@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--mainReport =============================================================================-->
+    <string name="report">신고</string>
+
+
+    <!--workout/component =======================================================================-->
+    <!--CameraCard -->
+    <string name="camera_permission_denied">카메라 권한 거부됨</string>
+    <string name="please_allow_camera_permissions">설정에서 카메라 권한을 허용해 주세요.\n(설정 > 권한 > 카메라 >\n앱 사용 중 또는 항상 확인)</string>
+
+
+</resources>

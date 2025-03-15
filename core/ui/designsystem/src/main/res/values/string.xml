@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="example">example</string>
+
+    <!--component/button/ =======================================================================-->
+    <!-- AccountButtons.kt -->
+    <string name="delete_account">Delete account</string>
+    <string name="change_image">Change image</string>
+    <string name="delete_image">Delete image</string>
+
+    <!-- AuthButtons.kt -->
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_in_with_apple">Sign in with Apple</string>
+    <string name="authentication_with_google">Authenticate with Google</string>
+    <string name="authentication_with_apple">Authenticate with Apple</string>
+    <string name="authentication_complete">Authentication complete</string>
+    <string name="authenticating">Authenticating…</string>
+
+    <!-- BottomSaveCancelBar.kt -->
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+
+    <!-- PrivacyPolicyButton.kt -->
+    <string name="privacy_policy">Privacy policy</string>
+
+    <!-- TextButtons.kt -->
+    <string name="try_again">Try again</string>
+    <string name="settings">Settings</string>
+
+    <!-- WorkoutButtons.kt -->
+    <string name="next_exercise">Next exercise</string>
+
+
+    <!--component/topAppBars/ ===================================================================-->
+    <!-- MyTopAppBar.kt -->
+    <string name="internet_unavailable">Internet unavailable</string>
+
+
+    <!--component/ ==============================================================================-->
+    <!-- Image.kt -->
+    <string name="image_loading_error">Image loading error</string>
+
+
+    <!--component/icon/MyIcons.kt/ =======================================================-->
+    <!--NavigationBarIcon-->
+    <string name="report">Report</string>
+    <string name="logs">Logs</string>
+    <string name="more">More</string>
+
+    <!--TopBarIcon-->
+    <string name="back">Back</string>
+    <string name="edit">Edit</string>
+    <string name="close">Close</string>
+    <string name="more_options">More options</string>
+
+    <!--IconTextButtonIcon-->
+
+    <!--IconTextButtonIcon-->
+    <string name="stop">Stop</string>
+    <string name="pause">Pause</string>
+    <string name="minus">Minus</string>
+    <string name="plus">Plus</string>
+
+    <!--MyIcons-->
+    <string name="error">Error</string>
+
+    <string name="sign_in">Sign in</string>
+
+    <string name="expand">Expand</string>
+    <string name="collapse">Collapse</string>
+
+    <string name="flip_camera">Flip camera</string>
+    <string name="open_in_new">Open in new</string>
+
+
+</resources>

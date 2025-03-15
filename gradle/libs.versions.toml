@@ -1,0 +1,191 @@
+[versions]
+#0 test
+junit = "4.13.2"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+
+#1 compose bom
+composeBom = "2025.01.00"
+
+#2 firebase bom
+
+#3 core / activity / appcompat / material
+coreKtx = "1.15.0"
+activityCompose = "1.10.0"
+appcompat = "1.7.0"
+material = "1.12.0"
+
+#4 hilt
+hilt = "2.51.1"
+androidxHiltNavigationCompose = "1.2.0"
+
+#5 open source license
+
+
+#6 lifecycle
+lifecycle = "2.8.7"
+
+#7 splash screen
+splashscreen = "1.0.1"
+
+#8 status bar color
+accompanist = "0.30.1"
+
+#9 navigation
+composeNavigation = "2.8.5"
+
+
+#10 permission
+permissions = "0.34.0"
+
+#11 data store
+datastore = "1.1.2"
+
+#12 auth / credentials
+credentials = "1.3.0"
+
+#13 google id
+googleid = "1.1.1"
+
+#14 retrofit / serialization
+retrofit = "2.9.0"
+moshi = "1.15.1"
+
+#15 camerax
+camerax= "1.5.0-alpha05"
+
+#16 google ml kit pose detection
+pose-detection= "18.0.0-beta5"
+
+#17 image
+coil = "2.4.0"
+
+#18 google maps
+playServiceMaps = "19.1.0"
+
+
+
+
+
+# plugins
+agp = "8.8.0"
+kotlin = "2.0.0"
+
+devToolsKsp = "2.0.0-1.0.24"
+
+
+
+
+
+
+
+
+
+
+
+
+
+[libraries] # name = some word of the group + name(full)
+#0 test
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+#1 compose bom
+androidx-compose-bom =               { group = "androidx.compose",    name = "compose-bom", version.ref = "composeBom" }
+androidx-ui =                        { group = "androidx.compose.ui", name = "ui" }
+androidx-ui-graphics =               { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-tooling =                { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-ui-tooling-preview =        { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-ui-test-manifest =          { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-ui-test-junit4 =            { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-material-icons-extended =   { group = "androidx.compose.material", name = "material-icons-extended" }
+androidx-material3 =                 { group = "androidx.compose.material3", name = "material3" }
+
+#2 firebase bom
+
+
+#3 core / activity / appcompat / material
+androidx-core-ktx =         { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
+androidx-appcompat =        { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+android-material =          { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+#4 hilt
+dagger-hilt-android =              { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+dagger-hilt-android-compiler =     { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+
+#5 open source license
+
+
+#6 lifecycle
+androidx-lifecycle-common =          { group = "androidx.lifecycle", name = "lifecycle-common", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+
+#7 splash screen
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "splashscreen" }
+
+#8 status bar color
+google-accompanist-systemuicontroller = { group = "com.google.accompanist", name = "accompanist-systemuicontroller", version.ref = "accompanist" }
+
+#9 navigation
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "composeNavigation" }
+
+#10 permission
+google-accompanist-permissions =   { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "permissions" }
+
+#11 data store
+androidx-datastore-preferences = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+#12 credentials
+#google-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
+androidx-credentials-play-services-auth = { group = "androidx.credentials", name = "credentials-play-services-auth", version.ref = "credentials" }
+
+#13 google id
+google-googleid = { group = "com.google.android.libraries.identity.googleid", name = "googleid", version.ref = "googleid" }
+
+#14 retrofit
+squareup-retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+squareup-converter-moshi = { group = "com.squareup.retrofit2", name = "converter-moshi", version.ref = "retrofit" }
+squareup-moshi-kotlin = { group = "com.squareup.moshi", name = "moshi-kotlin", version.ref = "moshi" }
+
+#15 camerax
+androidx-camera-core =        { group = "androidx.camera", name = "camera-core", version.ref = "camerax" }
+androidx-camera-compose =     { group = "androidx.camera", name = "camera-compose", version.ref = "camerax" }
+androidx-camera-camera2 =     { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
+androidx-camera-lifecycle =   { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
+androidx-camera-video =       { group = "androidx.camera", name = "camera-video", version.ref = "camerax" }
+androidx-camera-view =        { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+androidx-camera-extentions =  { group = "androidx.camera", name = "camera-extensions", version.ref = "camerax" }
+
+#16 google ml kit pose detection
+mlkit-pose-detection =  { group = "com.google.mlkit", name = "pose-detection", version.ref = "pose-detection" }
+
+#17 image
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+#18 google maps
+google-play-services-maps =        { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServiceMaps" }
+
+
+
+
+
+
+[plugins]
+android-application =   { id = "com.android.application", version.ref = "agp" }
+android-library =       { id = "com.android.library", version.ref = "agp" }
+kotlin-android =        { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-compose =        { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
+#ksp
+googleDevToolsKsp =     { id = "com.google.devtools.ksp", version.ref = "devToolsKsp" }
+
+#hilt
+hilt =                  { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
+#serialization
+serialization =     { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }

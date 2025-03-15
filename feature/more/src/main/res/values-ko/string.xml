@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--about ===================================================================================-->
+    <string name="about">앱 정보</string>
+
+
+    <!--account =================================================================================-->
+    <string name="account">계정</string>
+    <string name="sign_out">로그아웃</string>
+    <string name="dialog_body_sign_out">로그아웃 할까요?</string>
+    <string name="sign_out_error">로그아웃 에러. 나중에 다시 시도하세요.</string>
+
+
+    <!--deleteAccount ===========================================================================-->
+    <string name="delete_account">계정 삭제</string>
+
+
+    <!--editProfile =============================================================================-->
+    <string name="edit_profile">프로필 수정</string>
+
+
+    <!--mainMore ================================================================================-->
+    <string name="more">더 보기</string>
+    <string name="settings">설정</string>
+
+
+    <!--setDateTimeFormat =======================================================================-->
+    <string name="date_time_format">날짜 및 시간</string>
+    <string name="time_format">시간 형식</string>
+    <string name="date_format">날짜 형식</string>
+    <string name="use_month_name">월 이름 사용</string>
+    <string name="include_day_of_week">요일 포함</string>
+
+    <!--setTheme ================================================================================-->
+    <string name="theme">테마</string>
+
+</resources>

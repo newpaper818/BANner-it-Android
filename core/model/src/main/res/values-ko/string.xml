@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--enums/ ==================================================================================-->
+    <!--DateTime.kt-->
+    <string name="ymd">년 월 일</string>
+    <string name="dmy">일 월 년</string>
+    <string name="mdy">월 일 년</string>
+    <string name="_24h">24시간</string>
+    <string name="_12h">12시간</string>
+
+    <!--Theme.kt-->
+    <string name="theme_light">밝은 테마</string>
+    <string name="theme_dark">어두운 테마</string>
+    <string name="theme_auto">기기 테마와 동일</string>
+
+    <!--UserRole.kt-->
+    <string name="administrator">관리자</string>
+    <string name="user">사용자</string>
+    <string name="guest">게스트</string>
+
+
+    <!--report/ ================================================================================-->
+    <!--ReportStatus.kt-->
+    <string name="received">접수됨</string>
+    <string name="legal">합법</string>
+    <string name="legal_demolition">합법 철거됨</string>
+    <string name="illegal">불법</string>
+    <string name="illegal_demolition">불법 철거됨</string>
+    <string name="unknown">알 수 없음</string>
+
+
+</resources>

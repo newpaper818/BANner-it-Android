@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">BANner it!</string>
+    <string name="example" translatable="false">example</string>
+
+    <string name="report">Report</string>
+    <string name="logs">Logs</string>
+    <string name="more">More</string>
+
+</resources>

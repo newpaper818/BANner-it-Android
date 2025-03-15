@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--logDetail ===============================================================================-->
+    <string name="log_detail">Log detail</string>
+
+    <!--mainLogs ================================================================================-->
+    <string name="logs">Logs</string>
+
+
+</resources>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="example">example</string>
+
+    <!--component/button/ =======================================================================-->
+    <!-- AccountButtons.kt -->
+    <string name="delete_account">계정 삭제</string>
+    <string name="change_image">사진 변경</string>
+    <string name="delete_image">사진 삭제</string>
+
+    <!-- AuthButtons.kt -->
+    <string name="sign_in_with_google">Google로 로그인</string>
+    <string name="sign_in_with_apple">Apple로 로그인</string>
+    <string name="authentication_with_google">Google 인증</string>
+    <string name="authentication_with_apple">Apple 인증</string>
+    <string name="authentication_complete">인증 완료</string>
+    <string name="authenticating">인증 중…</string>
+
+    <!-- BottomSaveCancelBar.kt -->
+    <string name="save">저장</string>
+    <string name="cancel">취소</string>
+
+    <!-- PrivacyPolicyButton.kt -->
+    <string name="privacy_policy">개인정보 처리방침</string>
+
+    <!-- TextButtons.kt -->
+    <string name="try_again">다시 시도</string>
+    <string name="settings">설정</string>
+
+    <!-- WorkoutButtons.kt -->
+    <string name="next_exercise">다음 운동</string>
+
+
+    <!--component/topAppBars/ ===================================================================-->
+    <!-- MyTopAppBar.kt -->
+    <string name="internet_unavailable">인터넷 연결 없음</string>
+
+
+    <!--component/ ==============================================================================-->
+    <!-- Image.kt -->
+    <string name="image_loading_error">이미지 로딩 에러</string>
+
+
+    <!--component/icon/MyIcons.kt/ =======================================================-->
+    <!--NavigationBarIcon-->
+    <string name="report">신고</string>
+    <string name="logs">기록</string>
+    <string name="more">더 보기</string>
+
+    <!--TopBarIcon-->
+    <string name="back">뒤로 가기</string>
+    <string name="edit">편집</string>
+    <string name="close">닫기</string>
+    <string name="more_options">옵션 더보기</string>
+
+    <!--IconTextButtonIcon-->
+
+    <!--IconTextButtonIcon-->
+    <string name="stop">정지</string>
+    <string name="pause">일시정지</string>
+    <string name="minus">빼기</string>
+    <string name="plus">더하기</string>
+
+    <!--MyIcons-->
+    <string name="error">오류</string>
+
+    <string name="sign_in">로그인</string>
+
+    <string name="expand">펼치기</string>
+    <string name="collapse">접기</string>
+
+    <string name="flip_camera">카메라 전환</string>
+    <string name="open_in_new">새 창에서 열기</string>
+
+
+</resources>
