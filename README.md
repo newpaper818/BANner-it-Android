@@ -1,2 +1,2 @@
 # BANner it!
-## Frontend -  Android app
+## Frontend - Android app
