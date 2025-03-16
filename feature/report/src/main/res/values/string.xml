@@ -2,6 +2,7 @@
 <resources>
     <!--mainReport =============================================================================-->
     <string name="report">Report</string>
+    <string name="you_should_sign_in">You should sign in to report banner</string>
 
 
     <!--workout/component =======================================================================-->

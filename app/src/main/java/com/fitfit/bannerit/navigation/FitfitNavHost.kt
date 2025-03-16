@@ -27,6 +27,8 @@ import com.fitfit.bannerit.navigation.mainMore.mainMoreScreen
 import com.fitfit.bannerit.navigation.mainMore.setDateTimeFormatScreen
 import com.fitfit.bannerit.navigation.mainMore.setThemeScreen
 import com.fitfit.bannerit.navigation.mainReport.mainReportScreen
+import com.fitfit.bannerit.navigation.mainReport.navigateToMainReport
+import com.fitfit.bannerit.navigation.signin.navigateToSignIn
 import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
 import com.fitfit.bannerit.ui.AppViewModel
@@ -198,8 +200,15 @@ fun FitfitNavHost(
             mainReportScreen(
                 appViewModel = appViewModel,
                 externalState = externalState,
+                navigateToSignIn = {
+                    mainNavController.navigateToSignIn(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                },
                 navigateToReport = {
-
+//                    mainNavController.navigateToReport(
+//                        navOptions = navOptions { launchSingleTop = true }
+//                    )
                 }
             )
 

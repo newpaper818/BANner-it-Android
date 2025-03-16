@@ -23,12 +23,12 @@
     <!-- PrivacyPolicyButton.kt -->
     <string name="privacy_policy">Privacy policy</string>
 
+    <!-- ReportButton.kt -->
+    <string name="report_banner">Report banner</string>
+
     <!-- TextButtons.kt -->
     <string name="try_again">Try again</string>
     <string name="settings">Settings</string>
-
-    <!-- WorkoutButtons.kt -->
-    <string name="next_exercise">Next exercise</string>
 
 
     <!--component/topAppBars/ ===================================================================-->
