@@ -6,6 +6,7 @@
 
     <!--account =================================================================================-->
     <string name="account">Account</string>
+    <string name="sign_in">Sign in</string>
     <string name="sign_out">Sign out</string>
     <string name="dialog_body_sign_out">Do you want to sign out?</string>
     <string name="sign_out_error">Sign out error. Do it later.</string>

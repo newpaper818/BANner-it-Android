@@ -34,6 +34,7 @@ fun NavGraphBuilder.mainReportScreen(
     appViewModel: AppViewModel,
     externalState: ExternalState,
 
+    navigateToSignIn: () -> Unit,
     navigateToReport: () -> Unit,
 ) {
     composable(
@@ -67,9 +68,11 @@ fun NavGraphBuilder.mainReportScreen(
             }
 
             MainReportRoute(
-                navigateToWorkout = navigateToReport,
+                appUserData = appUiState.appUserData,
                 use2Panes = externalState.windowSizeClass.use2Panes,
-                spacerValue = externalState.windowSizeClass.spacerValue
+                spacerValue = externalState.windowSizeClass.spacerValue,
+                navigateToSignIn = navigateToSignIn,
+                navigateToReport = navigateToReport
             )
         }
     }

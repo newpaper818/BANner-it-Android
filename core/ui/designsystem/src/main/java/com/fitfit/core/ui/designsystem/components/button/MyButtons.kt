@@ -65,7 +65,10 @@ internal fun MyTextButton(
             enabled = enabled,
             onClick = onClick,
             modifier = modifier,
-            colors = ButtonDefaults.buttonColors(containerColor = containerColor)
+            colors = ButtonDefaults.buttonColors(
+                containerColor = containerColor,
+                contentColor = MaterialTheme.colorScheme.contentColorFor(containerColor)
+            )
         ) {
             Text(
                 text = text,
