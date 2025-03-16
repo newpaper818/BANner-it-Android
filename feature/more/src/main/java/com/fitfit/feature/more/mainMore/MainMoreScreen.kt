@@ -110,7 +110,9 @@ private fun MainMoreScreen(
                     modifier = itemModifier
                 ) {
                     ItemWithText(
-                        text = stringResource(id = R.string.account),
+                        text =
+                            if (appUserData != null) stringResource(id = R.string.account)
+                            else stringResource(id = R.string.sign_in),
                         onItemClick = {
                             if (appUserData != null)
                                 navigateTo(ScreenDestination.ACCOUNT)

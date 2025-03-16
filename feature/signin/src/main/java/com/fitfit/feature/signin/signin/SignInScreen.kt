@@ -32,13 +32,14 @@ import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.ProviderId
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.button.SignInWithButton
+import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
+import com.fitfit.core.ui.designsystem.icon.TopAppBarIcon
 import com.fitfit.core.utils.onClickPrivacyPolicy
 import com.fitfit.feature.signin.R
 import com.fitfit.feature.signin.signin.components.AppVersionTextWithPrivacyPolicy
 import com.fitfit.feature.signin.signin.components.InternetUnavailableIconWithTextForSignIn
 import com.fitfit.feature.signin.signin.components.SigningInIconWithText
-import com.fitfit.feature.signin.signin.components.WelcomeText
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -50,6 +51,7 @@ fun SignInRoute(
 
     updateUserData: (userData: UserData) -> Unit,
     navigateToMain: () -> Unit,
+    navigateUp: () -> Unit,
 
     signInViewModel: SignInViewModel = hiltViewModel(),
 ) {
@@ -79,6 +81,7 @@ fun SignInRoute(
 
     //set signInButtonEnabled
     LaunchedEffect(internetEnabled, isSigningIn) {
+        delay(100)
         if (!isSigningIn && !signInButtonEnabled){
             delay(1200)
             signInViewModel.setSignInButtonEnabled(internetEnabled)
@@ -112,6 +115,7 @@ fun SignInRoute(
                             context = context,
                             onResult = { userData ->
                                 updateUserData(userData)
+                                navigateUp()
                             },
                             onError = { signInErrorSnackbar() }
                         )
@@ -121,7 +125,8 @@ fun SignInRoute(
         },
         onClickPrivacyPolicy = { onClickPrivacyPolicy(uriHandler) },
         setSignInButtonEnabled = signInViewModel::setSignInButtonEnabled,
-        snackBarHostState = snackBarHostState
+        snackBarHostState = snackBarHostState,
+        navigateUp = navigateUp
     )
 }
 
@@ -139,10 +144,19 @@ private fun SignInScreen(
     setSignInButtonEnabled: (signInButtonEnabled: Boolean) -> Unit,
     snackBarHostState: SnackbarHostState,
 
+    navigateUp: () -> Unit,
+
     modifier: Modifier = Modifier
 ){
     MyScaffold(
         modifier = modifier,
+        topBar = {
+            MyTopAppBar(
+                title = stringResource(R.string.sign_in),
+                navigationIcon = TopAppBarIcon.back,
+                onClickNavigationIcon = { navigateUp() }
+            )
+        },
         snackbarHost = {
             SnackbarHost(
                 hostState = snackBarHostState,
@@ -168,19 +182,19 @@ private fun SignInScreen(
                 .navigationBarsPadding()
                 .displayCutoutPadding(),
         ){
-            item{
-                MySpacerColumn(height = 32.dp)
-
+//            item{
+//                MySpacerColumn(height = 32.dp)
+//
                 //app icon with text
 //                AppIconWithAppNameCard(
 //                    modifier = Modifier.padding(16.dp, 0.dp)
 //                )
-                MySpacerColumn(height = 32.dp)
-            }
+//                MySpacerColumn(height = 32.dp)
+//            }
 
             item {
                 Box(
-                    modifier = Modifier.height(150.dp),
+                    modifier = Modifier.height(100.dp),
                     contentAlignment = Alignment.Center
                 ) {
                     //signing in...
@@ -190,7 +204,7 @@ private fun SignInScreen(
                     InternetUnavailableIconWithTextForSignIn(!isSigningIn && !internetEnabled)
 
                     //welcome message
-                    WelcomeText(!isSigningIn && internetEnabled)
+//                    WelcomeText(!isSigningIn && internetEnabled)
                 }
 
                 MySpacerColumn(height = 32.dp)
@@ -219,7 +233,7 @@ private fun SignInScreen(
                         MySpacerColumn(height = 16.dp)
                 }
 
-                MySpacerColumn(height = 32.dp)
+                MySpacerColumn(height = 64.dp)
             }
 
             item {

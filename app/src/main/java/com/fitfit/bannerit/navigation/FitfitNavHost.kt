@@ -17,7 +17,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.bannerit.navigation.mainLogs.logDetailScreen
 import com.fitfit.bannerit.navigation.mainLogs.mainLogsScreen
 import com.fitfit.bannerit.navigation.mainMore.aboutScreen
@@ -32,6 +31,7 @@ import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
 import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.ExternalState
+import com.fitfit.core.model.enums.ScreenDestination
 import java.util.UUID
 
 @Composable
@@ -181,6 +181,7 @@ fun FitfitNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 isDarkAppTheme = isDarkAppTheme,
+                navigateUp = navigateUp,
                 navigateToMain = {
                     mainNavController.navigate(
                         route = ScreenDestination.MAIN_REPORT.route,

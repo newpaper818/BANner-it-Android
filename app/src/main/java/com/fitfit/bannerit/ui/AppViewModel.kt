@@ -9,7 +9,6 @@ import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.Theme
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.ScreenDestination
-import com.fitfit.core.model.enums.UserRole
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -127,15 +126,15 @@ class AppViewModel @Inject constructor(
         Log.d("MainActivity1", "[1] intiUserAndUpdateStartDestination start")
 
         initSignedInUser(
-            onDone = { userDataIsNull ->
-                updateCurrentScreenDestination(userDataIsNull)
+            onDone = {
+                updateCurrentScreenDestination()
             }
         )
         Log.d("MainActivity1", "                              [1]intiUserAndUpdateStartDestination done")
     }
 
     private fun initSignedInUser(
-        onDone: (userDataIsNull: Boolean) -> Unit
+        onDone: () -> Unit
     ){
         Log.d("MainActivity1", "[2] initSignedInUser start")
 
@@ -175,13 +174,13 @@ class AppViewModel @Inject constructor(
                 }
             }
 
-            newUserData = UserData("test", UserRole.USER, "nameee", "email@gmail.com", null, emptyList()) //TODO: delete this and use upper code
+//            newUserData = UserData("test", UserRole.USER, "nameee", "email@gmail.com", null, emptyList()) //TODO: delete this and use upper code
 
             _appUiState.update {
                 it.copy(appUserData = newUserData)
             }
 
-            onDone(newUserData == null || newUserData.userId == "")
+            onDone()
 
             Log.d("MainActivity1", "[2] initSignedInUser - user: ${newUserData?.userId}")
 //            }
@@ -201,20 +200,16 @@ class AppViewModel @Inject constructor(
     //==============================================================================================
     //update screen destination ====================================================================
     fun updateCurrentScreenDestination(
-        userDataIsNull: Boolean
-    ){
-        val startScreenDestination =
-            if (userDataIsNull) ScreenDestination.SIGN_IN
-            else ScreenDestination.MAIN_REPORT
 
+    ){
         _appUiState.update {
             it.copy(
                 screenDestination = it.screenDestination.copy(
-                    startScreenDestination = startScreenDestination
+                    startScreenDestination = ScreenDestination.MAIN_REPORT
                 )
             )
         }
-        Log.d("MainActivity1", "[3] update screen destination: $startScreenDestination")
+        Log.d("MainActivity1", "[3] update screen destination: ScreenDestination.MAIN_REPORT")
     }
 
     fun updateMoreDetailCurrentScreenDestination(
