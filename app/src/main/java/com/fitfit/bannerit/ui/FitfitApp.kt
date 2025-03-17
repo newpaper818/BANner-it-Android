@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.fitfit.core.model.enums.ScreenDestination
-import com.fitfit.bannerit.navigation.FitfitNavHost
+import com.fitfit.bannerit.navigation.BannerItNavHost
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -64,7 +64,7 @@ fun FitfitApp(
     val startDestination = appUiState.screenDestination.startScreenDestination?.route
 
     if (startDestination != null){
-        FitfitNavHost(
+        BannerItNavHost(
             externalState = externalState,
             appViewModel = appViewModel,
 

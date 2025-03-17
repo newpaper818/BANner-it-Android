@@ -37,7 +37,7 @@ import com.fitfit.core.model.enums.ScreenDestination
 import java.util.UUID
 
 @Composable
-fun FitfitNavHost(
+fun BannerItNavHost(
     externalState: ExternalState,
     appViewModel: AppViewModel,
 
