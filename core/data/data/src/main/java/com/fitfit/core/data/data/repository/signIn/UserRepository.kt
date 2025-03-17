@@ -206,22 +206,4 @@ class UserRepository @Inject constructor(
 //            deleteSuccess = deleteSuccess
 //        )
 //    }
-//
-//
-//
-//
-//
-//
-//
-//
-//    suspend fun signOut(
-//        providerIdList: List<ProviderId>,
-//        signOutResult: (isSignOutSuccess: Boolean) -> Unit
-//    ){
-//        userRemoteDatasource.signOut(
-//            providerIdList = providerIdList,
-//            signOutResult = signOutResult
-//
-//        )
-//    }
 }

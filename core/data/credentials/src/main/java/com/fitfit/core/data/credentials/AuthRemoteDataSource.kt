@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentSender
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.enums.ProviderId
 
 interface AuthRemoteDataSource{
 //    fun getCurrentUser(): FirebaseUser?
@@ -28,10 +27,10 @@ interface AuthRemoteDataSource{
     suspend fun getGoogleSignInIntentSender(): IntentSender?
 
 
-    suspend fun signOut(
-        providerIdList: List<ProviderId>,
-        signOutResult: (isSignOutSuccess: Boolean) -> Unit
-    )
+//    suspend fun signOut(
+//        providerIdList: List<ProviderId>,
+//        signOutResult: (isSignOutSuccess: Boolean) -> Unit
+//    )
 
     fun reAuthenticateGoogleUser(
         intent: Intent,

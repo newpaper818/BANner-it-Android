@@ -76,7 +76,6 @@ fun AccountRoute(
         onSignOut = {
             coroutineScope.launch {
                 accountViewModel.signOut(
-                    providerIdList = userData.providerIds,
                     signOutResult = { isSignOutSuccess ->
                         if (isSignOutSuccess) {
                             navigateToMainMore()
@@ -103,7 +102,7 @@ fun AccountRoute(
 @Composable
 private fun AccountScreen(
     use2Panes: Boolean,
-    userData: UserData,
+    userData: UserData?,
 
     onSignOut: () -> Unit,
     navigateToEditProfile: () -> Unit,
@@ -176,13 +175,15 @@ private fun AccountScreen(
         ){
             //user profile
             item {
-                UserProfileCard(
-                    userData = userData,
-                    internetEnabled = internetEnabled,
-                    showSignInWithInfo = false,
-                    enabled = false,
-                    modifier = itemModifier
-                )
+                if(userData != null){
+                    UserProfileCard(
+                        userData = userData,
+                        internetEnabled = internetEnabled,
+                        showSignInWithInfo = false,
+                        enabled = false,
+                        modifier = itemModifier
+                    )
+                }
             }
 
             //edit profile
