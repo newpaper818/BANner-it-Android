@@ -159,7 +159,7 @@ fun UserProfileCard(
  */
 @Composable
 fun ProfileImage(
-    profileUserId: String,
+    profileUserId: Int,
     internetEnabled: Boolean,
     profileImagePath: String?,
 
@@ -219,7 +219,7 @@ private fun UserProfileCardPreview(){
         ) {
             UserProfileCard(
                 userData = UserData(
-                    userId = "",
+                    userId = 123,
                     role = UserRole.USER,
                     name = "user name",
                     email = "somewhere@gmail.com",
@@ -244,7 +244,7 @@ private fun UserProfileCardWithProviderIdPreview(){
         ) {
             UserProfileCard(
                 userData = UserData(
-                    userId = "",
+                    userId = 123,
                     role = UserRole.USER,
                     name = "user name",
                     email = "somewhere@gmail.com",

@@ -4,7 +4,7 @@ import com.fitfit.core.model.enums.ProviderId
 import com.fitfit.core.model.enums.UserRole
 
 data class UserData(
-    val userId: String,
+    val userId: Int,
     val role: UserRole,
 
     val name: String?,

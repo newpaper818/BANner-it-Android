@@ -19,8 +19,24 @@ class RetrofitApi @Inject constructor(
             Log.d(RETROFIT_TAG, "headers = ${result.headers()}")
             Log.d(RETROFIT_TAG, "body = ${result.body()}")
 
-            //TODO: get jwt, userData
-            return null
+            //TODO: test this get jwt
+            val jwt = result.headers()["Authentication"]?.let {
+                if (it.startsWith("Bearer ")){
+                    it.substringAfter("Bearer ")
+                }
+                else null
+            }
+            val userData = result.body()?.userDataDTO?.toUserData()
+
+            Log.d(RETROFIT_TAG, "jwt = $jwt")
+            Log.d(RETROFIT_TAG, "userData = $userData")
+
+            return if (jwt !== null && userData !== null){
+                    Pair(jwt, userData)
+                } else {
+                    null
+                }
+
 
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, e.toString())

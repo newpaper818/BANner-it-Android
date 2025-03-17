@@ -9,6 +9,7 @@ import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.Theme
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.ScreenDestination
+import com.fitfit.core.model.enums.UserRole
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -174,7 +175,7 @@ class AppViewModel @Inject constructor(
                 }
             }
 
-//            newUserData = UserData("test", UserRole.USER, "nameee", "email@gmail.com", null, emptyList()) //TODO: delete this and use upper code
+            newUserData = UserData(111, UserRole.ADMIN, "nameee", "email@gmail.com", null, emptyList()) //TODO: delete this and use upper code
 
             _appUiState.update {
                 it.copy(appUserData = newUserData)
