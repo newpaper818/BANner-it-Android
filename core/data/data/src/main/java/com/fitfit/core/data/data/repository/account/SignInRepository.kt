@@ -1,4 +1,4 @@
-package com.fitfit.core.data.data.repository.signIn
+package com.fitfit.core.data.data.repository.account
 
 import android.content.Context
 import com.fitfit.core.data.credentials.AuthRemoteDataSource

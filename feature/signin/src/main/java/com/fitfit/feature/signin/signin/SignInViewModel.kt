@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.CommonUiState
 import com.fitfit.core.data.data.repository.CommonUiStateRepository
 import com.fitfit.core.data.data.repository.PreferencesRepository
-import com.fitfit.core.data.data.repository.signIn.SignInRepository
+import com.fitfit.core.data.data.repository.account.SignInRepository
 import com.fitfit.core.model.data.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
