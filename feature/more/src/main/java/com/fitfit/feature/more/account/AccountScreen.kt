@@ -43,14 +43,16 @@ import kotlinx.coroutines.launch
 @Composable
 fun AccountRoute(
     use2Panes: Boolean,
-    userData: UserData,
+    userData: UserData?,
     internetEnabled: Boolean,
     spacerValue: Dp,
 
-    navigateToEditAccount: () -> Unit,
-    navigateToDeleteAccount: () -> Unit,
+    updateUserDataToNull: () -> Unit,
+
     navigateUp: () -> Unit,
-    onSignOutDone: () -> Unit,
+    navigateToEditProfile: () -> Unit,
+    navigateToDeleteAccount: () -> Unit,
+    navigateToMainMore: () -> Unit,
 
     modifier: Modifier = Modifier,
     accountViewModel: AccountViewModel = hiltViewModel()
@@ -77,7 +79,8 @@ fun AccountRoute(
                     providerIdList = userData.providerIds,
                     signOutResult = { isSignOutSuccess ->
                         if (isSignOutSuccess) {
-                            onSignOutDone()
+                            navigateToMainMore()
+                            updateUserDataToNull()
                         } else {
                             signOutErrorSnackbar()
                         }
@@ -85,7 +88,7 @@ fun AccountRoute(
                 )
             }
         },
-        navigateToEditAccount = navigateToEditAccount,
+        navigateToEditProfile = navigateToEditProfile,
         navigateToDeleteAccount = navigateToDeleteAccount,
         internetEnabled = internetEnabled,
         startSpacerValue = if (use2Panes) spacerValue / 2 else spacerValue,
@@ -103,7 +106,7 @@ private fun AccountScreen(
     userData: UserData,
 
     onSignOut: () -> Unit,
-    navigateToEditAccount: () -> Unit,
+    navigateToEditProfile: () -> Unit,
     navigateToDeleteAccount: () -> Unit,
 
     internetEnabled: Boolean,
@@ -189,7 +192,7 @@ private fun AccountScreen(
                 ) {
                     ItemWithText(
                         text = stringResource(id = R.string.edit_profile),
-                        onItemClick = navigateToEditAccount
+                        onItemClick = navigateToEditProfile
                     )
                 }
             }
