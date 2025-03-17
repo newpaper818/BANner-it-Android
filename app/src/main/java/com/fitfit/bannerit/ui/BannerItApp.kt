@@ -10,7 +10,7 @@ import com.fitfit.bannerit.navigation.BannerItNavHost
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
-fun FitfitApp(
+fun BannerItApp(
     externalState: ExternalState,
     appViewModel: AppViewModel,
 //    tripsViewModel: TripsViewModel,
