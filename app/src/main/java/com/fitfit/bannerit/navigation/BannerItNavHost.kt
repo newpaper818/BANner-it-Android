@@ -24,10 +24,12 @@ import com.fitfit.bannerit.navigation.mainMore.accountScreen
 import com.fitfit.bannerit.navigation.mainMore.deleteAccountScreen
 import com.fitfit.bannerit.navigation.mainMore.editProfileScreen
 import com.fitfit.bannerit.navigation.mainMore.mainMoreScreen
+import com.fitfit.bannerit.navigation.mainMore.navigateToDeleteAccount
+import com.fitfit.bannerit.navigation.mainMore.navigateToEditProfile
+import com.fitfit.bannerit.navigation.mainMore.navigateToMainMore
 import com.fitfit.bannerit.navigation.mainMore.setDateTimeFormatScreen
 import com.fitfit.bannerit.navigation.mainMore.setThemeScreen
 import com.fitfit.bannerit.navigation.mainReport.mainReportScreen
-import com.fitfit.bannerit.navigation.mainReport.navigateToMainReport
 import com.fitfit.bannerit.navigation.signin.navigateToSignIn
 import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
@@ -37,7 +39,7 @@ import com.fitfit.core.model.enums.ScreenDestination
 import java.util.UUID
 
 @Composable
-fun FitfitNavHost(
+fun BannerItNavHost(
     externalState: ExternalState,
     appViewModel: AppViewModel,
 
@@ -251,7 +253,24 @@ fun FitfitNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
+                navigateToEditProfile = {
+                    mainNavController.navigateToEditProfile(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                },
+                navigateToDeleteAccount = {
+                    mainNavController.navigateToDeleteAccount(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                },
+                navigateToMainMore = {
+                    mainNavController.navigateToMainMore(
+                        navOptions = navOptions {
+                            popUpTo(ScreenDestination.ACCOUNT.route) { inclusive = true }
+                            launchSingleTop = true
+                        }
+                    )
+                }
             )
 
             setDateTimeFormatScreen(

@@ -1,7 +1,7 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.dto.ApiResponse
+import com.fitfit.core.model.dto.SignInResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -13,7 +13,7 @@ interface RetrofitApiService {
     @POST("oauth/validate")
     suspend fun requestUserDataWithIdToken(
         @Body idToken: String
-    ): Response<ApiResponse>
+    ): Response<SignInResponse>
 
 
 
@@ -21,7 +21,7 @@ interface RetrofitApiService {
     @POST("")
     fun requestUserDataWithJwt(
         @Header("Authorization") jwt: String,
-    ): Response<ApiResponse>
+    ): Response<SignInResponse>
 
 
 

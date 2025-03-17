@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.CommonUiState
 import com.fitfit.core.data.data.repository.CommonUiStateRepository
 import com.fitfit.core.data.data.repository.PreferencesRepository
-import com.fitfit.core.data.data.repository.signIn.SignInRepository
+import com.fitfit.core.data.data.repository.signIn.UserRepository
 import com.fitfit.core.model.data.UserData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +23,7 @@ data class SignInUiState(
 @HiltViewModel
 class SignInViewModel @Inject constructor(
     private val commonUiStateRepository: CommonUiStateRepository,
-    private val signInRepository: SignInRepository,
+    private val userRepository: UserRepository,
     private val preferencesRepository: PreferencesRepository,
 ): ViewModel() {
     private val _signInUiState: MutableStateFlow<SignInUiState> =
@@ -74,7 +74,7 @@ class SignInViewModel @Inject constructor(
 
         setIsSigningIn(true)
 
-        val jwtAndUserData = signInRepository.signInWithGoogle(context = context)
+        val jwtAndUserData = userRepository.signInWithGoogle(context = context)
 
         if (jwtAndUserData == null){
             setIsSigningIn(false)
@@ -157,7 +157,7 @@ class SignInViewModel @Inject constructor(
             //check user exit and
             //  if exit, get user data from firestore
             //  else, register user data to firestore
-            signInRepository.updateUserDataFromRemote(
+            userRepository.updateUserDataFromRemote(
                 userData = userData,
                 setIsSigningIn = { setIsSigningIn(it) },
                 onDone = onDone,

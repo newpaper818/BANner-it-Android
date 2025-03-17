@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 private const val USER_REPOSITORY_TAG = "User-Repository"
 
-class SignInRepository @Inject constructor(
+class UserRepository @Inject constructor(
     private val authRemoteDataSource: AuthRemoteDataSource, //credentials
     private val dbRemoteDataSource: DbRemoteDataSource, //retrofit
 ) {
@@ -204,24 +204,6 @@ class SignInRepository @Inject constructor(
 //    ){
 //        userRemoteDatasource.deleteAuthUser(
 //            deleteSuccess = deleteSuccess
-//        )
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//    suspend fun signOut(
-//        providerIdList: List<ProviderId>,
-//        signOutResult: (isSignOutSuccess: Boolean) -> Unit
-//    ){
-//        userRemoteDatasource.signOut(
-//            providerIdList = providerIdList,
-//            signOutResult = signOutResult
-//
 //        )
 //    }
 }
