@@ -90,6 +90,24 @@ fun UserProfileCard(
                     overflow = TextOverflow.Ellipsis
                 )
 
+
+
+
+                //if administrator
+                if (userData.role == UserRole.ADMIN) {
+                    MySpacerColumn(height = 4.dp)
+
+                    Text(
+                        text = stringResource(UserRole.ADMIN.textId),
+                        style = MaterialTheme.typography.bodySmall.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+
+
+
+
+
                 //email
                 MySpacerColumn(height = 4.dp)
 
@@ -99,6 +117,11 @@ fun UserProfileCard(
                     overflow = TextOverflow.Ellipsis
                 )
 
+
+
+
+
+                //connected with Google
                 if (showSignInWithInfo) {
                     MySpacerColumn(height = 4.dp)
 

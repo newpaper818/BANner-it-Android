@@ -176,7 +176,7 @@ private fun AccountScreen(
                 UserProfileCard(
                     userData = userData,
                     internetEnabled = internetEnabled,
-                    showSignInWithInfo = true,
+                    showSignInWithInfo = false,
                     enabled = false,
                     modifier = itemModifier
                 )
