@@ -8,7 +8,7 @@ import javax.inject.Inject
 
 private const val USER_REPOSITORY_TAG = "User-Repository"
 
-class UserRepository @Inject constructor(
+class SignInRepository @Inject constructor(
     private val authRemoteDataSource: AuthRemoteDataSource, //credentials
     private val dbRemoteDataSource: DbRemoteDataSource, //retrofit
 ) {
