@@ -5,6 +5,17 @@
     <string name="you_should_sign_in">현수막을 신고하려면 로그인해야 합니다</string>
 
 
+    <!--report ==================================================================================-->
+    <string name="dialog_body_exit">나가시겠습니까??\n입력한 데이터는 삭제됩니다</string>
+    <string name="exit">나가기</string>
+
+    <string name="photos">사진 (%d/%d)</string>
+    <string name="content">내용</string>
+    <string name="location">위치</string>
+
+    <string name="text_up_to">최대 %d자</string>
+
+
     <!--workout/component =======================================================================-->
     <!--CameraCard -->
     <string name="camera_permission_denied">카메라 권한 거부됨</string>

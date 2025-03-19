@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--card/ ===================================================================================-->
-    <!-- AppIconWithAppNameCard.kt -->
+    <!-- ContentCard.kt -->
+    <string name="no_content">No content</string>
+    <string name="add_content">Add content</string>
+
+    <!-- UserProfileCard.kt -->
     <string name="user_info">User information</string>
     <string name="no_name">No name</string>
     <string name="no_email">No email</string>

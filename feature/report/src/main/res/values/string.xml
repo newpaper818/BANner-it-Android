@@ -5,6 +5,17 @@
     <string name="you_should_sign_in">You should sign in to report banner</string>
 
 
+    <!--report ==================================================================================-->
+    <string name="dialog_body_exit">Are you sure to exit?\nData will be lost</string>
+    <string name="exit">Exit</string>
+
+    <string name="photos">Photos (%d/%d)</string>
+    <string name="content">Content</string>
+    <string name="location">Location</string>
+
+    <string name="text_up_to">Up to %d characters</string>
+
+
     <!--workout/component =======================================================================-->
     <!--CameraCard -->
     <string name="camera_permission_denied">Camera permissions denied</string>
