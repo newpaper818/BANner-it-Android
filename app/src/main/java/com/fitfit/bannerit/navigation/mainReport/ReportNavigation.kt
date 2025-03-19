@@ -14,6 +14,7 @@ import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
+import com.fitfit.core.ui.ui.ErrorScreen
 import com.fitfit.feature.report.report.ReportRoute
 import kotlinx.coroutines.delay
 
@@ -45,12 +46,19 @@ fun NavGraphBuilder.reportScreen(
 
         val appUiState by appViewModel.appUiState.collectAsState()
 
-        ReportRoute(
-            appUserData = appUiState.appUserData,
-            use2Panes = externalState.windowSizeClass.use2Panes,
-            spacerValue = externalState.windowSizeClass.spacerValue,
-            navigateUp = navigateUp,
-            navigateToSendReport = navigateToSendReport
-        )
+        if (appUiState.appUserData != null) {
+
+            ReportRoute(
+                appUserData = appUiState.appUserData!!,
+                use2Panes = externalState.windowSizeClass.use2Panes,
+                spacerValue = externalState.windowSizeClass.spacerValue,
+                navigateUp = navigateUp,
+                navigateToSendReport = navigateToSendReport
+            )
+        }
+        else{
+            ErrorScreen()
+            navigateUp()
+        }
     }
 }

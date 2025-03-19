@@ -36,6 +36,10 @@
 
 
     <!-- ========================================================================================-->
+    <!--ErrorScreen.kt-->
+    <string name="error_occurred">오류가 발생했어요…</string>
+    <string name="turning_the_app_off_and_on">앱을 껐다 켜보세요.</string>
+
     <!--InternetUnavailable.kt-->
     <string name="internet_unavailable_check_connection">인터넷 연결 없음\n인터넷 연결을 확인하세요.</string>
 
