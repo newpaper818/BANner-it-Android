@@ -20,6 +20,10 @@
     <string name="save">저장</string>
     <string name="cancel">취소</string>
 
+    <!-- GetPhotos.kt -->
+    <string name="take_photos">사진 찍기</string>
+    <string name="select_photos">사진 선택</string>
+
     <!-- PrivacyPolicyButton.kt -->
     <string name="privacy_policy">개인정보 처리방침</string>
 

@@ -20,6 +20,10 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
+    <!-- GetPhotos.kt -->
+    <string name="take_photos">Take photos</string>
+    <string name="select_photos">Select photos</string>
+
     <!-- PrivacyPolicyButton.kt -->
     <string name="privacy_policy">Privacy policy</string>
 
