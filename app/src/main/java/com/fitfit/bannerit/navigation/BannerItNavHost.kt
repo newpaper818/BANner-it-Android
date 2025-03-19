@@ -30,6 +30,8 @@ import com.fitfit.bannerit.navigation.mainMore.navigateToMainMore
 import com.fitfit.bannerit.navigation.mainMore.setDateTimeFormatScreen
 import com.fitfit.bannerit.navigation.mainMore.setThemeScreen
 import com.fitfit.bannerit.navigation.mainReport.mainReportScreen
+import com.fitfit.bannerit.navigation.mainReport.navigateToReport
+import com.fitfit.bannerit.navigation.mainReport.reportScreen
 import com.fitfit.bannerit.navigation.signin.navigateToSignIn
 import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
@@ -208,9 +210,9 @@ fun BannerItNavHost(
                     )
                 },
                 navigateToReport = {
-//                    mainNavController.navigateToReport(
-//                        navOptions = navOptions { launchSingleTop = true }
-//                    )
+                    mainNavController.navigateToReport(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
                 }
             )
 
@@ -234,7 +236,16 @@ fun BannerItNavHost(
 
 
             //from main report ====================================================================
-            //reportScreen()
+            reportScreen(
+                appViewModel = appViewModel,
+                externalState = externalState,
+                navigateUp = navigateUp,
+                navigateToSendReport = {
+//                    mainNavController.navigateToSendReport(
+//                        navOptions = navOptions { launchSingleTop = true }
+//                    )
+                }
+            )
 
 
 
