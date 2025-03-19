@@ -89,6 +89,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:data:data"))
     implementation(project(":core:ui:designsystem"))
+    implementation(project(":core:ui:ui"))
 
     implementation(project(":feature:signin"))
     implementation(project(":feature:report"))

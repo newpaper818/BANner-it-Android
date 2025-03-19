@@ -13,6 +13,7 @@
     <string name="content">Content</string>
     <string name="location">Location</string>
 
+    <string name="photo_up_to">Up to %d photos</string>
     <string name="text_up_to">Up to %d characters</string>
 
 

@@ -106,7 +106,7 @@ object IconButtonIcon {
     val gallery = MyIcon(Icons.Rounded.PhotoLibrary,    30.dp, false, null, null)
 
     val map = MyIcon(Icons.Rounded.Map,                 30.dp, false, null, null)
-    val myLocation = MyIcon(Icons.Rounded.MyLocation,   30.dp, false, null, null)
+    val currentLocation = MyIcon(Icons.Rounded.MyLocation,   30.dp, false, null, null)
 }
 
 object FabIcon {

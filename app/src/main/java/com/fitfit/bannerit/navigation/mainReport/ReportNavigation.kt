@@ -52,6 +52,7 @@ fun NavGraphBuilder.reportScreen(
                 appUserData = appUiState.appUserData!!,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
+                internetEnabled = externalState.internetEnabled,
                 navigateUp = navigateUp,
                 navigateToSendReport = navigateToSendReport
             )

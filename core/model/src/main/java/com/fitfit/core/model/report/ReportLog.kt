@@ -4,23 +4,29 @@ import com.google.android.gms.maps.model.LatLng
 import java.time.ZonedDateTime
 
 data class ReportLog(
-    val reportId: String,
-    val reportDateTime: ZonedDateTime,
-    val status: ReportStatus,
+    val reportId: Int = 0,
+    val reportTime: ZonedDateTime = ZonedDateTime.now(),
+    val status: ReportStatus = ReportStatus.RECEIVED,
 
-    val images: List<String>,
-    val location: LatLng,
-    val content: String
+    val createdUserId: Int = 0,
+
+    val photos: List<String> = listOf(), //string(url)?
+    val location: LatLng = LatLng(0.0, 0.0),
+    val content: String = ""
 )
+
+
+
 
 
 
 val sampleReportLog = ReportLog(
-    reportId = "AA123",
-    reportDateTime = ZonedDateTime.now(),
+    reportId = 123,
+    reportTime = ZonedDateTime.now(),
     status = ReportStatus.RECEIVED,
 
-    images = listOf(),
+    photos = listOf(),
     location = LatLng(0.0, 0.0),
     content = "report content"
 )
+
