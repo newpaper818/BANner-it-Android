@@ -31,6 +31,48 @@ import com.fitfit.core.ui.designsystem.R
 import com.fitfit.core.ui.designsystem.theme.BannerItTheme
 
 @Composable
+fun BottomReportCancelButtons(
+    onClickCancel: () -> Unit,
+    onClickReport: () -> Unit,
+    modifier: Modifier = Modifier,
+    reportEnabled: Boolean = true,
+    use2PanesAndSpotScreen: Boolean = false
+){
+    Row {
+        if (use2PanesAndSpotScreen)
+            Spacer(modifier = Modifier.weight(1f))
+
+        Column(modifier = Modifier.weight(1f)) {
+            //gradation
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(34.dp)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            listOf(Color.Transparent, MaterialTheme.colorScheme.background)
+                        )
+                    )
+            )
+
+
+            //no gradation
+            NegativePositiveButtons(
+                negativeButtonText = stringResource(id = R.string.cancel),
+                positiveButtonText = stringResource(id = R.string.report),
+                onClickCancel = onClickCancel,
+                onClickPositive = onClickReport,
+                modifier = modifier
+                    .fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(10.dp, 2.dp, 10.dp, 10.dp),
+                positiveEnabled = reportEnabled,
+            )
+        }
+    }
+}
+
+@Composable
 fun AnimatedBottomSaveCancelButtons(
     visible: Boolean,
     onClickCancel: () -> Unit,

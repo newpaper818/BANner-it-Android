@@ -16,7 +16,7 @@
     <string name="authentication_complete">Authentication complete</string>
     <string name="authenticating">Authenticating…</string>
 
-    <!-- BottomSaveCancelBar.kt -->
+    <!-- BottomButtons.kt -->
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
