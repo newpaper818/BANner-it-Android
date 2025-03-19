@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.fitfit.core.data.data"
+    namespace = "com.fitfit.core.data.local_image_file"
     compileSdk = 35
 
     defaultConfig {
@@ -38,22 +38,16 @@ dependencies {
 
     //module
     implementation(project(":core:model"))
-
-    implementation(project(":core:data:credentials"))
-    implementation(project(":core:data:local-db"))
-    implementation(project(":core:data:remote-db"))
-    implementation(project(":core:data:local-image-file"))
+    implementation(project(":core:utils"))
 
     //
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.activity.compose)
     implementation(libs.android.material)
 
     //hilt
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
-
 
     //test
     testImplementation(libs.junit)
