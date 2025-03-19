@@ -5,6 +5,10 @@
     <string name="no_content">내용 없음</string>
     <string name="add_content">내용 추가</string>
 
+    <!-- ImageCard.kt -->
+    <string name="no_photos">사진 없음</string>
+    <string name="photo">사진</string>
+
     <!-- UserProfileCard.kt -->
     <string name="user_info">사용자 정보</string>
     <string name="no_name">이름 없음</string>

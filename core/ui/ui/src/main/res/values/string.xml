@@ -5,6 +5,10 @@
     <string name="no_content">No content</string>
     <string name="add_content">Add content</string>
 
+    <!-- ImageCard.kt -->
+    <string name="no_photos">No photos</string>
+    <string name="photo">Photo</string>
+
     <!-- UserProfileCard.kt -->
     <string name="user_info">User information</string>
     <string name="no_name">No name</string>
