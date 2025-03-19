@@ -53,8 +53,6 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
 
-    //ml kit pose detection
-    implementation(libs.mlkit.pose.detection)
 
     //test
     testImplementation(libs.junit)
