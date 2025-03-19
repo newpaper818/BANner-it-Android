@@ -17,6 +17,6 @@ fun TitleText(
         style = MaterialTheme.typography.labelMedium.copy(
             fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant
         ),
-        modifier = modifier.fillMaxWidth()
+        modifier = modifier
     )
 }
