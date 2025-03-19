@@ -38,6 +38,7 @@ import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material.icons.rounded.NoPhotography
 import androidx.compose.material.icons.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.OutlinedFlag
@@ -101,8 +102,11 @@ object IconButtonIcon {
     val minus = MyIcon(Icons.Rounded.Remove,   30.dp, false, null, R.string.minus)
     val plus = MyIcon(Icons.Rounded.Add,       30.dp, false, null, R.string.plus)
 
-    val camera = MyIcon(Icons.Rounded.CameraAlt,  30.dp, false, null, null)
-    val gallery = MyIcon(Icons.Rounded.PhotoLibrary,  30.dp, false, null, null)
+    val camera = MyIcon(Icons.Rounded.CameraAlt,        30.dp, false, null, null)
+    val gallery = MyIcon(Icons.Rounded.PhotoLibrary,    30.dp, false, null, null)
+
+    val map = MyIcon(Icons.Rounded.Map,                 30.dp, false, null, null)
+    val myLocation = MyIcon(Icons.Rounded.MyLocation,   30.dp, false, null, null)
 }
 
 object FabIcon {

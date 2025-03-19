@@ -21,6 +21,7 @@ import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
 import com.fitfit.core.ui.designsystem.icon.DisplayIcon
 import com.fitfit.core.ui.designsystem.icon.IconButtonIcon
 import com.fitfit.core.ui.designsystem.icon.MyIcon
+import com.fitfit.core.utils.itemMaxWidthSmall
 
 @Composable
 fun GetPhotosButtons(
@@ -28,7 +29,7 @@ fun GetPhotosButtons(
     onClickSelectPhotos: () -> Unit
 ){
     Row(
-        modifier = Modifier.widthIn(max = 400.dp)
+        modifier = Modifier.widthIn(max = itemMaxWidthSmall)
     ) {
         GetPhotosButton(
             onClick = onClickTakePhotos,
@@ -43,6 +44,32 @@ fun GetPhotosButtons(
             onClick = onClickSelectPhotos,
             icon = IconButtonIcon.gallery,
             text = stringResource(R.string.select_photos),
+            modifier = Modifier.weight(1f)
+        )
+    }
+}
+
+@Composable
+fun LocationButtons(
+    onClickTakePhotos: () -> Unit,
+    onClickSelectPhotos: () -> Unit
+){
+    Row(
+        modifier = Modifier.widthIn(max = itemMaxWidthSmall)
+    ) {
+        GetPhotosButton(
+            onClick = onClickTakePhotos,
+            icon = IconButtonIcon.map,
+            text = stringResource(R.string.select_location),
+            modifier = Modifier.weight(1f)
+        )
+
+        MySpacerRow(16.dp)
+
+        GetPhotosButton(
+            onClick = onClickSelectPhotos,
+            icon = IconButtonIcon.myLocation,
+            text = stringResource(R.string.current_location),
             modifier = Modifier.weight(1f)
         )
     }
