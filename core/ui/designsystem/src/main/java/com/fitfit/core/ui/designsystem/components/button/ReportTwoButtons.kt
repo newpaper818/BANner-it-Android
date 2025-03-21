@@ -64,7 +64,7 @@ fun LocationButtons(
     ) {
         IconButton(
             onClick = onClickSelectLocation,
-            enabled = true,
+            enabled = false,
             icon = IconButtonIcon.map,
             text = stringResource(R.string.select_location),
             modifier = Modifier.weight(1f)
@@ -74,7 +74,7 @@ fun LocationButtons(
 
         IconButton(
             onClick = onClickCurrentLocation,
-            enabled = true,
+            enabled = false,
             icon = IconButtonIcon.currentLocation,
             text = stringResource(R.string.current_location),
             modifier = Modifier.weight(1f)

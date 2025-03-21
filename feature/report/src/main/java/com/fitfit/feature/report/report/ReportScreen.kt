@@ -314,7 +314,7 @@ private fun ReportScreen(
                     MyCard(
                         modifier = Modifier
                             .widthIn(max = itemMaxWidthSmall)
-                            .height(160.dp)
+                            .height(140.dp)
                     ) {
                         Box(modifier = Modifier.fillMaxSize())
                     }
