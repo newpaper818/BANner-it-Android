@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.navigation.enterTransition
 import com.fitfit.bannerit.navigation.exitTransition
 import com.fitfit.bannerit.navigation.popEnterTransition
@@ -18,7 +19,7 @@ import com.fitfit.core.ui.ui.ErrorScreen
 import com.fitfit.feature.report.report.ReportRoute
 import kotlinx.coroutines.delay
 
-private val topLevelScreenDestination = com.fitfit.bannerit.navigation.TopLevelDestination.REPORT
+private val topLevelScreenDestination = TopLevelDestination.REPORT
 private val screenDestination = ScreenDestination.REPORT
 
 fun NavController.navigateToReport(navOptions: NavOptions? = null) =
@@ -29,6 +30,7 @@ fun NavGraphBuilder.reportScreen(
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
+    navigateToCamera: () -> Unit,
     navigateToSendReport: () -> Unit,
 ) {
     composable(
@@ -54,6 +56,7 @@ fun NavGraphBuilder.reportScreen(
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 internetEnabled = externalState.internetEnabled,
                 navigateUp = navigateUp,
+                navigateToCamera = navigateToCamera,
                 navigateToSendReport = navigateToSendReport
             )
         }

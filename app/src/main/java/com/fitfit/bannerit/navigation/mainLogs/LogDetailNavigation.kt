@@ -9,6 +9,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
 import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
@@ -23,7 +24,7 @@ import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
 
-private val topLevelScreenDestination = com.fitfit.bannerit.navigation.TopLevelDestination.LOGS
+private val topLevelScreenDestination = TopLevelDestination.LOGS
 private val screenDestination = ScreenDestination.LOG_DETAIL
 
 fun NavController.navigateToLogDetail(navOptions: NavOptions? = null) =

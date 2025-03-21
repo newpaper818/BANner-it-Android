@@ -8,6 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.feature.more.setDateTimeFormat.SetDateTimeFormatRoute
 import com.fitfit.bannerit.navigation.enterTransition
@@ -18,7 +19,7 @@ import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import kotlinx.coroutines.launch
 
-private val topLevelScreenDestination = com.fitfit.bannerit.navigation.TopLevelDestination.MORE
+private val topLevelScreenDestination = TopLevelDestination.MORE
 private val screenDestination = ScreenDestination.SET_DATE_TIME_FORMAT
 
 fun NavController.navigateToSetDateTimeFormat(navOptions: NavOptions? = null) =
