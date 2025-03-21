@@ -26,7 +26,7 @@ internal fun CameraPermissionNotGrantedCard(
 ){
 
     MyCard(
-
+        modifier = Modifier.padding(16.dp)
     ) {
         Box(
             modifier = Modifier
