@@ -65,6 +65,9 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    //google maps
+    implementation(libs.google.play.services.maps)
+
     //permission
     implementation(libs.google.accompanist.permissions)
 
@@ -76,9 +79,6 @@ dependencies {
     implementation(libs.androidx.camera.video)
     implementation(libs.androidx.camera.view)
     implementation(libs.androidx.camera.extentions)
-
-    //google maps
-    implementation(libs.google.play.services.maps)
 
     //test
     testImplementation(libs.junit)

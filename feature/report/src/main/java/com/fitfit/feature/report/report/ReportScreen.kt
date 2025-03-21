@@ -60,6 +60,7 @@ fun ReportRoute(
     internetEnabled: Boolean,
 
     navigateUp: () -> Unit,
+    navigateToCamera: () -> Unit,
     navigateToSendReport: () -> Unit,
 
     modifier: Modifier = Modifier,
@@ -116,6 +117,7 @@ fun ReportRoute(
             )
         },
 
+        navigateToCamera = navigateToCamera,
         navigateToSendReport = navigateToSendReport
     )
 }
@@ -140,6 +142,7 @@ private fun ReportScreen(
     deletePhotos: (List<String>) -> Unit,
     saveImageToInternalStorage: (index: Int, uri: Uri) -> String?,
 
+    navigateToCamera: () -> Unit,
     navigateToSendReport: () -> Unit,
 ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
@@ -253,7 +256,7 @@ private fun ReportScreen(
                     GetPhotosButtons(
                         enabled = reportLog.photos.size < MAX_IMAGE_COUNT,
                         onClickTakePhotos = {
-
+                            navigateToCamera()
                         },
                         onClickSelectPhotos = {
                             galleryLauncher.launch("image/*")

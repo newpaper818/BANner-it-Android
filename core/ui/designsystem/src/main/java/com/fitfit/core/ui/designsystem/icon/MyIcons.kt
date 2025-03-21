@@ -107,6 +107,8 @@ object IconButtonIcon {
 
     val map = MyIcon(Icons.Rounded.Map,                 30.dp, false, null, null)
     val currentLocation = MyIcon(Icons.Rounded.MyLocation,   30.dp, false, null, null)
+
+    val closeCamera = MyIcon(Icons.Rounded.Close,          30.dp, false, CustomColor.white, R.string.close)
 }
 
 object FabIcon {

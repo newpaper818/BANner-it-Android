@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--camera =======================================================================-->
+    <!--CameraPermissionNotGrantedCard.kt-->
+    <string name="camera_permission_denied">Camera permissions denied</string>
+    <string name="please_allow_camera_permissions">Please allow camera permissions in settings.\n(Settings > Permissions > Camera >\nWhile using the app or Ask every time)</string>
+
+
     <!--mainReport =============================================================================-->
     <string name="report">Report</string>
     <string name="you_should_sign_in">You should sign in to report banner</string>
@@ -15,12 +21,6 @@
 
     <string name="photo_up_to">Up to %d photos</string>
     <string name="text_up_to">Up to %d characters</string>
-
-
-    <!--workout/component =======================================================================-->
-    <!--CameraCard -->
-    <string name="camera_permission_denied">Camera permissions denied</string>
-    <string name="please_allow_camera_permissions">Please allow camera permissions in settings.\n(Settings > Permissions > Camera >\nWhile using the app or Ask every time)</string>
 
 
 </resources>

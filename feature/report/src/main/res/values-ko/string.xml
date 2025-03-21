@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--camera =======================================================================-->
+    <!--CameraPermissionNotGrantedCard.kt-->
+    <string name="camera_permission_denied">카메라 권한 거부됨</string>
+    <string name="please_allow_camera_permissions">설정에서 카메라 권한을 허용해 주세요.\n(설정 > 권한 > 카메라 >\n앱 사용 중 또는 항상 확인)</string>
+
+
     <!--mainReport =============================================================================-->
     <string name="report">신고</string>
     <string name="you_should_sign_in">현수막을 신고하려면 로그인해야 합니다</string>
@@ -15,12 +21,6 @@
 
     <string name="photo_up_to">최대 %d장</string>
     <string name="text_up_to">최대 %d자</string>
-
-
-    <!--workout/component =======================================================================-->
-    <!--CameraCard -->
-    <string name="camera_permission_denied">카메라 권한 거부됨</string>
-    <string name="please_allow_camera_permissions">설정에서 카메라 권한을 허용해 주세요.\n(설정 > 권한 > 카메라 >\n앱 사용 중 또는 항상 확인)</string>
 
 
 </resources>

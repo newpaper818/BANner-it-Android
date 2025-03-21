@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.bannerit.navigation.BannerItNavHost
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -25,12 +26,13 @@ fun BannerItApp(
     val systemUiController = rememberSystemUiController()
 
     //set status bar color
-//    when (appUiState.screenDestination.currentScreenDestination) {
-//        //image
-//        ScreenDestination.IMAGE -> {
-//            systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = false)
-//        }
-//
+    when (appUiState.screenDestination.currentScreenDestination) {
+        //image
+        ScreenDestination.CAMERA,
+        ScreenDestination.IMAGE -> {
+            systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = false)
+        }
+
 //        //trip map
 //        ScreenDestination.TRIP_MAP -> {
 //            if (isDarkMapTheme)
@@ -39,18 +41,19 @@ fun BannerItApp(
 //                systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = true)
 //        }
 //
-//        else -> {
-//            if (isDarkAppTheme)
-//                systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = false)
-//            else
-//                systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = true)
-//        }
-//    }
+        else -> {
+            if (isDarkAppTheme)
+                systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = false)
+            else
+                systemUiController.setStatusBarColor(color = Color.Transparent, darkIcons = true)
+        }
+    }
 
 
     //set navigation bar(recent, home, back) color
     when (appUiState.screenDestination.currentScreenDestination) {
-//        ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
+        ScreenDestination.CAMERA,
+        ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
 //
         //top level destinations
         ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_LOGS, ScreenDestination.MAIN_MORE

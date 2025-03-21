@@ -29,7 +29,9 @@ import com.fitfit.bannerit.navigation.mainMore.navigateToEditProfile
 import com.fitfit.bannerit.navigation.mainMore.navigateToMainMore
 import com.fitfit.bannerit.navigation.mainMore.setDateTimeFormatScreen
 import com.fitfit.bannerit.navigation.mainMore.setThemeScreen
+import com.fitfit.bannerit.navigation.mainReport.cameraScreen
 import com.fitfit.bannerit.navigation.mainReport.mainReportScreen
+import com.fitfit.bannerit.navigation.mainReport.navigateToCamera
 import com.fitfit.bannerit.navigation.mainReport.navigateToReport
 import com.fitfit.bannerit.navigation.mainReport.reportScreen
 import com.fitfit.bannerit.navigation.signin.navigateToSignIn
@@ -147,7 +149,7 @@ fun BannerItNavHost(
             mainNavController.navigate(
                 route = it.route,
                 navOptions = navOptions{
-                    popUpTo(com.fitfit.bannerit.navigation.TopLevelDestination.REPORT.route) { inclusive = it == com.fitfit.bannerit.navigation.TopLevelDestination.REPORT }
+                    popUpTo(TopLevelDestination.REPORT.route) { inclusive = it == TopLevelDestination.REPORT }
                     launchSingleTop = true
                 }
             )
@@ -157,8 +159,8 @@ fun BannerItNavHost(
 
             if (
                 externalState.windowSizeClass.use2Panes
-                && prevTopLevelDestination == com.fitfit.bannerit.navigation.TopLevelDestination.MORE
-                && it != com.fitfit.bannerit.navigation.TopLevelDestination.MORE
+                && prevTopLevelDestination == TopLevelDestination.MORE
+                && it != TopLevelDestination.MORE
             ){
                 appViewModel.updateMoreDetailCurrentScreenDestination(currentMoreDetailScreenDestination)
             }
@@ -240,11 +242,21 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
+                navigateToCamera = {
+                    mainNavController.navigateToCamera(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                },
                 navigateToSendReport = {
 //                    mainNavController.navigateToSendReport(
 //                        navOptions = navOptions { launchSingleTop = true }
 //                    )
                 }
+            )
+
+            cameraScreen(
+                appViewModel = appViewModel,
+                navigateUp = navigateUp
             )
 
 
