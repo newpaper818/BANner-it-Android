@@ -82,7 +82,12 @@ fun CameraRoute(
 
                 //shutter button
                 ShutterButton(
-                    onClick = { }
+                    onClick = {
+                        cameraPreviewViewModel.takePhoto(
+                            onPhotoSaved = { },
+                            onError = { }
+                        )
+                    }
                 )
 
                 Spacer(modifier = Modifier.weight(1f))

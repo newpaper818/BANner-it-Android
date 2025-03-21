@@ -1,11 +1,12 @@
 package com.fitfit.feature.report.camera
 
-import android.app.Application
 import android.content.Context
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.util.Log
 import androidx.camera.core.CameraSelector.DEFAULT_BACK_CAMERA
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.core.SurfaceRequest
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -19,6 +20,11 @@ import kotlinx.coroutines.awaitCancellation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
+import java.io.File
+import java.time.Instant
+import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
+import java.util.concurrent.Executors
 import javax.inject.Inject
 
 private const val CAMERA_PREVIEW_VIEWMODEL_TAG = "Camera-Preview-ViewModel"
@@ -34,6 +40,9 @@ class CameraPreviewViewModel @Inject constructor(
     private val _cameraAspectRatio = MutableStateFlow(4f / 3f) // 기본값 설정
     val cameraAspectRatio: StateFlow<Float> = _cameraAspectRatio
 
+    private var imageCapture: ImageCapture? = null
+
+
 
     init {
         getCameraAspectRatio()
@@ -46,9 +55,10 @@ class CameraPreviewViewModel @Inject constructor(
     }
 
     suspend fun bindToCamera(appContext: Context, lifecycleOwner: LifecycleOwner) {
+        imageCapture = ImageCapture.Builder().build()
         val processCameraProvider = ProcessCameraProvider.awaitInstance(appContext)
         processCameraProvider.bindToLifecycle(
-            lifecycleOwner, DEFAULT_BACK_CAMERA, cameraPreviewUseCase
+            lifecycleOwner, DEFAULT_BACK_CAMERA, cameraPreviewUseCase, imageCapture
         )
 
         // Cancellation signals we're done with the camera
@@ -71,5 +81,43 @@ class CameraPreviewViewModel @Inject constructor(
         } catch (e: Exception) {
             Log.e(CAMERA_PREVIEW_VIEWMODEL_TAG, "Error getting camera aspect ratio", e)
         }
+    }
+
+
+
+
+fun takePhoto(
+        onPhotoSaved: (String) -> Unit,
+        onError: (Exception) -> Unit
+    ) {
+        val imageCapture = imageCapture ?: return
+
+        val formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")
+            .withZone(ZoneOffset.UTC)
+
+        val photoFile = File(
+            context.getExternalFilesDir(null),
+            "img_${formatter.format(Instant.now())}.jpg"
+        )
+
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        val executor = Executors.newSingleThreadExecutor()
+
+        imageCapture?.takePicture(
+            outputOptions,
+            executor,
+            object : ImageCapture.OnImageSavedCallback {
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    Log.d(CAMERA_PREVIEW_VIEWMODEL_TAG, "take photo: ${photoFile.absolutePath}")
+                    onPhotoSaved(photoFile.absolutePath)
+                }
+
+                override fun onError(e: ImageCaptureException) {
+                    Log.e(CAMERA_PREVIEW_VIEWMODEL_TAG, "Error taking photo", e)
+                    onError(e)
+                }
+            }
+        )
     }
 }
