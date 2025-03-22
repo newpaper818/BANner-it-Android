@@ -1,15 +1,22 @@
 package com.fitfit.core.data.remote_db
 
+import android.content.Context
 import android.util.Log
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.toReportLogDTO
 import com.fitfit.core.model.report.ReportLog
+import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 private const val RETROFIT_TAG = "Retrofit"
 
 class RetrofitApi @Inject constructor(
+    @ApplicationContext private val context: Context,
     private val retrofitApiService: RetrofitApiService
 ): DbRemoteDataSource {
 
@@ -101,5 +108,49 @@ class RetrofitApi @Inject constructor(
             Log.e(RETROFIT_TAG, e.toString())
             return false
         }
+    }
+
+    //TODO delete after test - use above
+    override suspend fun sendTestImage(
+        jwt: String,
+        userId: Int,
+        reportLog: ReportLog
+    ): Boolean {
+        val imageFile = File(context.filesDir, reportLog.images[0])
+        val request = RequestBody.create(
+            MediaType.parse("image/jpg"),
+            imageFile
+        )
+
+        val userIdReq = RequestBody.create(
+            MediaType.parse("application/json"),
+            "{"
+                    + "\"user_id\" : \"$userId\""
+            + "}"
+        )
+
+        val photo = MultipartBody.Part.createFormData(
+            "photo", imageFile.name, request
+        )
+
+        try {
+            val result = retrofitApiService.postTestPhoto(
+                photo = photo,
+                userId = userIdReq
+            )
+            val error = result.body()?.error
+
+            Log.d(RETROFIT_TAG, "result = $result")
+
+            if (error == null)
+                return true
+            else
+                return false
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, e.toString())
+            return false
+        }
+
     }
 }

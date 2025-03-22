@@ -46,6 +46,11 @@ data class RequestReportLogDTO(
 
 //response
 @JsonClass(generateAdapter = true)
+data class TestBodyReportDTO(
+    @Json(name = "error")val error: ErrorDto?
+)
+
+@JsonClass(generateAdapter = true)
 data class ResponseBodyReportDTO(
     @Json(name = "report_log")val responseReportLogDTO: ResponseReportLogDTO?,
     @Json(name = "error")val error: ErrorDto?

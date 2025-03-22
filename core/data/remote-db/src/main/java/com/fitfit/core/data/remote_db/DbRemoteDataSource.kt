@@ -44,5 +44,12 @@ interface DbRemoteDataSource {
         userId: Int,
         reportLog: ReportLog
     ): Boolean
+
+    //TODO delete after test
+    suspend fun sendTestImage(
+        jwt: String,
+        userId: Int,
+        reportLog: ReportLog
+    ): Boolean
 }
 

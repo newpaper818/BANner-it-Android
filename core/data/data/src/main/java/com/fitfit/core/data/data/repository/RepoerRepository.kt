@@ -17,7 +17,15 @@ class ReportRepository @Inject constructor(
         reportLog: ReportLog,
         onResult: (Boolean) -> Unit
     ){
-        val result = dbRemoteDataSource.postReportLog(
+//        val result = dbRemoteDataSource.postReportLog(
+//            jwt = jwt,
+//            userId = userId,
+//            reportLog = reportLog
+//        )
+//        onResult(result)
+
+        //TODO delete after test - use above
+        val result = dbRemoteDataSource.sendTestImage(
             jwt = jwt,
             userId = userId,
             reportLog = reportLog
