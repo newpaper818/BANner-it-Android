@@ -23,7 +23,6 @@ class RetrofitApi @Inject constructor(
             //result
             val code = result.code()
             val header = result.headers()
-            val success = result.body()?.success
             val error = result.body()?.error
 
             //data
@@ -32,7 +31,6 @@ class RetrofitApi @Inject constructor(
 
             if (
                 code == 200
-                && success == true
                 && error == null
                 && jwt != null
                 && userData != null

@@ -15,7 +15,6 @@ data class IdTokenRequestDTO(
 
 @JsonClass(generateAdapter = true)
 data class SignInResponseDTO(
-    @Json(name = "success")val success: Boolean,
     @Json(name = "user_data")val userDataDTO: UserDataDTO?,
     @Json(name = "error")val error: ErrorDto?
 )
