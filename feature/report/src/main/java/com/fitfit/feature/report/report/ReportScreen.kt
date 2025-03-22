@@ -293,6 +293,8 @@ private fun ReportScreen(
                         saveImageToInternalStorage = saveImageToInternalStorage
                     )
 
+                    MySpacerColumn(height = 16.dp)
+
                     GetPhotosButtons(
                         enabled = reportLog.images.size < MAX_IMAGE_COUNT,
                         onClickTakePhotos = {

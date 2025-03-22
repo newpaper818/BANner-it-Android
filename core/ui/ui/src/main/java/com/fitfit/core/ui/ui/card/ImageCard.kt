@@ -232,8 +232,6 @@ fun ImageCard(
                     }
                 }
             }
-
-            MySpacerColumn(height = 8.dp)
         }
     }
 }
