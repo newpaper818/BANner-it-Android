@@ -10,10 +10,19 @@ data class ReportLog(
 
     val createdUserId: Int = 0,
 
-    val photos: List<String> = listOf(), //string(url)?
+    val images: List<String> = listOf(), //string(url)
     val location: LatLng = LatLng(0.0, 0.0),
+    val address: Address = Address(),
     val content: String = ""
 )
+
+data class Address(
+    val address1: String = "",
+    val address2: String = "",
+    val address3: String = ""
+)
+
+
 
 
 
@@ -25,7 +34,7 @@ val sampleReportLog = ReportLog(
     reportTime = ZonedDateTime.now(),
     status = ReportStatus.RECEIVED,
 
-    photos = listOf(),
+    images = listOf(),
     location = LatLng(0.0, 0.0),
     content = "report content"
 )

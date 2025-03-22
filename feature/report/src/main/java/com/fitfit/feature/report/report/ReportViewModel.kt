@@ -89,12 +89,12 @@ class ReportViewModel @Inject constructor(
     }
 
     fun addPhotos(addedPhotos: List<String>) {
-        val newPhotos = _reportUiState.value.reportLog.photos + addedPhotos
+        val newPhotos = _reportUiState.value.reportLog.images + addedPhotos
 
         _reportUiState.update {
             it.copy(
                 reportLog = it.reportLog.copy(
-                    photos = newPhotos
+                    images = newPhotos
                 )
             )
         }
@@ -103,13 +103,13 @@ class ReportViewModel @Inject constructor(
     }
 
     fun deletePhotos(deletedPhotos: List<String>) {
-        val newPhotos = _reportUiState.value.reportLog.photos.toMutableList()
+        val newPhotos = _reportUiState.value.reportLog.images.toMutableList()
         newPhotos.removeAll(deletedPhotos)
 
         _reportUiState.update {
             it.copy(
                 reportLog = it.reportLog.copy(
-                    photos = newPhotos
+                    images = newPhotos
                 )
             )
         }

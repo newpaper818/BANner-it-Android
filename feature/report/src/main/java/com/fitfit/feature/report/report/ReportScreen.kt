@@ -188,7 +188,7 @@ private fun ReportScreen(
     ){ uriList ->
         var addUriList = uriList
 
-        if (reportLog.photos.size + uriList.size > MAX_IMAGE_COUNT && !isPhotoCountOver){
+        if (reportLog.images.size + uriList.size > MAX_IMAGE_COUNT && !isPhotoCountOver){
             setPhotoCountOver(true)
         }
 
@@ -246,7 +246,7 @@ private fun ReportScreen(
                         modifier = itemModifier.padding(bottom = 6.dp)
                     ) {
                         TitleText(
-                            text = stringResource(R.string.photos, reportLog.photos.size, MAX_IMAGE_COUNT),
+                            text = stringResource(R.string.photos, reportLog.images.size, MAX_IMAGE_COUNT),
                             modifier = Modifier.padding(start = 16.dp)
                         )
 
@@ -269,7 +269,7 @@ private fun ReportScreen(
                         imageUserId = appUserData.userId,
                         internetEnabled = internetEnabled,
                         isEditMode = true,
-                        imagePathList = reportLog.photos,
+                        imagePathList = reportLog.images,
                         isImageCountOver = isPhotoCountOver,
                         onClickImage = { initialImageIndex ->
 
@@ -288,7 +288,7 @@ private fun ReportScreen(
                     )
 
                     GetPhotosButtons(
-                        enabled = reportLog.photos.size < MAX_IMAGE_COUNT,
+                        enabled = reportLog.images.size < MAX_IMAGE_COUNT,
                         onClickTakePhotos = {
                             navigateToCamera()
                         },
