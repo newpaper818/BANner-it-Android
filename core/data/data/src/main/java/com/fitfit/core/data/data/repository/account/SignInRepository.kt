@@ -6,7 +6,7 @@ import com.fitfit.core.data.remote_db.DbRemoteDataSource
 import com.fitfit.core.model.data.UserData
 import javax.inject.Inject
 
-private const val USER_REPOSITORY_TAG = "User-Repository"
+private const val SIGN_IN_REPOSITORY_TAG = "Sign-In-Repository"
 
 class SignInRepository @Inject constructor(
     private val authRemoteDataSource: AuthRemoteDataSource, //credentials

@@ -12,16 +12,29 @@ interface RetrofitApiService {
 
     @POST("oauth/validate")
     suspend fun requestUserDataWithIdToken(
-        @Body idToken: String
-    ): Response<SignInResponse>
-
-
-
+        @Body idTokenRequestDTO: IdTokenRequestDTO
+    ): Response<SignInResponseDTO>
 
     @POST("")
     fun requestUserDataWithJwt(
         @Header("Authorization") jwt: String,
-    ): Response<SignInResponse>
+    ): Response<SignInResponseDTO>
+
+
+
+
+
+
+//    @POST("")
+//    fun postReportLog(
+//        @Header("Authorization") jwt: String,
+//        @Body reportLogDTO: ReportLogDTO
+//    ): Response<>
+
+
+
+
+
 
 
 
