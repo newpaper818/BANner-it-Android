@@ -31,6 +31,34 @@ import com.fitfit.core.ui.designsystem.R
 import com.fitfit.core.ui.designsystem.theme.BannerItTheme
 
 @Composable
+fun BottomGoBackHomeButton(
+    onClick: () -> Unit
+){
+    BigPositiveButton(
+        text = stringResource(id = R.string.return_to_home),
+        onClick = onClick,
+        modifier = Modifier
+            .widthIn(max = 260.dp)
+            .fillMaxWidth()
+            .padding(10.dp, 2.dp, 10.dp, 10.dp)
+    )
+}
+
+@Composable
+fun BottomGoBackButton(
+    onClick: () -> Unit
+){
+    BigPositiveButton(
+        text = stringResource(id = R.string.go_back),
+        onClick = onClick,
+        modifier = Modifier
+            .widthIn(max = 260.dp)
+            .fillMaxWidth()
+            .padding(10.dp, 2.dp, 10.dp, 10.dp)
+    )
+}
+
+@Composable
 fun BottomReportCancelButtons(
     onClickCancel: () -> Unit,
     onClickReport: () -> Unit,

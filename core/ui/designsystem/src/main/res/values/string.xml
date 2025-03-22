@@ -17,6 +17,9 @@
     <string name="authenticating">Authenticating…</string>
 
     <!-- BottomButtons.kt -->
+    <string name="return_to_home">Return to home</string>
+    <string name="go_back">Go back</string>
+
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
@@ -69,6 +72,7 @@
 
     <!--MyIcons-->
     <string name="error">Error</string>
+    <string name="completed">Completed</string>
 
     <string name="sign_in">Sign in</string>
 
