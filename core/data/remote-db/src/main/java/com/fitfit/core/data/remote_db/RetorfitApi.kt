@@ -3,6 +3,7 @@ package com.fitfit.core.data.remote_db
 import android.util.Log
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.IdTokenRequestDTO
+import com.fitfit.core.model.dto.toReportLogDTO
 import com.fitfit.core.model.report.ReportLog
 import javax.inject.Inject
 
@@ -64,6 +65,41 @@ class RetrofitApi @Inject constructor(
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, e.toString())
             return null
+        }
+    }
+
+    override suspend fun postReportLog(
+        jwt: String,
+        userId: Int,
+        reportLog: ReportLog
+    ): Boolean {
+        try {
+            val result = retrofitApiService.postReportLog(
+                jwt = jwt,
+                requestBodyReportDTO = reportLog.toReportLogDTO(
+                    userId = userId
+                )
+            )
+
+            val code = result.code()
+            val error = result.body()?.error
+
+            if (
+                code == 200
+                && error == null
+            ) {
+                return true
+            }
+            else {
+                Log.e(RETROFIT_TAG, "result: $result")
+                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                return false
+            }
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, e.toString())
+            return false
         }
     }
 }

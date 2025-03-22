@@ -1,7 +1,10 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.dto.SignInResponse
+import com.fitfit.core.model.dto.IdTokenRequestDTO
+import com.fitfit.core.model.dto.RequestBodyReportDTO
+import com.fitfit.core.model.dto.ResponseBodyReportDTO
+import com.fitfit.core.model.dto.SignInResponseDTO
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -25,11 +28,11 @@ interface RetrofitApiService {
 
 
 
-//    @POST("")
-//    fun postReportLog(
-//        @Header("Authorization") jwt: String,
-//        @Body reportLogDTO: ReportLogDTO
-//    ): Response<>
+    @POST("")
+    fun postReportLog(
+        @Header("Authorization") jwt: String,
+        @Body requestBodyReportDTO: RequestBodyReportDTO
+    ): Response<ResponseBodyReportDTO>
 
 
 

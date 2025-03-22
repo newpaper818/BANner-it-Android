@@ -72,6 +72,8 @@ fun ReportRoute(
 
     reportViewModel: ReportViewModel = hiltViewModel()
 ) {
+    val coroutineScope = rememberCoroutineScope()
+
     val reportUiState by reportViewModel.reportUiState.collectAsState()
 
     val onClickBackButton = {
@@ -152,7 +154,11 @@ fun ReportRoute(
         },
 
         navigateToCamera = navigateToCamera,
-        onClickReport = { reportViewModel.setShowSendReportResultDialog(true) }
+        onClickReport = {
+            coroutineScope.launch {
+                reportViewModel.sendReportLog(appUserData)
+            }
+        }
     )
 }
 

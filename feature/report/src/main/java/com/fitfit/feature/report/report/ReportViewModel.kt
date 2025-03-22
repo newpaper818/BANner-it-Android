@@ -3,6 +3,8 @@ package com.fitfit.feature.report.report
 import android.net.Uri
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ImageRepository
+import com.fitfit.core.data.data.repository.ReportRepository
+import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.report.ReportLog
 import com.fitfit.core.ui.ui.card.MAX_IMAGE_COUNT
 import com.google.android.gms.maps.model.LatLng
@@ -29,7 +31,7 @@ data class ReportUiState(
 
 @HiltViewModel
 class ReportViewModel @Inject constructor(
-//    private val reportRepository: ReportRepository,
+    private val reportRepository: ReportRepository,
     private val imageRepository: ImageRepository
 ): ViewModel() {
 
@@ -150,6 +152,17 @@ class ReportViewModel @Inject constructor(
     }
 
 
-
-
+    suspend fun sendReportLog(
+        appUserData: UserData
+    ){
+        reportRepository.sendReportLog(
+            jwt = appUserData.jwt,
+            userId = appUserData.userId,
+            reportLog = _reportUiState.value.reportLog,
+            onResult = { result ->
+                setSendReportResultIsSuccess(result)
+                setShowSendReportResultDialog(true)
+            }
+        )
+    }
 }

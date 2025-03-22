@@ -1,6 +1,7 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.report.ReportLog
 
 interface DbRemoteDataSource {
 
@@ -17,7 +18,7 @@ interface DbRemoteDataSource {
      */
     suspend fun requestUserDataWithIdToken(
         userGoogleIdToken: String,
-    ): Pair<String, UserData>?
+    ): UserData?
 
 
 
@@ -35,5 +36,13 @@ interface DbRemoteDataSource {
     suspend fun requestUserDataWithJwt(
         jwt: String
     ): Pair<String, UserData>?
+
+
+
+    suspend fun postReportLog(
+        jwt: String,
+        userId: Int,
+        reportLog: ReportLog
+    ): Boolean
 }
 
