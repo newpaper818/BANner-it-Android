@@ -16,7 +16,6 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 import java.io.InputStream
-import java.text.DecimalFormat
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -25,7 +24,7 @@ import kotlin.math.sqrt
 
 private const val LOCAL_IMAGE_TAG = "Local-Storage-Image"
 
-private const val IMAGE_MAX_SIZE_MB = 2.3    //Mebibyte
+private const val IMAGE_MAX_SIZE_MB = 0.2    //Mebibyte
 private const val PROFILE_IMAGE_MAX_SIZE_MB = 0.05    //Mebibyte
 
 class ImageLocalApi @Inject constructor(
@@ -49,7 +48,7 @@ class ImageLocalApi @Inject constructor(
         //save
         return try{
             context.openFileOutput(fileName, Context.MODE_PRIVATE).use { stream ->
-                val quality = if (isProfileImage) 80 else 90
+                val quality = if (isProfileImage) 70 else 60
 
                 if (!newBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)){
                     throw IOException("Couldn't save bitmap")
@@ -129,32 +128,6 @@ class ImageLocalApi @Inject constructor(
             Log.e(LOCAL_IMAGE_TAG, "delete all images from local storage fail - ", e)
         }
     }
-
-//    override fun deleteUnusedImageFilesForAllTrips(
-//        allTrips: List<Trip>
-//    ){
-//        //all trip id : 1 4 5 8
-//        //internal image path names(trip id) : 1 4 4 5 8 9
-//        // -> delete 9
-//
-//        val allTripIdList = allTrips.map { it.id }
-//
-//        //get all .jpg files in internal storage
-//        val internalStorageDir = context.filesDir
-//        val allImageFiles = internalStorageDir.listFiles { file ->
-//            file.isFile && file.extension.equals("jpg", ignoreCase = true)
-//        }
-//
-//        //filter is not include in [allTripIdList]
-//        val unusedImageFiles = allImageFiles?.filter {
-//            "profile_" !in it.name && extractTripIdFromImagePath(it.name) !in allTripIdList
-//        } ?: listOf()
-//
-//        //delete unused image files
-//        deleteFilesFromInternalStorage(
-//            files = unusedImageFiles.map { it.name }
-//        )
-//    }
 
     override fun deleteUnusedProfileImageFiles(
         usingProfileImage: String?
@@ -277,12 +250,11 @@ class ImageLocalApi @Inject constructor(
         isProfileImage: Boolean,
         index: Int
     ): String {
-        val df = DecimalFormat("000")
         val now = ZonedDateTime.now(ZoneId.of("UTC"))
-        val dateTime = now.format(DateTimeFormatter.ofPattern("yyMMdd_HHmmssSSS"))
+        val dateTime = now.format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmssSSS"))
 
         return if (isProfileImage) "profile_${userId}_${dateTime}.jpg"
-                else "${userId}_${dateTime}_${index}.jpg"
+                else "${userId}_${dateTime}_${index+1}.jpg"
 
         //profile_1_231011_103012157.jpg
         //1_231011_103012157_0.jpg

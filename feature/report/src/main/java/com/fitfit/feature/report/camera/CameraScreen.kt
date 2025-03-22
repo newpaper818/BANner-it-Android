@@ -26,6 +26,7 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,14 +41,20 @@ import com.fitfit.feature.report.camera.component.CameraPreviewContent
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun CameraRoute(
+    userId: Int,
     navigateUp: () -> Unit,
     modifier: Modifier = Modifier,
     cameraPreviewViewModel: CameraPreviewViewModel = hiltViewModel(),
 ){
     val activity = LocalActivity.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val cameraPreviewUiState by cameraPreviewViewModel.cameraPreviewUiState.collectAsState()
 
     LaunchedEffect(Unit) {
         activity?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -74,6 +81,7 @@ fun CameraRoute(
 
             CameraScreen(
                 modifier = modifier,
+                cameraPreviewUiState = cameraPreviewUiState,
                 cameraPreviewViewModel = cameraPreviewViewModel
             )
 
@@ -92,17 +100,26 @@ fun CameraRoute(
 
                 //close button
                 CloseButton(
-                    onClick = navigateUp
+                    onClick = navigateUp,
+                    enabled = !cameraPreviewUiState.isTakingPhoto
                 )
 
                 Spacer(modifier = Modifier.weight(1f))
 
                 //shutter button
                 ShutterButton(
-                    enabled = imageCapture != null,
+                    enabled =
+                        imageCapture != null
+                        && !cameraPreviewUiState.isTakingPhoto,
                     onClick = {
                         cameraPreviewViewModel.takePhoto(
-                            onPhotoSaved = { },
+                            userId = userId,
+                            onPhotoSaved = {
+                                coroutineScope.launch {
+                                    delay(50)
+                                    navigateUp()
+                                }
+                            },
                             onError = { }
                         )
                     }
@@ -120,6 +137,7 @@ fun CameraRoute(
 @Composable
 private fun CameraScreen(
     modifier: Modifier = Modifier,
+    cameraPreviewUiState: CameraPreviewUiState,
     cameraPreviewViewModel: CameraPreviewViewModel,
 ){
     val context = LocalContext.current
@@ -131,12 +149,11 @@ private fun CameraScreen(
         }
     }
 
-    val cameraAspectRatio by cameraPreviewViewModel.cameraAspectRatio.collectAsState()
 
     Box(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(cameraAspectRatio),
+            .aspectRatio(cameraPreviewUiState.cameraAspectRatio),
         contentAlignment = Alignment.Center
     ) {
 

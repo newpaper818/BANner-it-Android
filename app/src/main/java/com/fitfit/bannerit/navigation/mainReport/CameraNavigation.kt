@@ -45,6 +45,7 @@ fun NavGraphBuilder.cameraScreen(
 
 
         CameraRoute(
+            userId = appUiState.appUserData?.userId ?: 0,
             navigateUp = navigateUp
         )
     }

@@ -14,12 +14,14 @@ import com.fitfit.core.ui.designsystem.icon.IconButtonIcon
 @Composable
 fun CloseButton(
     onClick: () -> Unit,
+    enabled: Boolean,
     modifier: Modifier = Modifier
 ){
     MyIconButton(
         modifier = modifier.size(50.dp),
         icon = IconButtonIcon.closeCamera,
         onClick = onClick,
+        enabled = enabled,
         containerColor = Color.DarkGray
     )
 }

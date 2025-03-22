@@ -25,11 +25,13 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -48,9 +50,9 @@ import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.TopAppBarIcon
 import com.fitfit.core.ui.designsystem.theme.CustomColor
 import com.fitfit.core.ui.ui.card.ContentCard
-import com.fitfit.core.ui.ui.card.MAX_IMAGE_COUNT
 import com.fitfit.core.ui.ui.card.ImageCard
 import com.fitfit.core.ui.ui.card.MAX_CONTENT_LENGTH
+import com.fitfit.core.ui.ui.card.MAX_IMAGE_COUNT
 import com.fitfit.core.ui.ui.dialog.TwoButtonsDialog
 import com.fitfit.core.ui.ui.item.TitleText
 import com.fitfit.core.utils.itemMaxWidthSmall
@@ -72,12 +74,17 @@ fun ReportRoute(
 
     reportViewModel: ReportViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
     val reportUiState by reportViewModel.reportUiState.collectAsState()
 
     val onClickBackButton = {
         reportViewModel.setShowExitDialog(true)
+    }
+
+    LaunchedEffect(Unit) {
+        reportViewModel.updateCameraCapturedImage(context = context)
     }
 
 

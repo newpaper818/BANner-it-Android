@@ -1,6 +1,8 @@
 package com.fitfit.feature.report.report
 
+import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ImageRepository
 import com.fitfit.core.data.data.repository.ReportRepository
@@ -13,6 +15,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
+
+private const val REPORT_VIEWMODEL_TAG = "Report-ViewModel"
 
 data class ReportUiState(
     val showExitDialog: Boolean = false,
@@ -40,6 +44,9 @@ class ReportViewModel @Inject constructor(
 
     val reportUiState = _reportUiState.asStateFlow()
 
+    init {
+        imageRepository.deleteAllImagesFromInternalStorage()
+    }
 
 
     //dialog
@@ -96,7 +103,9 @@ class ReportViewModel @Inject constructor(
     }
 
     fun addPhotos(addedPhotos: List<String>) {
-        val newPhotos = _reportUiState.value.reportLog.images + addedPhotos
+        val photos = _reportUiState.value.reportLog.images.toMutableList()
+        photos.addAll(addedPhotos)
+        val newPhotos = photos.distinct().toMutableList()
 
         _reportUiState.update {
             it.copy(
@@ -122,6 +131,9 @@ class ReportViewModel @Inject constructor(
         }
 
         setPhotoCountOver(newPhotos.size > MAX_IMAGE_COUNT)
+
+        //delete photos from internal storage
+        imageRepository.deleteFilesFromInternalStorage(deletedPhotos)
     }
 
     fun setLocation(newLocation: LatLng){
@@ -149,6 +161,27 @@ class ReportViewModel @Inject constructor(
             uri = uri,
             isProfileImage = isProfileImage
         )
+    }
+
+    fun updateCameraCapturedImage(
+        context: Context,
+    ){
+        try {
+            val fileList = context.filesDir.listFiles()
+
+            for (file in fileList!!) {
+                if (
+                    file.isFile
+                    && file.extension.equals("jpg", ignoreCase = true)
+                    && file.name.endsWith("_0.jpg")
+                ) {
+                    addPhotos(listOf(file.name))
+                }
+            }
+
+        } catch (e: Exception) {
+            Log.e(REPORT_VIEWMODEL_TAG, "", e)
+        }
     }
 
 
