@@ -45,6 +45,9 @@ fun CameraRoute(
     cameraPreviewViewModel: CameraPreviewViewModel = hiltViewModel(),
 ){
 
+    val imageCapture by cameraPreviewViewModel.imageCapture.collectAsState()
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -82,6 +85,7 @@ fun CameraRoute(
 
                 //shutter button
                 ShutterButton(
+                    enabled = imageCapture != null,
                     onClick = {
                         cameraPreviewViewModel.takePhoto(
                             onPhotoSaved = { },

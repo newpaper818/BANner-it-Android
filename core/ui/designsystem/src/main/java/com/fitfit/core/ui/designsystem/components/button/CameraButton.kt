@@ -5,6 +5,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.designsystem.icon.IconButtonIcon
@@ -25,12 +27,20 @@ fun CloseButton(
 @Composable
 fun ShutterButton(
     onClick: () -> Unit,
+    enabled: Boolean,
     modifier: Modifier = Modifier
 ){
+    val haptic = LocalHapticFeedback.current
+
     ClickableBox(
         modifier = modifier.size(70.dp),
-        onClick = onClick,
-        containerColor = Color.White,
+        enabled = enabled,
+        onClick = {
+            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+            onClick()
+        },
+        containerColor = if (enabled) Color.White
+                            else Color.Gray,
         shape = CircleShape,
     ) {
 

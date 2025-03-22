@@ -40,7 +40,8 @@ class CameraPreviewViewModel @Inject constructor(
     private val _cameraAspectRatio = MutableStateFlow(4f / 3f) // 기본값 설정
     val cameraAspectRatio: StateFlow<Float> = _cameraAspectRatio
 
-    private var imageCapture: ImageCapture? = null
+    private val _imageCapture = MutableStateFlow<ImageCapture?>(null)
+    val imageCapture: StateFlow<ImageCapture?> = _imageCapture
 
 
 
@@ -55,10 +56,10 @@ class CameraPreviewViewModel @Inject constructor(
     }
 
     suspend fun bindToCamera(appContext: Context, lifecycleOwner: LifecycleOwner) {
-        imageCapture = ImageCapture.Builder().build()
+        _imageCapture.value = ImageCapture.Builder().build()
         val processCameraProvider = ProcessCameraProvider.awaitInstance(appContext)
         processCameraProvider.bindToLifecycle(
-            lifecycleOwner, DEFAULT_BACK_CAMERA, cameraPreviewUseCase, imageCapture
+            lifecycleOwner, DEFAULT_BACK_CAMERA, cameraPreviewUseCase, imageCapture.value
         )
 
         // Cancellation signals we're done with the camera
@@ -104,7 +105,7 @@ fun takePhoto(
 
         val executor = Executors.newSingleThreadExecutor()
 
-        imageCapture?.takePicture(
+        imageCapture.value?.takePicture(
             outputOptions,
             executor,
             object : ImageCapture.OnImageSavedCallback {
