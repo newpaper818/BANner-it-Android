@@ -74,15 +74,14 @@ class SignInViewModel @Inject constructor(
 
         setIsSigningIn(true)
 
-        val jwtAndUserData = signInRepository.signInWithGoogle(context = context)
+        val userData = signInRepository.signInWithGoogle(context = context)
 
-        if (jwtAndUserData == null){
+        if (userData == null){
             setIsSigningIn(false)
             onError()
         }
         else {
-            val (jwt, userData) = jwtAndUserData
-            preferencesRepository.saveJwtPreference(jwt)
+            preferencesRepository.saveJwtPreference(userData.jwt)
             onResult(userData)
         }
     }

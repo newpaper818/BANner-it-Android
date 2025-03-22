@@ -28,8 +28,11 @@ data class UserDataDTO(
     @Json(name = "email")val email: String,
     @Json(name = "profile_image_url")val profileImageUrl: String,
 ){
-    fun toUserData(): UserData {
+    fun toUserData(
+        jwt: String
+    ): UserData {
         return UserData(
+            jwt = jwt,
             userId = userId,
             role = UserRole.valueOf(role),
             name = name,

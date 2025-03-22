@@ -14,7 +14,7 @@ class RetrofitApi @Inject constructor(
 
     override suspend fun requestUserDataWithIdToken(
         userGoogleIdToken: String,
-    ): Pair<String, UserData>? {
+    ): UserData? {
         try {
             val result = retrofitApiService.requestUserDataWithIdToken(
                 idTokenRequestDTO = IdTokenRequestDTO(idToken = userGoogleIdToken)
@@ -28,7 +28,7 @@ class RetrofitApi @Inject constructor(
 
             //data
             val jwt = header["Authorization"]?.replace("Bearer ", "")
-            val userData = result.body()?.userDataDTO?.toUserData()
+            val userData = result.body()?.userDataDTO?.toUserData(jwt ?: "")
 
             if (
                 code == 200
@@ -37,7 +37,7 @@ class RetrofitApi @Inject constructor(
                 && jwt != null
                 && userData != null
             ) {
-                return Pair(jwt, userData)
+                return userData
             }
             else {
                 Log.e(RETROFIT_TAG, "result: $result")

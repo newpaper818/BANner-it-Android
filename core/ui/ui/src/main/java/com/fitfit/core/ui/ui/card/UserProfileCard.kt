@@ -219,6 +219,7 @@ private fun UserProfileCardPreview(){
         ) {
             UserProfileCard(
                 userData = UserData(
+                    jwt = "",
                     userId = 123,
                     role = UserRole.USER,
                     name = "user name",
@@ -244,6 +245,7 @@ private fun UserProfileCardWithProviderIdPreview(){
         ) {
             UserProfileCard(
                 userData = UserData(
+                    jwt = "",
                     userId = 123,
                     role = UserRole.USER,
                     name = "user name",

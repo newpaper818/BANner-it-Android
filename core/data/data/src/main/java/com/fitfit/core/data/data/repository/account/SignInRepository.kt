@@ -16,7 +16,7 @@ class SignInRepository @Inject constructor(
     //sign in ======================================================================================
     suspend fun signInWithGoogle(
         context: Context,
-    ): Pair<String, UserData>? {
+    ): UserData? {
         //sign in -> get user idToken
         val idToken = authRemoteDataSource.signinWithGoogle(context = context)
 
