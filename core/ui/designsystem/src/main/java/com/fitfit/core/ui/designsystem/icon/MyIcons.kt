@@ -14,6 +14,8 @@ import androidx.compose.material.icons.rounded.AccessTime
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.CalendarMonth
+import androidx.compose.material.icons.rounded.CameraAlt
+import androidx.compose.material.icons.rounded.CheckCircleOutline
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.CloudOff
 import androidx.compose.material.icons.rounded.Delete
@@ -37,11 +39,13 @@ import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.MyLocation
 import androidx.compose.material.icons.rounded.NoPhotography
 import androidx.compose.material.icons.rounded.OpenInNew
 import androidx.compose.material.icons.rounded.OutlinedFlag
 import androidx.compose.material.icons.rounded.Pause
 import androidx.compose.material.icons.rounded.Payments
+import androidx.compose.material.icons.rounded.PhotoLibrary
 import androidx.compose.material.icons.rounded.QrCode
 import androidx.compose.material.icons.rounded.Remove
 import androidx.compose.material.icons.rounded.Route
@@ -98,6 +102,14 @@ object IconButtonIcon {
 
     val minus = MyIcon(Icons.Rounded.Remove,   30.dp, false, null, R.string.minus)
     val plus = MyIcon(Icons.Rounded.Add,       30.dp, false, null, R.string.plus)
+
+    val camera = MyIcon(Icons.Rounded.CameraAlt,        30.dp, false, null, null)
+    val gallery = MyIcon(Icons.Rounded.PhotoLibrary,    30.dp, false, null, null)
+
+    val map = MyIcon(Icons.Rounded.Map,                 30.dp, false, null, null)
+    val currentLocation = MyIcon(Icons.Rounded.MyLocation,   30.dp, false, null, null)
+
+    val closeCamera = MyIcon(Icons.Rounded.Close,          30.dp, false, CustomColor.white, R.string.close)
 }
 
 object FabIcon {
@@ -113,7 +125,11 @@ object FabIcon {
 object MyIcons {
 
     //error
-    val error = MyIcon(Icons.Rounded.ErrorOutline,              40.dp, false, null, R.string.error)
+    val error = MyIcon(Icons.Rounded.ErrorOutline,          80.dp, false, null, R.string.error)
+
+    //check
+    val check = MyIcon(Icons.Rounded.CheckCircleOutline,    80.dp, false, null, R.string.completed)
+
 
     //sign in screen
     val signIn = MyIcon(Icons.AutoMirrored.Rounded.Login,       36.dp, true, null, R.string.sign_in)

@@ -104,10 +104,10 @@ fun ImageFromUrl(
 @Composable
 fun ImageFromFile(
     internetEnabled: Boolean,
-    imageUserId: String,
+    imageUserId: Int,
     imagePath: String,
     contentDescription: String,
-    downloadImage: (imagePath: String, imageUserId: String, result: (Boolean) -> Unit) -> Unit,
+    downloadImage: (imagePath: String, imageUserId: Int, result: (Boolean) -> Unit) -> Unit,
 
     modifier: Modifier = Modifier,
     contentScale: ContentScale = ContentScale.Crop,

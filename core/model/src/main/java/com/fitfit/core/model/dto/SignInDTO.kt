@@ -7,10 +7,16 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class SignInResponse(
-    @Json(name = "success")val success: Boolean,
+data class IdTokenRequestDTO(
+    @Json(name = "id_token")val idToken: String,
+)
+
+
+
+@JsonClass(generateAdapter = true)
+data class SignInResponseDTO(
     @Json(name = "user_data")val userDataDTO: UserDataDTO?,
-    @Json(name = "error")val error: String?
+    @Json(name = "error")val error: ErrorDto?
 )
 
 @JsonClass(generateAdapter = true)
@@ -21,8 +27,11 @@ data class UserDataDTO(
     @Json(name = "email")val email: String,
     @Json(name = "profile_image_url")val profileImageUrl: String,
 ){
-    fun toUserData(): UserData {
+    fun toUserData(
+        jwt: String
+    ): UserData {
         return UserData(
+            jwt = jwt,
             userId = userId,
             role = UserRole.valueOf(role),
             name = name,

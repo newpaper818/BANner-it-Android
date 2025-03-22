@@ -54,13 +54,10 @@ moshi = "1.15.1"
 #15 camerax
 camerax= "1.5.0-alpha05"
 
-#16 google ml kit pose detection
-pose-detection= "18.0.0-beta5"
-
-#17 image
+#16 image
 coil = "2.4.0"
 
-#18 google maps
+#17 google maps
 playServiceMaps = "19.1.0"
 
 
@@ -161,13 +158,10 @@ androidx-camera-video =       { group = "androidx.camera", name = "camera-video"
 androidx-camera-view =        { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
 androidx-camera-extentions =  { group = "androidx.camera", name = "camera-extensions", version.ref = "camerax" }
 
-#16 google ml kit pose detection
-mlkit-pose-detection =  { group = "com.google.mlkit", name = "pose-detection", version.ref = "pose-detection" }
-
-#17 image
+#16 image
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
-#18 google maps
+#17 google maps
 google-play-services-maps =        { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServiceMaps" }
 
 

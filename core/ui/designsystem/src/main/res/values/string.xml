@@ -16,7 +16,10 @@
     <string name="authentication_complete">Authentication complete</string>
     <string name="authenticating">Authenticating…</string>
 
-    <!-- BottomSaveCancelBar.kt -->
+    <!-- BottomButtons.kt -->
+    <string name="return_to_home">Return to home</string>
+    <string name="go_back">Go back</string>
+
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
@@ -25,6 +28,12 @@
 
     <!-- ReportButton.kt -->
     <string name="report_banner">Report banner</string>
+
+    <!-- ReportTwoButtons.kt -->
+    <string name="take_photos">Take photos</string>
+    <string name="select_photos">Select photos</string>
+    <string name="select_location">Select location</string>
+    <string name="current_location">Current location</string>
 
     <!-- TextButtons.kt -->
     <string name="try_again">Try again</string>
@@ -63,6 +72,7 @@
 
     <!--MyIcons-->
     <string name="error">Error</string>
+    <string name="completed">Completed</string>
 
     <string name="sign_in">Sign in</string>
 

@@ -18,7 +18,7 @@ import androidx.lifecycle.viewModelScope
 import com.fitfit.core.model.enums.AppTheme
 import com.fitfit.core.ui.designsystem.theme.BannerItTheme
 import com.fitfit.bannerit.ui.AppViewModel
-import com.fitfit.bannerit.ui.FitfitApp
+import com.fitfit.bannerit.ui.BannerItApp
 import com.fitfit.bannerit.ui.rememberExternalState
 import com.fitfit.bannerit.utils.ConnectivityObserver
 import com.fitfit.bannerit.utils.NetworkConnectivityObserver
@@ -90,7 +90,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    FitfitApp(
+                    BannerItApp(
                         externalState = externalState,
                         appViewModel = appViewModel,
                         isDarkAppTheme = isDarkAppTheme

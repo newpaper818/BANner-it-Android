@@ -4,6 +4,7 @@ import com.fitfit.core.model.enums.ProviderId
 import com.fitfit.core.model.enums.UserRole
 
 data class UserData(
+    val jwt: String,
     val userId: Int,
     val role: UserRole,
 

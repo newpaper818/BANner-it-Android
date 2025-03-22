@@ -83,7 +83,7 @@ private fun MainWorkoutScreen(
 
                 if (appUserData != null){
                     ReportBannerButton(
-                        onClick = navigateToSignIn
+                        onClick = navigateToReport
                     )
                 }
                 else{

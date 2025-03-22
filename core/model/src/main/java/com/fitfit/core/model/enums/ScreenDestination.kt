@@ -15,9 +15,12 @@ enum class ScreenDestination(
 
     //from MAIN_REPORT
     REPORT("report"),
+    CAMERA("camera"),
+    SEND_REPORT("send_report"),
 
     //form MAIN_LOGS
     LOG_DETAIL("logDetail"),
+    IMAGE("image"),
 
     //from MAIN_MORE
     SET_DATE_TIME_FORMAT("setDateTimeFormat"),

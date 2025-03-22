@@ -3,6 +3,7 @@ package com.fitfit.bannerit.ui
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.core.data.data.repository.PreferencesRepository
 import com.fitfit.core.data.data.repository.SplashRepository
 import com.fitfit.core.model.data.DateTimeFormat
@@ -28,7 +29,7 @@ data class AppPreferencesState(
 data class DestinationState(
     val startScreenDestination: ScreenDestination? = null, //if not null, splash screen will be finish
     val moreDetailStartScreenDestination: ScreenDestination = ScreenDestination.SET_DATE_TIME_FORMAT,
-    val currentTopLevelDestination: com.fitfit.bannerit.navigation.TopLevelDestination = com.fitfit.bannerit.navigation.TopLevelDestination.REPORT,
+    val currentTopLevelDestination: TopLevelDestination = TopLevelDestination.REPORT,
     val currentScreenDestination: ScreenDestination = ScreenDestination.SIGN_IN
 )
 
@@ -175,7 +176,7 @@ class AppViewModel @Inject constructor(
                 }
             }
 
-            newUserData = UserData(111, UserRole.ADMIN, "nameee", "email@gmail.com", null, emptyList()) //TODO: delete this and use upper code
+            newUserData = UserData("", 111, UserRole.ADMIN, "nameee", "email@gmail.com", null, emptyList()) //TODO: delete this and use upper code
 
             _appUiState.update {
                 it.copy(appUserData = newUserData)
@@ -225,7 +226,7 @@ class AppViewModel @Inject constructor(
         }
     }
 
-    fun updateCurrentTopLevelDestination(topLevelDestination: com.fitfit.bannerit.navigation.TopLevelDestination){
+    fun updateCurrentTopLevelDestination(topLevelDestination: TopLevelDestination){
         _appUiState.update {
             it.copy(
                 screenDestination = it.screenDestination.copy(
@@ -244,7 +245,7 @@ class AppViewModel @Inject constructor(
                 _appUiState.update {
                     it.copy(
                         screenDestination = it.screenDestination.copy(
-                            currentTopLevelDestination = com.fitfit.bannerit.navigation.TopLevelDestination.REPORT,
+                            currentTopLevelDestination = TopLevelDestination.REPORT,
                             currentScreenDestination = screenDestination
                         )
                     )
@@ -254,7 +255,7 @@ class AppViewModel @Inject constructor(
                 _appUiState.update {
                     it.copy(
                         screenDestination = it.screenDestination.copy(
-                            currentTopLevelDestination = com.fitfit.bannerit.navigation.TopLevelDestination.LOGS,
+                            currentTopLevelDestination = TopLevelDestination.LOGS,
                             currentScreenDestination = screenDestination
                         )
                     )

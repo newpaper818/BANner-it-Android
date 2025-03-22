@@ -32,13 +32,10 @@ fun ListGroupCard(
         modifier = modifier
     ) {
         if (title != null) {
-            Row {
-                MySpacerRow(width = 16.dp)
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                )
-            }
+            TitleText(
+                text = title,
+                modifier = Modifier.padding(start = 16.dp)
+            )
 
             MySpacerColumn(height = 6.dp)
         }

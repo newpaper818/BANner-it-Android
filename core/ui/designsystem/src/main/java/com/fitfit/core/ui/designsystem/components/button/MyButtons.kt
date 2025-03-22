@@ -133,8 +133,7 @@ internal fun MyIconButton(
         contentAlignment = Alignment.Center
     ) {
         DisplayIcon(
-            icon = icon,
-            color = MaterialTheme.colorScheme.contentColorFor(containerColor)
+            icon = icon
         )
     }
 }

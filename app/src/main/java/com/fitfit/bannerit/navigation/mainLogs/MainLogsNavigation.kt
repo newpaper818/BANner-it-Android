@@ -16,6 +16,7 @@ import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
 import com.fitfit.feature.logs.mainLogs.MainLogsRoute
 import com.fitfit.bannerit.navigation.TopEnterTransition
 import com.fitfit.bannerit.navigation.TopExitTransition
+import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.navigation.TopPopEnterTransition
 import com.fitfit.bannerit.navigation.TopPopExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
@@ -24,7 +25,7 @@ import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
 import kotlinx.coroutines.delay
 
-private val topLevelScreenDestination = com.fitfit.bannerit.navigation.TopLevelDestination.LOGS
+private val topLevelScreenDestination = TopLevelDestination.LOGS
 private val screenDestination = ScreenDestination.MAIN_LOGS
 
 fun NavController.navigateToMainLogs(navOptions: NavOptions? = null) =
