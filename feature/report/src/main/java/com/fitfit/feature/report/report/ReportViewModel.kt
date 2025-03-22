@@ -47,14 +47,19 @@ class ReportViewModel @Inject constructor(
         }
     }
 
-    fun setShowSendReportResultDialog(showSendReportResultDialog: Boolean) {
+    fun setShowSendReportResultDialog(
+        showSendReportResultDialog: Boolean
+    ) {
+        if (!showSendReportResultDialog)
+            setSendReportResultIsSuccess(null)
+
         _reportUiState.update {
             it.copy(showSendReportResultDialog = showSendReportResultDialog)
         }
     }
 
     //
-    fun setSendReportResultIsSuccess(isSuccess: Boolean){
+    fun setSendReportResultIsSuccess(isSuccess: Boolean?){
         _reportUiState.update {
             it.copy(sendReportResultIsSuccess = isSuccess)
         }
