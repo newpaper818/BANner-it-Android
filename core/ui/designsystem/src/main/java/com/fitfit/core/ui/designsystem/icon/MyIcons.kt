@@ -15,6 +15,7 @@ import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Bookmarks
 import androidx.compose.material.icons.rounded.CalendarMonth
 import androidx.compose.material.icons.rounded.CameraAlt
+import androidx.compose.material.icons.rounded.CheckCircleOutline
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.CloudOff
 import androidx.compose.material.icons.rounded.Delete
@@ -124,7 +125,11 @@ object FabIcon {
 object MyIcons {
 
     //error
-    val error = MyIcon(Icons.Rounded.ErrorOutline,              40.dp, false, null, R.string.error)
+    val error = MyIcon(Icons.Rounded.ErrorOutline,          80.dp, false, null, R.string.error)
+
+    //check
+    val check = MyIcon(Icons.Rounded.CheckCircleOutline,    80.dp, false, null, R.string.completed)
+
 
     //sign in screen
     val signIn = MyIcon(Icons.AutoMirrored.Rounded.Login,       36.dp, true, null, R.string.sign_in)

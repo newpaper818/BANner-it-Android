@@ -22,5 +22,8 @@
     <string name="photo_up_to">최대 %d장</string>
     <string name="text_up_to">최대 %d자</string>
 
+    <string name="report_was_received_successfully">신고가 정상적으로\n접수되었습니다!</string>
+    <string name="error_occurred">오류가 발생했어요…</string>
+
 
 </resources>

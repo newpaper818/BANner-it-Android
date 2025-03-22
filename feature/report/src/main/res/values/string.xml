@@ -22,5 +22,8 @@
     <string name="photo_up_to">Up to %d photos</string>
     <string name="text_up_to">Up to %d characters</string>
 
+    <string name="report_was_received_successfully">The report was\nreceived successfully!</string>
+    <string name="error_occurred">Error occurred…</string>
+
 
 </resources>
