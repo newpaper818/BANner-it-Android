@@ -246,11 +246,6 @@ fun BannerItNavHost(
                     mainNavController.navigateToCamera(
                         navOptions = navOptions { launchSingleTop = true }
                     )
-                },
-                navigateToSendReport = {
-//                    mainNavController.navigateToSendReport(
-//                        navOptions = navOptions { launchSingleTop = true }
-//                    )
                 }
             )
 

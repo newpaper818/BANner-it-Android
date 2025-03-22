@@ -31,7 +31,6 @@ fun NavGraphBuilder.reportScreen(
 
     navigateUp: () -> Unit,
     navigateToCamera: () -> Unit,
-    navigateToSendReport: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -56,8 +55,7 @@ fun NavGraphBuilder.reportScreen(
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 internetEnabled = externalState.internetEnabled,
                 navigateUp = navigateUp,
-                navigateToCamera = navigateToCamera,
-                navigateToSendReport = navigateToSendReport
+                navigateToCamera = navigateToCamera
             )
         }
         else{

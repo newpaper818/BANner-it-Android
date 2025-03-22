@@ -4,6 +4,10 @@ import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,6 +34,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.report.ReportLog
@@ -50,6 +55,7 @@ import com.fitfit.core.ui.ui.dialog.TwoButtonsDialog
 import com.fitfit.core.ui.ui.item.TitleText
 import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.report.R
+import com.fitfit.feature.report.report.component.SendReportResultDialog
 import kotlinx.coroutines.launch
 
 @Composable
@@ -61,7 +67,6 @@ fun ReportRoute(
 
     navigateUp: () -> Unit,
     navigateToCamera: () -> Unit,
-    navigateToSendReport: () -> Unit,
 
     modifier: Modifier = Modifier,
 
@@ -88,8 +93,37 @@ fun ReportRoute(
         )
     }
 
+    AnimatedVisibility(
+        visible = reportUiState.showSendReportResultDialog,
+        enter = slideInHorizontally(animationSpec = tween(300), initialOffsetX = { it }),
+        exit = slideOutHorizontally(animationSpec = tween(300), targetOffsetX = { it }),
+        modifier = Modifier.zIndex(1f)
+    ) {
+        SendReportResultDialog(
+            success = reportUiState.sendReportResultIsSuccess == true,
+            onClickGoBackHome = {
+                navigateUp()
+            },
+            onClickGoBack = {
+                reportViewModel.setShowSendReportResultDialog(false)
+            }
+        )
+    }
+
+
+
+
     BackHandler {
-        onClickBackButton()
+        if (reportUiState.showSendReportResultDialog){
+            when (reportUiState.sendReportResultIsSuccess){
+                true -> navigateUp()
+                false -> reportViewModel.setShowSendReportResultDialog(false)
+                null -> { }
+            }
+        }
+        else{
+            onClickBackButton()
+        }
     }
 
     ReportScreen(
@@ -118,7 +152,7 @@ fun ReportRoute(
         },
 
         navigateToCamera = navigateToCamera,
-        navigateToSendReport = navigateToSendReport
+        onClickReport = { reportViewModel.setShowSendReportResultDialog(true) }
     )
 }
 
@@ -143,7 +177,7 @@ private fun ReportScreen(
     saveImageToInternalStorage: (index: Int, uri: Uri) -> String?,
 
     navigateToCamera: () -> Unit,
-    navigateToSendReport: () -> Unit,
+    onClickReport: () -> Unit,
 ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
     val coroutineScope = rememberCoroutineScope()
@@ -339,7 +373,7 @@ private fun ReportScreen(
                     setShowExitDialog(true)
                 },
                 onClickReport = {
-                    navigateToSendReport()
+                    onClickReport()
                 },
                 modifier = Modifier
             )

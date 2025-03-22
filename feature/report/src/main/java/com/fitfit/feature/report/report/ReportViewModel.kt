@@ -14,13 +14,16 @@ import javax.inject.Inject
 
 data class ReportUiState(
     val showExitDialog: Boolean = false,
+    val showSendReportResultDialog: Boolean = false,
 
     val reportLog: ReportLog = ReportLog(),
 
     val isPhotoCountOver: Boolean = false,
     val isContentTextLengthOver: Boolean = false,
 
-    val reportButtonEnabled: Boolean = true
+    val reportButtonEnabled: Boolean = true,
+
+    val sendReportResultIsSuccess: Boolean? = null
 )
 
 
@@ -41,6 +44,19 @@ class ReportViewModel @Inject constructor(
     fun setShowExitDialog(showExitDialog: Boolean) {
         _reportUiState.update {
             it.copy(showExitDialog = showExitDialog)
+        }
+    }
+
+    fun setShowSendReportResultDialog(showSendReportResultDialog: Boolean) {
+        _reportUiState.update {
+            it.copy(showSendReportResultDialog = showSendReportResultDialog)
+        }
+    }
+
+    //
+    fun setSendReportResultIsSuccess(isSuccess: Boolean){
+        _reportUiState.update {
+            it.copy(sendReportResultIsSuccess = isSuccess)
         }
     }
 
