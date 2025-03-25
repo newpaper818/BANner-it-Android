@@ -40,11 +40,12 @@ interface RetrofitApiService {
     ): Response<ResponseBodyReportDTO>
 
 
+    //TODO test FIXME several photos
     @Multipart
     @POST("")
     fun postTestPhoto(
         @Part photo: MultipartBody.Part,
-        @Part("user_id") userId: RequestBody
+        @Part("test") userId: RequestBody
     ): Response<TestBodyReportDTO>
 
 

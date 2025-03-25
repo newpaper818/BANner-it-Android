@@ -84,7 +84,7 @@ class RetrofitApi @Inject constructor(
             val result = retrofitApiService.postReportLog(
                 jwt = jwt,
                 requestBodyReportDTO = reportLog.toReportLogDTO(
-                    userId = userId
+//                    userId = userId
                 )
             )
 
