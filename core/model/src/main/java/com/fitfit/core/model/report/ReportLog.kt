@@ -44,6 +44,33 @@ val sampleReportLog = ReportLog(
 
     createdUserId = 145,
 
+    images = listOf("https://lh3.googleusercontent.com/BDYz2mEEqtB9JGCH_uR0rE6lIIJOnoRhAzdla91I-sFg-cdl1NUi79AYciv5iujzL7711Q=s221-p-k-rw-no"),
+    location = LatLng(0.0, 0.0),
+    address = Address(),
+    content = "report content",
+    bannerInfo = listOf(
+        BannerInfo(
+            bannerId = 4978,
+            status = ReportStatus.LEGAL,
+            companyName = "aaaa",
+            phoneNumber = "010-2222-3366"
+        ),
+        BannerInfo(
+            bannerId = 1059,
+            status = ReportStatus.ILLEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        )
+    )
+)
+
+val sampleReportLog2 = ReportLog(
+    reportId = 12345,
+    reportTime = ZonedDateTime.parse("2025-03-25T20:30:50Z"),
+    status = ReportStatus.RECEIVED,
+
+    createdUserId = 145,
+
     images = listOf(),
     location = LatLng(0.0, 0.0),
     address = Address(),
