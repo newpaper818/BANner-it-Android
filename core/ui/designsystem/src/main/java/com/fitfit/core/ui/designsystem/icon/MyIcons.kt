@@ -7,6 +7,7 @@ import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
 import androidx.compose.material.icons.automirrored.rounded.Login
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.automirrored.rounded.Send
+import androidx.compose.material.icons.outlined.HideImage
 import androidx.compose.material.icons.outlined.Keyboard
 import androidx.compose.material.icons.outlined.MoreHoriz
 import androidx.compose.material.icons.outlined.Palette
@@ -146,8 +147,9 @@ object MyIcons {
     val deleteProfileImage = MyIcon(Icons.Rounded.Delete,   24.dp, false, null, null)
 
     //image card
-    val deleteImage = MyIcon(Icons.Rounded.Close,       16.dp, false, null, R.string.example)
-    val imageLoadingError = MyIcon(Icons.Rounded.Error, 36.dp, false, null, R.string.example)
+    val deleteImage = MyIcon(Icons.Rounded.Close,       16.dp, false, null, R.string.delete_image)
+    val imageLoadingError = MyIcon(Icons.Rounded.Error, 36.dp, false, null, R.string.image_loading_error)
+    val noImage = MyIcon(Icons.Outlined.HideImage,       36.dp, true, null, R.string.no_image)
 
     //search / text input
     val searchLocation = MyIcon(Icons.Rounded.Search,   24.dp, false, null, R.string.example)

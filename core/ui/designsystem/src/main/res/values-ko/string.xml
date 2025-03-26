@@ -48,6 +48,7 @@
     <!--component/ ==============================================================================-->
     <!-- Image.kt -->
     <string name="image_loading_error">이미지 로딩 에러</string>
+    <string name="no_image">이미지 없음</string>
 
 
     <!--component/icon/MyIcons.kt/ =======================================================-->
