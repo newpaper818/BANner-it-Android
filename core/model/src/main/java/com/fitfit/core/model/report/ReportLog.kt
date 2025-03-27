@@ -65,11 +65,11 @@ val sampleReportLog = ReportLog(
 )
 
 val sampleReportLog2 = ReportLog(
-    reportId = 12345,
+    reportId = 454545,
     reportTime = ZonedDateTime.parse("2025-03-25T20:30:50Z"),
-    status = ReportStatus.RECEIVED,
+    status = ReportStatus.ILLEGAL_DEMOLITION,
 
-    createdUserId = 145,
+    createdUserId = 1234,
 
     images = listOf(),
     location = LatLng(0.0, 0.0),
@@ -91,3 +91,29 @@ val sampleReportLog2 = ReportLog(
     )
 )
 
+val sampleReportLog3 = ReportLog(
+    reportId = 124511,
+    reportTime = ZonedDateTime.parse("2025-03-28T08:10:00Z"),
+    status = ReportStatus.LEGAL,
+
+    createdUserId = 1234,
+
+    images = listOf(""),
+    location = LatLng(0.0, 0.0),
+    address = Address(),
+    content = "report content",
+    bannerInfo = listOf(
+        BannerInfo(
+            bannerId = 4978,
+            status = ReportStatus.LEGAL,
+            companyName = "aaaa",
+            phoneNumber = "010-2222-3366"
+        ),
+        BannerInfo(
+            bannerId = 1059,
+            status = ReportStatus.ILLEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        )
+    )
+)

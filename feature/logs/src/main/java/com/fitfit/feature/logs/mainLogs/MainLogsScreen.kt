@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.report.sampleReportLog
 import com.fitfit.core.model.report.sampleReportLog2
+import com.fitfit.core.model.report.sampleReportLog3
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.ui.card.ReportLogCard
@@ -72,6 +73,13 @@ private fun MainLogsScreen(
             item {
                 ReportLogCard(
                     reportLog = sampleReportLog2,
+                    dateTimeFormat = dateTimeFormat,
+                    modifier = itemModifier
+                )
+            }
+            item {
+                ReportLogCard(
+                    reportLog = sampleReportLog3,
                     dateTimeFormat = dateTimeFormat,
                     modifier = itemModifier
                 )
