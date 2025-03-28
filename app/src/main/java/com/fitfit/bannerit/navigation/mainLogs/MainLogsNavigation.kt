@@ -64,12 +64,13 @@ fun NavGraphBuilder.mainLogsScreen(
                     jwt = jwt
                 )
             }
+        }
 
+        LaunchedEffect(Unit) {
             appViewModel.updateCurrentTopLevelDestination(topLevelScreenDestination)
             delay(100)
             appViewModel.updateCurrentScreenDestination(screenDestination)
         }
-
 
 
         Row {

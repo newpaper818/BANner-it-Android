@@ -5,6 +5,7 @@
 
     <!--mainLogs ================================================================================-->
     <string name="logs">Logs</string>
+    <string name="no_report_log">No report log</string>
 
 
 </resources>

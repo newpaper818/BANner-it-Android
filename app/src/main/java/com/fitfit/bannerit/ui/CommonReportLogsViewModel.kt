@@ -7,6 +7,7 @@ import com.fitfit.core.model.report.sampleReportLog
 import com.fitfit.core.model.report.sampleReportLog2
 import com.fitfit.core.model.report.sampleReportLog3
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -61,6 +62,7 @@ class CommonReportLogsViewModel @Inject constructor(
             setAppUserReportLogs(newAppUserReportLogs)
         else {
             val sampleList = listOf(sampleReportLog, sampleReportLog2, sampleReportLog3)
+            delay(2000)
             setAppUserReportLogs(sampleList)
         }
     }
