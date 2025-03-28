@@ -60,6 +60,8 @@ class CommonReportLogsViewModel @Inject constructor(
         val newAppUserReportLogs = reportLogsRepository.getAppUserReportLogs(jwt = jwt)
         if (newAppUserReportLogs != null)
             setAppUserReportLogs(newAppUserReportLogs)
+
+        //TODO delete after test
         else {
             val sampleList = listOf(sampleReportLog, sampleReportLog2, sampleReportLog3)
             delay(2000)

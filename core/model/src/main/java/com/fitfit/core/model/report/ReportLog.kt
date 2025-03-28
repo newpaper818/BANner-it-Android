@@ -44,7 +44,7 @@ val sampleReportLog = ReportLog(
 
     createdUserId = 145,
 
-    images = listOf("https://lh3.googleusercontent.com/BDYz2mEEqtB9JGCH_uR0rE6lIIJOnoRhAzdla91I-sFg-cdl1NUi79AYciv5iujzL7711Q=s221-p-k-rw-no"),
+    images = listOf("https://www.greenkorea.org/wp-content/uploads/2024/03/IMG_8832-615x820.jpg"),
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
