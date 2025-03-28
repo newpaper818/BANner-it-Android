@@ -145,7 +145,7 @@ object MyIcons {
 
     //image card
     val deleteImage = MyIcon(Icons.Rounded.Close,               16.dp, false, null, R.string.delete_image)
-    val imageLoadingError = MyIcon(Icons.Rounded.ErrorOutline,  36.dp, true, null, R.string.image_loading_error)
+    val imageLoadingError = MyIcon(Icons.Rounded.ErrorOutline,  36.dp, false, null, R.string.image_loading_error)
     val noImage = MyIcon(Icons.Outlined.HideImage,              36.dp, true, null, R.string.no_image)
 
     //search / text input
