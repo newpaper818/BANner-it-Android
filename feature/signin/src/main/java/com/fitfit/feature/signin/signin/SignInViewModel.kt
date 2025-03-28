@@ -2,8 +2,6 @@ package com.fitfit.feature.signin.signin
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
-import com.fitfit.core.data.data.repository.CommonUiState
-import com.fitfit.core.data.data.repository.CommonUiStateRepository
 import com.fitfit.core.data.data.repository.PreferencesRepository
 import com.fitfit.core.data.data.repository.account.SignInRepository
 import com.fitfit.core.model.data.UserData
@@ -13,7 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
-private const val SIGN_IN_VIEWMODEL_TAG = "SignIn-ViewModel"
+private const val SIGN_IN_VIEWMODEL_TAG = "Sign-In-ViewModel"
 
 data class SignInUiState(
     val isSigningIn: Boolean = false,
@@ -22,7 +20,6 @@ data class SignInUiState(
 
 @HiltViewModel
 class SignInViewModel @Inject constructor(
-    private val commonUiStateRepository: CommonUiStateRepository,
     private val signInRepository: SignInRepository,
     private val preferencesRepository: PreferencesRepository,
 ): ViewModel() {
@@ -30,13 +27,6 @@ class SignInViewModel @Inject constructor(
         MutableStateFlow(SignInUiState())
 
     val signInUiState = _signInUiState.asStateFlow()
-
-    init {
-        //init commonUiState
-        commonUiStateRepository._commonUiState.update {
-            CommonUiState()
-        }
-    }
 
 
     //==============================================================================================
