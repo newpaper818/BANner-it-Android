@@ -5,7 +5,7 @@
     <string name="no_report_log">신고 기록이 없어요</string>
 
     <!--reportLogDetail =========================================================================-->
-    <string name="log_detail">기록 디테일</string>
+    <string name="report_log">신고 기록</string>
     <string name="photos_">사진 %d장</string>
     <string name="content">내용</string>
     <string name="banner_info">현수막 정보</string>

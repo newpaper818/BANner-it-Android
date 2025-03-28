@@ -5,7 +5,7 @@
     <string name="no_report_log">No report log</string>
 
     <!--reportLogDetail =========================================================================-->
-    <string name="log_detail">Log detail</string>
+    <string name="report_log">Report log</string>
     <string name="photos_">%d Photos</string>
     <string name="content">Content</string>
     <string name="banner_info">Banner info</string>
