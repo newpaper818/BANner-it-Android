@@ -19,7 +19,7 @@ enum class ScreenDestination(
     SEND_REPORT("send_report"),
 
     //form MAIN_LOGS
-    LOG_DETAIL("logDetail"),
+    REPORT_LOG_DETAIL("ReportLogDetail"),
     IMAGE("image"),
 
     //from MAIN_MORE
