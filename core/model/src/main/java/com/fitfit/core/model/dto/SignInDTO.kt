@@ -1,43 +1,20 @@
 package com.fitfit.core.model.dto
 
-import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.enums.ProviderId
-import com.fitfit.core.model.enums.UserRole
+import com.fitfit.core.model.dto.basic.ErrorDto
+import com.fitfit.core.model.dto.basic.UserDataDTO
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
+//request
 @JsonClass(generateAdapter = true)
 data class IdTokenRequestDTO(
     @Json(name = "id_token")val idToken: String,
 )
 
 
-
+//response
 @JsonClass(generateAdapter = true)
 data class SignInResponseDTO(
     @Json(name = "user_data")val userDataDTO: UserDataDTO?,
     @Json(name = "error")val error: ErrorDto?
 )
-
-@JsonClass(generateAdapter = true)
-data class UserDataDTO(
-    @Json(name = "user_id")val userId: Int,
-    @Json(name = "role")val role: String,
-    @Json(name = "name")val name: String,
-    @Json(name = "email")val email: String,
-    @Json(name = "profile_image_url")val profileImageUrl: String,
-){
-    fun toUserData(
-        jwt: String
-    ): UserData {
-        return UserData(
-            jwt = jwt,
-            userId = userId,
-            role = UserRole.valueOf(role),
-            name = name,
-            email = email,
-            profileImageUrl = profileImageUrl,
-            providerIds = listOf(ProviderId.GOOGLE)
-        )
-    }
-}
