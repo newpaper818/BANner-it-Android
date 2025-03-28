@@ -49,11 +49,16 @@ fun NavGraphBuilder.reportLogDetailScreen(
         val widthSizeClass = externalState.windowSizeClass.widthSizeClass
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
-        if (commonReportLogsUiState.currentReportLogIndex != null) {
+        if (
+            commonReportLogsUiState.currentReportLogIndex != null
+            && appUiState.appUserData != null
+        ) {
             ReportLogDetailRoute(
+                appUserData = appUiState.appUserData!!,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
+                internetEnabled = externalState.internetEnabled,
                 reportLog = commonReportLogsUiState.appUserReportLogs[commonReportLogsUiState.currentReportLogIndex!!],
                 navigateUp = navigateUp
             )

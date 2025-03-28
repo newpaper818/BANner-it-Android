@@ -6,6 +6,10 @@
 
     <!--reportLogDetail =========================================================================-->
     <string name="log_detail">Log detail</string>
+    <string name="photos_">%d Photos</string>
+    <string name="content">Content</string>
+    <string name="banner_info">Banner info</string>
+    <string name="location">Location</string>
 
 
 </resources>
