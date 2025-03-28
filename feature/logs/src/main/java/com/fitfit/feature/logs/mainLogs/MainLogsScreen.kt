@@ -70,7 +70,7 @@ private fun MainLogsScreen(
 
         topBar = {
             MyTopAppBar(
-                title = stringResource(R.string.logs)
+                title = stringResource(R.string.report_logs)
             )
         }
     ){ paddingValues ->

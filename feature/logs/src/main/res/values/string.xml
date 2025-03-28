@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--mainLogs ================================================================================-->
-    <string name="logs">Logs</string>
+    <string name="report_logs">Report logs</string>
     <string name="no_report_log">No report log</string>
 
     <!--reportLogDetail =========================================================================-->
