@@ -14,7 +14,7 @@ data class ReportLog(
     val location: LatLng = LatLng(0.0, 0.0),
     val address: Address = Address(),
     val content: String = "",
-    val bannerInfo: List<BannerInfo> = listOf()
+    val bannersInfo: List<BannerInfo> = listOf()
 )
 
 data class BannerInfo(
@@ -44,11 +44,14 @@ val sampleReportLog = ReportLog(
 
     createdUserId = 145,
 
-    images = listOf("https://www.greenkorea.org/wp-content/uploads/2024/03/IMG_8832-615x820.jpg"),
+    images = listOf(
+        "https://www.greenkorea.org/wp-content/uploads/2024/03/IMG_8832-615x820.jpg",
+        "https://lh6.googleusercontent.com/proxy/1ZoW7lMeLruPcXpuTv-OrWj_Ksq7roabBQoZ90yyZdCxl7dNUTEmdyuLjmQlL785mb16F3W3_DUxERbt6JKKG8-1YOfDhE08oefCjcrvsxqtwzvLkA"
+    ),
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
-    bannerInfo = listOf(
+    bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,
@@ -75,7 +78,7 @@ val sampleReportLog2 = ReportLog(
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
-    bannerInfo = listOf(
+    bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,
@@ -102,7 +105,7 @@ val sampleReportLog3 = ReportLog(
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
-    bannerInfo = listOf(
+    bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,

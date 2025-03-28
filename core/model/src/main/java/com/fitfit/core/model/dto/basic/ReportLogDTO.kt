@@ -32,7 +32,7 @@ data class ReportLogDTO(
             location = locationDTO.toLatLng(),
             address = addressDTO.toAddress(),
             content = content,
-            bannerInfo = bannerInfoDTO.map { it.toBannerInfo() }
+            bannersInfo = bannerInfoDTO.map { it.toBannerInfo() }
         )
     }
 }
