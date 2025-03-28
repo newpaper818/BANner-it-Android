@@ -8,7 +8,7 @@ import com.fitfit.core.data.data.repository.ImageRepository
 import com.fitfit.core.data.data.repository.ReportRepository
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.report.ReportLog
-import com.fitfit.core.ui.ui.card.MAX_IMAGE_COUNT
+import com.fitfit.core.ui.ui.card.report.MAX_IMAGE_COUNT
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

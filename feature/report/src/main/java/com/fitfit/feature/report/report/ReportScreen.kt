@@ -49,10 +49,10 @@ import com.fitfit.core.ui.designsystem.components.utils.MyCard
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.TopAppBarIcon
 import com.fitfit.core.ui.designsystem.theme.CustomColor
-import com.fitfit.core.ui.ui.card.ContentCard
-import com.fitfit.core.ui.ui.card.ImageCard
-import com.fitfit.core.ui.ui.card.MAX_CONTENT_LENGTH
-import com.fitfit.core.ui.ui.card.MAX_IMAGE_COUNT
+import com.fitfit.core.ui.ui.card.report.ContentCard
+import com.fitfit.core.ui.ui.card.report.ImageCard
+import com.fitfit.core.ui.ui.card.report.MAX_CONTENT_LENGTH
+import com.fitfit.core.ui.ui.card.report.MAX_IMAGE_COUNT
 import com.fitfit.core.ui.ui.dialog.TwoButtonsDialog
 import com.fitfit.core.ui.ui.item.TitleText
 import com.fitfit.core.utils.itemMaxWidthSmall
@@ -252,7 +252,6 @@ private fun ReportScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
                     .navigationBarsPadding()
-
             ){
                 //photos
                 item {

@@ -29,7 +29,7 @@ import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.DisplayIcon
 import com.fitfit.core.ui.designsystem.icon.MyIcons
-import com.fitfit.core.ui.ui.card.ReportLogCard
+import com.fitfit.core.ui.ui.card.report.ReportLogCard
 import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
 

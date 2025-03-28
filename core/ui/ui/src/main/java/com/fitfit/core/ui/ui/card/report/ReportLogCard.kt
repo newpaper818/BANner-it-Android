@@ -1,4 +1,4 @@
-package com.fitfit.core.ui.ui.card
+package com.fitfit.core.ui.ui.card.report
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
