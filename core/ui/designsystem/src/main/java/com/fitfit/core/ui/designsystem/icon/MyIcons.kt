@@ -25,7 +25,6 @@ import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.material.icons.rounded.East
 import androidx.compose.material.icons.rounded.Edit
 import androidx.compose.material.icons.rounded.EditNote
-import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material.icons.rounded.ErrorOutline
 import androidx.compose.material.icons.rounded.ExpandLess
 import androidx.compose.material.icons.rounded.ExpandMore
@@ -147,9 +146,9 @@ object MyIcons {
     val deleteProfileImage = MyIcon(Icons.Rounded.Delete,   24.dp, false, null, null)
 
     //image card
-    val deleteImage = MyIcon(Icons.Rounded.Close,       16.dp, false, null, R.string.delete_image)
-    val imageLoadingError = MyIcon(Icons.Rounded.Error, 36.dp, false, null, R.string.image_loading_error)
-    val noImage = MyIcon(Icons.Outlined.HideImage,       36.dp, true, null, R.string.no_image)
+    val deleteImage = MyIcon(Icons.Rounded.Close,               16.dp, false, null, R.string.delete_image)
+    val imageLoadingError = MyIcon(Icons.Rounded.ErrorOutline,  36.dp, true, null, R.string.image_loading_error)
+    val noImage = MyIcon(Icons.Outlined.HideImage,              36.dp, true, null, R.string.no_image)
 
     //search / text input
     val searchLocation = MyIcon(Icons.Rounded.Search,   24.dp, false, null, R.string.example)
@@ -162,7 +161,7 @@ object MyIcons {
 
     //
     val delete = MyIcon(Icons.Rounded.Delete,            22.dp, true, null, R.string.example)
-    val deleteSpot = MyIcon(Icons.Rounded.Delete,            22.dp, true, null, R.string.example)
+    val deleteSpot = MyIcon(Icons.Rounded.Delete,        22.dp, true, null, R.string.example)
     val deleteStartTime = MyIcon(Icons.Rounded.Delete,   22.dp, true, null, R.string.example)
     val deleteEndTime = MyIcon(Icons.Rounded.Delete,     22.dp, true, null, R.string.example)
     val dragHandle = MyIcon(Icons.Rounded.DragHandle,    22.dp, true, null, R.string.example)
