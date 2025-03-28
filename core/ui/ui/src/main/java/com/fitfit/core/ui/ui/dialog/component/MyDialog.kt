@@ -203,7 +203,7 @@ private fun MyDialogPreview(){
         MyScaffold {
             MyDialog(
                 titleText = "Dailog title",
-                bodyText = "body text some text....... some textttttt somewhere trip planner",
+                bodyText = "body text some text....... some textttttt",
                 bodyContent = {
                     MyCard(
                         modifier = Modifier

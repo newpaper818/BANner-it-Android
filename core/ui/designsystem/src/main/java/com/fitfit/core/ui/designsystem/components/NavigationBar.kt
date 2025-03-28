@@ -233,7 +233,7 @@ fun MyNavigationDrawerItem(
 @Composable
 @PreviewLightDark
 private fun NavigationBottomBarPreview(){
-    val labelTexts = listOf("Trips", "Profile", "More")
+    val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
         NavigationBarIcon.logsFilled,
@@ -263,7 +263,7 @@ private fun NavigationBottomBarPreview(){
 @Composable
 @PreviewLightDark
 private fun NavigationRailBarPreview(){
-    val labelTexts = listOf("Trips", "Profile", "More")
+    val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
         NavigationBarIcon.logsFilled,
@@ -293,7 +293,7 @@ private fun NavigationRailBarPreview(){
 @Composable
 @PreviewLightDark
 private fun NavigationDrawerPreview(){
-    val labelTexts = listOf("Trips", "Profile", "More")
+    val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
         NavigationBarIcon.logsFilled,
