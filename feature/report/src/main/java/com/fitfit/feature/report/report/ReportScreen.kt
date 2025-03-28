@@ -143,7 +143,7 @@ fun ReportRoute(
         reportLog = reportUiState.reportLog,
         isPhotoCountOver = reportUiState.isPhotoCountOver,
         isContentTextLengthOver = reportUiState.isContentTextLengthOver,
-        reportButtonEnabled = reportUiState.reportButtonEnabled,
+        isErrorContained = reportUiState.isErrorContained,
 
         setShowExitDialog = reportViewModel::setShowExitDialog,
         setContentText = reportViewModel::setContentText,
@@ -178,7 +178,7 @@ private fun ReportScreen(
     reportLog: ReportLog,
     isPhotoCountOver: Boolean,
     isContentTextLengthOver: Boolean,
-    reportButtonEnabled: Boolean,
+    isErrorContained: Boolean,
 
     setShowExitDialog: (Boolean) -> Unit,
     setContentText: (String) -> Unit,
@@ -232,6 +232,7 @@ private fun ReportScreen(
         topBar = {
             MyTopAppBar(
                 title = stringResource(R.string.report),
+                internetEnabled = internetEnabled,
                 startPadding = spacerValue,
                 navigationIcon = TopAppBarIcon.back,
                 onClickNavigationIcon = { setShowExitDialog(true) }
@@ -383,7 +384,7 @@ private fun ReportScreen(
 
             //bottom report cancel buttons
             BottomReportCancelButtons(
-                reportEnabled = reportButtonEnabled,
+                reportEnabled = isErrorContained && internetEnabled && reportLog.images.isNotEmpty(),
                 onClickCancel = {
                     setShowExitDialog(true)
                 },

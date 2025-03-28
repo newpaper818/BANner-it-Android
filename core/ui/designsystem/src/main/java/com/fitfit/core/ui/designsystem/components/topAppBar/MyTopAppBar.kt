@@ -207,7 +207,7 @@ private fun InternetUnavailable(
     ) {
 
         Text(
-            text = stringResource(id = R.string.example),
+            text = stringResource(id = R.string.internet_unavailable),
             style = MaterialTheme.typography.labelMedium.copy(color = MaterialTheme.colorScheme.onSurfaceVariant)
         )
     }
