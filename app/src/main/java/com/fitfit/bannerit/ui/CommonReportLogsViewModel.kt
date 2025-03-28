@@ -17,7 +17,7 @@ data class ReportUiState(
     val appUserReportLogs: List<ReportLog> = listOf(),
     val adminReportLogs: List<ReportLog> = listOf(),
 
-    val currentReportLog: ReportLog? = null
+    val currentReportLogIndex: Int? = null
 )
 
 @HiltViewModel
@@ -45,11 +45,11 @@ class CommonReportLogsViewModel @Inject constructor(
         }
     }
 
-    fun setCurrentReportLog(
-        reportLog: ReportLog
+    fun setCurrentReportLogIndex(
+        reportLogIndex: Int?
     ) {
         _reportUiState.update {
-            it.copy(currentReportLog = reportLog)
+            it.copy(currentReportLogIndex = reportLogIndex)
         }
     }
 
