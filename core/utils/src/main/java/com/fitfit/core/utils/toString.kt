@@ -45,15 +45,15 @@ fun getDateTimeText(
     zonedDateTime: ZonedDateTime,
     dateTimeFormat: DateTimeFormat
 ): String{
-    val localReportTime = convertToLocalZonedDateTime(zonedDateTime)
+    val localZonedDateTimeTime = convertToLocalZonedDateTime(zonedDateTime)
 
     val dateText = getDateText(
-        date = localReportTime.toLocalDate(),
+        date = localZonedDateTimeTime.toLocalDate(),
         dateTimeFormat = dateTimeFormat
     )
 
     val timeText = getTimeText(
-        time = localReportTime.toLocalTime(),
+        time = localZonedDateTimeTime.toLocalTime(),
         timeFormat = dateTimeFormat.timeFormat
     )
 
