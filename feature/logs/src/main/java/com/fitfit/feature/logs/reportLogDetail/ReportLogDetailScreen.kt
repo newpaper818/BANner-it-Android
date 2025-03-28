@@ -1,4 +1,4 @@
-package com.fitfit.feature.logs.logDetail
+package com.fitfit.feature.logs.reportLogDetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -18,20 +18,20 @@ import com.fitfit.core.ui.designsystem.icon.TopAppBarIcon
 import com.fitfit.feature.logs.R
 
 @Composable
-fun LogDetailRoute(
+fun ReportLogDetailRoute(
     navigateUp: () -> Unit,
 
     modifier: Modifier = Modifier,
 ) {
 
 
-    LogDetailScreen(
+    ReportLogDetailScreen(
         navigateUp = navigateUp
     )
 }
 
 @Composable
-private fun LogDetailScreen(
+private fun ReportLogDetailScreen(
     navigateUp: () -> Unit,
 
 ){

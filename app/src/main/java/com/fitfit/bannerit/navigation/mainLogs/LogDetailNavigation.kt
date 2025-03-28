@@ -14,7 +14,7 @@ import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
 import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
-import com.fitfit.feature.logs.logDetail.LogDetailRoute
+import com.fitfit.feature.logs.reportLogDetail.ReportLogDetailRoute
 import com.fitfit.bannerit.navigation.enterTransition
 import com.fitfit.bannerit.navigation.exitTransition
 import com.fitfit.bannerit.navigation.popEnterTransition
@@ -65,7 +65,7 @@ fun NavGraphBuilder.logDetailScreen(
                 MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
             }
 
-            LogDetailRoute(
+            ReportLogDetailRoute(
                 navigateUp = navigateUp
             )
         }
