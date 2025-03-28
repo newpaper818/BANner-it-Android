@@ -39,7 +39,7 @@ interface DbRemoteDataSource {
 
 
 
-    suspend fun postReportLog(
+    suspend fun postReportBanner(
         jwt: String,
         userId: Int,
         reportLog: ReportLog
@@ -51,5 +51,14 @@ interface DbRemoteDataSource {
         userId: Int,
         reportLog: ReportLog
     ): Boolean
+
+
+    suspend fun getAppUserReportLogs(
+        jwt: String,
+    ): List<ReportLog>?
+
+    suspend fun getAllReportLogs(
+
+    ): List<ReportLog>?
 }
 

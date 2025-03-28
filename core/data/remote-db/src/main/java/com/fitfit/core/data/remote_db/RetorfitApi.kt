@@ -75,16 +75,16 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    override suspend fun postReportLog(
+    override suspend fun postReportBanner(
         jwt: String,
         userId: Int,
         reportLog: ReportLog
     ): Boolean {
         try {
-            val result = retrofitApiService.postReportLog(
+            val result = retrofitApiService.postReportBanner(
                 jwt = jwt,
-                requestBodyReportDTO = reportLog.toReportLogDTO(
-                    userId = userId
+                reportBannerRequestBodyDTO = reportLog.toReportLogDTO(
+//                    userId = userId
                 )
             )
 
@@ -152,5 +152,65 @@ class RetrofitApi @Inject constructor(
             return false
         }
 
+    }
+
+    override suspend fun getAppUserReportLogs(
+        jwt: String
+    ): List<ReportLog>? {
+        try {
+            val result = retrofitApiService.getAppUserReportLogs(
+                jwt = jwt
+            )
+
+            //result
+            val code = result.code()
+            val error = result.body()?.error
+            val reportLogs = result.body()?.reportLogsDTO?.map { it.toReportLog() }
+
+            if (
+                code == 200
+                && error == null
+            ) {
+                return reportLogs
+            }
+            else {
+                Log.e(RETROFIT_TAG, "result: $result")
+                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                return null
+            }
+        } catch (e: Exception) {
+            Log.e(RETROFIT_TAG, e.toString())
+            return null
+        }
+    }
+
+    override suspend fun getAllReportLogs(
+
+    ): List<ReportLog>? {
+        try {
+            val result = retrofitApiService.getAllReportLogs()
+
+            //result
+            val code = result.code()
+            val error = result.body()?.error
+            val reportLogs = result.body()?.reportLogsDTO?.map { it.toReportLog() }
+
+            if (
+                code == 200
+                && error == null
+            ) {
+                return reportLogs
+            }
+            else {
+                Log.e(RETROFIT_TAG, "result: $result")
+                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                return null
+            }
+        } catch (e: Exception) {
+            Log.e(RETROFIT_TAG, e.toString())
+            return null
+        }
     }
 }

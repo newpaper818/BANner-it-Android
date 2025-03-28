@@ -13,7 +13,15 @@ data class ReportLog(
     val images: List<String> = listOf(), //string(url)
     val location: LatLng = LatLng(0.0, 0.0),
     val address: Address = Address(),
-    val content: String = ""
+    val content: String = "",
+    val bannerInfo: List<BannerInfo> = listOf()
+)
+
+data class BannerInfo(
+    val bannerId: Int = 0,
+    val status: ReportStatus = ReportStatus.RECEIVED,
+    val companyName: String = "",
+    val phoneNumber: String = "",
 )
 
 data class Address(
@@ -30,12 +38,82 @@ data class Address(
 
 
 val sampleReportLog = ReportLog(
-    reportId = 123,
+    reportId = 12345,
     reportTime = ZonedDateTime.now(),
     status = ReportStatus.RECEIVED,
 
-    images = listOf(),
+    createdUserId = 145,
+
+    images = listOf("https://lh3.googleusercontent.com/BDYz2mEEqtB9JGCH_uR0rE6lIIJOnoRhAzdla91I-sFg-cdl1NUi79AYciv5iujzL7711Q=s221-p-k-rw-no"),
     location = LatLng(0.0, 0.0),
-    content = "report content"
+    address = Address(),
+    content = "report content",
+    bannerInfo = listOf(
+        BannerInfo(
+            bannerId = 4978,
+            status = ReportStatus.LEGAL,
+            companyName = "aaaa",
+            phoneNumber = "010-2222-3366"
+        ),
+        BannerInfo(
+            bannerId = 1059,
+            status = ReportStatus.ILLEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        )
+    )
 )
 
+val sampleReportLog2 = ReportLog(
+    reportId = 454545,
+    reportTime = ZonedDateTime.parse("2025-03-25T20:30:50Z"),
+    status = ReportStatus.ILLEGAL_DEMOLITION,
+
+    createdUserId = 1234,
+
+    images = listOf(),
+    location = LatLng(0.0, 0.0),
+    address = Address(),
+    content = "report content",
+    bannerInfo = listOf(
+        BannerInfo(
+            bannerId = 4978,
+            status = ReportStatus.LEGAL,
+            companyName = "aaaa",
+            phoneNumber = "010-2222-3366"
+        ),
+        BannerInfo(
+            bannerId = 1059,
+            status = ReportStatus.ILLEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        )
+    )
+)
+
+val sampleReportLog3 = ReportLog(
+    reportId = 124511,
+    reportTime = ZonedDateTime.parse("2025-03-28T08:10:00Z"),
+    status = ReportStatus.LEGAL,
+
+    createdUserId = 1234,
+
+    images = listOf(""),
+    location = LatLng(0.0, 0.0),
+    address = Address(),
+    content = "report content",
+    bannerInfo = listOf(
+        BannerInfo(
+            bannerId = 4978,
+            status = ReportStatus.LEGAL,
+            companyName = "aaaa",
+            phoneNumber = "010-2222-3366"
+        ),
+        BannerInfo(
+            bannerId = 1059,
+            status = ReportStatus.ILLEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        )
+    )
+)

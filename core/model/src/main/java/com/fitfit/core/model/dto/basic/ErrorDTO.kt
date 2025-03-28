@@ -1,4 +1,4 @@
-package com.fitfit.core.model.dto
+package com.fitfit.core.model.dto.basic
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

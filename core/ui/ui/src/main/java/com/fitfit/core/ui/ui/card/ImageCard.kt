@@ -125,7 +125,7 @@ fun ImageCard(
 
                             Column(modifier = Modifier.fillMaxWidth()) {
 
-                                MySpacerColumn(height = 16.dp)
+                                MySpacerColumn(height = 12.dp)
 
 //                                val slideStates = remember {
 //                                    mutableStateMapOf<String, SlideState>(
@@ -138,14 +138,14 @@ fun ImageCard(
                                     Text(
                                         text = stringResource(id = R.string.no_photos),
                                         style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
-                                        modifier = Modifier.padding(16.dp, 0.dp)
+                                        modifier = Modifier.padding(12.dp, 0.dp)
                                     )
                                 }
 
                                 //images
                                 LazyRow(
                                     verticalAlignment = Alignment.CenterVertically,
-                                    contentPadding = PaddingValues(16.dp, 0.dp, 0.dp, 0.dp),
+                                    contentPadding = PaddingValues(12.dp, 0.dp, 0.dp, 0.dp),
                                     modifier = Modifier
                                         .fillMaxWidth()
                                 ) {
@@ -180,12 +180,12 @@ fun ImageCard(
 //                                                    }
 //                                                }
                                             )
-                                            MySpacerRow(width = 16.dp)
+                                            MySpacerRow(width = 12.dp)
                                         }
                                     }
                                 }
 
-                                MySpacerColumn(height = 16.dp)
+                                MySpacerColumn(height = 12.dp)
                             }
                         }
                     }

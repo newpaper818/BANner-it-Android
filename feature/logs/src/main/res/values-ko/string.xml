@@ -5,6 +5,7 @@
 
     <!--mainLogs ================================================================================-->
     <string name="logs">기록</string>
+    <string name="no_report_log">신고 기록이 없어요</string>
 
 
 </resources>

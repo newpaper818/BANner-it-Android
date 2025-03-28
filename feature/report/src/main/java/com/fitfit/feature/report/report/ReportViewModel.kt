@@ -24,10 +24,10 @@ data class ReportUiState(
 
     val reportLog: ReportLog = ReportLog(),
 
+    val isErrorContained: Boolean = true,
     val isPhotoCountOver: Boolean = false,
     val isContentTextLengthOver: Boolean = false,
 
-    val reportButtonEnabled: Boolean = true,
 
     val sendReportResultIsSuccess: Boolean? = null
 )
@@ -79,7 +79,7 @@ class ReportViewModel @Inject constructor(
         _reportUiState.update {
             it.copy(
                 isPhotoCountOver = isImageCountOver,
-                reportButtonEnabled = !it.isContentTextLengthOver && !isImageCountOver
+                isErrorContained = !it.isContentTextLengthOver && !isImageCountOver
             )
         }
     }
@@ -88,7 +88,7 @@ class ReportViewModel @Inject constructor(
         _reportUiState.update {
             it.copy(
                 isContentTextLengthOver = isContentTextLengthOver,
-                reportButtonEnabled = !isContentTextLengthOver && !it.isPhotoCountOver
+                isErrorContained = !isContentTextLengthOver && !it.isPhotoCountOver
             )
         }
     }

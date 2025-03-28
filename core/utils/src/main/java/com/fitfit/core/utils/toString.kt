@@ -9,6 +9,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -28,7 +29,19 @@ fun getNumToText(number: Float, numberOfDecimalPlaces: Int): String{
     return numberFormat.format(number)
 }
 
-//LocalDate -> "2023.06.12"
+
+
+fun convertToLocalZonedDateTime(
+    zonedDateTime: ZonedDateTime
+): ZonedDateTime {
+    val localZoneId = ZoneId.systemDefault()
+    return zonedDateTime.withZoneSameInstant(localZoneId)
+}
+
+
+/**
+ * LocalDate -> "2023.06.12"
+ */
 fun getDateText(
     date: LocalDate,
     dateTimeFormat: DateTimeFormat,
@@ -109,6 +122,9 @@ fun millisToLocalDate(
     return LocalDateTime.ofInstant(instant, ZoneId.systemDefault()).toLocalDate()
 }
 
+/**
+ * LocalTime -> "20:30" or "8:30 PM"
+ */
 fun getTimeText(
     time: LocalTime,
     timeFormat: TimeFormat
@@ -117,8 +133,8 @@ fun getTimeText(
 
     val hour24 = time.hour
     val hour12 = if (hour24 > 12) hour24 - 12
-    else if (hour24 == 0)   12
-    else hour24
+                else if (hour24 == 0)   12
+                else hour24
     val minute = df1.format(time.minute)
 
     val isPm = time.isAfter(LocalTime.of(11,59))

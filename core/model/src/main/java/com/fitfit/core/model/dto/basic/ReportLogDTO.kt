@@ -1,6 +1,7 @@
-package com.fitfit.core.model.dto
+package com.fitfit.core.model.dto.basic
 
 import com.fitfit.core.model.report.Address
+import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportLog
 import com.fitfit.core.model.report.ReportStatus
 import com.google.android.gms.maps.model.LatLng
@@ -8,56 +9,8 @@ import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import java.time.ZonedDateTime
 
-fun ReportLog.toReportLogDTO(
-    userId: Int
-): RequestBodyReportDTO {
-    return RequestBodyReportDTO(
-        userId = userId,
-        requestReportLogDTO = RequestReportLogDTO(
-            locationDTO = LocationDTO(
-                latitude = location.latitude,
-                longitude = location.longitude,
-            ),
-            addressDTO = AddressDTO(
-                address1 = "",
-                address2 = "",
-                address3 = "",
-            ),
-            content = content
-        )
-    )
-}
-
-//request
 @JsonClass(generateAdapter = true)
-data class RequestBodyReportDTO(
-    @Json(name = "user_id")val userId: Int,
-    @Json(name = "report_log")val requestReportLogDTO: RequestReportLogDTO,
-)
-
-@JsonClass(generateAdapter = true)
-data class RequestReportLogDTO(
-    @Json(name = "location")val locationDTO: LocationDTO,
-    @Json(name = "address")val addressDTO: AddressDTO,
-    @Json(name = "content")val content: String,
-)
-
-
-
-//response
-@JsonClass(generateAdapter = true)
-data class TestBodyReportDTO(
-    @Json(name = "error")val error: ErrorDto?
-)
-
-@JsonClass(generateAdapter = true)
-data class ResponseBodyReportDTO(
-    @Json(name = "report_log")val responseReportLogDTO: ResponseReportLogDTO?,
-    @Json(name = "error")val error: ErrorDto?
-)
-
-@JsonClass(generateAdapter = true)
-data class ResponseReportLogDTO(
+data class ReportLogDTO(
     @Json(name = "report_id") val reportId: Int,
     @Json(name = "report_time") val reportTime: String,
     @Json(name = "status") val status: String,
@@ -67,6 +20,7 @@ data class ResponseReportLogDTO(
     @Json(name = "location")val locationDTO: LocationDTO,
     @Json(name = "address")val addressDTO: AddressDTO,
     @Json(name = "content")val content: String,
+    @Json(name = "banner_info")val bannerInfoDTO: List<BannerInfoDTO>,
 ){
     fun toReportLog(): ReportLog {
         return ReportLog(
@@ -77,13 +31,14 @@ data class ResponseReportLogDTO(
             images = images,
             location = locationDTO.toLatLng(),
             address = addressDTO.toAddress(),
-            content = content
+            content = content,
+            bannerInfo = bannerInfoDTO.map { it.toBannerInfo() }
         )
     }
 }
 
 
-//
+
 @JsonClass(generateAdapter = true)
 data class LocationDTO(
     @Json(name = "latitude")val latitude: Double,
@@ -92,7 +47,6 @@ data class LocationDTO(
     fun toLatLng(): LatLng {
         return LatLng(latitude, longitude)
     }
-
 }
 
 @JsonClass(generateAdapter = true)
@@ -106,6 +60,23 @@ data class AddressDTO(
             address1 = address1,
             address2 = address2,
             address3 = address3
+        )
+    }
+}
+
+@JsonClass(generateAdapter = true)
+data class BannerInfoDTO(
+    @Json(name = "banner_id")val bannerId: Int,
+    @Json(name = "status") val status: String,
+    @Json(name = "company_name")val companyName: String,
+    @Json(name = "phone_number")val phoneNumber: String,
+){
+    fun toBannerInfo(): BannerInfo {
+        return BannerInfo(
+            bannerId = bannerId,
+            status = ReportStatus.valueOf(status),
+            companyName = companyName,
+            phoneNumber = phoneNumber
         )
     }
 }

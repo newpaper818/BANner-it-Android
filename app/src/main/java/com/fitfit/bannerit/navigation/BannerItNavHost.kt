@@ -14,6 +14,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
@@ -38,6 +39,7 @@ import com.fitfit.bannerit.navigation.signin.navigateToSignIn
 import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
 import com.fitfit.bannerit.ui.AppViewModel
+import com.fitfit.bannerit.ui.CommonReportLogsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import java.util.UUID
@@ -49,6 +51,8 @@ fun BannerItNavHost(
 
     isDarkAppTheme: Boolean,
     startDestination: String,
+
+    commonReportLogsViewModel: CommonReportLogsViewModel = hiltViewModel(),
 
     modifier: Modifier = Modifier,
 ) {
@@ -220,6 +224,7 @@ fun BannerItNavHost(
 
             mainLogsScreen(
                 appViewModel = appViewModel,
+                commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,
                 navigateToSomeScreen = { }
             )

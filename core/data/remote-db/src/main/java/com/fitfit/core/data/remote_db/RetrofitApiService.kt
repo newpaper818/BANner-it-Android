@@ -1,11 +1,12 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.dto.GetReportLogsResponseDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
-import com.fitfit.core.model.dto.RequestBodyReportDTO
-import com.fitfit.core.model.dto.ResponseBodyReportDTO
+import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
+import com.fitfit.core.model.dto.ReportBannerResponseDTO
 import com.fitfit.core.model.dto.SignInResponseDTO
-import com.fitfit.core.model.dto.TestBodyReportDTO
+import com.fitfit.core.model.dto.TestReportBannerResponseDTO
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -33,20 +34,32 @@ interface RetrofitApiService {
 
 
 
-    @POST("")
-    fun postReportLog(
+    @POST("reports/save")
+    fun postReportBanner(
         @Header("Authorization") jwt: String,
-        @Body requestBodyReportDTO: RequestBodyReportDTO
-    ): Response<ResponseBodyReportDTO>
+        @Body reportBannerRequestBodyDTO: ReportBannerRequestBodyDTO
+    ): Response<ReportBannerResponseDTO>
 
 
+    //TODO test FIXME several photos
     @Multipart
     @POST("")
     fun postTestPhoto(
         @Part photo: MultipartBody.Part,
-        @Part("user_id") userId: RequestBody
-    ): Response<TestBodyReportDTO>
+        @Part("test") userId: RequestBody
+    ): Response<TestReportBannerResponseDTO>
 
+
+    @GET("reports/logs")
+    fun getAppUserReportLogs(
+        @Header("Authorization") jwt: String,
+    ): Response<GetReportLogsResponseDTO>
+
+
+    @GET("reports")
+    fun getAllReportLogs(
+
+    ): Response<GetReportLogsResponseDTO>
 
 
 

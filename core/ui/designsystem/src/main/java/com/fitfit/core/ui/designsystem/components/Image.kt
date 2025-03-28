@@ -183,7 +183,20 @@ fun ImageFromFile(
     }
 }
 
-
+@Composable
+fun NoImage(
+    modifier: Modifier = Modifier,
+){
+    Box(
+        modifier = modifier
+            .background(MaterialTheme.colorScheme.surfaceDim),
+        contentAlignment = Alignment.Center,
+    ){
+        DisplayIcon(
+            icon = MyIcons.noImage
+        )
+    }
+}
 
 
 
@@ -232,10 +245,10 @@ private fun OnErrorImage(
     }
 
     val boxColor = if (isImageScreen) CustomColor.imageBackground
-    else MaterialTheme.colorScheme.surfaceDim
+                    else MaterialTheme.colorScheme.surfaceDim
 
     val onColor = if (isImageScreen) CustomColor.white
-    else MaterialTheme.colorScheme.onSurface
+                    else MaterialTheme.colorScheme.onSurface
 
     ClickableBox(
         modifier = Modifier

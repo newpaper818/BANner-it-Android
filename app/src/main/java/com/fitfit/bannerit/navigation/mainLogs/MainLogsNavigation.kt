@@ -9,20 +9,21 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.fitfit.core.model.enums.ScreenDestination
-import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
-import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
-import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
-import com.fitfit.feature.logs.mainLogs.MainLogsRoute
 import com.fitfit.bannerit.navigation.TopEnterTransition
 import com.fitfit.bannerit.navigation.TopExitTransition
 import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.navigation.TopPopEnterTransition
 import com.fitfit.bannerit.navigation.TopPopExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
+import com.fitfit.bannerit.ui.CommonReportLogsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
+import com.fitfit.core.model.enums.ScreenDestination
+import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
+import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
+import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
+import com.fitfit.feature.logs.mainLogs.MainLogsRoute
 import kotlinx.coroutines.delay
 
 private val topLevelScreenDestination = TopLevelDestination.LOGS
@@ -33,6 +34,7 @@ fun NavController.navigateToMainLogs(navOptions: NavOptions? = null) =
 
 fun NavGraphBuilder.mainLogsScreen(
     appViewModel: AppViewModel,
+    commonReportLogsViewModel: CommonReportLogsViewModel,
     externalState: ExternalState,
 
     navigateToSomeScreen: () -> Unit,
@@ -44,16 +46,32 @@ fun NavGraphBuilder.mainLogsScreen(
         popEnterTransition = { TopPopEnterTransition },
         popExitTransition = { TopPopExitTransition }
     ) {
+
+
+
+
+        val appUiState by appViewModel.appUiState.collectAsState()
+        val commonReportLogsUiState by commonReportLogsViewModel.reportUiState.collectAsState()
+
+        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
+        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
+
+        val jwt = appUiState.appUserData?.jwt
+
+        LaunchedEffect(Unit) {
+            if (jwt != null) {
+                commonReportLogsViewModel.getAppUserReportLogs(
+                    jwt = jwt
+                )
+            }
+        }
+
         LaunchedEffect(Unit) {
             appViewModel.updateCurrentTopLevelDestination(topLevelScreenDestination)
             delay(100)
             appViewModel.updateCurrentScreenDestination(screenDestination)
         }
 
-        val appUiState by appViewModel.appUiState.collectAsState()
-
-        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
-        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
         Row {
             if (widthSizeClass == WindowWidthSizeClass.Compact) {
@@ -69,7 +87,9 @@ fun NavGraphBuilder.mainLogsScreen(
 
             MainLogsRoute(
                 use2Panes = externalState.windowSizeClass.use2Panes,
-                spacerValue = externalState.windowSizeClass.spacerValue
+                spacerValue = externalState.windowSizeClass.spacerValue,
+                dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
+                appUserReportLogs = commonReportLogsUiState.appUserReportLogs
             )
         }
     }

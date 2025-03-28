@@ -44,6 +44,8 @@ dependencies {
     //module
     implementation(project(":core:model"))
     implementation(project(":core:ui:designsystem"))
+    implementation(project(":core:ui:ui"))
+    implementation(project(":core:utils"))
 
     //compose bom
     implementation(platform(libs.androidx.compose.bom))
