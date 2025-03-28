@@ -3,6 +3,9 @@ package com.fitfit.bannerit.ui
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportLogsRepository
 import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.sampleReportLog
+import com.fitfit.core.model.report.sampleReportLog2
+import com.fitfit.core.model.report.sampleReportLog3
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,6 +15,8 @@ import javax.inject.Inject
 data class ReportUiState(
     val appUserReportLogs: List<ReportLog> = listOf(),
     val adminReportLogs: List<ReportLog> = listOf(),
+
+    val currentReportLog: ReportLog? = null
 )
 
 @HiltViewModel
@@ -39,6 +44,14 @@ class CommonReportLogsViewModel @Inject constructor(
         }
     }
 
+    fun setCurrentReportLog(
+        reportLog: ReportLog
+    ) {
+        _reportUiState.update {
+            it.copy(currentReportLog = reportLog)
+        }
+    }
+
 
     suspend fun getAppUserReportLogs(
         jwt: String
@@ -46,6 +59,10 @@ class CommonReportLogsViewModel @Inject constructor(
         val newAppUserReportLogs = reportLogsRepository.getAppUserReportLogs(jwt = jwt)
         if (newAppUserReportLogs != null)
             setAppUserReportLogs(newAppUserReportLogs)
+        else {
+            val sampleList = listOf(sampleReportLog, sampleReportLog2, sampleReportLog3)
+            setAppUserReportLogs(sampleList)
+        }
     }
 
     suspend fun getAdminReportLogs(
