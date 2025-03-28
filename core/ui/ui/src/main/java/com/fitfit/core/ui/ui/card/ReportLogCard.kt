@@ -37,6 +37,7 @@ private const val CARD_HEIGHT_DP = 120
 fun ReportLogCard(
     reportLog: ReportLog = sampleReportLog,
     dateTimeFormat: DateTimeFormat,
+    onClick: () -> Unit,
 
     modifier: Modifier = Modifier
 ){
@@ -44,7 +45,7 @@ fun ReportLogCard(
         modifier = modifier
             .height(CARD_HEIGHT_DP.dp),
         shape = MaterialTheme.shapes.extraLarge,
-        onClick = { }
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier

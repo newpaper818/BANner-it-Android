@@ -37,7 +37,7 @@ fun NavGraphBuilder.mainLogsScreen(
     commonReportLogsViewModel: CommonReportLogsViewModel,
     externalState: ExternalState,
 
-    navigateToSomeScreen: () -> Unit,
+    navigateToReportLogDetail: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -89,7 +89,11 @@ fun NavGraphBuilder.mainLogsScreen(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
-                appUserReportLogs = commonReportLogsUiState.appUserReportLogs
+                appUserReportLogs = commonReportLogsUiState.appUserReportLogs,
+                onClickReportLog = {
+                    commonReportLogsViewModel.setCurrentReportLogIndex(it)
+                    navigateToReportLogDetail()
+                }
             )
         }
     }

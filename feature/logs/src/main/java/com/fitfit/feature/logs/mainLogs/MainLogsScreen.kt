@@ -12,7 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -40,6 +40,7 @@ fun MainLogsRoute(
     dateTimeFormat: DateTimeFormat,
 
     appUserReportLogs: List<ReportLog>,
+    onClickReportLog: (reportLogIndex: Int) -> Unit,
 
     modifier: Modifier = Modifier
 ) {
@@ -49,6 +50,7 @@ fun MainLogsRoute(
         spacerValue = spacerValue,
         dateTimeFormat = dateTimeFormat,
         appUserReportLogs = appUserReportLogs,
+        onClickReportLog = onClickReportLog
     )
 }
 
@@ -56,7 +58,8 @@ fun MainLogsRoute(
 private fun MainLogsScreen(
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
-    appUserReportLogs: List<ReportLog>
+    appUserReportLogs: List<ReportLog>,
+    onClickReportLog: (reportLogIndex: Int) -> Unit,
 ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
@@ -85,10 +88,13 @@ private fun MainLogsScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ){
-                items(appUserReportLogs) { appUserReportLog ->
+                itemsIndexed(appUserReportLogs) { index, appUserReportLog ->
                     ReportLogCard(
                         reportLog = appUserReportLog,
                         dateTimeFormat = dateTimeFormat,
+                        onClick = {
+                            onClickReportLog(index)
+                        },
                         modifier = itemModifier
                     )
                 }

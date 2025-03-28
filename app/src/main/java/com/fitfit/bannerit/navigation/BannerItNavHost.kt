@@ -18,8 +18,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.fitfit.bannerit.navigation.mainLogs.logDetailScreen
+import com.fitfit.bannerit.navigation.mainLogs.reportLogDetailScreen
 import com.fitfit.bannerit.navigation.mainLogs.mainLogsScreen
+import com.fitfit.bannerit.navigation.mainLogs.navigateToReportLogDetail
 import com.fitfit.bannerit.navigation.mainMore.aboutScreen
 import com.fitfit.bannerit.navigation.mainMore.accountScreen
 import com.fitfit.bannerit.navigation.mainMore.deleteAccountScreen
@@ -226,7 +227,11 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,
-                navigateToSomeScreen = { }
+                navigateToReportLogDetail = {
+                    mainNavController.navigateToReportLogDetail(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
             )
 
             mainMoreScreen(
@@ -262,11 +267,11 @@ fun BannerItNavHost(
 
 
             //from main logs  ======================================================================
-            logDetailScreen(
+            reportLogDetailScreen(
                 appViewModel = appViewModel,
+                commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,
-                navigateUp = navigateUp,
-                navigateToSomeScreen = { }
+                navigateUp = navigateUp
             )
 
 
