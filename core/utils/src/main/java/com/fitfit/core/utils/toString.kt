@@ -38,6 +38,27 @@ fun convertToLocalZonedDateTime(
     return zonedDateTime.withZoneSameInstant(localZoneId)
 }
 
+/**
+ * zonedDateTime to local time text
+ */
+fun getDateTimeText(
+    zonedDateTime: ZonedDateTime,
+    dateTimeFormat: DateTimeFormat
+): String{
+    val localReportTime = convertToLocalZonedDateTime(zonedDateTime)
+
+    val dateText = getDateText(
+        date = localReportTime.toLocalDate(),
+        dateTimeFormat = dateTimeFormat
+    )
+
+    val timeText = getTimeText(
+        time = localReportTime.toLocalTime(),
+        timeFormat = dateTimeFormat.timeFormat
+    )
+
+    return "$dateText  $timeText"
+}
 
 /**
  * LocalDate -> "2023.06.12"

@@ -27,9 +27,7 @@ import com.fitfit.core.ui.designsystem.components.utils.MyCard
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
 import com.fitfit.core.ui.ui.R
-import com.fitfit.core.utils.convertToLocalZonedDateTime
-import com.fitfit.core.utils.getDateText
-import com.fitfit.core.utils.getTimeText
+import com.fitfit.core.utils.getDateTimeText
 
 private const val CARD_HEIGHT_DP = 120
 
@@ -100,22 +98,9 @@ fun ReportLogCard(
 
                 MySpacerColumn(8.dp)
 
-                val localReportTime = convertToLocalZonedDateTime(reportLog.reportTime)
-
-                val dateText = getDateText(
-                    date = localReportTime.toLocalDate(),
-                    dateTimeFormat = dateTimeFormat
-                )
-
-                val timeText = getTimeText(
-                    time = localReportTime.toLocalTime(),
-                    timeFormat = dateTimeFormat.timeFormat
-                )
-
-
                 //date time
                 Text(
-                    text = "$dateText  $timeText",
+                    text = getDateTimeText(reportLog.reportTime, dateTimeFormat),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }
