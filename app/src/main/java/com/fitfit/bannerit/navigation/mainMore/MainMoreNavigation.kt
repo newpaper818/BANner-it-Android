@@ -71,6 +71,7 @@ fun NavGraphBuilder.mainMoreScreen(
             MainMoreRoute(
                 isDebugMode = com.fitfit.bannerit.BuildConfig.DEBUG,
                 appUserData = appUiState.appUserData,
+                internetEnabled = externalState.internetEnabled,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 navigateTo = navigateTo
