@@ -7,7 +7,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.displayCutoutPadding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imePadding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,10 +22,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.fitfit.core.ui.designsystem.components.button.BottomGoBackButton
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.DisplayIcon
 import com.fitfit.core.ui.designsystem.icon.MyIcons
@@ -31,7 +34,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun ErrorScreen(
-
+    onClickGoBack: () -> Unit
 ){
     var visible by rememberSaveable {
         mutableStateOf(false)
@@ -47,37 +50,59 @@ fun ErrorScreen(
         enter = fadeIn(tween(500)),
         exit = fadeOut(tween(500))
     ) {
-        ErrorScreenUi()
+        ErrorScreenUi(
+            onClickGoBack = onClickGoBack
+        )
     }
 }
 
 @Composable
 private fun ErrorScreenUi(
-
+    onClickGoBack: () -> Unit
 ){
-    Box(
-        modifier = Modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    Column(
+        modifier = Modifier
+        .navigationBarsPadding()
+        .displayCutoutPadding()
+        .imePadding()
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            contentAlignment = Alignment.Center
         ) {
-            DisplayIcon(icon = MyIcons.error)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                DisplayIcon(icon = MyIcons.error)
 
-            MySpacerColumn(height = 12.dp)
+                MySpacerColumn(height = 12.dp)
 
-            Text(
-                text = stringResource(id = R.string.error_occurred),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge.copy(fontWeight = FontWeight.Bold)
-            )
+                Text(
+                    text = stringResource(id = R.string.error_occurred),
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleMedium
+                )
 
-            MySpacerColumn(height = 8.dp)
+//            MySpacerColumn(height = 8.dp)
+//
+//            Text(
+//                text = stringResource(id = R.string.turning_the_app_off_and_on),
+//                textAlign = TextAlign.Center,
+//                style = MaterialTheme.typography.bodyLarge
+//            )
+            }
+        }
 
-            Text(
-                text = stringResource(id = R.string.turning_the_app_off_and_on),
-                textAlign = TextAlign.Center,
-                style = MaterialTheme.typography.bodyLarge
+        //go back button
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ){
+            BottomGoBackButton(
+                onClick = onClickGoBack
             )
         }
     }
@@ -91,7 +116,9 @@ private fun ErrorScreenUi(
 fun ErrorScreenPreview(){
     BannerItTheme {
         Box(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-            ErrorScreenUi()
+            ErrorScreenUi(
+                onClickGoBack = {}
+            )
         }
     }
 }
