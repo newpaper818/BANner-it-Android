@@ -26,8 +26,8 @@ import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
 import com.fitfit.feature.logs.mainLogs.MainLogsRoute
 import kotlinx.coroutines.delay
 
-private val topLevelScreenDestination = TopLevelDestination.LOGS
-private val screenDestination = ScreenDestination.MAIN_LOGS
+private val topLevelScreenDestination = TopLevelDestination.RECORDS
+private val screenDestination = ScreenDestination.MAIN_RECORDS
 
 fun NavController.navigateToMainLogs(navOptions: NavOptions? = null) =
     navigate(screenDestination.route, navOptions)

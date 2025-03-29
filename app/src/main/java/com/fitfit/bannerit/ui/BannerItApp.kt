@@ -56,7 +56,7 @@ fun BannerItApp(
         ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
 //
         //top level destinations
-        ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_LOGS, ScreenDestination.MAIN_MORE
+        ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_RECORDS, ScreenDestination.MAIN_MORE
          -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
 
         else -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surface)

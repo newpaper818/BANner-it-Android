@@ -19,8 +19,8 @@ import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.ui.ErrorScreen
 import com.fitfit.feature.logs.reportLogDetail.ReportLogDetailRoute
 
-private val topLevelScreenDestination = TopLevelDestination.LOGS
-private val screenDestination = ScreenDestination.REPORT_LOG_DETAIL
+private val topLevelScreenDestination = TopLevelDestination.RECORDS
+private val screenDestination = ScreenDestination.REPORT_RECORD_DETAIL
 
 fun NavController.navigateToReportLogDetail(navOptions: NavOptions? = null) =
     navigate(screenDestination.route, navOptions)

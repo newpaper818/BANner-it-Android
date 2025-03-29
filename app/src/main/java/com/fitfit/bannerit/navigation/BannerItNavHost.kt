@@ -80,7 +80,7 @@ fun BannerItNavHost(
     }
 
     val isOnTopLevel = appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_REPORT
-            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_LOGS
+            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_RECORDS
             || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_MORE
 
 //    val isOnMoreList = appUiState.screenDestination.currentScreenDestination == ScreenDestination.MORE

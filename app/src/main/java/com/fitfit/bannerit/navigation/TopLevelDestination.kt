@@ -18,11 +18,11 @@ enum class TopLevelDestination(
         labelTextId = R.string.report,
         route = ScreenDestination.MAIN_REPORT.route
     ),
-    LOGS(
+    RECORDS(
         selectedIcon = NavigationBarIcon.logsFilled,
         unselectedIcon = NavigationBarIcon.logsOutlined,
-        labelTextId = R.string.logs,
-        route = ScreenDestination.MAIN_LOGS.route
+        labelTextId = R.string.records,
+        route = ScreenDestination.MAIN_RECORDS.route
     ),
     MORE(
         selectedIcon = NavigationBarIcon.moreFilled,

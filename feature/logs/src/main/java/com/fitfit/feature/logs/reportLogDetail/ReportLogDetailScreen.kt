@@ -75,7 +75,7 @@ private fun ReportLogDetailScreen(
 
         topBar = {
             MyTopAppBar(
-                title = stringResource(R.string.report_log),
+                title = stringResource(R.string.report_record),
                 navigationIcon = TopAppBarIcon.back,
                 onClickNavigationIcon = { navigateUp() }
             )

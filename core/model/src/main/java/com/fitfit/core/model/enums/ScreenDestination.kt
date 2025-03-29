@@ -8,7 +8,7 @@ enum class ScreenDestination(
 
     //main
     MAIN_REPORT("mainReport"),
-    MAIN_LOGS("mainLogs"),
+    MAIN_RECORDS("mainRecords"),
     MAIN_MORE("mainMore"),
 
 
@@ -16,10 +16,9 @@ enum class ScreenDestination(
     //from MAIN_REPORT
     REPORT("report"),
     CAMERA("camera"),
-    SEND_REPORT("send_report"),
 
     //form MAIN_LOGS
-    REPORT_LOG_DETAIL("ReportLogDetail"),
+    REPORT_RECORD_DETAIL("ReportRecordDetail"),
     IMAGE("image"),
 
     //from MAIN_MORE
