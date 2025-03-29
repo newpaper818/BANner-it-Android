@@ -37,7 +37,7 @@ fun NavGraphBuilder.mainMyRecordsScreen(
     commonReportLogsViewModel: CommonReportLogsViewModel,
     externalState: ExternalState,
 
-    navigateToReportLogDetail: () -> Unit,
+    navigateToReportRecordDetail: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -87,7 +87,7 @@ fun NavGraphBuilder.mainMyRecordsScreen(
                 appUserReportLogs = commonReportLogsUiState.appUserReportLogs,
                 onClickReportLog = {
                     commonReportLogsViewModel.setCurrentReportLogIndex(it)
-                    navigateToReportLogDetail()
+                    navigateToReportRecordDetail()
                 }
             )
         }

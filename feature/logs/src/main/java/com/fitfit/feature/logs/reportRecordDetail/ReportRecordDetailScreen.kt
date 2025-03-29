@@ -1,4 +1,4 @@
-package com.fitfit.feature.logs.reportLogDetail
+package com.fitfit.feature.logs.reportRecordDetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,7 +32,7 @@ import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
 
 @Composable
-fun ReportLogDetailRoute(
+fun ReportRecordDetailRoute(
     appUserData: UserData,
     use2Panes: Boolean,
     spacerValue: Dp,
@@ -47,7 +47,7 @@ fun ReportLogDetailRoute(
 ) {
 
 
-    ReportLogDetailScreen(
+    ReportRecordDetailScreen(
         appUserData = appUserData,
         spacerValue = spacerValue,
         dateTimeFormat = dateTimeFormat,
@@ -58,7 +58,7 @@ fun ReportLogDetailRoute(
 }
 
 @Composable
-private fun ReportLogDetailScreen(
+private fun ReportRecordDetailScreen(
     appUserData: UserData,
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,

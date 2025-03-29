@@ -20,8 +20,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.fitfit.bannerit.navigation.mainLogs.mainLookupScreen
 import com.fitfit.bannerit.navigation.mainLogs.mainMyRecordsScreen
-import com.fitfit.bannerit.navigation.mainLogs.navigateToReportLogDetail
-import com.fitfit.bannerit.navigation.mainLogs.reportLogDetailScreen
+import com.fitfit.bannerit.navigation.mainLogs.navigateToReportRecordDetail
+import com.fitfit.bannerit.navigation.mainLogs.reportRecordDetailScreen
 import com.fitfit.bannerit.navigation.mainMore.aboutScreen
 import com.fitfit.bannerit.navigation.mainMore.accountScreen
 import com.fitfit.bannerit.navigation.mainMore.deleteAccountScreen
@@ -232,8 +232,8 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,
-                navigateToReportLogDetail = {
-                    mainNavController.navigateToReportLogDetail(
+                navigateToReportRecordDetail = {
+                    mainNavController.navigateToReportRecordDetail(
                         navOptions = navOptions { launchSingleTop = true }
                     )
                 }
@@ -243,8 +243,8 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,
-                navigateToReportLogDetail = {
-                    mainNavController.navigateToReportLogDetail(
+                navigateToReportRecordDetail = {
+                    mainNavController.navigateToReportRecordDetail(
                         navOptions = navOptions { launchSingleTop = true }
                     )
                 }
@@ -283,7 +283,7 @@ fun BannerItNavHost(
 
 
             //from main logs  ======================================================================
-            reportLogDetailScreen(
+            reportRecordDetailScreen(
                 appViewModel = appViewModel,
                 commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,

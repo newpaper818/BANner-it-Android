@@ -17,15 +17,15 @@ import com.fitfit.bannerit.ui.CommonReportLogsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.ui.ErrorScreen
-import com.fitfit.feature.logs.reportLogDetail.ReportLogDetailRoute
+import com.fitfit.feature.logs.reportRecordDetail.ReportRecordDetailRoute
 
 private val topLevelScreenDestination = TopLevelDestination.MY_RECORDS
 private val screenDestination = ScreenDestination.REPORT_RECORD_DETAIL
 
-fun NavController.navigateToReportLogDetail(navOptions: NavOptions? = null) =
+fun NavController.navigateToReportRecordDetail(navOptions: NavOptions? = null) =
     navigate(screenDestination.route, navOptions)
 
-fun NavGraphBuilder.reportLogDetailScreen(
+fun NavGraphBuilder.reportRecordDetailScreen(
     appViewModel: AppViewModel,
     commonReportLogsViewModel: CommonReportLogsViewModel,
     externalState: ExternalState,
@@ -53,7 +53,7 @@ fun NavGraphBuilder.reportLogDetailScreen(
             commonReportLogsUiState.currentReportLogIndex != null
             && appUiState.appUserData != null
         ) {
-            ReportLogDetailRoute(
+            ReportRecordDetailRoute(
                 appUserData = appUiState.appUserData!!,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,

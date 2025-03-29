@@ -37,7 +37,7 @@ fun NavGraphBuilder.mainLookupScreen(
     commonReportLogsViewModel: CommonReportLogsViewModel,
     externalState: ExternalState,
 
-    navigateToReportLogDetail: () -> Unit,
+    navigateToReportRecordDetail: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -84,7 +84,7 @@ fun NavGraphBuilder.mainLookupScreen(
                 allReportLogs = commonReportLogsUiState.allReportLogs,
                 onClickReportLog = {
                     commonReportLogsViewModel.setCurrentReportLogIndex(it)
-                    navigateToReportLogDetail()
+                    navigateToReportRecordDetail()
                 }
             )
         }
