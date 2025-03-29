@@ -148,6 +148,9 @@ fun BannerItNavHost(
         windowSizeClass = externalState.windowSizeClass,
         currentTopLevelDestination = appUiState.screenDestination.currentTopLevelDestination,
         showNavigationBar = showNavigationBar,
+        topLevelDestinations =
+            if (appUiState.appUserData == null) listOf(TopLevelDestination.REPORT, TopLevelDestination.LOOKUP, TopLevelDestination.MORE)
+            else TopLevelDestination.entries,
         onClickNavBarItem = {
             val prevTopLevelDestination = appUiState.screenDestination.currentTopLevelDestination
             val currentMoreDetailScreenDestination = appUiState.screenDestination.currentScreenDestination
