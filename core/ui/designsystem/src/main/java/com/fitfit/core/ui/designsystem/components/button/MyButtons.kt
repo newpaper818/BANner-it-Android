@@ -23,6 +23,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -44,13 +45,15 @@ internal fun MyTextButton(
     modifier: Modifier = Modifier,
 
     enabled: Boolean = true,
+    shape: Shape = ButtonDefaults.shape,
     containerColor: Color = MaterialTheme.colorScheme.primary,
     textStyle: TextStyle = MaterialTheme.typography.labelLarge
 ){
     if (containerColor == Color.Transparent){
         TextButton(
-            enabled = enabled,
             onClick = onClick,
+            enabled = enabled,
+            shape = shape,
             modifier = modifier
         ) {
             Text(
@@ -62,8 +65,9 @@ internal fun MyTextButton(
     }
     else {
         Button(
-            enabled = enabled,
             onClick = onClick,
+            enabled = enabled,
+            shape = shape,
             modifier = modifier,
             colors = ButtonDefaults.buttonColors(
                 containerColor = containerColor,
