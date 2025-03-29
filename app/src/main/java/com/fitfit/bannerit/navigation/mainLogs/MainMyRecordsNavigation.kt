@@ -65,8 +65,6 @@ fun NavGraphBuilder.mainMyRecordsScreen(
             appViewModel.updateCurrentTopLevelDestination(topLevelScreenDestination)
             delay(100)
             appViewModel.updateCurrentScreenDestination(screenDestination)
-            delay(500)
-            commonReportRecordsViewModel.setCurrentReportRecord(null)
         }
 
 
