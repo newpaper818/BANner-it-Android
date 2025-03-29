@@ -55,13 +55,15 @@ fun NavGraphBuilder.mainLookupScreen(
 
 
         LaunchedEffect(Unit) {
-            commonReportRecordsViewModel.getAdminReportRecords()
+            commonReportRecordsViewModel.getAllReportRecords()
         }
 
         LaunchedEffect(Unit) {
             appViewModel.updateCurrentTopLevelDestination(topLevelScreenDestination)
             delay(100)
             appViewModel.updateCurrentScreenDestination(screenDestination)
+            delay(500)
+            commonReportRecordsViewModel.setCurrentReportRecord(null)
         }
 
 
@@ -83,7 +85,7 @@ fun NavGraphBuilder.mainLookupScreen(
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 allReportRecords = commonReportRecordsUiState.allReportRecords,
                 onClickReportRecord = {
-                    commonReportRecordsViewModel.setCurrentReportRecordIndex(it)
+                    commonReportRecordsViewModel.setCurrentReportRecord(it)
                     navigateToReportRecordDetail()
                 }
             )

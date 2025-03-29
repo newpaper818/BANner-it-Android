@@ -17,7 +17,7 @@ data class ReportUiState(
     val appUserReportRecords: List<ReportRecord> = listOf(),
     val allReportRecords: List<ReportRecord> = listOf(),
 
-    val currentReportRecordIndex: Int? = null
+    val currentReportRecord: ReportRecord? = null
 )
 
 @HiltViewModel
@@ -45,13 +45,16 @@ class CommonReportRecordsViewModel @Inject constructor(
         }
     }
 
-    fun setCurrentReportRecordIndex(
-        reportRecordIndex: Int?
+    fun setCurrentReportRecord(
+        reportRecord: ReportRecord?
     ) {
         _reportUiState.update {
-            it.copy(currentReportRecordIndex = reportRecordIndex)
+            it.copy(currentReportRecord = reportRecord)
         }
     }
+
+
+
 
 
     suspend fun getAppUserReportRecords(
@@ -69,10 +72,10 @@ class CommonReportRecordsViewModel @Inject constructor(
         }
     }
 
-    suspend fun getAdminReportRecords(
+    suspend fun getAllReportRecords(
 
     ) {
-        val newAdminReportRecords = reportRecordsRepository.getAdminReportRecords()
+        val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
         if (newAdminReportRecords != null)
             setAllReportRecords(newAdminReportRecords)
 

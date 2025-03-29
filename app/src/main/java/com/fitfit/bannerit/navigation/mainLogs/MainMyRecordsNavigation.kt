@@ -65,6 +65,8 @@ fun NavGraphBuilder.mainMyRecordsScreen(
             appViewModel.updateCurrentTopLevelDestination(topLevelScreenDestination)
             delay(100)
             appViewModel.updateCurrentScreenDestination(screenDestination)
+            delay(500)
+            commonReportRecordsViewModel.setCurrentReportRecord(null)
         }
 
 
@@ -86,7 +88,7 @@ fun NavGraphBuilder.mainMyRecordsScreen(
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 appUserReportRecords = commonReportRecordsUiState.appUserReportRecords,
                 onClickReportRecord = {
-                    commonReportRecordsViewModel.setCurrentReportRecordIndex(it)
+                    commonReportRecordsViewModel.setCurrentReportRecord(it)
                     navigateToReportRecordDetail()
                 }
             )

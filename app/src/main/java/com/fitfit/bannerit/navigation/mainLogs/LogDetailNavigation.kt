@@ -50,7 +50,7 @@ fun NavGraphBuilder.reportRecordDetailScreen(
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
         if (
-            commonReportRecordsUiState.currentReportRecordIndex != null
+            commonReportRecordsUiState.currentReportRecord != null
             && appUiState.appUserData != null
         ) {
             ReportRecordDetailRoute(
@@ -59,7 +59,7 @@ fun NavGraphBuilder.reportRecordDetailScreen(
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 internetEnabled = externalState.internetEnabled,
-                reportRecord = commonReportRecordsUiState.appUserReportRecords[commonReportRecordsUiState.currentReportRecordIndex!!],
+                reportRecord = commonReportRecordsUiState.currentReportRecord!!,
                 navigateUp = navigateUp
             )
         }

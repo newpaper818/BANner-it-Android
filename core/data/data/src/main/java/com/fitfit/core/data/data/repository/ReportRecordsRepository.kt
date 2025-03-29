@@ -16,7 +16,7 @@ class ReportRecordsRepository @Inject constructor(
         return dbRemoteDataSource.getAppUserReportRecords(jwt = jwt)
     }
 
-    suspend fun getAdminReportRecords(
+    suspend fun getAllReportRecords(
 
     ): List<ReportRecord>? {
         return dbRemoteDataSource.getAllReportRecords()
