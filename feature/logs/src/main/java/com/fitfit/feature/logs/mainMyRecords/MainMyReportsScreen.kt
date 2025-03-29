@@ -1,4 +1,4 @@
-package com.fitfit.feature.logs.mainLogs
+package com.fitfit.feature.logs.mainMyRecords
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -34,7 +34,7 @@ import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
 
 @Composable
-fun MainLogsRoute(
+fun MainMyReportsRoute(
     use2Panes: Boolean,
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
@@ -46,7 +46,7 @@ fun MainLogsRoute(
 ) {
 
 
-    MainLogsScreen(
+    MainMyReportsScreen(
         spacerValue = spacerValue,
         dateTimeFormat = dateTimeFormat,
         appUserReportLogs = appUserReportLogs,
@@ -55,7 +55,7 @@ fun MainLogsRoute(
 }
 
 @Composable
-private fun MainLogsScreen(
+private fun MainMyReportsScreen(
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
     appUserReportLogs: List<ReportLog>,
@@ -70,7 +70,7 @@ private fun MainLogsScreen(
 
         topBar = {
             MyTopAppBar(
-                title = stringResource(R.string.report_records)
+                title = stringResource(R.string.my_report_records)
             )
         }
     ){ paddingValues ->

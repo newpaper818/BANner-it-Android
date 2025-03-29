@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--mainLogs ================================================================================-->
-    <string name="report_records">신고 기록</string>
+    <!--mainLookup ==============================================================================-->
+    <string name="lookup_reports">신고 조회</string>
+
+    <!--mainMyRecords ===========================================================================-->
+    <string name="my_report_records">내 신고 기록</string>
     <string name="no_report_log">신고 기록이 없어요</string>
 
     <!--reportLogDetail =========================================================================-->

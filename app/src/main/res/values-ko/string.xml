@@ -4,7 +4,8 @@
 
 
     <string name="report">신고</string>
-    <string name="records">기록</string>
+    <string name="lookup">조회</string>
+    <string name="my_records">내 기록</string>
     <string name="more">더 보기</string>
 
 </resources>

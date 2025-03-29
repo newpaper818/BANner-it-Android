@@ -4,7 +4,8 @@
     <string name="example" translatable="false">example</string>
 
     <string name="report">Report</string>
-    <string name="records">Records</string>
+    <string name="lookup">Lookup</string>
+    <string name="my_records">My Records</string>
     <string name="more">More</string>
 
 </resources>

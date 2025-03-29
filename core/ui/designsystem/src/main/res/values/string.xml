@@ -54,7 +54,8 @@
     <!--component/icon/MyIcons.kt/ =======================================================-->
     <!--NavigationBarIcon-->
     <string name="report">Report</string>
-    <string name="logs">Logs</string>
+    <string name="lookup">Lookup</string>
+    <string name="my_records">My records</string>
     <string name="more">More</string>
 
     <!--TopBarIcon-->

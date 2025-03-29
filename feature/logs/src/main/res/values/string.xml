@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--mainLogs ================================================================================-->
-    <string name="report_records">Report records</string>
+    <!--mainLookup ==============================================================================-->
+    <string name="lookup_reports">Lookup Reports</string>
+
+    <!--mainMyRecords ===========================================================================-->
+    <string name="my_report_records">My Report Records</string>
     <string name="no_report_log">No report log</string>
 
     <!--reportLogDetail =========================================================================-->

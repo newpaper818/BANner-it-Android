@@ -236,12 +236,12 @@ private fun NavigationBottomBarPreview(){
     val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
-        NavigationBarIcon.logsFilled,
+        NavigationBarIcon.myRecordsFilled,
         NavigationBarIcon.moreFilled
     )
     val unSelectedIcons = listOf(
         NavigationBarIcon.reportOutlined,
-        NavigationBarIcon.logsOutlined,
+        NavigationBarIcon.myRecordsOutlined,
         NavigationBarIcon.moreOutlined
     )
 

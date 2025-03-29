@@ -6,8 +6,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.bannerit.navigation.BannerItNavHost
+import com.fitfit.core.model.enums.ScreenDestination
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
@@ -56,7 +56,7 @@ fun BannerItApp(
         ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
 //
         //top level destinations
-        ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_RECORDS, ScreenDestination.MAIN_MORE
+        ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_MY_RECORDS, ScreenDestination.MAIN_MORE
          -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
 
         else -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surface)

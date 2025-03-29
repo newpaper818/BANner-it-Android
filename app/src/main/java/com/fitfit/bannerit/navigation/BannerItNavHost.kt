@@ -18,9 +18,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.fitfit.bannerit.navigation.mainLogs.reportLogDetailScreen
-import com.fitfit.bannerit.navigation.mainLogs.mainLogsScreen
+import com.fitfit.bannerit.navigation.mainLogs.mainLookupScreen
+import com.fitfit.bannerit.navigation.mainLogs.mainMyRecordsScreen
 import com.fitfit.bannerit.navigation.mainLogs.navigateToReportLogDetail
+import com.fitfit.bannerit.navigation.mainLogs.reportLogDetailScreen
 import com.fitfit.bannerit.navigation.mainMore.aboutScreen
 import com.fitfit.bannerit.navigation.mainMore.accountScreen
 import com.fitfit.bannerit.navigation.mainMore.deleteAccountScreen
@@ -80,7 +81,8 @@ fun BannerItNavHost(
     }
 
     val isOnTopLevel = appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_REPORT
-            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_RECORDS
+            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_LOOKUP
+            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_MY_RECORDS
             || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_MORE
 
 //    val isOnMoreList = appUiState.screenDestination.currentScreenDestination == ScreenDestination.MORE

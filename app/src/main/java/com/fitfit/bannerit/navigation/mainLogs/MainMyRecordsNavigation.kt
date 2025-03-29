@@ -23,16 +23,16 @@ import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
 import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
-import com.fitfit.feature.logs.mainLogs.MainLogsRoute
+import com.fitfit.feature.logs.mainMyRecords.MainMyReportsRoute
 import kotlinx.coroutines.delay
 
-private val topLevelScreenDestination = TopLevelDestination.RECORDS
-private val screenDestination = ScreenDestination.MAIN_RECORDS
+private val topLevelScreenDestination = TopLevelDestination.MY_RECORDS
+private val screenDestination = ScreenDestination.MAIN_MY_RECORDS
 
-fun NavController.navigateToMainLogs(navOptions: NavOptions? = null) =
+fun NavController.navigateToMainMyRecords(navOptions: NavOptions? = null) =
     navigate(screenDestination.route, navOptions)
 
-fun NavGraphBuilder.mainLogsScreen(
+fun NavGraphBuilder.mainMyRecordsScreen(
     appViewModel: AppViewModel,
     commonReportLogsViewModel: CommonReportLogsViewModel,
     externalState: ExternalState,
@@ -47,9 +47,6 @@ fun NavGraphBuilder.mainLogsScreen(
         popExitTransition = { TopPopExitTransition }
     ) {
 
-
-
-
         val appUiState by appViewModel.appUiState.collectAsState()
         val commonReportLogsUiState by commonReportLogsViewModel.reportUiState.collectAsState()
 
@@ -60,9 +57,7 @@ fun NavGraphBuilder.mainLogsScreen(
 
         LaunchedEffect(Unit) {
             if (jwt != null) {
-                commonReportLogsViewModel.getAppUserReportLogs(
-                    jwt = jwt
-                )
+                commonReportLogsViewModel.getAppUserReportLogs(jwt = jwt)
             }
         }
 
@@ -85,7 +80,7 @@ fun NavGraphBuilder.mainLogsScreen(
                 MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
             }
 
-            MainLogsRoute(
+            MainMyReportsRoute(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,

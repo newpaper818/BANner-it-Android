@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
 import androidx.compose.material.icons.automirrored.rounded.Login
+import androidx.compose.material.icons.automirrored.rounded.ManageSearch
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.outlined.HideImage
@@ -33,8 +34,6 @@ import androidx.compose.material.icons.rounded.FlipCameraAndroid
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.rounded.LocationOff
-import androidx.compose.material.icons.rounded.Luggage
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
@@ -74,8 +73,13 @@ data class MyIcon(
 object NavigationBarIcon {
     val reportFilled = MyIcon(Icons.Rounded.Flag,               24.dp, false, null, R.string.report)
     val reportOutlined = MyIcon(Icons.Rounded.OutlinedFlag,     24.dp, false, null, R.string.report)
-    val logsFilled = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,      24.dp, false, null, R.string.logs)
-    val logsOutlined = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,   24.dp, false, null, R.string.logs)
+
+    val lookupFilled = MyIcon(Icons.AutoMirrored.Rounded.ManageSearch,      28.dp, false, null, R.string.lookup)
+    val lookupOutlined = MyIcon(Icons.AutoMirrored.Rounded.ManageSearch,    28.dp, false, null, R.string.lookup)
+
+    val myRecordsFilled = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,     24.dp, false, null, R.string.my_records)
+    val myRecordsOutlined = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,   24.dp, false, null, R.string.my_records)
+
     val moreFilled = MyIcon(Icons.Rounded.MoreHoriz,      24.dp, false, null, R.string.more)
     val moreOutlined = MyIcon(Icons.Outlined.MoreHoriz,   24.dp, false, null, R.string.more)
 }

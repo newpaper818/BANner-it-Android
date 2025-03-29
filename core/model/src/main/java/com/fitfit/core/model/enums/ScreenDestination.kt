@@ -8,7 +8,8 @@ enum class ScreenDestination(
 
     //main
     MAIN_REPORT("mainReport"),
-    MAIN_RECORDS("mainRecords"),
+    MAIN_LOOKUP("mainLookup"),
+    MAIN_MY_RECORDS("mainMyRecords"),
     MAIN_MORE("mainMore"),
 
 

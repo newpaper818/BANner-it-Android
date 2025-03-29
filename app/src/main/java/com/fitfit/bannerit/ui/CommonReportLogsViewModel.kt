@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 data class ReportUiState(
     val appUserReportLogs: List<ReportLog> = listOf(),
-    val adminReportLogs: List<ReportLog> = listOf(),
+    val allReportLogs: List<ReportLog> = listOf(),
 
     val currentReportLogIndex: Int? = null
 )
@@ -37,11 +37,11 @@ class CommonReportLogsViewModel @Inject constructor(
         }
     }
 
-    private fun setAdminReportLogs(
+    private fun setAllReportLogs(
         adminReportLogs: List<ReportLog>
     ) {
         _reportUiState.update {
-            it.copy(adminReportLogs = adminReportLogs)
+            it.copy(allReportLogs = adminReportLogs)
         }
     }
 
@@ -74,7 +74,14 @@ class CommonReportLogsViewModel @Inject constructor(
     ) {
         val newAdminReportLogs = reportLogsRepository.getAdminReportLogs()
         if (newAdminReportLogs != null)
-            setAdminReportLogs(newAdminReportLogs)
+            setAllReportLogs(newAdminReportLogs)
+
+        //TODO delete after test
+        else {
+            val sampleList = listOf(sampleReportLog3, sampleReportLog, sampleReportLog2)
+            delay(2000)
+            setAllReportLogs(sampleList)
+        }
     }
 
 }
