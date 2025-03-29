@@ -53,11 +53,15 @@ fun BannerItApp(
     //set navigation bar(recent, home, back) color
     when (appUiState.screenDestination.currentScreenDestination) {
         ScreenDestination.CAMERA,
-        ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
+        ScreenDestination.IMAGE
+            -> systemUiController.setNavigationBarColor(color = Color.Transparent)
 //
         //top level destinations
-        ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_MY_RECORDS, ScreenDestination.MAIN_MORE
-         -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
+        ScreenDestination.MAIN_REPORT,
+        ScreenDestination.MAIN_LOOKUP,
+        ScreenDestination.MAIN_MY_RECORDS,
+        ScreenDestination.MAIN_MORE
+            -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
 
         else -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surface)
     }

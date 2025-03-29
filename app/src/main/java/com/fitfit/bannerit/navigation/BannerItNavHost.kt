@@ -225,7 +225,18 @@ fun BannerItNavHost(
                 }
             )
 
-            mainLogsScreen(
+            mainLookupScreen(
+                appViewModel = appViewModel,
+                commonReportLogsViewModel = commonReportLogsViewModel,
+                externalState = externalState,
+                navigateToReportLogDetail = {
+                    mainNavController.navigateToReportLogDetail(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
+            )
+
+            mainMyRecordsScreen(
                 appViewModel = appViewModel,
                 commonReportLogsViewModel = commonReportLogsViewModel,
                 externalState = externalState,

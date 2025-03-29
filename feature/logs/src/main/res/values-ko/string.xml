@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--mainLookup ==============================================================================-->
-    <string name="lookup_reports">신고 조회</string>
+    <string name="lookup_all_reports">모든 신고 조회</string>
 
     <!--mainMyRecords ===========================================================================-->
     <string name="my_report_records">내 신고 기록</string>

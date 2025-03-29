@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--mainLookup ==============================================================================-->
-    <string name="lookup_reports">Lookup Reports</string>
+    <string name="lookup_all_reports">Lookup All Reports</string>
 
     <!--mainMyRecords ===========================================================================-->
     <string name="my_report_records">My Report Records</string>
