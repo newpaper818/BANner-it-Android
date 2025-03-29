@@ -14,7 +14,6 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 fun BannerItApp(
     externalState: ExternalState,
     appViewModel: AppViewModel,
-//    tripsViewModel: TripsViewModel,
     isDarkAppTheme: Boolean,
 
     modifier: Modifier = Modifier,
