@@ -233,15 +233,15 @@ fun MyNavigationDrawerItem(
 @Composable
 @PreviewLightDark
 private fun NavigationBottomBarPreview(){
-    val labelTexts = listOf("Trips", "Profile", "More")
+    val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
-        NavigationBarIcon.logsFilled,
+        NavigationBarIcon.myRecordsFilled,
         NavigationBarIcon.moreFilled
     )
     val unSelectedIcons = listOf(
         NavigationBarIcon.reportOutlined,
-        NavigationBarIcon.logsOutlined,
+        NavigationBarIcon.myRecordsOutlined,
         NavigationBarIcon.moreOutlined
     )
 
@@ -263,15 +263,15 @@ private fun NavigationBottomBarPreview(){
 @Composable
 @PreviewLightDark
 private fun NavigationRailBarPreview(){
-    val labelTexts = listOf("Trips", "Profile", "More")
+    val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
-        NavigationBarIcon.logsFilled,
+        NavigationBarIcon.myRecordsFilled,
         NavigationBarIcon.moreFilled
     )
     val unSelectedIcons = listOf(
         NavigationBarIcon.reportOutlined,
-        NavigationBarIcon.logsOutlined,
+        NavigationBarIcon.myRecordsOutlined,
         NavigationBarIcon.moreOutlined
     )
 
@@ -293,15 +293,15 @@ private fun NavigationRailBarPreview(){
 @Composable
 @PreviewLightDark
 private fun NavigationDrawerPreview(){
-    val labelTexts = listOf("Trips", "Profile", "More")
+    val labelTexts = listOf("Report", "Logs", "More")
     val selectedIcons = listOf(
         NavigationBarIcon.reportFilled,
-        NavigationBarIcon.logsFilled,
+        NavigationBarIcon.myRecordsFilled,
         NavigationBarIcon.moreFilled
     )
     val unSelectedIcons = listOf(
         NavigationBarIcon.reportOutlined,
-        NavigationBarIcon.logsOutlined,
+        NavigationBarIcon.myRecordsOutlined,
         NavigationBarIcon.moreOutlined
     )
 

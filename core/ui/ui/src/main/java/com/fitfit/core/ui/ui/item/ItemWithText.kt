@@ -34,6 +34,7 @@ fun ItemWithText(
     subText: String? = null,
 
     isOpenInNew: Boolean = false,
+    showClickableIcon: Boolean = false,
     onItemClick: (() -> Unit)? = null
 ){
     val textStyle = MaterialTheme.typography.bodyLarge
@@ -86,6 +87,11 @@ fun ItemWithText(
                     Spacer(modifier = Modifier.weight(1f))
 
                     DisplayIcon(icon = MyIcons.openInNew)
+                }
+                else if (showClickableIcon) {
+                    Spacer(modifier = Modifier.weight(1f))
+
+                    DisplayIcon(icon = MyIcons.clickableItem)
                 }
             }
         }

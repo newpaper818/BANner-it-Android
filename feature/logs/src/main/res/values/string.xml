@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--logDetail ===============================================================================-->
-    <string name="log_detail">Log detail</string>
+    <!--mainLookup ==============================================================================-->
+    <string name="lookup_all_reports">Lookup All Reports</string>
 
-    <!--mainLogs ================================================================================-->
-    <string name="logs">Logs</string>
-    <string name="no_report_log">No report log</string>
+    <!--mainMyRecords ===========================================================================-->
+    <string name="my_report_records">My Report Records</string>
+    <string name="no_report_record">No report record</string>
+
+    <!--reportRecordDetail ======================================================================-->
+    <string name="report_record">Report record</string>
+    <string name="photos_">%d Photos</string>
+    <string name="content">Content</string>
+    <string name="banner_info">Banner info</string>
+    <string name="location">Location</string>
 
 
 </resources>

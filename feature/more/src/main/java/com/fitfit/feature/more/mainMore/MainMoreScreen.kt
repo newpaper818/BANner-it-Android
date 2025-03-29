@@ -19,6 +19,7 @@ import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
+import com.fitfit.core.ui.ui.card.UserProfileCard
 import com.fitfit.core.ui.ui.item.ItemDivider
 import com.fitfit.core.ui.ui.item.ItemWithText
 import com.fitfit.core.ui.ui.item.ListGroupCard
@@ -29,6 +30,7 @@ import com.fitfit.feature.more.R
 fun MainMoreRoute(
     isDebugMode: Boolean,
     appUserData: UserData?,
+    internetEnabled: Boolean,
 
     use2Panes: Boolean,
     spacerValue: Dp,
@@ -41,6 +43,7 @@ fun MainMoreRoute(
     MainMoreScreen(
         isDebugMode = isDebugMode,
         appUserData = appUserData,
+        internetEnabled = internetEnabled,
 
         startSpacerValue = spacerValue,
         endSpacerValue = if (use2Panes) spacerValue / 2 else spacerValue,
@@ -52,6 +55,7 @@ fun MainMoreRoute(
 private fun MainMoreScreen(
     isDebugMode: Boolean,
     appUserData: UserData?,
+    internetEnabled: Boolean,
 
     startSpacerValue: Dp,
     endSpacerValue: Dp,
@@ -82,6 +86,29 @@ private fun MainMoreScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ){
+            item {
+                if(appUserData != null){
+                    UserProfileCard(
+                        userData = appUserData,
+                        internetEnabled = internetEnabled,
+                        showSignInWithInfo = false,
+                        onProfileClick = { navigateTo(ScreenDestination.ACCOUNT) },
+                        modifier = itemModifier
+                    )
+                }
+                else {
+                    ListGroupCard(
+                        modifier = itemModifier
+                    ) {
+                        ItemWithText(
+                            text = stringResource(id = R.string.sign_in),
+                            showClickableIcon = true,
+                            onItemClick = { navigateTo(ScreenDestination.SIGN_IN) }
+                        )
+                    }
+                }
+            }
+
             //setting
             item {
                 ListGroupCard(
@@ -91,6 +118,7 @@ private fun MainMoreScreen(
                     //date time format
                     ItemWithText(
                         text = stringResource(id = R.string.date_time_format),
+                        showClickableIcon = true,
                         onItemClick = { navigateTo(ScreenDestination.SET_DATE_TIME_FORMAT) }
                     )
 
@@ -99,29 +127,13 @@ private fun MainMoreScreen(
                     //app theme
                     ItemWithText(
                         text = stringResource(id = R.string.theme),
+                        showClickableIcon = true,
                         onItemClick = { navigateTo(ScreenDestination.SET_THEME) }
                     )
                 }
             }
 
-            //account
-            item {
-                ListGroupCard(
-                    modifier = itemModifier
-                ) {
-                    ItemWithText(
-                        text =
-                            if (appUserData != null) stringResource(id = R.string.account)
-                            else stringResource(id = R.string.sign_in),
-                        onItemClick = {
-                            if (appUserData != null)
-                                navigateTo(ScreenDestination.ACCOUNT)
-                            else
-                                navigateTo(ScreenDestination.SIGN_IN)
-                        }
-                    )
-                }
-            }
+
 
             //about
             item {
@@ -130,6 +142,7 @@ private fun MainMoreScreen(
                 ) {
                     ItemWithText(
                         text = stringResource(id = R.string.about),
+                        showClickableIcon = true,
                         onItemClick = {
                             navigateTo(ScreenDestination.ABOUT)
                         }

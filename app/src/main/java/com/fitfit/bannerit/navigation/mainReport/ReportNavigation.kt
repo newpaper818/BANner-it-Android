@@ -59,8 +59,9 @@ fun NavGraphBuilder.reportScreen(
             )
         }
         else{
-            ErrorScreen()
-            navigateUp()
+            ErrorScreen(
+                onClickGoBack = navigateUp
+            )
         }
     }
 }

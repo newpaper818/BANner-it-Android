@@ -193,6 +193,7 @@ private fun AccountScreen(
                 ) {
                     ItemWithText(
                         text = stringResource(id = R.string.edit_profile),
+                        showClickableIcon = true,
                         onItemClick = navigateToEditProfile
                     )
                 }
@@ -205,6 +206,7 @@ private fun AccountScreen(
                 ) {
                     ItemWithText(
                         text = stringResource(id = R.string.sign_out),
+                        showClickableIcon = true,
                         onItemClick = { showSignOutDialog = true }
                     )
 
@@ -212,6 +214,7 @@ private fun AccountScreen(
 
                     ItemWithText(
                         text = stringResource(id = R.string.delete_account),
+                        showClickableIcon = true,
                         onItemClick = navigateToDeleteAccount
                     )
                 }

@@ -1,4 +1,4 @@
-package com.fitfit.bannerit.navigation.mainMore
+package com.fitfit.bannerit.navigation.mainLogs
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.LaunchedEffect
@@ -9,34 +9,35 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.fitfit.core.model.enums.ScreenDestination
-import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
-import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
-import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
-import com.fitfit.feature.more.mainMore.MainMoreRoute
 import com.fitfit.bannerit.navigation.TopEnterTransition
 import com.fitfit.bannerit.navigation.TopExitTransition
 import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.navigation.TopPopEnterTransition
 import com.fitfit.bannerit.navigation.TopPopExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
+import com.fitfit.core.model.enums.ScreenDestination
+import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
+import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
+import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
+import com.fitfit.feature.logs.mainLookup.MainLookupRoute
 import kotlinx.coroutines.delay
 
+private val topLevelScreenDestination = TopLevelDestination.LOOKUP
+private val screenDestination = ScreenDestination.MAIN_LOOKUP
 
-private val topLevelScreenDestination = TopLevelDestination.MORE
-private val screenDestination = ScreenDestination.MAIN_MORE
-
-fun NavController.navigateToMainMore(navOptions: NavOptions? = null) =
+fun NavController.navigateToMainLookup(navOptions: NavOptions? = null) =
     navigate(screenDestination.route, navOptions)
 
-fun NavGraphBuilder.mainMoreScreen(
+fun NavGraphBuilder.mainLookupScreen(
     appViewModel: AppViewModel,
+    commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
 
-    navigateTo: (ScreenDestination) -> Unit,
+    navigateToReportRecordDetail: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -45,16 +46,24 @@ fun NavGraphBuilder.mainMoreScreen(
         popEnterTransition = { TopPopEnterTransition },
         popExitTransition = { TopPopExitTransition }
     ) {
+
+        val appUiState by appViewModel.appUiState.collectAsState()
+        val commonReportRecordsUiState by commonReportRecordsViewModel.reportUiState.collectAsState()
+
+        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
+        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
+
+
+        LaunchedEffect(Unit) {
+            commonReportRecordsViewModel.getAllReportRecords()
+        }
+
         LaunchedEffect(Unit) {
             appViewModel.updateCurrentTopLevelDestination(topLevelScreenDestination)
             delay(100)
             appViewModel.updateCurrentScreenDestination(screenDestination)
         }
 
-        val appUiState by appViewModel.appUiState.collectAsState()
-
-        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
-        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
         Row {
             if (widthSizeClass == WindowWidthSizeClass.Compact) {
@@ -68,13 +77,15 @@ fun NavGraphBuilder.mainMoreScreen(
                 MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
             }
 
-            MainMoreRoute(
-                isDebugMode = com.fitfit.bannerit.BuildConfig.DEBUG,
-                appUserData = appUiState.appUserData,
-                internetEnabled = externalState.internetEnabled,
+            MainLookupRoute(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
-                navigateTo = navigateTo
+                dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
+                allReportRecords = commonReportRecordsUiState.allReportRecords,
+                onClickReportRecord = {
+                    commonReportRecordsViewModel.setCurrentReportRecord(it)
+                    navigateToReportRecordDetail()
+                }
             )
         }
     }

@@ -4,8 +4,8 @@ import android.content.Context
 import android.util.Log
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.IdTokenRequestDTO
-import com.fitfit.core.model.dto.toReportLogDTO
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.dto.toReportRecordDTO
+import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -75,15 +75,15 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    override suspend fun postReportBanner(
+    override suspend fun postBannerReport(
         jwt: String,
         userId: Int,
-        reportLog: ReportLog
+        reportRecord: ReportRecord
     ): Boolean {
         try {
-            val result = retrofitApiService.postReportBanner(
+            val result = retrofitApiService.postBannerReport(
                 jwt = jwt,
-                reportBannerRequestBodyDTO = reportLog.toReportLogDTO(
+                reportBannerRequestBodyDTO = reportRecord.toReportRecordDTO(
 //                    userId = userId
                 )
             )
@@ -114,9 +114,9 @@ class RetrofitApi @Inject constructor(
     override suspend fun sendTestImage(
         jwt: String,
         userId: Int,
-        reportLog: ReportLog
+        reportRecord: ReportRecord
     ): Boolean {
-        val imageFile = File(context.filesDir, reportLog.images[0])
+        val imageFile = File(context.filesDir, reportRecord.images[0])
         val request = RequestBody.create(
             MediaType.parse("image/jpg"),
             imageFile
@@ -154,24 +154,24 @@ class RetrofitApi @Inject constructor(
 
     }
 
-    override suspend fun getAppUserReportLogs(
+    override suspend fun getAppUserReportRecords(
         jwt: String
-    ): List<ReportLog>? {
+    ): List<ReportRecord>? {
         try {
-            val result = retrofitApiService.getAppUserReportLogs(
+            val result = retrofitApiService.getAppUserReportRecords(
                 jwt = jwt
             )
 
             //result
             val code = result.code()
             val error = result.body()?.error
-            val reportLogs = result.body()?.reportLogsDTO?.map { it.toReportLog() }
+            val reportRecords = result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
 
             if (
                 code == 200
                 && error == null
             ) {
-                return reportLogs
+                return reportRecords
             }
             else {
                 Log.e(RETROFIT_TAG, "result: $result")
@@ -185,22 +185,22 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    override suspend fun getAllReportLogs(
+    override suspend fun getAllReportRecords(
 
-    ): List<ReportLog>? {
+    ): List<ReportRecord>? {
         try {
-            val result = retrofitApiService.getAllReportLogs()
+            val result = retrofitApiService.getAllReportRecords()
 
             //result
             val code = result.code()
             val error = result.body()?.error
-            val reportLogs = result.body()?.reportLogsDTO?.map { it.toReportLog() }
+            val reportRecords = result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
 
             if (
                 code == 200
                 && error == null
             ) {
-                return reportLogs
+                return reportRecords
             }
             else {
                 Log.e(RETROFIT_TAG, "result: $result")

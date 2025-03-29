@@ -6,15 +6,14 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.bannerit.navigation.BannerItNavHost
+import com.fitfit.core.model.enums.ScreenDestination
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 @Composable
 fun BannerItApp(
     externalState: ExternalState,
     appViewModel: AppViewModel,
-//    tripsViewModel: TripsViewModel,
     isDarkAppTheme: Boolean,
 
     modifier: Modifier = Modifier,
@@ -53,11 +52,15 @@ fun BannerItApp(
     //set navigation bar(recent, home, back) color
     when (appUiState.screenDestination.currentScreenDestination) {
         ScreenDestination.CAMERA,
-        ScreenDestination.IMAGE -> systemUiController.setNavigationBarColor(color = Color.Transparent)
+        ScreenDestination.IMAGE
+            -> systemUiController.setNavigationBarColor(color = Color.Transparent)
 //
         //top level destinations
-        ScreenDestination.MAIN_REPORT, ScreenDestination.MAIN_LOGS, ScreenDestination.MAIN_MORE
-         -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
+        ScreenDestination.MAIN_REPORT,
+        ScreenDestination.MAIN_LOOKUP,
+        ScreenDestination.MAIN_MY_RECORDS,
+        ScreenDestination.MAIN_MORE
+            -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surfaceDim)
 
         else -> systemUiController.setNavigationBarColor(color = MaterialTheme.colorScheme.surface)
     }

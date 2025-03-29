@@ -18,8 +18,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
-import com.fitfit.bannerit.navigation.mainLogs.logDetailScreen
-import com.fitfit.bannerit.navigation.mainLogs.mainLogsScreen
+import com.fitfit.bannerit.navigation.mainLogs.mainLookupScreen
+import com.fitfit.bannerit.navigation.mainLogs.mainMyRecordsScreen
+import com.fitfit.bannerit.navigation.mainLogs.navigateToReportRecordDetail
+import com.fitfit.bannerit.navigation.mainLogs.reportRecordDetailScreen
 import com.fitfit.bannerit.navigation.mainMore.aboutScreen
 import com.fitfit.bannerit.navigation.mainMore.accountScreen
 import com.fitfit.bannerit.navigation.mainMore.deleteAccountScreen
@@ -39,7 +41,7 @@ import com.fitfit.bannerit.navigation.signin.navigateToSignIn
 import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
 import com.fitfit.bannerit.ui.AppViewModel
-import com.fitfit.bannerit.ui.CommonReportLogsViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import java.util.UUID
@@ -52,7 +54,7 @@ fun BannerItNavHost(
     isDarkAppTheme: Boolean,
     startDestination: String,
 
-    commonReportLogsViewModel: CommonReportLogsViewModel = hiltViewModel(),
+    commonReportRecordsViewModel: CommonReportRecordsViewModel = hiltViewModel(),
 
     modifier: Modifier = Modifier,
 ) {
@@ -79,7 +81,8 @@ fun BannerItNavHost(
     }
 
     val isOnTopLevel = appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_REPORT
-            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_LOGS
+            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_LOOKUP
+            || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_MY_RECORDS
             || appUiState.screenDestination.currentScreenDestination == ScreenDestination.MAIN_MORE
 
 //    val isOnMoreList = appUiState.screenDestination.currentScreenDestination == ScreenDestination.MORE
@@ -145,6 +148,9 @@ fun BannerItNavHost(
         windowSizeClass = externalState.windowSizeClass,
         currentTopLevelDestination = appUiState.screenDestination.currentTopLevelDestination,
         showNavigationBar = showNavigationBar,
+        topLevelDestinations =
+            if (appUiState.appUserData == null) listOf(TopLevelDestination.REPORT, TopLevelDestination.LOOKUP, TopLevelDestination.MORE)
+            else TopLevelDestination.entries,
         onClickNavBarItem = {
             val prevTopLevelDestination = appUiState.screenDestination.currentTopLevelDestination
             val currentMoreDetailScreenDestination = appUiState.screenDestination.currentScreenDestination
@@ -222,11 +228,26 @@ fun BannerItNavHost(
                 }
             )
 
-            mainLogsScreen(
+            mainLookupScreen(
                 appViewModel = appViewModel,
-                commonReportLogsViewModel = commonReportLogsViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
-                navigateToSomeScreen = { }
+                navigateToReportRecordDetail = {
+                    mainNavController.navigateToReportRecordDetail(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
+            )
+
+            mainMyRecordsScreen(
+                appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
+                externalState = externalState,
+                navigateToReportRecordDetail = {
+                    mainNavController.navigateToReportRecordDetail(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
             )
 
             mainMoreScreen(
@@ -262,11 +283,11 @@ fun BannerItNavHost(
 
 
             //from main logs  ======================================================================
-            logDetailScreen(
+            reportRecordDetailScreen(
                 appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
-                navigateUp = navigateUp,
-                navigateToSomeScreen = { }
+                navigateUp = navigateUp
             )
 
 

@@ -3,7 +3,7 @@ package com.fitfit.core.model.report
 import com.google.android.gms.maps.model.LatLng
 import java.time.ZonedDateTime
 
-data class ReportLog(
+data class ReportRecord(
     val reportId: Int = 0,
     val reportTime: ZonedDateTime = ZonedDateTime.now(),
     val status: ReportStatus = ReportStatus.RECEIVED,
@@ -14,7 +14,7 @@ data class ReportLog(
     val location: LatLng = LatLng(0.0, 0.0),
     val address: Address = Address(),
     val content: String = "",
-    val bannerInfo: List<BannerInfo> = listOf()
+    val bannersInfo: List<BannerInfo> = listOf()
 )
 
 data class BannerInfo(
@@ -37,18 +37,21 @@ data class Address(
 
 
 
-val sampleReportLog = ReportLog(
+val sampleReportRecord = ReportRecord(
     reportId = 12345,
     reportTime = ZonedDateTime.now(),
     status = ReportStatus.RECEIVED,
 
     createdUserId = 145,
 
-    images = listOf("https://lh3.googleusercontent.com/BDYz2mEEqtB9JGCH_uR0rE6lIIJOnoRhAzdla91I-sFg-cdl1NUi79AYciv5iujzL7711Q=s221-p-k-rw-no"),
+    images = listOf(
+        "https://www.greenkorea.org/wp-content/uploads/2024/03/IMG_8832-615x820.jpg",
+        "https://lh6.googleusercontent.com/proxy/1ZoW7lMeLruPcXpuTv-OrWj_Ksq7roabBQoZ90yyZdCxl7dNUTEmdyuLjmQlL785mb16F3W3_DUxERbt6JKKG8-1YOfDhE08oefCjcrvsxqtwzvLkA"
+    ),
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
-    bannerInfo = listOf(
+    bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,
@@ -64,7 +67,7 @@ val sampleReportLog = ReportLog(
     )
 )
 
-val sampleReportLog2 = ReportLog(
+val sampleReportRecord2 = ReportRecord(
     reportId = 454545,
     reportTime = ZonedDateTime.parse("2025-03-25T20:30:50Z"),
     status = ReportStatus.ILLEGAL_DEMOLITION,
@@ -75,7 +78,7 @@ val sampleReportLog2 = ReportLog(
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
-    bannerInfo = listOf(
+    bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,
@@ -91,7 +94,7 @@ val sampleReportLog2 = ReportLog(
     )
 )
 
-val sampleReportLog3 = ReportLog(
+val sampleReportRecord3 = ReportRecord(
     reportId = 124511,
     reportTime = ZonedDateTime.parse("2025-03-28T08:10:00Z"),
     status = ReportStatus.LEGAL,
@@ -102,7 +105,7 @@ val sampleReportLog3 = ReportLog(
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
-    bannerInfo = listOf(
+    bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,

@@ -1,4 +1,4 @@
-package com.fitfit.core.ui.ui.card
+package com.fitfit.core.ui.ui.card.report
 
 import android.net.Uri
 import androidx.compose.animation.AnimatedVisibility
@@ -30,17 +30,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -52,6 +48,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.fitfit.core.ui.designsystem.components.ImageFromFile
+import com.fitfit.core.ui.designsystem.components.ImageFromUrl
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
@@ -108,7 +105,7 @@ fun ImageCard(
             modifier = modifier
         ) {
             MyCard(
-                shape = if (imagePathList.isNotEmpty()) MaterialTheme.shapes.extraLarge
+                shape = if (isEditMode && imagePathList.isNotEmpty()) MaterialTheme.shapes.extraLarge
                         else MaterialTheme.shapes.medium,
                 modifier = modifier1
                     .fillMaxWidth()
@@ -210,14 +207,19 @@ fun ImageCard(
                                     state = pageState,
                                     beyondViewportPageCount = 3,
                                     pageContent = {
-                                        ImageFromFile(
-                                            internetEnabled = internetEnabled,
-                                            imageUserId = imageUserId,
-                                            imagePath = imagePathList[it],
+                                        ImageFromUrl(
+                                            imageUrl = imagePathList[it],
                                             contentDescription = stringResource(id = R.string.photo),
-                                            downloadImage = downloadImage,
                                             modifier = Modifier.fillMaxSize()
                                         )
+//                                        ImageFromFile(
+//                                            internetEnabled = internetEnabled,
+//                                            imageUserId = imageUserId,
+//                                            imagePath = imagePathList[it],
+//                                            contentDescription = stringResource(id = R.string.photo),
+//                                            downloadImage = downloadImage,
+//                                            modifier = Modifier.fillMaxSize()
+//                                        )
                                     }
                                 )
 

@@ -5,6 +5,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.FormatListBulleted
 import androidx.compose.material.icons.automirrored.rounded.Login
+import androidx.compose.material.icons.automirrored.rounded.ManageSearch
 import androidx.compose.material.icons.automirrored.rounded.NavigateNext
 import androidx.compose.material.icons.automirrored.rounded.Send
 import androidx.compose.material.icons.outlined.HideImage
@@ -33,8 +34,6 @@ import androidx.compose.material.icons.rounded.FlipCameraAndroid
 import androidx.compose.material.icons.rounded.Image
 import androidx.compose.material.icons.rounded.KeyboardArrowLeft
 import androidx.compose.material.icons.rounded.KeyboardArrowRight
-import androidx.compose.material.icons.rounded.LocationOff
-import androidx.compose.material.icons.rounded.Luggage
 import androidx.compose.material.icons.rounded.Map
 import androidx.compose.material.icons.rounded.MoreHoriz
 import androidx.compose.material.icons.rounded.MoreTime
@@ -74,8 +73,13 @@ data class MyIcon(
 object NavigationBarIcon {
     val reportFilled = MyIcon(Icons.Rounded.Flag,               24.dp, false, null, R.string.report)
     val reportOutlined = MyIcon(Icons.Rounded.OutlinedFlag,     24.dp, false, null, R.string.report)
-    val logsFilled = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,      24.dp, false, null, R.string.logs)
-    val logsOutlined = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,   24.dp, false, null, R.string.logs)
+
+    val lookupFilled = MyIcon(Icons.AutoMirrored.Rounded.ManageSearch,      28.dp, false, null, R.string.lookup)
+    val lookupOutlined = MyIcon(Icons.AutoMirrored.Rounded.ManageSearch,    28.dp, false, null, R.string.lookup)
+
+    val myRecordsFilled = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,     24.dp, false, null, R.string.my_records)
+    val myRecordsOutlined = MyIcon(Icons.AutoMirrored.Rounded.FormatListBulleted,   24.dp, false, null, R.string.my_records)
+
     val moreFilled = MyIcon(Icons.Rounded.MoreHoriz,      24.dp, false, null, R.string.more)
     val moreOutlined = MyIcon(Icons.Outlined.MoreHoriz,   24.dp, false, null, R.string.more)
 }
@@ -137,7 +141,7 @@ object MyIcons {
     val internetUnavailableWhite = MyIcon(Icons.Rounded.CloudOff, 40.dp, false, Color.White, R.string.internet_unavailable)
 
     //no item
-    val noReportLog = MyIcon(Icons.Rounded.EditNote,    40.dp, true, null, null)
+    val noReportRecord = MyIcon(Icons.Rounded.EditNote,    40.dp, true, null, null)
 
     //edit profile
     val changeProfileImage = MyIcon(Icons.Rounded.Image,    24.dp, false, null, null)
@@ -145,7 +149,7 @@ object MyIcons {
 
     //image card
     val deleteImage = MyIcon(Icons.Rounded.Close,               16.dp, false, null, R.string.delete_image)
-    val imageLoadingError = MyIcon(Icons.Rounded.ErrorOutline,  36.dp, true, null, R.string.image_loading_error)
+    val imageLoadingError = MyIcon(Icons.Rounded.ErrorOutline,  36.dp, false, null, R.string.image_loading_error)
     val noImage = MyIcon(Icons.Outlined.HideImage,              36.dp, true, null, R.string.no_image)
 
     //search / text input
@@ -163,7 +167,7 @@ object MyIcons {
     val deleteStartTime = MyIcon(Icons.Rounded.Delete,   22.dp, true, null, R.string.example)
     val deleteEndTime = MyIcon(Icons.Rounded.Delete,     22.dp, true, null, R.string.example)
     val dragHandle = MyIcon(Icons.Rounded.DragHandle,    22.dp, true, null, R.string.example)
-    val clickableItem = MyIcon(Icons.AutoMirrored.Rounded.NavigateNext,    22.dp, true, null, R.string.example)
+    val clickableItem = MyIcon(Icons.AutoMirrored.Rounded.NavigateNext,    22.dp, true, null, null)
 
 
     //set color

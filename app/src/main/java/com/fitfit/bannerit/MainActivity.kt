@@ -15,14 +15,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewModelScope
-import com.fitfit.core.model.enums.AppTheme
-import com.fitfit.core.ui.designsystem.theme.BannerItTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.BannerItApp
 import com.fitfit.bannerit.ui.rememberExternalState
-import com.fitfit.bannerit.utils.ConnectivityObserver
-import com.fitfit.bannerit.utils.NetworkConnectivityObserver
 import com.fitfit.bannerit.utils.calculateWindowSizeClass
+import com.fitfit.bannerit.utils.internetConnectivityObserver.AndroidConnectivityObserver
+import com.fitfit.bannerit.utils.internetConnectivityObserver.ConnectivityViewModel
+import com.fitfit.core.model.enums.AppTheme
+import com.fitfit.core.ui.designsystem.theme.BannerItTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,11 +32,7 @@ private const val MAIN_ACTIVITY_TAG = "MainActivity1"
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-
     private val appViewModel: AppViewModel by viewModels()
-
-    private lateinit var connectivityObserver: ConnectivityObserver
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -58,23 +55,25 @@ class MainActivity : ComponentActivity() {
             appViewModel.intiUserAndUpdateStartDestination()
         }
 
-
         enableEdgeToEdge()
-
-        //connectivityObserver
-        connectivityObserver = NetworkConnectivityObserver(applicationContext)
-
-
 
         // ----------------------------------------------------------------------------------------
         setContent {
+            val connectivityViewModel = viewModel<ConnectivityViewModel> {
+                ConnectivityViewModel(
+                    connectivityObserver = AndroidConnectivityObserver(
+                        context = applicationContext
+                    )
+                )
+            }
+
+            val internetEnabled by connectivityViewModel.isConnected.collectAsState()
             val appUiState by appViewModel.appUiState.collectAsState()
 
             //external state
             val externalState = rememberExternalState(
-                context = applicationContext,
                 windowSizeClass = calculateWindowSizeClass(),
-                connectivityObserver = connectivityObserver
+                internetEnabled = internetEnabled
             )
 
             //get app theme

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--card/ ===================================================================================-->
+    <!--card/report/ ============================================================================-->
     <!-- ContentCard.kt -->
     <string name="no_content">No content</string>
     <string name="add_content">Add content</string>
@@ -9,6 +9,16 @@
     <string name="no_photos">No photos</string>
     <string name="photo">Photo</string>
 
+    <!-- ReportRecordInfoCard.kt -->
+    <string name="report_id">Report ID</string>
+    <string name="status">Status</string>
+    <string name="report_time">Report time</string>
+    <string name="banner_id">Banner ID</string>
+    <string name="company_name">Company name</string>
+    <string name="phone_number">Phone number</string>
+
+
+    <!--card/ ===================================================================================-->
     <!-- UserProfileCard.kt -->
     <string name="user_info">User information</string>
     <string name="no_name">No name</string>

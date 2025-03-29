@@ -31,6 +31,8 @@ import com.fitfit.core.ui.designsystem.components.ImageFromDrawable
 import com.fitfit.core.ui.designsystem.components.ImageFromUrl
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
+import com.fitfit.core.ui.designsystem.icon.DisplayIcon
+import com.fitfit.core.ui.designsystem.icon.MyIcons
 import com.fitfit.core.ui.designsystem.theme.BannerItTheme
 import com.fitfit.core.ui.ui.R
 
@@ -142,6 +144,9 @@ fun UserProfileCard(
             }
 
             Spacer(modifier = Modifier.weight(1f))
+
+            if (enabled)
+                DisplayIcon(icon = MyIcons.clickableItem)
         }
     }
 }

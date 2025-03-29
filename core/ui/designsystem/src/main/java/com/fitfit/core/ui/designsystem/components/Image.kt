@@ -248,7 +248,7 @@ private fun OnErrorImage(
                     else MaterialTheme.colorScheme.surfaceDim
 
     val onColor = if (isImageScreen) CustomColor.white
-                    else MaterialTheme.colorScheme.onSurface
+                    else MaterialTheme.colorScheme.onSurfaceVariant
 
     ClickableBox(
         modifier = Modifier

@@ -251,11 +251,11 @@ class AppViewModel @Inject constructor(
                     )
                 }
             }
-            ScreenDestination.MAIN_LOGS -> {
+            ScreenDestination.MAIN_MY_RECORDS -> {
                 _appUiState.update {
                     it.copy(
                         screenDestination = it.screenDestination.copy(
-                            currentTopLevelDestination = TopLevelDestination.LOGS,
+                            currentTopLevelDestination = TopLevelDestination.MY_RECORDS,
                             currentScreenDestination = screenDestination
                         )
                     )
