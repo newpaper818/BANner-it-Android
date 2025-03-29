@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.report.ReportLog
@@ -92,6 +93,7 @@ fun ReportLogCard(
                     Text(
                         text = stringResource(reportLog.status.textId) ,
                         style = MaterialTheme.typography.bodyMedium,
+                        textAlign = TextAlign.End,
                         modifier = Modifier.padding(start = 12.dp)
                     )
                 }
