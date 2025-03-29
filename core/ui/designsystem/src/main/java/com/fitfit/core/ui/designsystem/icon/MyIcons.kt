@@ -167,7 +167,7 @@ object MyIcons {
     val deleteStartTime = MyIcon(Icons.Rounded.Delete,   22.dp, true, null, R.string.example)
     val deleteEndTime = MyIcon(Icons.Rounded.Delete,     22.dp, true, null, R.string.example)
     val dragHandle = MyIcon(Icons.Rounded.DragHandle,    22.dp, true, null, R.string.example)
-    val clickableItem = MyIcon(Icons.AutoMirrored.Rounded.NavigateNext,    22.dp, true, null, R.string.example)
+    val clickableItem = MyIcon(Icons.AutoMirrored.Rounded.NavigateNext,    22.dp, true, null, null)
 
 
     //set color

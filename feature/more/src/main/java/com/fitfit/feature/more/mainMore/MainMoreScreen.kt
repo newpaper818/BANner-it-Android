@@ -102,6 +102,7 @@ private fun MainMoreScreen(
                     ) {
                         ItemWithText(
                             text = stringResource(id = R.string.sign_in),
+                            showClickableIcon = true,
                             onItemClick = { navigateTo(ScreenDestination.SIGN_IN) }
                         )
                     }
@@ -117,6 +118,7 @@ private fun MainMoreScreen(
                     //date time format
                     ItemWithText(
                         text = stringResource(id = R.string.date_time_format),
+                        showClickableIcon = true,
                         onItemClick = { navigateTo(ScreenDestination.SET_DATE_TIME_FORMAT) }
                     )
 
@@ -125,6 +127,7 @@ private fun MainMoreScreen(
                     //app theme
                     ItemWithText(
                         text = stringResource(id = R.string.theme),
+                        showClickableIcon = true,
                         onItemClick = { navigateTo(ScreenDestination.SET_THEME) }
                     )
                 }
@@ -139,6 +142,7 @@ private fun MainMoreScreen(
                 ) {
                     ItemWithText(
                         text = stringResource(id = R.string.about),
+                        showClickableIcon = true,
                         onItemClick = {
                             navigateTo(ScreenDestination.ABOUT)
                         }
