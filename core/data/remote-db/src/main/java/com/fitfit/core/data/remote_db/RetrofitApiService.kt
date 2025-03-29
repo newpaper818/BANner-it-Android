@@ -1,7 +1,7 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.dto.GetReportLogsResponseDTO
+import com.fitfit.core.model.dto.GetReportRecordResponseDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
 import com.fitfit.core.model.dto.ReportBannerResponseDTO
@@ -35,7 +35,7 @@ interface RetrofitApiService {
 
 
     @POST("reports/save")
-    fun postReportBanner(
+    fun postBannerReport(
         @Header("Authorization") jwt: String,
         @Body reportBannerRequestBodyDTO: ReportBannerRequestBodyDTO
     ): Response<ReportBannerResponseDTO>
@@ -51,15 +51,15 @@ interface RetrofitApiService {
 
 
     @GET("reports/logs")
-    fun getAppUserReportLogs(
+    fun getAppUserReportRecords(
         @Header("Authorization") jwt: String,
-    ): Response<GetReportLogsResponseDTO>
+    ): Response<GetReportRecordResponseDTO>
 
 
     @GET("reports")
-    fun getAllReportLogs(
+    fun getAllReportRecords(
 
-    ): Response<GetReportLogsResponseDTO>
+    ): Response<GetReportRecordResponseDTO>
 
 
 

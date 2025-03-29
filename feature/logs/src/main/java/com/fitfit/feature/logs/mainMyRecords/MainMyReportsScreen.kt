@@ -23,13 +23,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.DisplayIcon
 import com.fitfit.core.ui.designsystem.icon.MyIcons
-import com.fitfit.core.ui.ui.card.report.ReportLogCard
+import com.fitfit.core.ui.ui.card.report.ReportRecordCard
 import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
 
@@ -39,8 +39,8 @@ fun MainMyReportsRoute(
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
 
-    appUserReportLogs: List<ReportLog>,
-    onClickReportLog: (reportLogIndex: Int) -> Unit,
+    appUserReportRecords: List<ReportRecord>,
+    onClickReportRecord: (reportRecordIndex: Int) -> Unit,
 
     modifier: Modifier = Modifier
 ) {
@@ -49,8 +49,8 @@ fun MainMyReportsRoute(
     MainMyReportsScreen(
         spacerValue = spacerValue,
         dateTimeFormat = dateTimeFormat,
-        appUserReportLogs = appUserReportLogs,
-        onClickReportLog = onClickReportLog
+        appUserReportRecords = appUserReportRecords,
+        onClickReportRecord = onClickReportRecord
     )
 }
 
@@ -58,12 +58,12 @@ fun MainMyReportsRoute(
 private fun MainMyReportsScreen(
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
-    appUserReportLogs: List<ReportLog>,
-    onClickReportLog: (reportLogIndex: Int) -> Unit,
+    appUserReportRecords: List<ReportRecord>,
+    onClickReportRecord: (reportRecordIndex: Int) -> Unit,
 ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
-    val isReportLogsEmpty = appUserReportLogs.isEmpty()
+    val isReportRecordsEmpty = appUserReportRecords.isEmpty()
 
     MyScaffold(
         modifier = Modifier,
@@ -76,7 +76,7 @@ private fun MainMyReportsScreen(
     ){ paddingValues ->
 
         AnimatedVisibility(
-            visible = !isReportLogsEmpty,
+            visible = !isReportRecordsEmpty,
             enter = fadeIn(tween(400)),
             exit = fadeOut(tween(400))
         ) {
@@ -88,12 +88,12 @@ private fun MainMyReportsScreen(
                     .fillMaxSize()
                     .padding(paddingValues)
             ){
-                itemsIndexed(appUserReportLogs) { index, appUserReportLog ->
-                    ReportLogCard(
-                        reportLog = appUserReportLog,
+                itemsIndexed(appUserReportRecords) { index, appUserReportRecord ->
+                    ReportRecordCard(
+                        reportRecord = appUserReportRecord,
                         dateTimeFormat = dateTimeFormat,
                         onClick = {
-                            onClickReportLog(index)
+                            onClickReportRecord(index)
                         },
                         modifier = itemModifier
                     )
@@ -103,7 +103,7 @@ private fun MainMyReportsScreen(
 
 
         AnimatedVisibility(
-            visible = isReportLogsEmpty,
+            visible = isReportRecordsEmpty,
             enter = fadeIn(tween(400)),
             exit = fadeOut(tween(400))
         ) {
@@ -112,14 +112,14 @@ private fun MainMyReportsScreen(
                     .fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                NoReportLog()
+                NoReportRecord()
             }
         }
     }
 }
 
 @Composable
-private fun NoReportLog(
+private fun NoReportRecord(
     modifier: Modifier = Modifier
 ){
     Column(
@@ -130,7 +130,7 @@ private fun NoReportLog(
     ){
         //icon
         DisplayIcon(
-            icon = MyIcons.noReportLog,
+            icon = MyIcons.noReportRecord,
             contentDescriptionIsNull = true
         )
 
@@ -138,7 +138,7 @@ private fun NoReportLog(
 
         //text
         Text(
-            text = stringResource(id = R.string.no_report_log),
+            text = stringResource(id = R.string.no_report_record),
             style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
             textAlign = TextAlign.Center
         )

@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ImageRepository
 import com.fitfit.core.data.data.repository.ReportRepository
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.ui.ui.card.report.MAX_IMAGE_COUNT
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +22,7 @@ data class ReportUiState(
     val showExitDialog: Boolean = false,
     val showSendReportResultDialog: Boolean = false,
 
-    val reportLog: ReportLog = ReportLog(),
+    val reportRecord: ReportRecord = ReportRecord(),
 
     val isErrorContained: Boolean = true,
     val isPhotoCountOver: Boolean = false,
@@ -97,19 +97,19 @@ class ReportViewModel @Inject constructor(
     fun setContentText(newContentText: String) {
         _reportUiState.update {
             it.copy(
-                reportLog = it.reportLog.copy(content = newContentText)
+                reportRecord = it.reportRecord.copy(content = newContentText)
             )
         }
     }
 
     fun addPhotos(addedPhotos: List<String>) {
-        val photos = _reportUiState.value.reportLog.images.toMutableList()
+        val photos = _reportUiState.value.reportRecord.images.toMutableList()
         photos.addAll(addedPhotos)
         val newPhotos = photos.distinct().toMutableList()
 
         _reportUiState.update {
             it.copy(
-                reportLog = it.reportLog.copy(
+                reportRecord = it.reportRecord.copy(
                     images = newPhotos
                 )
             )
@@ -119,12 +119,12 @@ class ReportViewModel @Inject constructor(
     }
 
     fun deletePhotos(deletedPhotos: List<String>) {
-        val newPhotos = _reportUiState.value.reportLog.images.toMutableList()
+        val newPhotos = _reportUiState.value.reportRecord.images.toMutableList()
         newPhotos.removeAll(deletedPhotos)
 
         _reportUiState.update {
             it.copy(
-                reportLog = it.reportLog.copy(
+                reportRecord = it.reportRecord.copy(
                     images = newPhotos
                 )
             )
@@ -139,7 +139,7 @@ class ReportViewModel @Inject constructor(
     fun setLocation(newLocation: LatLng){
         _reportUiState.update {
             it.copy(
-                reportLog = it.reportLog.copy(
+                reportRecord = it.reportRecord.copy(
                     location = newLocation
                 )
             )
@@ -185,13 +185,13 @@ class ReportViewModel @Inject constructor(
     }
 
 
-    suspend fun sendReportLog(
+    suspend fun sendBannerReport(
         appUserData: UserData
     ){
-        reportRepository.sendReportLog(
+        reportRepository.sendBannerReport(
             jwt = appUserData.jwt,
             userId = appUserData.userId,
-            reportLog = _reportUiState.value.reportLog,
+            reportRecord = _reportUiState.value.reportRecord,
             onResult = { result ->
                 setSendReportResultIsSuccess(result)
                 setShowSendReportResultDialog(true)

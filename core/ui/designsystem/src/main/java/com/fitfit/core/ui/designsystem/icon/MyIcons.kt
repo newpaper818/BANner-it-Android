@@ -141,7 +141,7 @@ object MyIcons {
     val internetUnavailableWhite = MyIcon(Icons.Rounded.CloudOff, 40.dp, false, Color.White, R.string.internet_unavailable)
 
     //no item
-    val noReportLog = MyIcon(Icons.Rounded.EditNote,    40.dp, true, null, null)
+    val noReportRecord = MyIcon(Icons.Rounded.EditNote,    40.dp, true, null, null)
 
     //edit profile
     val changeProfileImage = MyIcon(Icons.Rounded.Image,    24.dp, false, null, null)

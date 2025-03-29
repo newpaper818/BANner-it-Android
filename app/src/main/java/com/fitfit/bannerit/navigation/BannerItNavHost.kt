@@ -41,7 +41,7 @@ import com.fitfit.bannerit.navigation.signin.navigateToSignIn
 import com.fitfit.bannerit.navigation.signin.signInScreen
 import com.fitfit.bannerit.navigationUi.ScreenWithNavigationBar
 import com.fitfit.bannerit.ui.AppViewModel
-import com.fitfit.bannerit.ui.CommonReportLogsViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import java.util.UUID
@@ -54,7 +54,7 @@ fun BannerItNavHost(
     isDarkAppTheme: Boolean,
     startDestination: String,
 
-    commonReportLogsViewModel: CommonReportLogsViewModel = hiltViewModel(),
+    commonReportRecordsViewModel: CommonReportRecordsViewModel = hiltViewModel(),
 
     modifier: Modifier = Modifier,
 ) {
@@ -230,7 +230,7 @@ fun BannerItNavHost(
 
             mainLookupScreen(
                 appViewModel = appViewModel,
-                commonReportLogsViewModel = commonReportLogsViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateToReportRecordDetail = {
                     mainNavController.navigateToReportRecordDetail(
@@ -241,7 +241,7 @@ fun BannerItNavHost(
 
             mainMyRecordsScreen(
                 appViewModel = appViewModel,
-                commonReportLogsViewModel = commonReportLogsViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateToReportRecordDetail = {
                     mainNavController.navigateToReportRecordDetail(
@@ -285,7 +285,7 @@ fun BannerItNavHost(
             //from main logs  ======================================================================
             reportRecordDetailScreen(
                 appViewModel = appViewModel,
-                commonReportLogsViewModel = commonReportLogsViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp
             )

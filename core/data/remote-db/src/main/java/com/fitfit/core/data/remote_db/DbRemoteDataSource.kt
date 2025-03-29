@@ -1,7 +1,7 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 
 interface DbRemoteDataSource {
 
@@ -39,26 +39,26 @@ interface DbRemoteDataSource {
 
 
 
-    suspend fun postReportBanner(
+    suspend fun postBannerReport(
         jwt: String,
         userId: Int,
-        reportLog: ReportLog
+        reportRecord: ReportRecord
     ): Boolean
 
     //TODO delete after test
     suspend fun sendTestImage(
         jwt: String,
         userId: Int,
-        reportLog: ReportLog
+        reportRecord: ReportRecord
     ): Boolean
 
 
-    suspend fun getAppUserReportLogs(
+    suspend fun getAppUserReportRecords(
         jwt: String,
-    ): List<ReportLog>?
+    ): List<ReportRecord>?
 
-    suspend fun getAllReportLogs(
+    suspend fun getAllReportRecords(
 
-    ): List<ReportLog>?
+    ): List<ReportRecord>?
 }
 

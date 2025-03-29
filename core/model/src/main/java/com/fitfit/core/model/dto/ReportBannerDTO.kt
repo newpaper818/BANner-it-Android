@@ -3,11 +3,11 @@ package com.fitfit.core.model.dto
 import com.fitfit.core.model.dto.basic.AddressDTO
 import com.fitfit.core.model.dto.basic.ErrorDto
 import com.fitfit.core.model.dto.basic.LocationDTO
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
-fun ReportLog.toReportLogDTO(
+fun ReportRecord.toReportRecordDTO(
 
 ): ReportBannerRequestBodyDTO {
     return ReportBannerRequestBodyDTO(

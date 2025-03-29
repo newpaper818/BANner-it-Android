@@ -9,7 +9,7 @@
     <string name="no_photos">사진 없음</string>
     <string name="photo">사진</string>
 
-    <!-- ReportLogInfoCard.kt -->
+    <!-- ReportRecordInfoCard.kt -->
     <string name="report_id">신고 ID</string>
     <string name="status">상태</string>
     <string name="report_time">신고 시간</string>

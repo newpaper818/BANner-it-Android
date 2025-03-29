@@ -15,7 +15,7 @@ import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.navigation.TopPopEnterTransition
 import com.fitfit.bannerit.navigation.TopPopExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
-import com.fitfit.bannerit.ui.CommonReportLogsViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
@@ -34,7 +34,7 @@ fun NavController.navigateToMainLookup(navOptions: NavOptions? = null) =
 
 fun NavGraphBuilder.mainLookupScreen(
     appViewModel: AppViewModel,
-    commonReportLogsViewModel: CommonReportLogsViewModel,
+    commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
 
     navigateToReportRecordDetail: () -> Unit,
@@ -48,14 +48,14 @@ fun NavGraphBuilder.mainLookupScreen(
     ) {
 
         val appUiState by appViewModel.appUiState.collectAsState()
-        val commonReportLogsUiState by commonReportLogsViewModel.reportUiState.collectAsState()
+        val commonReportRecordsUiState by commonReportRecordsViewModel.reportUiState.collectAsState()
 
         val widthSizeClass = externalState.windowSizeClass.widthSizeClass
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
 
         LaunchedEffect(Unit) {
-            commonReportLogsViewModel.getAdminReportLogs()
+            commonReportRecordsViewModel.getAdminReportRecords()
         }
 
         LaunchedEffect(Unit) {
@@ -81,9 +81,9 @@ fun NavGraphBuilder.mainLookupScreen(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
-                allReportLogs = commonReportLogsUiState.allReportLogs,
-                onClickReportLog = {
-                    commonReportLogsViewModel.setCurrentReportLogIndex(it)
+                allReportRecords = commonReportRecordsUiState.allReportRecords,
+                onClickReportRecord = {
+                    commonReportRecordsViewModel.setCurrentReportRecordIndex(it)
                     navigateToReportRecordDetail()
                 }
             )

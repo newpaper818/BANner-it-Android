@@ -15,7 +15,7 @@ import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.navigation.TopPopEnterTransition
 import com.fitfit.bannerit.navigation.TopPopExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
-import com.fitfit.bannerit.ui.CommonReportLogsViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
@@ -34,7 +34,7 @@ fun NavController.navigateToMainMyRecords(navOptions: NavOptions? = null) =
 
 fun NavGraphBuilder.mainMyRecordsScreen(
     appViewModel: AppViewModel,
-    commonReportLogsViewModel: CommonReportLogsViewModel,
+    commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
 
     navigateToReportRecordDetail: () -> Unit,
@@ -48,7 +48,7 @@ fun NavGraphBuilder.mainMyRecordsScreen(
     ) {
 
         val appUiState by appViewModel.appUiState.collectAsState()
-        val commonReportLogsUiState by commonReportLogsViewModel.reportUiState.collectAsState()
+        val commonReportRecordsUiState by commonReportRecordsViewModel.reportUiState.collectAsState()
 
         val widthSizeClass = externalState.windowSizeClass.widthSizeClass
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
@@ -57,7 +57,7 @@ fun NavGraphBuilder.mainMyRecordsScreen(
 
         LaunchedEffect(Unit) {
             if (jwt != null) {
-                commonReportLogsViewModel.getAppUserReportLogs(jwt = jwt)
+                commonReportRecordsViewModel.getAppUserReportRecords(jwt = jwt)
             }
         }
 
@@ -84,9 +84,9 @@ fun NavGraphBuilder.mainMyRecordsScreen(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
-                appUserReportLogs = commonReportLogsUiState.appUserReportLogs,
-                onClickReportLog = {
-                    commonReportLogsViewModel.setCurrentReportLogIndex(it)
+                appUserReportRecords = commonReportRecordsUiState.appUserReportRecords,
+                onClickReportRecord = {
+                    commonReportRecordsViewModel.setCurrentReportRecordIndex(it)
                     navigateToReportRecordDetail()
                 }
             )

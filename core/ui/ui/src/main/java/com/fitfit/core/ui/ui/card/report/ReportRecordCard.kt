@@ -20,8 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
-import com.fitfit.core.model.report.ReportLog
-import com.fitfit.core.model.report.sampleReportLog
+import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.sampleReportRecord
 import com.fitfit.core.ui.designsystem.components.ImageFromUrl
 import com.fitfit.core.ui.designsystem.components.NoImage
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
@@ -33,8 +33,8 @@ import com.fitfit.core.utils.getDateTimeText
 private const val CARD_HEIGHT_DP = 120
 
 @Composable
-fun ReportLogCard(
-    reportLog: ReportLog = sampleReportLog,
+fun ReportRecordCard(
+    reportRecord: ReportRecord = sampleReportRecord,
     dateTimeFormat: DateTimeFormat,
     onClick: () -> Unit,
 
@@ -59,9 +59,9 @@ fun ReportLogCard(
                     .size((CARD_HEIGHT_DP - 24).dp)
                     .clip(MaterialTheme.shapes.medium)
             ) {
-                if (reportLog.images.isNotEmpty()){
+                if (reportRecord.images.isNotEmpty()){
                     ImageFromUrl(
-                        imageUrl = reportLog.images[0],
+                        imageUrl = reportRecord.images[0],
                         contentDescription = stringResource(R.string.photo),
                         modifier = Modifier.fillMaxSize()
                     )
@@ -81,7 +81,7 @@ fun ReportLogCard(
                 Row {
                     //report id
                     Text(
-                        text = reportLog.reportId.toString(),
+                        text = reportRecord.reportId.toString(),
                         style = MaterialTheme.typography.bodyMedium.copy(
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -91,7 +91,7 @@ fun ReportLogCard(
 
                     //status
                     Text(
-                        text = stringResource(reportLog.status.textId) ,
+                        text = stringResource(reportRecord.status.textId) ,
                         style = MaterialTheme.typography.bodyMedium,
                         textAlign = TextAlign.End,
                         modifier = Modifier.padding(start = 12.dp)
@@ -102,7 +102,7 @@ fun ReportLogCard(
 
                 //date time
                 Text(
-                    text = getDateTimeText(reportLog.reportTime, dateTimeFormat),
+                    text = getDateTimeText(reportRecord.reportTime, dateTimeFormat),
                     style = MaterialTheme.typography.bodyMedium
                 )
             }

@@ -5,7 +5,7 @@
 
     <!--mainMyRecords ===========================================================================-->
     <string name="my_report_records">내 신고 기록</string>
-    <string name="no_report_log">신고 기록이 없어요</string>
+    <string name="no_report_record">신고 기록이 없어요</string>
 
     <!--reportRecordDetail ======================================================================-->
     <string name="report_record">신고 기록</string>

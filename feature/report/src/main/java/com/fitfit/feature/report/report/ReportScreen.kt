@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.button.BottomReportCancelButtons
 import com.fitfit.core.ui.designsystem.components.button.GetPhotosButtons
@@ -140,7 +140,7 @@ fun ReportRoute(
         spacerValue = spacerValue,
         internetEnabled = internetEnabled,
 
-        reportLog = reportUiState.reportLog,
+        reportRecord = reportUiState.reportRecord,
         isPhotoCountOver = reportUiState.isPhotoCountOver,
         isContentTextLengthOver = reportUiState.isContentTextLengthOver,
         isErrorContained = reportUiState.isErrorContained,
@@ -163,7 +163,7 @@ fun ReportRoute(
         navigateToCamera = navigateToCamera,
         onClickReport = {
             coroutineScope.launch {
-                reportViewModel.sendReportLog(appUserData)
+                reportViewModel.sendBannerReport(appUserData)
             }
         }
     )
@@ -175,7 +175,7 @@ private fun ReportScreen(
     spacerValue: Dp,
     internetEnabled: Boolean,
 
-    reportLog: ReportLog,
+    reportRecord: ReportRecord,
     isPhotoCountOver: Boolean,
     isContentTextLengthOver: Boolean,
     isErrorContained: Boolean,
@@ -201,7 +201,7 @@ private fun ReportScreen(
     ){ uriList ->
         var addUriList = uriList
 
-        if (reportLog.images.size + uriList.size > MAX_IMAGE_COUNT && !isPhotoCountOver){
+        if (reportRecord.images.size + uriList.size > MAX_IMAGE_COUNT && !isPhotoCountOver){
             setPhotoCountOver(true)
         }
 
@@ -259,7 +259,7 @@ private fun ReportScreen(
                         modifier = itemModifier.padding(bottom = 6.dp)
                     ) {
                         TitleText(
-                            text = stringResource(R.string.photos, reportLog.images.size, MAX_IMAGE_COUNT),
+                            text = stringResource(R.string.photos, reportRecord.images.size, MAX_IMAGE_COUNT),
                             modifier = Modifier.padding(start = 16.dp)
                         )
 
@@ -282,7 +282,7 @@ private fun ReportScreen(
                         imageUserId = appUserData.userId,
                         internetEnabled = internetEnabled,
                         isEditMode = true,
-                        imagePathList = reportLog.images,
+                        imagePathList = reportRecord.images,
                         isImageCountOver = isPhotoCountOver,
                         onClickImage = { initialImageIndex ->
 
@@ -303,7 +303,7 @@ private fun ReportScreen(
                     MySpacerColumn(height = 16.dp)
 
                     GetPhotosButtons(
-                        enabled = reportLog.images.size < MAX_IMAGE_COUNT,
+                        enabled = reportRecord.images.size < MAX_IMAGE_COUNT,
                         onClickTakePhotos = {
                             navigateToCamera()
                         },
@@ -341,7 +341,7 @@ private fun ReportScreen(
                     ContentCard(
                         modifier = itemModifier,
                         isEditMode = true,
-                        contentText = reportLog.content,
+                        contentText = reportRecord.content,
                         onContentTextChange = { newContentText ->
                             setContentText(newContentText)
                         },
@@ -383,7 +383,7 @@ private fun ReportScreen(
 
             //bottom report cancel buttons
             BottomReportCancelButtons(
-                reportEnabled = isErrorContained && internetEnabled && reportLog.images.isNotEmpty(),
+                reportEnabled = isErrorContained && internetEnabled && reportRecord.images.isNotEmpty(),
                 onClickCancel = {
                     setShowExitDialog(true)
                 },

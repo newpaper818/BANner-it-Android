@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
@@ -25,8 +25,8 @@ import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.TopAppBarIcon
 import com.fitfit.core.ui.ui.card.report.ContentCard
 import com.fitfit.core.ui.ui.card.report.ImageCard
-import com.fitfit.core.ui.ui.card.report.ReportLogBannerInfoCard
-import com.fitfit.core.ui.ui.card.report.ReportLogInfoCard
+import com.fitfit.core.ui.ui.card.report.ReportRecordBannerInfoCard
+import com.fitfit.core.ui.ui.card.report.ReportRecordInfoCard
 import com.fitfit.core.ui.ui.item.TitleText
 import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
@@ -39,7 +39,7 @@ fun ReportRecordDetailRoute(
     dateTimeFormat: DateTimeFormat,
     internetEnabled: Boolean,
 
-    reportLog: ReportLog,
+    reportRecord: ReportRecord,
 
     navigateUp: () -> Unit,
 
@@ -52,7 +52,7 @@ fun ReportRecordDetailRoute(
         spacerValue = spacerValue,
         dateTimeFormat = dateTimeFormat,
         internetEnabled = internetEnabled,
-        reportLog = reportLog,
+        reportRecord = reportRecord,
         navigateUp = navigateUp
     )
 }
@@ -64,7 +64,7 @@ private fun ReportRecordDetailScreen(
     dateTimeFormat: DateTimeFormat,
     internetEnabled: Boolean,
 
-    reportLog: ReportLog,
+    reportRecord: ReportRecord,
     navigateUp: () -> Unit,
 
     ){
@@ -92,8 +92,8 @@ private fun ReportRecordDetailScreen(
         ){
             //report info
             item {
-                ReportLogInfoCard(
-                    reportLog = reportLog,
+                ReportRecordInfoCard(
+                    reportRecord = reportRecord,
                     dateTimeFormat = dateTimeFormat,
                     modifier = itemModifier
                 )
@@ -102,7 +102,7 @@ private fun ReportRecordDetailScreen(
             //image
             item {
                 TitleText(
-                    text = stringResource(R.string.photos_, reportLog.images.size),
+                    text = stringResource(R.string.photos_, reportRecord.images.size),
                     modifier = itemModifier
                         .fillMaxWidth()
                         .padding(start = 16.dp, bottom = 6.dp)
@@ -113,7 +113,7 @@ private fun ReportRecordDetailScreen(
                     imageUserId = appUserData.userId,
                     internetEnabled = internetEnabled,
                     isEditMode = false,
-                    imagePathList = reportLog.images,
+                    imagePathList = reportRecord.images,
                     isImageCountOver = false,
                     onClickImage = { initialImageIndex ->
 
@@ -126,7 +126,7 @@ private fun ReportRecordDetailScreen(
             }
 
             //banner info
-            if (reportLog.bannersInfo.isNotEmpty()) {
+            if (reportRecord.bannersInfo.isNotEmpty()) {
 
                 item{
                     TitleText(
@@ -136,13 +136,13 @@ private fun ReportRecordDetailScreen(
                             .padding(start = 16.dp, bottom = 6.dp)
                     )
 
-                    reportLog.bannersInfo.forEach { bannerInfo ->
-                        ReportLogBannerInfoCard(
+                    reportRecord.bannersInfo.forEach { bannerInfo ->
+                        ReportRecordBannerInfoCard(
                             bannerInfo = bannerInfo,
                             modifier = itemModifier
                         )
 
-                        if (bannerInfo != reportLog.bannersInfo.last()){
+                        if (bannerInfo != reportRecord.bannersInfo.last()){
                             MySpacerColumn(16.dp)
                         }
                     }
@@ -161,7 +161,7 @@ private fun ReportRecordDetailScreen(
                 ContentCard(
                     modifier = itemModifier,
                     isEditMode = false,
-                    contentText = reportLog.content,
+                    contentText = reportRecord.content,
                     onContentTextChange = { _ -> },
                     isLongText = { _ -> },
                 )

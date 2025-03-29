@@ -15,7 +15,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
@@ -23,8 +23,8 @@ import com.fitfit.core.ui.ui.R
 import com.fitfit.core.utils.getDateTimeText
 
 @Composable
-fun ReportLogInfoCard(
-    reportLog: ReportLog,
+fun ReportRecordInfoCard(
+    reportRecord: ReportRecord,
     dateTimeFormat: DateTimeFormat,
     modifier: Modifier = Modifier
 ){
@@ -37,28 +37,28 @@ fun ReportLogInfoCard(
         ) {
             TextRow(
                 text1 = stringResource(R.string.report_id),
-                text2 = reportLog.reportId.toString(),
+                text2 = reportRecord.reportId.toString(),
             )
 
             MySpacerColumn(16.dp)
 
             TextRow(
                 text1 = stringResource(R.string.status),
-                text2 = stringResource(reportLog.status.textId),
+                text2 = stringResource(reportRecord.status.textId),
             )
 
             MySpacerColumn(16.dp)
 
             TextRow(
                 text1 = stringResource(R.string.report_time),
-                text2 = getDateTimeText(reportLog.reportTime, dateTimeFormat),
+                text2 = getDateTimeText(reportRecord.reportTime, dateTimeFormat),
             )
         }
     }
 }
 
 @Composable
-fun ReportLogBannerInfoCard(
+fun ReportRecordBannerInfoCard(
     bannerInfo: BannerInfo,
     modifier: Modifier = Modifier
 ){

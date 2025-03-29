@@ -1,7 +1,7 @@
 package com.fitfit.core.data.data.repository
 
 import com.fitfit.core.data.remote_db.DbRemoteDataSource
-import com.fitfit.core.model.report.ReportLog
+import com.fitfit.core.model.report.ReportRecord
 import javax.inject.Inject
 
 private const val REPORT_REPOSITORY_TAG = "Report-Repository"
@@ -11,16 +11,16 @@ class ReportRepository @Inject constructor(
 ) {
 
     //send report log
-    suspend fun sendReportLog(
+    suspend fun sendBannerReport(
         jwt: String,
         userId: Int,
-        reportLog: ReportLog,
+        reportRecord: ReportRecord,
         onResult: (Boolean) -> Unit
     ){
-//        val result = dbRemoteDataSource.postReportLog(
+//        val result = dbRemoteDataSource.postBannerReport(
 //            jwt = jwt,
 //            userId = userId,
-//            reportLog = reportLog
+//            reportRecord = reportRecord
 //        )
 //        onResult(result)
 
@@ -28,7 +28,7 @@ class ReportRepository @Inject constructor(
         val result = dbRemoteDataSource.sendTestImage(
             jwt = jwt,
             userId = userId,
-            reportLog = reportLog
+            reportRecord = reportRecord
         )
         onResult(result)
     }

@@ -13,7 +13,7 @@ import com.fitfit.bannerit.navigation.exitTransition
 import com.fitfit.bannerit.navigation.popEnterTransition
 import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
-import com.fitfit.bannerit.ui.CommonReportLogsViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.ui.ErrorScreen
@@ -27,7 +27,7 @@ fun NavController.navigateToReportRecordDetail(navOptions: NavOptions? = null) =
 
 fun NavGraphBuilder.reportRecordDetailScreen(
     appViewModel: AppViewModel,
-    commonReportLogsViewModel: CommonReportLogsViewModel,
+    commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
@@ -44,13 +44,13 @@ fun NavGraphBuilder.reportRecordDetailScreen(
         }
 
         val appUiState by appViewModel.appUiState.collectAsState()
-        val commonReportLogsUiState by commonReportLogsViewModel.reportUiState.collectAsState()
+        val commonReportRecordsUiState by commonReportRecordsViewModel.reportUiState.collectAsState()
 
         val widthSizeClass = externalState.windowSizeClass.widthSizeClass
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
         if (
-            commonReportLogsUiState.currentReportLogIndex != null
+            commonReportRecordsUiState.currentReportRecordIndex != null
             && appUiState.appUserData != null
         ) {
             ReportRecordDetailRoute(
@@ -59,7 +59,7 @@ fun NavGraphBuilder.reportRecordDetailScreen(
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 internetEnabled = externalState.internetEnabled,
-                reportLog = commonReportLogsUiState.appUserReportLogs[commonReportLogsUiState.currentReportLogIndex!!],
+                reportRecord = commonReportRecordsUiState.appUserReportRecords[commonReportRecordsUiState.currentReportRecordIndex!!],
                 navigateUp = navigateUp
             )
         }

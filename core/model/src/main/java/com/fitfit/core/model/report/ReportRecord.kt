@@ -3,7 +3,7 @@ package com.fitfit.core.model.report
 import com.google.android.gms.maps.model.LatLng
 import java.time.ZonedDateTime
 
-data class ReportLog(
+data class ReportRecord(
     val reportId: Int = 0,
     val reportTime: ZonedDateTime = ZonedDateTime.now(),
     val status: ReportStatus = ReportStatus.RECEIVED,
@@ -37,7 +37,7 @@ data class Address(
 
 
 
-val sampleReportLog = ReportLog(
+val sampleReportRecord = ReportRecord(
     reportId = 12345,
     reportTime = ZonedDateTime.now(),
     status = ReportStatus.RECEIVED,
@@ -67,7 +67,7 @@ val sampleReportLog = ReportLog(
     )
 )
 
-val sampleReportLog2 = ReportLog(
+val sampleReportRecord2 = ReportRecord(
     reportId = 454545,
     reportTime = ZonedDateTime.parse("2025-03-25T20:30:50Z"),
     status = ReportStatus.ILLEGAL_DEMOLITION,
@@ -94,7 +94,7 @@ val sampleReportLog2 = ReportLog(
     )
 )
 
-val sampleReportLog3 = ReportLog(
+val sampleReportRecord3 = ReportRecord(
     reportId = 124511,
     reportTime = ZonedDateTime.parse("2025-03-28T08:10:00Z"),
     status = ReportStatus.LEGAL,

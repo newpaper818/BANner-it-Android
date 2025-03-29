@@ -5,7 +5,7 @@
 
     <!--mainMyRecords ===========================================================================-->
     <string name="my_report_records">My Report Records</string>
-    <string name="no_report_log">No report log</string>
+    <string name="no_report_record">No report record</string>
 
     <!--reportRecordDetail ======================================================================-->
     <string name="report_record">Report record</string>
