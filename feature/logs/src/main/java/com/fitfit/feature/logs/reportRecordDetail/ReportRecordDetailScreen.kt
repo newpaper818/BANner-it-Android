@@ -145,6 +145,7 @@ private fun ReportRecordDetailScreen(
         topBar = {
             MyTopAppBar(
                 title = stringResource(R.string.report_record),
+                internetEnabled = internetEnabled,
                 navigationIcon = TopAppBarIcon.back,
                 onClickNavigationIcon = { navigateUp() }
             )
@@ -236,7 +237,7 @@ private fun ReportRecordDetailScreen(
 
                     reportRecord.bannersInfo.forEach { bannerInfo ->
                         ReportRecordBannerInfoCard(
-                            isUserAdmin = appUserData.role == UserRole.ADMIN,
+                            showEditBannerStatusButton = internetEnabled && appUserData.role == UserRole.ADMIN,
                             bannerInfo = bannerInfo,
                             onClickEditBannerStatus = {
                                 setCurrentBannerInfo(bannerInfo)

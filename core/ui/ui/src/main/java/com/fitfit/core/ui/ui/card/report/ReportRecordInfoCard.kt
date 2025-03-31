@@ -1,5 +1,9 @@
 package com.fitfit.core.ui.ui.card.report
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,7 +71,7 @@ fun ReportRecordInfoCard(
 
 @Composable
 fun ReportRecordBannerInfoCard(
-    isUserAdmin: Boolean,
+    showEditBannerStatusButton: Boolean,
     bannerInfo: BannerInfo,
     onClickEditBannerStatus: () -> Unit,
     modifier: Modifier = Modifier
@@ -80,7 +84,7 @@ fun ReportRecordBannerInfoCard(
             Modifier.padding(bottom = 16.dp)
         ) {
             BannerStatusRow(
-                isUserAdmin = isUserAdmin,
+                showEditBannerStatusButton = showEditBannerStatusButton,
                 bannerStatus = bannerInfo.status,
                 onClick = onClickEditBannerStatus,
                 modifier = Modifier.padding(16.dp, 0.dp, 4.dp, 0.dp)
@@ -117,7 +121,7 @@ fun ReportRecordBannerInfoCard(
 
 @Composable
 private fun BannerStatusRow(
-    isUserAdmin: Boolean,
+    showEditBannerStatusButton: Boolean,
     bannerStatus: ReportStatus,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -149,10 +153,16 @@ private fun BannerStatusRow(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        if (isUserAdmin)
+
+        AnimatedVisibility(
+            visible = showEditBannerStatusButton,
+            enter = fadeIn(tween(500)),
+            exit = fadeOut(tween(500))
+        ) {
             EditBannerStatusButton(
                 onClick = onClick
             )
+        }
     }
 }
 
