@@ -32,8 +32,12 @@
     <!-- DialogButton.kt -->
     <string name="button_cancel">Cancel</string>
     <string name="button_ok">OK</string>
+    <string name="button_save">Save</string>
+
 
     <!--dialog/ =================================================================================-->
+    <!-- SelectBannerStatusDialog.kt -->
+    <string name="set_banner_status">Set banner status</string>
 
 
 

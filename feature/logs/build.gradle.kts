@@ -42,6 +42,7 @@ android {
 dependencies {
 
     //module
+    implementation(project(":core:data:data"))
     implementation(project(":core:model"))
     implementation(project(":core:ui:designsystem"))
     implementation(project(":core:ui:ui"))

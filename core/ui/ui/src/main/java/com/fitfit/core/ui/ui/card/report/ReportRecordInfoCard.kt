@@ -60,10 +60,11 @@ fun ReportRecordInfoCard(
 @Composable
 fun ReportRecordBannerInfoCard(
     bannerInfo: BannerInfo,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
     MyCard(
-        enabled = false,
+        onClick = onClick,
         modifier = modifier.fillMaxWidth()
     ) {
         Column(

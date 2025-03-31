@@ -10,14 +10,19 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.ReportStatus
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
@@ -27,6 +32,7 @@ import com.fitfit.core.ui.ui.card.report.ContentCard
 import com.fitfit.core.ui.ui.card.report.ImageCard
 import com.fitfit.core.ui.ui.card.report.ReportRecordBannerInfoCard
 import com.fitfit.core.ui.ui.card.report.ReportRecordInfoCard
+import com.fitfit.core.ui.ui.dialog.SelectBannerStatusDialog
 import com.fitfit.core.ui.ui.item.TitleText
 import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
@@ -44,8 +50,9 @@ fun ReportRecordDetailRoute(
     navigateUp: () -> Unit,
 
     modifier: Modifier = Modifier,
+    reportRecordDetailViewModel: ReportRecordDetailViewModel = hiltViewModel()
 ) {
-
+    val reportRecordDetailUiState by reportRecordDetailViewModel.reportRecordDetailUiState.collectAsState()
 
     ReportRecordDetailScreen(
         appUserData = appUserData,
@@ -53,6 +60,19 @@ fun ReportRecordDetailRoute(
         dateTimeFormat = dateTimeFormat,
         internetEnabled = internetEnabled,
         reportRecord = reportRecord,
+
+        currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
+        setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
+        showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
+        setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
+        saveBannerStatus = { bannerId, bannerStatus ->
+            reportRecordDetailViewModel.saveBannerStatus(
+                reportId = reportRecord.reportId,
+                bannerId = bannerId,
+                bannerStatus = bannerStatus
+            )
+        },
+
         navigateUp = navigateUp
     )
 }
@@ -65,9 +85,16 @@ private fun ReportRecordDetailScreen(
     internetEnabled: Boolean,
 
     reportRecord: ReportRecord,
+
+    currentBannerInfo: BannerInfo?,
+    setCurrentBannerInfo: (BannerInfo) -> Unit,
+    showSelectBannerStatusDialog: Boolean,
+    setShowSelectBannerStatusDialog: (Boolean) -> Unit,
+    saveBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
+
     navigateUp: () -> Unit,
 
-    ){
+){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
     MyScaffold(
@@ -81,6 +108,21 @@ private fun ReportRecordDetailScreen(
             )
         }
     ){ paddingValues ->
+
+        //dialog
+        if (currentBannerInfo != null && showSelectBannerStatusDialog){
+            SelectBannerStatusDialog(
+                initialBannerStatus = currentBannerInfo.status,
+                onOkClick = { bannerStatus ->
+                    saveBannerStatus(currentBannerInfo.bannerId, bannerStatus)
+
+                    setShowSelectBannerStatusDialog(false)
+                },
+                onDismissRequest = { setShowSelectBannerStatusDialog(false) }
+            )
+
+        }
+
 
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -139,6 +181,10 @@ private fun ReportRecordDetailScreen(
                     reportRecord.bannersInfo.forEach { bannerInfo ->
                         ReportRecordBannerInfoCard(
                             bannerInfo = bannerInfo,
+                            onClick = {
+                                setCurrentBannerInfo(bannerInfo)
+                                setShowSelectBannerStatusDialog(true)
+                            },
                             modifier = itemModifier
                         )
 
