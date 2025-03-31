@@ -17,7 +17,10 @@ data class ReportUiState(
     val appUserReportRecords: List<ReportRecord> = listOf(),
     val allReportRecords: List<ReportRecord> = listOf(),
 
-    val currentReportRecord: ReportRecord? = null
+    val currentReportRecord: ReportRecord? = null,
+
+    val imageList: List<String> = listOf(),
+    val initialImageIndex: Int = 0
 )
 
 @HiltViewModel
@@ -50,6 +53,18 @@ class CommonReportRecordsViewModel @Inject constructor(
     ) {
         _reportUiState.update {
             it.copy(currentReportRecord = reportRecord)
+        }
+    }
+
+    fun setImageListAndInitialImageIndex(
+        imageList: List<String>,
+        initialImageIndex: Int
+    ) {
+        _reportUiState.update {
+            it.copy(
+                imageList = imageList,
+                initialImageIndex = initialImageIndex
+            )
         }
     }
 

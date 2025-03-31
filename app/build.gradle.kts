@@ -91,6 +91,7 @@ dependencies {
     implementation(project(":core:ui:designsystem"))
     implementation(project(":core:ui:ui"))
 
+    implementation(project(":feature:image"))
     implementation(project(":feature:signin"))
     implementation(project(":feature:report"))
     implementation(project(":feature:record"))

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image">사진</string>
+    <string name="toast_download_complete">다운로드 완료</string>
+    <string name="toast_download_error">다운로드 에러</string>
+</resources>

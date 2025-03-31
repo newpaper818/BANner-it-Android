@@ -17,6 +17,7 @@ import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.bannerit.utils.WindowHeightSizeClass
 import com.fitfit.bannerit.utils.WindowSizeClass
 import com.fitfit.bannerit.utils.WindowWidthSizeClass
+import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.designsystem.components.MyNavigationBottomBar
 import com.fitfit.core.ui.designsystem.components.MyNavigationBottomBarItem
 import com.fitfit.core.ui.designsystem.components.MyNavigationDrawer
@@ -28,6 +29,7 @@ import com.fitfit.core.ui.designsystem.components.MyNavigationRailBarItem
 fun ScreenWithNavigationBar(
     windowSizeClass: WindowSizeClass,
     currentTopLevelDestination: TopLevelDestination,
+    currentScreenDestination: ScreenDestination,
     showNavigationBar: Boolean,
 
     onClickNavBarItem: (TopLevelDestination) -> Unit,
@@ -84,8 +86,13 @@ fun ScreenWithNavigationBar(
             windowSizeClass.heightSizeClass == WindowHeightSizeClass.Compact
             || windowSizeClass.widthSizeClass == WindowWidthSizeClass.Medium
         ) {
+            val modifier = if (currentScreenDestination == ScreenDestination.IMAGE)
+                Modifier.fillMaxSize()
+            else
+                Modifier.displayCutoutPadding().fillMaxSize()
+
             Box(
-                modifier = Modifier.displayCutoutPadding().fillMaxSize()
+                modifier = modifier
             ) {
                 //content
                 content()

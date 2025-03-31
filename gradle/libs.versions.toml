@@ -60,6 +60,9 @@ coil = "2.4.0"
 #17 google maps
 playServiceMaps = "19.1.0"
 
+#18 zoomable
+zoomable = "1.5.2"
+
 
 
 
@@ -162,7 +165,10 @@ androidx-camera-extentions =  { group = "androidx.camera", name = "camera-extens
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 #17 google maps
-google-play-services-maps =        { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServiceMaps" }
+google-play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServiceMaps" }
+
+#18 zoomable
+zoomable = { group = "net.engawapg.lib", name = "zoomable", version.ref = "zoomable" }
 
 
 

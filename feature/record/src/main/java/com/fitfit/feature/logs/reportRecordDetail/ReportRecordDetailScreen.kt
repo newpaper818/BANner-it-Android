@@ -60,6 +60,7 @@ fun ReportRecordDetailRoute(
     reportRecord: ReportRecord,
 
     navigateUp: () -> Unit,
+    navigateToImage: (imageList: List<String>, initialImageIndex: Int) -> Unit,
 
     modifier: Modifier = Modifier,
     reportRecordDetailViewModel: ReportRecordDetailViewModel = hiltViewModel()
@@ -114,7 +115,8 @@ fun ReportRecordDetailRoute(
                 }
             },
 
-            navigateUp = navigateUp
+            navigateUp = navigateUp,
+            navigateToImage = navigateToImage
         )
     }
 }
@@ -136,6 +138,7 @@ private fun ReportRecordDetailScreen(
     editBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
 
     navigateUp: () -> Unit,
+    navigateToImage: (imageList: List<String>, initialImageIndex: Int) -> Unit
 ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
@@ -215,7 +218,7 @@ private fun ReportRecordDetailScreen(
                     imagePathList = reportRecord.images,
                     isImageCountOver = false,
                     onClickImage = { initialImageIndex ->
-
+                        navigateToImage(reportRecord.images, initialImageIndex)
                     },
                     deleteImage = { _ -> },
                     isOverImage = { _ -> },
