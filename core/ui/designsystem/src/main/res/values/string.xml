@@ -23,6 +23,9 @@
     <string name="save">Save</string>
     <string name="cancel">Cancel</string>
 
+    <!-- EditBannerStatusButton.kt -->
+    <string name="edit_banner_status">Edit banner status</string>
+
     <!-- PrivacyPolicyButton.kt -->
     <string name="privacy_policy">Privacy policy</string>
 

@@ -54,13 +54,37 @@ val sampleReportRecord = ReportRecord(
     bannersInfo = listOf(
         BannerInfo(
             bannerId = 4978,
-            status = ReportStatus.LEGAL,
+            status = ReportStatus.RECEIVED,
             companyName = "aaaa",
             phoneNumber = "010-2222-3366"
         ),
         BannerInfo(
             bannerId = 1059,
             status = ReportStatus.ILLEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        ),
+        BannerInfo(
+            bannerId = 2373732,
+            status = ReportStatus.ILLEGAL_DEMOLITION,
+            companyName = "long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text",
+            phoneNumber = "010-2222-7890"
+        ),
+        BannerInfo(
+            bannerId = 43458,
+            status = ReportStatus.LEGAL,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        ),
+        BannerInfo(
+            bannerId = 54,
+            status = ReportStatus.LEGAL_DEMOLITION,
+            companyName = "ff",
+            phoneNumber = "010-2222-7890"
+        ),
+        BannerInfo(
+            bannerId = 134377,
+            status = ReportStatus.UNKNOWN,
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         )

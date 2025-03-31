@@ -30,6 +30,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.model.report.ReportStatus
@@ -235,8 +236,9 @@ private fun ReportRecordDetailScreen(
 
                     reportRecord.bannersInfo.forEach { bannerInfo ->
                         ReportRecordBannerInfoCard(
+                            isUserAdmin = appUserData.role == UserRole.ADMIN,
                             bannerInfo = bannerInfo,
-                            onClick = {
+                            onClickEditBannerStatus = {
                                 setCurrentBannerInfo(bannerInfo)
                                 setShowSelectBannerStatusDialog(true)
                             },

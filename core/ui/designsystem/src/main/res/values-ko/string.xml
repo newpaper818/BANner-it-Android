@@ -23,6 +23,9 @@
     <string name="save">저장</string>
     <string name="cancel">취소</string>
 
+    <!-- EditBannerStatusButton.kt -->
+    <string name="edit_banner_status">현수막 상태 변경</string>
+
     <!-- PrivacyPolicyButton.kt -->
     <string name="privacy_policy">개인정보 처리방침</string>
 

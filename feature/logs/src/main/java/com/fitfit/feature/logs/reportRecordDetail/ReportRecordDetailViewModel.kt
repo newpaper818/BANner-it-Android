@@ -81,7 +81,5 @@ class ReportRecordDetailViewModel @Inject constructor(
         else{
             return false
         }
-
-
     }
 }
