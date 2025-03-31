@@ -24,9 +24,9 @@
     <!--ReportStatus.kt-->
     <string name="received">Received</string>
     <string name="legal">Legal</string>
-    <string name="legal_demolition">Legal Demolition</string>
+    <string name="legal_demolition">Legal Demolished</string>
     <string name="illegal">Illegal</string>
-    <string name="illegal_demolition">IllLegal Demolition</string>
+    <string name="illegal_demolition">IllLegal Demolished</string>
     <string name="unknown">Unknown</string>
 
 
