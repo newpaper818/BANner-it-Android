@@ -13,6 +13,7 @@
     <string name="content">Content</string>
     <string name="banner_info">Banner info</string>
     <string name="location">Location</string>
+    <string name="edit_banner_status_error">Edit banner status error. Do it later.</string>
 
 
 </resources>

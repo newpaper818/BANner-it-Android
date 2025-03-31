@@ -1,19 +1,26 @@
 package com.fitfit.feature.logs.reportRecordDetail
 
-import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -64,12 +71,26 @@ fun ReportRecordDetailRoute(
 
     val reportRecordDetailUiState by reportRecordDetailViewModel.reportRecordDetailUiState.collectAsState()
 
+    val snackBarHostState = remember { SnackbarHostState() }
+    val editBannerStatusErrorText = stringResource(R.string.edit_banner_status_error)
+
+    val editBannerStatusErrorSnackbar = {
+        coroutineScope.launch {
+            snackBarHostState.showSnackbar(
+                message = editBannerStatusErrorText,
+                duration = SnackbarDuration.Short
+            )
+        }
+    }
+
+
     if (reportRecordDetailUiState.currentReportRecord != null) {
         ReportRecordDetailScreen(
             appUserData = appUserData,
             spacerValue = spacerValue,
             dateTimeFormat = dateTimeFormat,
             internetEnabled = internetEnabled,
+            snackBarHostState = snackBarHostState,
             reportRecord = reportRecordDetailUiState.currentReportRecord!!,
 
             currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
@@ -84,11 +105,10 @@ fun ReportRecordDetailRoute(
                         bannerId = bannerId,
                         bannerStatus = bannerStatus
                     )
+                    reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
 
-                    if (result) {
-                        reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
-                    } else {
-                        Log.d("qew", "fail")
+                    if (!result) {
+                        editBannerStatusErrorSnackbar()
                     }
                 }
             },
@@ -104,6 +124,7 @@ private fun ReportRecordDetailScreen(
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
     internetEnabled: Boolean,
+    snackBarHostState: SnackbarHostState,
 
     reportRecord: ReportRecord,
 
@@ -114,8 +135,7 @@ private fun ReportRecordDetailScreen(
     editBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
 
     navigateUp: () -> Unit,
-
-    ){
+){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
     MyScaffold(
@@ -127,6 +147,20 @@ private fun ReportRecordDetailScreen(
                 navigationIcon = TopAppBarIcon.back,
                 onClickNavigationIcon = { navigateUp() }
             )
+        },
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackBarHostState,
+                modifier = Modifier
+                    .width(500.dp)
+                    .navigationBarsPadding(),
+                snackbar = {
+                    Snackbar(
+                        snackbarData = it,
+                        shape = MaterialTheme.shapes.medium
+                    )
+                }
+            )
         }
     ){ paddingValues ->
 
@@ -134,12 +168,14 @@ private fun ReportRecordDetailScreen(
         if (currentBannerInfo != null && showSelectBannerStatusDialog){
             SelectBannerStatusDialog(
                 initialBannerStatus = currentBannerInfo.status,
-                onSaveClick = { bannerStatus ->
-                    editBannerStatus(currentBannerInfo.bannerId, bannerStatus)
+                onSaveClick = { newBannerStatus ->
+                    if (newBannerStatus != currentBannerInfo.status)
+                        editBannerStatus(currentBannerInfo.bannerId, newBannerStatus)
+                    else
+                        setShowSelectBannerStatusDialog(false)
                 },
                 onDismissRequest = { setShowSelectBannerStatusDialog(false) }
             )
-
         }
 
 

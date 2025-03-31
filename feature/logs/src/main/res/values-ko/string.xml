@@ -13,5 +13,7 @@
     <string name="content">내용</string>
     <string name="banner_info">현수막 정보</string>
     <string name="location">위치</string>
+    <string name="edit_banner_status_error">현수막 상태 변경 에러. 나중에 다시 시도하세요.</string>
+
 
 </resources>
