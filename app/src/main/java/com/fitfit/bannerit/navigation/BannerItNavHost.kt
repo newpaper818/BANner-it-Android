@@ -3,7 +3,6 @@ package com.fitfit.bannerit.navigation
 import android.util.Log
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -267,10 +266,16 @@ fun BannerItNavHost(
             //from main report ====================================================================
             reportScreen(
                 appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
                 navigateToCamera = {
                     mainNavController.navigateToCamera(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                },
+                navigateToImage = {
+                    mainNavController.navigateToImage(
                         navOptions = navOptions { launchSingleTop = true }
                     )
                 }

@@ -26,7 +26,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -146,7 +146,7 @@ fun ImageCard(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                 ) {
-                                    items(imagePathList) { imagePath ->
+                                    itemsIndexed(imagePathList) { index, imagePath ->
 
                                         key(imagePathList) {
 //                                            val slideState =
@@ -157,6 +157,9 @@ fun ImageCard(
                                                 internetEnabled = internetEnabled,
                                                 imagePath = imagePath,
                                                 imagePathList = imagePathList,
+                                                onClickImage = {
+                                                    onClickImage(index)
+                                                },
                                                 onDeleteClick = {
                                                     deleteImage(imagePath)
                                                 },
@@ -246,6 +249,7 @@ private fun ImageWithDeleteIcon(
     internetEnabled: Boolean,
     imagePath: String,
     imagePathList: List<String>,
+    onClickImage: () -> Unit,
     onDeleteClick: () -> Unit,
     downloadImage: (imagePath: String, imageUserId: Int, result: (Boolean) -> Unit) -> Unit,
 
@@ -291,6 +295,7 @@ private fun ImageWithDeleteIcon(
         .zIndex(zIndex)
 
     MyCard(
+        onClick = onClickImage,
         shape = MaterialTheme.shapes.medium,
         modifier = dragModifier
             .size(cardWidthDp)

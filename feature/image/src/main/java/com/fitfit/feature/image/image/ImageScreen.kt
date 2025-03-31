@@ -23,7 +23,6 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -162,34 +161,37 @@ private fun ImageScreen(
 
                         val a = this
 
-                        ImageFromUrl(
-                            imageUrl = imagePathList[it],
-                            contentDescription = stringResource(id = R.string.image),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .zoomable(
-                                    zoomState = zoomState,
+                        if ("https" in imagePathList[it]) {
+                            ImageFromUrl(
+                                imageUrl = imagePathList[it],
+                                contentDescription = stringResource(id = R.string.image),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .zoomable(
+                                        zoomState = zoomState,
 //                                    onTap = { onClickImage() }
-                                ),
-                            contentScale = ContentScale.Fit,
-                        )
-
-//                        ImageFromFile(
-//                            internetEnabled = internetEnabled,
-//                            imageUserId = imageUerId,
-//                            imagePath = imagePathList[it],
-//                            contentDescription = stringResource(id = R.string.image),
-//                            downloadImage =  {_,_ ,_ -> },
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                                .zoomable(
-//                                    zoomState = zoomState,
-////                                    onTap = { onClickImage() }
-//                                ),
-//                            contentScale = ContentScale.Fit,
-//                            isImageScreen = true,
-////                            onClick = onClickImage
-//                        )
+                                    ),
+                                contentScale = ContentScale.Fit,
+                            )
+                        }
+                        else {
+                            ImageFromFile(
+                                internetEnabled = internetEnabled,
+                                imageUserId = imageUerId,
+                                imagePath = imagePathList[it],
+                                contentDescription = stringResource(id = R.string.image),
+                                downloadImage = { _, _, _ -> },
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .zoomable(
+                                        zoomState = zoomState,
+//                                    onTap = { onClickImage() }
+                                    ),
+                                contentScale = ContentScale.Fit,
+                                isImageScreen = true,
+//                            onClick = onClickImage
+                            )
+                        }
                     }
                 }
             )
