@@ -32,14 +32,13 @@ import com.fitfit.core.ui.ui.dialog.component.CancelDialogButton
 import com.fitfit.core.ui.ui.dialog.component.DialogButtonLayout
 import com.fitfit.core.ui.ui.dialog.component.DialogButtons
 import com.fitfit.core.ui.ui.dialog.component.MyDialog
-import com.fitfit.core.ui.ui.dialog.component.OkDialogButton
 import com.fitfit.core.ui.ui.dialog.component.SaveDialogButton
 
 @Composable
 fun SelectBannerStatusDialog(
     initialBannerStatus: ReportStatus,
 
-    onOkClick: (bannerStatus: ReportStatus) -> Unit,
+    onSaveClick: (bannerStatus: ReportStatus) -> Unit,
     onDismissRequest: () -> Unit
 ){
     val bannerStatusList = enumValues<ReportStatus>()
@@ -82,7 +81,7 @@ fun SelectBannerStatusDialog(
                 positiveButtonContent = {
                     //ok button
                     SaveDialogButton(
-                        onClick = { onOkClick(currentBannerStatus) },
+                        onClick = { onSaveClick(currentBannerStatus) },
                         modifier = it
                     )
                 }

@@ -56,7 +56,6 @@ class CommonReportRecordsViewModel @Inject constructor(
 
 
 
-
     suspend fun getAppUserReportRecords(
         jwt: String
     ) {

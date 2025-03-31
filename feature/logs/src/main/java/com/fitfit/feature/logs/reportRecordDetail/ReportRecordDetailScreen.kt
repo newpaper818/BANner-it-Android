@@ -1,5 +1,6 @@
 package com.fitfit.feature.logs.reportRecordDetail
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,8 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -36,6 +39,7 @@ import com.fitfit.core.ui.ui.dialog.SelectBannerStatusDialog
 import com.fitfit.core.ui.ui.item.TitleText
 import com.fitfit.core.utils.itemMaxWidthSmall
 import com.fitfit.feature.logs.R
+import kotlinx.coroutines.launch
 
 @Composable
 fun ReportRecordDetailRoute(
@@ -52,29 +56,46 @@ fun ReportRecordDetailRoute(
     modifier: Modifier = Modifier,
     reportRecordDetailViewModel: ReportRecordDetailViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(Unit) {
+        reportRecordDetailViewModel.setCurrentReportRecord(reportRecord)
+    }
+
+    val coroutineScope = rememberCoroutineScope()
+
     val reportRecordDetailUiState by reportRecordDetailViewModel.reportRecordDetailUiState.collectAsState()
 
-    ReportRecordDetailScreen(
-        appUserData = appUserData,
-        spacerValue = spacerValue,
-        dateTimeFormat = dateTimeFormat,
-        internetEnabled = internetEnabled,
-        reportRecord = reportRecord,
+    if (reportRecordDetailUiState.currentReportRecord != null) {
+        ReportRecordDetailScreen(
+            appUserData = appUserData,
+            spacerValue = spacerValue,
+            dateTimeFormat = dateTimeFormat,
+            internetEnabled = internetEnabled,
+            reportRecord = reportRecordDetailUiState.currentReportRecord!!,
 
-        currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
-        setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
-        showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
-        setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
-        saveBannerStatus = { bannerId, bannerStatus ->
-            reportRecordDetailViewModel.saveBannerStatus(
-                reportId = reportRecord.reportId,
-                bannerId = bannerId,
-                bannerStatus = bannerStatus
-            )
-        },
+            currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
+            setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
+            showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
+            setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
+            editBannerStatus = { bannerId, bannerStatus ->
+                coroutineScope.launch {
+                    val result = reportRecordDetailViewModel.editBannerStatus(
+                        jwt = appUserData.jwt,
+                        reportId = reportRecord.reportId,
+                        bannerId = bannerId,
+                        bannerStatus = bannerStatus
+                    )
 
-        navigateUp = navigateUp
-    )
+                    if (result) {
+                        reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
+                    } else {
+                        Log.d("qew", "fail")
+                    }
+                }
+            },
+
+            navigateUp = navigateUp
+        )
+    }
 }
 
 @Composable
@@ -90,11 +111,11 @@ private fun ReportRecordDetailScreen(
     setCurrentBannerInfo: (BannerInfo) -> Unit,
     showSelectBannerStatusDialog: Boolean,
     setShowSelectBannerStatusDialog: (Boolean) -> Unit,
-    saveBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
+    editBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
 
     navigateUp: () -> Unit,
 
-){
+    ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
 
     MyScaffold(
@@ -113,10 +134,8 @@ private fun ReportRecordDetailScreen(
         if (currentBannerInfo != null && showSelectBannerStatusDialog){
             SelectBannerStatusDialog(
                 initialBannerStatus = currentBannerInfo.status,
-                onOkClick = { bannerStatus ->
-                    saveBannerStatus(currentBannerInfo.bannerId, bannerStatus)
-
-                    setShowSelectBannerStatusDialog(false)
+                onSaveClick = { bannerStatus ->
+                    editBannerStatus(currentBannerInfo.bannerId, bannerStatus)
                 },
                 onDismissRequest = { setShowSelectBannerStatusDialog(false) }
             )

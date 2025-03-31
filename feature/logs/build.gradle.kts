@@ -65,6 +65,9 @@ dependencies {
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
+    //latlng
+    implementation(libs.google.play.services.maps)
+
     //test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

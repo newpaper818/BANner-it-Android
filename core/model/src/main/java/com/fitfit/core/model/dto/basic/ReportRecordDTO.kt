@@ -80,3 +80,9 @@ data class BannerInfoDTO(
         )
     }
 }
+
+@JsonClass(generateAdapter = true)
+data class BannerInfoIdWithStatusDTO(
+    @Json(name = "banner_id")val bannerId: Int,
+    @Json(name = "status") val status: String,
+)
