@@ -17,6 +17,7 @@ import com.fitfit.feature.logs.component.ReportRecordList
 fun MainMyReportsRoute(
     use2Panes: Boolean,
     spacerValue: Dp,
+    internetEnabled: Boolean,
     dateTimeFormat: DateTimeFormat,
 
     appUserReportRecords: List<ReportRecord>,
@@ -26,6 +27,7 @@ fun MainMyReportsRoute(
 ) {
     MainMyReportsScreen(
         spacerValue = spacerValue,
+        internetEnabled = internetEnabled,
         dateTimeFormat = dateTimeFormat,
         appUserReportRecords = appUserReportRecords,
         onClickReportRecord = onClickReportRecord
@@ -35,6 +37,7 @@ fun MainMyReportsRoute(
 @Composable
 private fun MainMyReportsScreen(
     spacerValue: Dp,
+    internetEnabled: Boolean,
     dateTimeFormat: DateTimeFormat,
     appUserReportRecords: List<ReportRecord>,
     onClickReportRecord: (reportRecord: ReportRecord) -> Unit,
@@ -46,7 +49,8 @@ private fun MainMyReportsScreen(
 
         topBar = {
             MyTopAppBar(
-                title = stringResource(R.string.my_report_records)
+                title = stringResource(R.string.my_report_records),
+                internetEnabled = internetEnabled
             )
         }
     ){ paddingValues ->

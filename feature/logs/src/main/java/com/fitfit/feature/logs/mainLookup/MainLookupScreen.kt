@@ -17,6 +17,7 @@ import com.fitfit.feature.logs.component.ReportRecordList
 fun MainLookupRoute(
     use2Panes: Boolean,
     spacerValue: Dp,
+    internetEnabled: Boolean,
     dateTimeFormat: DateTimeFormat,
 
     allReportRecords: List<ReportRecord>,
@@ -26,6 +27,7 @@ fun MainLookupRoute(
 ) {
     MainLookupScreen(
         spacerValue = spacerValue,
+        internetEnabled = internetEnabled,
         dateTimeFormat = dateTimeFormat,
         allReportRecords = allReportRecords,
         onClickReportRecord = onClickReportRecord
@@ -35,6 +37,7 @@ fun MainLookupRoute(
 @Composable
 private fun MainLookupScreen(
     spacerValue: Dp,
+    internetEnabled: Boolean,
     dateTimeFormat: DateTimeFormat,
     allReportRecords: List<ReportRecord>,
     onClickReportRecord: (reportRecord: ReportRecord) -> Unit,
@@ -46,7 +49,8 @@ private fun MainLookupScreen(
 
         topBar = {
             MyTopAppBar(
-                title = stringResource(R.string.lookup_all_reports)
+                title = stringResource(R.string.lookup_all_reports),
+                internetEnabled = internetEnabled
             )
         }
     ){ paddingValues ->

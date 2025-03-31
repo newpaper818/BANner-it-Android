@@ -80,6 +80,7 @@ fun NavGraphBuilder.mainLookupScreen(
             MainLookupRoute(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
+                internetEnabled = externalState.internetEnabled,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 allReportRecords = commonReportRecordsUiState.allReportRecords,
                 onClickReportRecord = {
