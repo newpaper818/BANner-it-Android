@@ -69,6 +69,7 @@ fun ReportRoute(
 
     navigateUp: () -> Unit,
     navigateToCamera: () -> Unit,
+    navigateToImage: (imageList: List<String>, initialImageIndex: Int) -> Unit,
 
     modifier: Modifier = Modifier,
 
@@ -161,6 +162,7 @@ fun ReportRoute(
         },
 
         navigateToCamera = navigateToCamera,
+        navigateToImage = navigateToImage,
         onClickReport = {
             coroutineScope.launch {
                 reportViewModel.sendBannerReport(appUserData)
@@ -190,6 +192,7 @@ private fun ReportScreen(
     saveImageToInternalStorage: (index: Int, uri: Uri) -> String?,
 
     navigateToCamera: () -> Unit,
+    navigateToImage: (imageList: List<String>, initialImageIndex: Int) -> Unit,
     onClickReport: () -> Unit,
 ){
     val itemModifier = Modifier.widthIn(max = itemMaxWidthSmall)
@@ -285,7 +288,7 @@ private fun ReportScreen(
                         imagePathList = reportRecord.images,
                         isImageCountOver = isPhotoCountOver,
                         onClickImage = { initialImageIndex ->
-
+                            navigateToImage(reportRecord.images, initialImageIndex)
                         },
 //                        onAddImages = { addedImageFiles ->
 //                            addPhotos(addedImageFiles)

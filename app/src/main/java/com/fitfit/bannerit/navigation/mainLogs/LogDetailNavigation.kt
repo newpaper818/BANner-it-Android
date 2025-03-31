@@ -31,6 +31,7 @@ fun NavGraphBuilder.reportRecordDetailScreen(
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
+    navigateToImage: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -60,7 +61,11 @@ fun NavGraphBuilder.reportRecordDetailScreen(
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 internetEnabled = externalState.internetEnabled,
                 reportRecord = commonReportRecordsUiState.currentReportRecord!!,
-                navigateUp = navigateUp
+                navigateUp = navigateUp,
+                navigateToImage = { imageList, initialImageIndex ->
+                    commonReportRecordsViewModel.setImageListAndInitialImageIndex(imageList, initialImageIndex)
+                    navigateToImage()
+                }
             )
         }
         else {

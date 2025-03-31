@@ -205,6 +205,20 @@ internal fun OkDialogButton(
 }
 
 @Composable
+internal fun SaveDialogButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
+){
+    DialogButton(
+        text = stringResource(id = R.string.button_save),
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled
+    )
+}
+
+@Composable
 internal fun PositiveDialogButton(
     text: String,
     onClick: () -> Unit,

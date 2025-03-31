@@ -152,7 +152,9 @@ private fun AccountScreen(
         snackbarHost = {
             SnackbarHost(
                 hostState = snackBarHostState,
-                modifier = Modifier.width(500.dp),
+                modifier = Modifier
+                    .width(500.dp)
+                    .navigationBarsPadding(),
                 snackbar = {
                     Snackbar(
                         snackbarData = it,

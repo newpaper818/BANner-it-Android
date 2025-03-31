@@ -34,6 +34,10 @@ android {
 
 dependencies {
 
+    //compose bom
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.androidx.ui)
+
     //moshi
     implementation(libs.squareup.converter.moshi)
 

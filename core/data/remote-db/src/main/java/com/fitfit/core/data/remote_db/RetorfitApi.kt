@@ -3,8 +3,11 @@ package com.fitfit.core.data.remote_db
 import android.content.Context
 import android.util.Log
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
+import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
+import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType
@@ -46,13 +49,13 @@ class RetrofitApi @Inject constructor(
                 return userData
             }
             else {
-                Log.e(RETROFIT_TAG, "result: $result")
-                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken result: $result")
+                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, e.toString())
+            Log.e(RETROFIT_TAG, "requestUserDataWithIdToken - $e")
             return null
         }
     }
@@ -62,15 +65,15 @@ class RetrofitApi @Inject constructor(
     ): Pair<String, UserData>? {
         try {
             val result = retrofitApiService.requestUserDataWithJwt(jwt = jwt)
-            Log.d(RETROFIT_TAG, "result = $result")
-            Log.d(RETROFIT_TAG, "headers = ${result.headers()}")
-            Log.d(RETROFIT_TAG, "body = ${result.body()}")
+            Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
+            Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
+            Log.d(RETROFIT_TAG, "requestUserDataWithJwt body = ${result.body()}")
 
             //TODO: get jwt, userData
             return null
 
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, e.toString())
+            Log.e(RETROFIT_TAG, "requestUserDataWithJwt - $e")
             return null
         }
     }
@@ -98,14 +101,14 @@ class RetrofitApi @Inject constructor(
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "result: $result")
-                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "postBannerReport result: $result")
+                Log.e(RETROFIT_TAG, "postBannerReport headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "postBannerReport body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, e.toString())
+            Log.e(RETROFIT_TAG, "postBannerReport - $e")
             return false
         }
     }
@@ -174,13 +177,13 @@ class RetrofitApi @Inject constructor(
                 return reportRecords
             }
             else {
-                Log.e(RETROFIT_TAG, "result: $result")
-                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "getAppUserReportRecords result: $result")
+                Log.e(RETROFIT_TAG, "getAppUserReportRecords headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "getAppUserReportRecords body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, e.toString())
+            Log.e(RETROFIT_TAG, "getAppUserReportRecords - $e")
             return null
         }
     }
@@ -203,14 +206,50 @@ class RetrofitApi @Inject constructor(
                 return reportRecords
             }
             else {
-                Log.e(RETROFIT_TAG, "result: $result")
-                Log.e(RETROFIT_TAG, "headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "getAllReportRecords result: $result")
+                Log.e(RETROFIT_TAG, "getAllReportRecords headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "getAllReportRecords body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, e.toString())
+            Log.e(RETROFIT_TAG, "getAllReportRecords - $e")
             return null
+        }
+    }
+
+    override suspend fun editBannerInfo(
+        jwt: String,
+        reportId: Int,
+        bannerInfo: List<BannerInfo>
+    ): Boolean {
+        try {
+            val result = retrofitApiService.editBannerStatus(
+                jwt = jwt,
+                editBannerInfoRequestDTO = EditBannerInfoRequestDTO(
+                    reportId = reportId,
+                    bannerInfoIdWithStatusDTO = bannerInfo.map { it.toBannerInfoIdWithStatusDTO() }
+                )
+            )
+
+            val code = result.code()
+            val error = result.body()?.error
+
+            if (
+                code == 200
+                && error == null
+            ) {
+                return true
+            }
+            else {
+                Log.e(RETROFIT_TAG, "editBannerInfo result: $result")
+                Log.e(RETROFIT_TAG, "editBannerInfo headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "editBannerInfo body: ${result.body()}")
+                return false
+            }
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "editBannerInfo - $e")
+            return false
         }
     }
 }

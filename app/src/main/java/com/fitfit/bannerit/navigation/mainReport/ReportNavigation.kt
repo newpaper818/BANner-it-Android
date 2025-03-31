@@ -13,6 +13,7 @@ import com.fitfit.bannerit.navigation.exitTransition
 import com.fitfit.bannerit.navigation.popEnterTransition
 import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.core.ui.ui.ErrorScreen
@@ -27,10 +28,12 @@ fun NavController.navigateToReport(navOptions: NavOptions? = null) =
 
 fun NavGraphBuilder.reportScreen(
     appViewModel: AppViewModel,
+    commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
     navigateToCamera: () -> Unit,
+    navigateToImage: () -> Unit,
 ) {
     composable(
         route = screenDestination.route,
@@ -55,7 +58,11 @@ fun NavGraphBuilder.reportScreen(
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 internetEnabled = externalState.internetEnabled,
                 navigateUp = navigateUp,
-                navigateToCamera = navigateToCamera
+                navigateToCamera = navigateToCamera,
+                navigateToImage = { imageList, initialImageIndex ->
+                    commonReportRecordsViewModel.setImageListAndInitialImageIndex(imageList, initialImageIndex)
+                    navigateToImage()
+                }
             )
         }
         else{

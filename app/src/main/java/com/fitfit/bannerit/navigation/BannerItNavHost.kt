@@ -3,7 +3,6 @@ package com.fitfit.bannerit.navigation
 import android.util.Log
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.key
@@ -18,6 +17,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
+import com.fitfit.bannerit.navigation.image.imageScreen
+import com.fitfit.bannerit.navigation.image.navigateToImage
 import com.fitfit.bannerit.navigation.mainLogs.mainLookupScreen
 import com.fitfit.bannerit.navigation.mainLogs.mainMyRecordsScreen
 import com.fitfit.bannerit.navigation.mainLogs.navigateToReportRecordDetail
@@ -102,15 +103,6 @@ fun BannerItNavHost(
         else isOnTopLevel
 //                || isOnMoreDetail
 
-    LaunchedEffect(appUiState.screenDestination.currentTopLevelDestination) {
-//        if (appUiState.screenDestination.currentTopLevelDestination != TopLevelDestination.MORE){
-//            //remove all more nav stack
-//            moreNavController.popBackStack(
-//                route = moreNavController.,
-//                inclusive = false
-//            )
-//        }
-    }
 
     var beforeUse2Panes by rememberSaveable {
         mutableStateOf(externalState.windowSizeClass.use2Panes)
@@ -147,6 +139,7 @@ fun BannerItNavHost(
     ScreenWithNavigationBar(
         windowSizeClass = externalState.windowSizeClass,
         currentTopLevelDestination = appUiState.screenDestination.currentTopLevelDestination,
+        currentScreenDestination = appUiState.screenDestination.currentScreenDestination,
         showNavigationBar = showNavigationBar,
         topLevelDestinations =
             if (appUiState.appUserData == null) listOf(TopLevelDestination.REPORT, TopLevelDestination.LOOKUP, TopLevelDestination.MORE)
@@ -211,6 +204,13 @@ fun BannerItNavHost(
                 }
             )
 
+            //image ================================================================================
+            imageScreen(
+                appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
+                externalState = externalState,
+                navigateUp = navigateUp
+            )
 
             //top level screen =====================================================================
             mainReportScreen(
@@ -266,10 +266,16 @@ fun BannerItNavHost(
             //from main report ====================================================================
             reportScreen(
                 appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
                 navigateToCamera = {
                     mainNavController.navigateToCamera(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                },
+                navigateToImage = {
+                    mainNavController.navigateToImage(
                         navOptions = navOptions { launchSingleTop = true }
                     )
                 }
@@ -287,7 +293,12 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
-                navigateUp = navigateUp
+                navigateUp = navigateUp,
+                navigateToImage = {
+                    mainNavController.navigateToImage(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
             )
 
 

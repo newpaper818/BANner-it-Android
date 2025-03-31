@@ -83,6 +83,7 @@ fun NavGraphBuilder.mainMyRecordsScreen(
             MainMyReportsRoute(
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
+                internetEnabled = externalState.internetEnabled,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
                 appUserReportRecords = commonReportRecordsUiState.appUserReportRecords,
                 onClickReportRecord = {

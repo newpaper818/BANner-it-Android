@@ -1,6 +1,8 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
+import com.fitfit.core.model.dto.EditBannerInfoResponseDTO
 import com.fitfit.core.model.dto.GetReportRecordResponseDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
@@ -14,6 +16,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Multipart
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Part
 
@@ -61,7 +64,11 @@ interface RetrofitApiService {
 
     ): Response<GetReportRecordResponseDTO>
 
-
+    @PATCH("banners/update")
+    fun editBannerStatus(
+        @Header("Authorization") jwt: String,
+        @Body editBannerInfoRequestDTO: EditBannerInfoRequestDTO
+    ): Response<EditBannerInfoResponseDTO>
 
 
 

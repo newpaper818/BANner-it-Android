@@ -32,8 +32,12 @@
     <!-- DialogButton.kt -->
     <string name="button_cancel">취소</string>
     <string name="button_ok">확인</string>
+    <string name="button_save">저장</string>
+
 
     <!--dialog/ =================================================================================-->
+    <!-- SelectBannerStatusDialog.kt -->
+    <string name="set_banner_status">현수막 상태 변경</string>
 
 
 

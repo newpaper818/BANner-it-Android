@@ -1,6 +1,7 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 
 interface DbRemoteDataSource {
@@ -60,5 +61,11 @@ interface DbRemoteDataSource {
     suspend fun getAllReportRecords(
 
     ): List<ReportRecord>?
+
+    suspend fun editBannerInfo(
+        jwt: String,
+        reportId: Int,
+        bannerInfo: List<BannerInfo>
+    ): Boolean
 }
 
