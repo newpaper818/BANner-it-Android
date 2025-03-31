@@ -1,6 +1,5 @@
 package com.fitfit.core.ui.ui.dialog
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
@@ -12,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -23,9 +21,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.ui.designsystem.components.BannerStatusLabel
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.ui.R
 import com.fitfit.core.ui.ui.dialog.component.CancelDialogButton
@@ -58,7 +56,7 @@ fun SelectBannerStatusDialog(
                     .background(MaterialTheme.colorScheme.surfaceBright)
             ) {
                 items(bannerStatusList) { bannerStatus ->
-                    ExerciseCard(
+                    BannerStatusCard(
                         bannerStatus = bannerStatus,
                         isSelected = bannerStatus == currentBannerStatus,
                         onClick = { it ->
@@ -92,19 +90,13 @@ fun SelectBannerStatusDialog(
 
 
 @Composable
-private fun ExerciseCard(
+private fun BannerStatusCard(
     bannerStatus: ReportStatus,
     isSelected: Boolean,
     onClick: (exercise: ReportStatus) -> Unit
 ){
-    val borderStroke = if (isSelected) BorderStroke(1.dp, MaterialTheme.colorScheme.primary)
-                    else null
-
     val cardColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer
                     else Color.Transparent
-
-    val cardTextStyle = if (isSelected) MaterialTheme.typography.bodyMedium.copy(color = MaterialTheme.colorScheme.primary, fontWeight = FontWeight.Bold)
-                        else MaterialTheme.typography.bodyMedium
 
     ClickableBox(
         containerColor = cardColor,
@@ -120,10 +112,7 @@ private fun ExerciseCard(
                 .padding(horizontal = 16.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(
-                text = stringResource(bannerStatus.textId),
-                style = cardTextStyle
-            )
+            BannerStatusLabel(bannerStatus)
         }
     }
 }
