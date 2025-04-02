@@ -7,6 +7,6 @@ enum class UserRole(
     @StringRes val textId: Int
 ) {
     ADMIN(R.string.administrator),
-    USER(R.string.user),
+    USER(R.string.normal_user),
     GUEST(R.string.guest)
 }
