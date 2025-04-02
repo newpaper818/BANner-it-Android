@@ -3,6 +3,7 @@ package com.fitfit.feature.more.editProfile.component
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,7 +47,7 @@ internal fun EditableProfileImage(
         MySpacerColumn(height = 6.dp)
 
         MyCard(
-            shape = MaterialTheme.shapes.extraLarge
+            shape = RoundedCornerShape(24.dp)
         ) {
             AutoLayoutTwoContents(
                 content1 = {

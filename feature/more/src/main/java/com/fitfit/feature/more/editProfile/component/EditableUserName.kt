@@ -61,7 +61,8 @@ internal fun EditableUserName(
         MyCard(
             modifier = Modifier
                 .fillMaxWidth()
-                .border(1.dp, borderColor, RoundedCornerShape(16.dp)),
+                .border(1.dp, borderColor, RoundedCornerShape(24.dp)),
+            shape = RoundedCornerShape(24.dp)
         ) {
             Row(
                 verticalAlignment = Alignment.CenterVertically,

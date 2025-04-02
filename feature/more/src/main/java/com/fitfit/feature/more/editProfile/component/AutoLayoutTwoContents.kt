@@ -25,7 +25,7 @@ internal fun AutoLayoutTwoContents(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(8.dp)
         ) {
             content1()
             MySpacerColumn(height = 12.dp)
@@ -37,7 +37,7 @@ internal fun AutoLayoutTwoContents(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(12.dp, 8.dp, 8.dp, 8.dp)
         ) {
             content1()
             MySpacerRow(width = 12.dp)
