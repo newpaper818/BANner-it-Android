@@ -5,6 +5,8 @@ import android.util.Log
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
+import com.fitfit.core.model.dto.UpdateUserDataDTO
+import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
 import com.fitfit.core.model.enums.UserRole
@@ -254,11 +256,41 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    override suspend fun updateProfile(
+    override suspend fun updateUserData(
         jwt: String,
         userName: String,
         userRole: UserRole
     ): Boolean {
-        return true
+        try {
+            val result = retrofitApiService.updateUserData(
+                jwt = jwt,
+                updateUserDataRequestDTO = UpdateUserDataRequestDTO(
+                    updateUserDataDTO = UpdateUserDataDTO(
+                        userName = userName,
+                        role = userRole.name
+                    )
+                )
+            )
+
+            val code = result.code()
+            val error = result.body()?.error
+
+            if (
+                code == 200
+                && error == null
+            ) {
+                return true
+            }
+            else {
+                Log.e(RETROFIT_TAG, "updateUserData result: $result")
+                Log.e(RETROFIT_TAG, "updateUserData headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "updateUserData body: ${result.body()}")
+                return false
+            }
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "updateUserData - $e")
+            return false
+        }
     }
 }

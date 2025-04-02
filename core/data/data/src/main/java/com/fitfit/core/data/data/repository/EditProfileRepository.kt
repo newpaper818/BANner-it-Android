@@ -13,7 +13,7 @@ class EditProfileRepository @Inject constructor(
         userName: String,
         userRole: UserRole
     ): Boolean {
-        return dbRemoteDataSource.updateProfile(
+        return dbRemoteDataSource.updateUserData(
             jwt = jwt,
             userName = userName,
             userRole = userRole

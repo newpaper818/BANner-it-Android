@@ -9,6 +9,8 @@ import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
 import com.fitfit.core.model.dto.ReportBannerResponseDTO
 import com.fitfit.core.model.dto.SignInResponseDTO
 import com.fitfit.core.model.dto.TestReportBannerResponseDTO
+import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
+import com.fitfit.core.model.dto.UpdateUserDataResponseDTO
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -69,6 +71,15 @@ interface RetrofitApiService {
         @Header("Authorization") jwt: String,
         @Body editBannerInfoRequestDTO: EditBannerInfoRequestDTO
     ): Response<EditBannerInfoResponseDTO>
+
+    @PATCH("users/update")
+    fun updateUserData(
+        @Header("Authorization") jwt: String,
+        @Body updateUserDataRequestDTO: UpdateUserDataRequestDTO
+    ): Response<UpdateUserDataResponseDTO>
+
+
+
 
 
 

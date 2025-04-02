@@ -70,7 +70,7 @@ interface DbRemoteDataSource {
     ): Boolean
 
 
-    suspend fun updateProfile(
+    suspend fun updateUserData(
         jwt: String,
         userName: String,
         userRole: UserRole
