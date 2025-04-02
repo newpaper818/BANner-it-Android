@@ -13,11 +13,27 @@
 
     <!--deleteAccount ===========================================================================-->
     <string name="delete_account">Delete account</string>
-
+    <string name="delete_account_explain">All data on that account will be deleted.\n\nSharing trip also deleted, so friend you invited won\'t be able to see your trip.\n\nDeleted account and data can not be recovered.</string>
+    <string name="re_auth_error">Authentication error. Do it later.</string>
+    <string name="re_auth_match_user">Authenticate with the currently signed in account.</string>
+    <string name="delete_account_error">Delete account error. Do it later.</string>
+    <string name="authenticating">Authenticating…</string>
+    <string name="authentication_with_google">Authenticate with Google</string>
+    <string name="authentication_with_apple">Authenticate with Apple</string>
+    <string name="dialog_delete_account">Are you sure to delete account?</string>
 
     <!--editProfile =============================================================================-->
     <string name="edit_profile">Edit profile</string>
-
+    <string name="profile_image">Profile image</string>
+    <string name="name">Name</string>
+    <string name="admin_settings">Admin settings</string>
+    <string name="no_name">No name</string>
+    <string name="snackbar_success_update_profile">Update profile success</string>
+    <string name="snackbar_fail_update_profile">Update profile error. Do it later.</string>
+    <string name="snackbar_no_changed">No changed</string>
+    <string name="connected_with">Connected with</string>
+    <string name="dialog_body_are_you_sure_to_exit">Are you sure to exit?\nUnsaved data will be delete.</string>
+    <string name="dialog_button_exit">Exit</string>
 
     <!--mainMore ================================================================================-->
     <string name="more">More</string>

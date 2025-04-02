@@ -1,6 +1,7 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 
@@ -66,6 +67,13 @@ interface DbRemoteDataSource {
         jwt: String,
         reportId: Int,
         bannerInfo: List<BannerInfo>
+    ): Boolean
+
+
+    suspend fun updateProfile(
+        jwt: String,
+        userName: String,
+        userRole: UserRole
     ): Boolean
 }
 

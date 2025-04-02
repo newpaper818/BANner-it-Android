@@ -7,6 +7,7 @@ import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
+import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -251,5 +252,13 @@ class RetrofitApi @Inject constructor(
             Log.e(RETROFIT_TAG, "editBannerInfo - $e")
             return false
         }
+    }
+
+    override suspend fun updateProfile(
+        jwt: String,
+        userName: String,
+        userRole: UserRole
+    ): Boolean {
+        return true
     }
 }

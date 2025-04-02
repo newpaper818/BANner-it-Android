@@ -35,12 +35,14 @@ fun DeleteAccountButton(
 @Composable
 fun ChangeProfileImageButton(
     onClick: () -> Unit,
+    enabled: Boolean,
     modifier: Modifier = Modifier
 ){
     MyIconTextButtonColumn(
         icon = MyIcons.changeProfileImage,
         text = stringResource(id = R.string.change_image),
         onClick = onClick,
+        enabled = enabled,
         containerColor = MaterialTheme.colorScheme.surface,
         contentColor = MaterialTheme.colorScheme.onSurface,
         modifier = modifier

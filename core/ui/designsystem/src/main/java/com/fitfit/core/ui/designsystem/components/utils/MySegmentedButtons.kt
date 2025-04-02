@@ -75,6 +75,7 @@ fun MySegmentedButtons(
 
     MyCard(
         modifier = modifier,
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         )
@@ -87,7 +88,7 @@ fun MySegmentedButtons(
                 modifier = modifier
                     .offset(selectedItemOffset.value.dp)
                     .padding(6.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(18.dp))
 
                     .width(width.dp / itemList.size)
                     .fillMaxHeight()
@@ -156,7 +157,7 @@ private fun MySegmentedButtonItem(
     CompositionLocalProvider(LocalRippleConfiguration provides noRippleConfiguration) {
         Box(
             modifier = modifier
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(18.dp))
                 .semantics {
                     stateDescription = if (isSelected) selected else unselected
                 }

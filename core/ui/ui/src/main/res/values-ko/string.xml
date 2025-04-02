@@ -61,8 +61,5 @@
     <!--InternetUnavailable.kt-->
     <string name="internet_unavailable_check_connection">인터넷 연결 없음\n인터넷 연결을 확인하세요.</string>
 
-    <!--SegmentedButtons.kt-->
-    <string name="_24h">24시간</string>
-    <string name="_12h">12시간</string>
 
 </resources>
