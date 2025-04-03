@@ -11,6 +11,8 @@ import javax.inject.Inject
 class PreferencesRepository @Inject constructor(
     private val dbLocalDataSource: DbLocalDataSource
 ) {
+
+    //get ==========================================================================================
     suspend fun getJwtPreference(
         onGet: (jwtOriginal: String?) -> Unit
     ){
@@ -24,7 +26,7 @@ class PreferencesRepository @Inject constructor(
     }
 
 
-
+    //save =========================================================================================
     suspend fun saveJwtPreference(
         jwtOriginal: String?
     ){

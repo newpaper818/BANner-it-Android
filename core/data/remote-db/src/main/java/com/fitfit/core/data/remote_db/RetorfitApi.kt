@@ -34,18 +34,13 @@ class RetrofitApi @Inject constructor(
                 idTokenRequestDTO = IdTokenRequestDTO(idToken = userGoogleIdToken)
             )
 
-            //result
-            val code = result.code()
-            val header = result.headers()
-            val error = result.body()?.error
-
             //data
-            val jwt = header["Authorization"]?.replace("Bearer ", "")
+            val jwt = result.headers()["Authorization"]?.replace("Bearer ", "")
             val userData = result.body()?.userDataDTO?.toUserData(jwt ?: "")
 
             if (
-                code == 200
-                && error == null
+                result.code() == 200
+                && result.body()?.error == null
                 && jwt != null
                 && userData != null
             ) {
@@ -68,6 +63,7 @@ class RetrofitApi @Inject constructor(
     ): Pair<String, UserData>? {
         try {
             val result = retrofitApiService.requestUserDataWithJwt(jwt = jwt)
+
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt body = ${result.body()}")
@@ -94,12 +90,9 @@ class RetrofitApi @Inject constructor(
                 )
             )
 
-            val code = result.code()
-            val error = result.body()?.error
-
             if (
-                code == 200
-                && error == null
+                result.code() == 200
+                && result.body()?.error == null
             ) {
                 return true
             }
@@ -168,16 +161,11 @@ class RetrofitApi @Inject constructor(
                 jwt = jwt
             )
 
-            //result
-            val code = result.code()
-            val error = result.body()?.error
-            val reportRecords = result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
-
             if (
-                code == 200
-                && error == null
+                result.code() == 200
+                && result.body()?.error == null
             ) {
-                return reportRecords
+                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
                 Log.e(RETROFIT_TAG, "getAppUserReportRecords result: $result")
@@ -197,16 +185,11 @@ class RetrofitApi @Inject constructor(
         try {
             val result = retrofitApiService.getAllReportRecords()
 
-            //result
-            val code = result.code()
-            val error = result.body()?.error
-            val reportRecords = result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
-
             if (
-                code == 200
-                && error == null
+                result.code() == 200
+                && result.body()?.error == null
             ) {
-                return reportRecords
+                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
                 Log.e(RETROFIT_TAG, "getAllReportRecords result: $result")
@@ -234,12 +217,9 @@ class RetrofitApi @Inject constructor(
                 )
             )
 
-            val code = result.code()
-            val error = result.body()?.error
-
             if (
-                code == 200
-                && error == null
+                result.code() == 200
+                && result.body()?.error == null
             ) {
                 return true
             }
@@ -272,12 +252,9 @@ class RetrofitApi @Inject constructor(
                 )
             )
 
-            val code = result.code()
-            val error = result.body()?.error
-
             if (
-                code == 200
-                && error == null
+                result.code() == 200
+                && result.body()?.error == null
             ) {
                 return true
             }
@@ -290,6 +267,33 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "updateUserData - $e")
+            return false
+        }
+    }
+
+    override suspend fun deleteAccount(
+        jwt: String
+    ): Boolean {
+        try {
+            val result = retrofitApiService.deleteAccount(
+                jwt = jwt
+            )
+
+            if (
+                result.code() == 200
+                && result.body()?.error == null
+            ) {
+                return true
+            }
+            else {
+                Log.e(RETROFIT_TAG, "deleteAccount result: $result")
+                Log.e(RETROFIT_TAG, "deleteAccount headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "deleteAccount body: ${result.body()}")
+                return false
+            }
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "deleteAccount - $e")
             return false
         }
     }

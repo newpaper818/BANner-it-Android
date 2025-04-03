@@ -36,6 +36,9 @@
 
 
     <!--dialog/ =================================================================================-->
+    <!--DeletingAccountDialog.kt-->
+    <string name="deleting_account">계정 삭제하는 중…</string>
+
     <!-- SelectBannerStatusDialog.kt -->
     <string name="set_banner_status">현수막 상태 변경</string>
 

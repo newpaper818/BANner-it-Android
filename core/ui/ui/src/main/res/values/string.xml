@@ -36,6 +36,9 @@
 
 
     <!--dialog/ =================================================================================-->
+    <!--DeletingAccountDialog.kt-->
+    <string name="deleting_account">Deleting account…</string>
+
     <!-- SelectBannerStatusDialog.kt -->
     <string name="set_banner_status">Set banner status</string>
 

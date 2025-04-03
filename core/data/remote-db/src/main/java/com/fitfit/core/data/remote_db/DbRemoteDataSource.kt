@@ -8,6 +8,8 @@ import com.fitfit.core.model.report.ReportRecord
 interface DbRemoteDataSource {
 
 
+    //sign in --------------------------------------------------------------------------------------
+
     /**
      * request idToken /
      * sign up user /
@@ -40,7 +42,7 @@ interface DbRemoteDataSource {
     ): Pair<String, UserData>?
 
 
-
+    //report banner --------------------------------------------------------------------------------
     suspend fun postBannerReport(
         jwt: String,
         userId: Int,
@@ -55,6 +57,10 @@ interface DbRemoteDataSource {
     ): Boolean
 
 
+
+
+
+    //get report records ---------------------------------------------------------------------------
     suspend fun getAppUserReportRecords(
         jwt: String,
     ): List<ReportRecord>?
@@ -63,6 +69,10 @@ interface DbRemoteDataSource {
 
     ): List<ReportRecord>?
 
+
+
+
+    //edit report records --------------------------------------------------------------------------
     suspend fun editBannerInfo(
         jwt: String,
         reportId: Int,
@@ -70,10 +80,20 @@ interface DbRemoteDataSource {
     ): Boolean
 
 
+
+    //account --------------------------------------------------------------------------------------
     suspend fun updateUserData(
         jwt: String,
         userName: String,
         userRole: UserRole
     ): Boolean
+
+    /**
+     * ⚠️ DELETE ACCOUNT ⚠️
+     */
+    suspend fun deleteAccount(
+        jwt: String
+    ): Boolean
+
 }
 

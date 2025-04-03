@@ -13,7 +13,7 @@
 
     <!--deleteAccount ===========================================================================-->
     <string name="delete_account">Delete account</string>
-    <string name="delete_account_explain">All data on that account will be deleted.\n\nSharing trip also deleted, so friend you invited won\'t be able to see your trip.\n\nDeleted account and data can not be recovered.</string>
+    <string name="delete_account_explain">All data on that account will be deleted.\n\nDeleted account and data can not be recovered.</string>
     <string name="re_auth_error">Authentication error. Do it later.</string>
     <string name="re_auth_match_user">Authenticate with the currently signed in account.</string>
     <string name="delete_account_error">Delete account error. Do it later.</string>
