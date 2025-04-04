@@ -14,6 +14,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
@@ -31,11 +32,14 @@ import com.fitfit.bannerit.navigation.mainMore.mainMoreScreen
 import com.fitfit.bannerit.navigation.mainMore.navigateToDeleteAccount
 import com.fitfit.bannerit.navigation.mainMore.navigateToEditProfile
 import com.fitfit.bannerit.navigation.mainMore.navigateToMainMore
+import com.fitfit.bannerit.navigation.mainMore.navigateToOpenSourceLicense
+import com.fitfit.bannerit.navigation.mainMore.openSourceLicenseScreen
 import com.fitfit.bannerit.navigation.mainMore.setDateTimeFormatScreen
 import com.fitfit.bannerit.navigation.mainMore.setThemeScreen
 import com.fitfit.bannerit.navigation.mainReport.cameraScreen
 import com.fitfit.bannerit.navigation.mainReport.mainReportScreen
 import com.fitfit.bannerit.navigation.mainReport.navigateToCamera
+import com.fitfit.bannerit.navigation.mainReport.navigateToMainReport
 import com.fitfit.bannerit.navigation.mainReport.navigateToReport
 import com.fitfit.bannerit.navigation.mainReport.reportScreen
 import com.fitfit.bannerit.navigation.signin.navigateToSignIn
@@ -344,7 +348,11 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
+                navigateToOpenSourceLicense = {
+                    mainNavController.navigateToOpenSourceLicense(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
             )
 
             editProfileScreen(
@@ -357,8 +365,24 @@ fun BannerItNavHost(
             deleteAccountScreen(
                 appViewModel = appViewModel,
                 externalState = externalState,
+                isDarkAppTheme = isDarkAppTheme,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
+                navigateToMainReportScreen = {
+                    mainNavController.navigateToMainReport(
+                        navOptions = navOptions {
+                            popUpTo(mainNavController.graph.findStartDestination().id) {
+                                inclusive = true
+                            }
+                            launchSingleTop = true
+                        }
+                    )
+                }
+            )
+
+            openSourceLicenseScreen(
+                externalState = externalState,
+                appViewModel = appViewModel,
+                navigateUp = navigateUp
             )
         }
     }

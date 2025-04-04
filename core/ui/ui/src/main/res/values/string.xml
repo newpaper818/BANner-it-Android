@@ -19,6 +19,17 @@
 
 
     <!--card/ ===================================================================================-->
+    <!-- AppIconCard.kt -->
+    <string name="bannerit_app_icon">Banner it app icon</string>
+
+    <!-- ContactCard.kt -->
+    <string name="contact">Contact</string>
+    <string name="contact_email" translatable="false">fitfitbannerit@gmail.com</string>
+
+    <!-- DeveloperCard.kt -->
+    <string name="developer">Developer</string>
+    <string name="developer_info" translatable="false">FE - 이세종\nBE - 정다영, 장유진\nAI - 박서진</string>
+
     <!-- UserProfileCard.kt -->
     <string name="user_info">User information</string>
     <string name="no_name">No name</string>
@@ -26,6 +37,11 @@
     <string name="connected_with">Connected with</string>
     <string name="my_profile_image">Profile image</string>
     <string name="default_profile_image">Default profile image</string>
+
+    <!-- VersionCard.kt -->
+    <string name="version">Version</string>
+    <string name="latest">(latest)</string>
+    <string name="old_version">(old ver)</string>
 
 
     <!--dialog/component/ =======================================================================-->
@@ -36,6 +52,9 @@
 
 
     <!--dialog/ =================================================================================-->
+    <!--DeletingAccountDialog.kt-->
+    <string name="deleting_account">Deleting account…</string>
+
     <!-- SelectBannerStatusDialog.kt -->
     <string name="set_banner_status">Set banner status</string>
 
@@ -61,8 +80,5 @@
     <!--InternetUnavailable.kt-->
     <string name="internet_unavailable_check_connection">Internet unavailable.\nCheck internet connection.</string>
 
-    <!--SegmentedButtons.kt-->
-    <string name="_24h">24h</string>
-    <string name="_12h">12h</string>
 
 </resources>

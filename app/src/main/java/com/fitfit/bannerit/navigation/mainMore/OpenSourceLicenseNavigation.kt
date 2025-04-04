@@ -1,8 +1,6 @@
 package com.fitfit.bannerit.navigation.mainMore
 
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,21 +13,18 @@ import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
-import com.fitfit.core.ui.ui.ErrorScreen
-import com.fitfit.feature.more.editProfile.EditProfileRoute
+import com.fitfit.feature.more.openSourceLicense.OpenSourceLicenseRoute
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
-private val screenDestination = ScreenDestination.EDIT_PROFILE
+private val screenDestination = ScreenDestination.OPEN_SOURCE_LICENSE
 
-fun NavController.navigateToEditProfile(navOptions: NavOptions? = null) =
+fun NavController.navigateToOpenSourceLicense(navOptions: NavOptions? = null) =
     navigate(screenDestination.route, navOptions)
 
-fun NavGraphBuilder.editProfileScreen(
-    appViewModel: AppViewModel,
+fun NavGraphBuilder.openSourceLicenseScreen(
     externalState: ExternalState,
-
-    navigateUp: () -> Unit,
-    navigateToSomeScreen: () -> Unit,
+    appViewModel: AppViewModel,
+    navigateUp: () -> Unit
 ) {
     composable(
         route = screenDestination.route,
@@ -42,25 +37,9 @@ fun NavGraphBuilder.editProfileScreen(
             appViewModel.updateCurrentScreenDestination(screenDestination)
         }
 
-        val appUiState by appViewModel.appUiState.collectAsState()
-
-        val widthSizeClass = externalState.windowSizeClass.widthSizeClass
-        val heightSizeClass = externalState.windowSizeClass.heightSizeClass
-
-
-        if (appUiState.appUserData != null) {
-            EditProfileRoute(
-                userData = appUiState.appUserData!!,
-                internetEnabled = externalState.internetEnabled,
-                spacerValue = externalState.windowSizeClass.spacerValue,
-                updateUserState = appViewModel::updateUserData,
-                navigateUp = navigateUp,
-            )
-        }
-        else {
-            ErrorScreen(
-                onClickGoBack = navigateUp
-            )
-        }
+        OpenSourceLicenseRoute(
+            startSpacerValue = externalState.windowSizeClass.spacerValue,
+            navigateUp = navigateUp
+        )
     }
 }

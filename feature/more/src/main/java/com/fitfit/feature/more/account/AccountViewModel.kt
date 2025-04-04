@@ -2,7 +2,6 @@ package com.fitfit.feature.more.account
 
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.PreferencesRepository
-import com.fitfit.core.model.enums.ProviderId
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

@@ -16,7 +16,7 @@
 
     <!--UserRole.kt-->
     <string name="administrator">Administrator</string>
-    <string name="user">User</string>
+    <string name="normal_user">Normal user</string>
     <string name="guest">Guest</string>
 
 

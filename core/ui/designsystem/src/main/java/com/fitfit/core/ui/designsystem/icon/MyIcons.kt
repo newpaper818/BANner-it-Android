@@ -203,5 +203,5 @@ object MyIcons {
 
     //setting
     val openInNew = MyIcon(Icons.Rounded.OpenInNew,     22.dp, true, null, R.string.open_in_new)
-    val sendEmail = MyIcon(Icons.AutoMirrored.Rounded.Send,     22.dp, true, null, R.string.example)
+    val sendEmail = MyIcon(Icons.AutoMirrored.Rounded.Send,     22.dp, true, null, R.string.send_email)
 }

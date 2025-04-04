@@ -5,11 +5,13 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
@@ -75,6 +77,7 @@ fun MySegmentedButtons(
 
     MyCard(
         modifier = modifier,
+        shape = RoundedCornerShape(24.dp),
         colors = CardDefaults.cardColors(
             containerColor = containerColor
         )
@@ -87,7 +90,7 @@ fun MySegmentedButtons(
                 modifier = modifier
                     .offset(selectedItemOffset.value.dp)
                     .padding(6.dp)
-                    .clip(RoundedCornerShape(10.dp))
+                    .clip(RoundedCornerShape(18.dp))
 
                     .width(width.dp / itemList.size)
                     .fillMaxHeight()
@@ -155,8 +158,9 @@ private fun MySegmentedButtonItem(
 
     CompositionLocalProvider(LocalRippleConfiguration provides noRippleConfiguration) {
         Box(
+            contentAlignment = Alignment.Center,
             modifier = modifier
-                .clip(RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(18.dp))
                 .semantics {
                     stateDescription = if (isSelected) selected else unselected
                 }
@@ -168,8 +172,8 @@ private fun MySegmentedButtonItem(
                 }
         ) {
             MyCard(
-                modifier = Modifier.fillMaxWidth(),
-                shape = MaterialTheme.shapes.small,
+                modifier = Modifier.fillMaxSize(),
+                shape = RoundedCornerShape(18.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = containerColor,
                     contentColor = contentColor.value
@@ -178,9 +182,10 @@ private fun MySegmentedButtonItem(
                 Column(
                     modifier = Modifier
                         .scale(contentScale.value)
-                        .fillMaxWidth()
+                        .fillMaxSize()
                         .padding(12.dp),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     if (segmentedButtonItem.icon != null) {
                         DisplayIcon(icon = segmentedButtonItem.icon)

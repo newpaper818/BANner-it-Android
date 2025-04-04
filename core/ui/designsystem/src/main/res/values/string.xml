@@ -86,7 +86,9 @@
     <string name="collapse">Collapse</string>
 
     <string name="flip_camera">Flip camera</string>
+
     <string name="open_in_new">Open in new</string>
+    <string name="send_email">Send email</string>
 
 
 </resources>

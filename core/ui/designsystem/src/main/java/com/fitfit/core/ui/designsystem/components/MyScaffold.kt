@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.fitfit.core.ui.designsystem.components.button.AnimatedBottomSaveCancelButtons
 
 @Composable
 fun MyScaffold(
@@ -51,14 +52,14 @@ fun MyScaffold(
             content(paddingValues)
 
             //bottom save cancel bar
-//            AnimatedBottomSaveCancelButtons(
-//                visible = bottomSaveCancelBarVisible,
-//                onClickCancel = onClickCancel,
-//                onClickSave = onClickSave,
-//                saveEnabled = saveEnabled,
-//                use2PanesAndSpotScreen = use2PanesAndSpotScreen,
-//                modifier = buttonsModifier
-//            )
+            AnimatedBottomSaveCancelButtons(
+                visible = bottomSaveCancelBarVisible,
+                onClickCancel = onClickCancel,
+                onClickSave = onClickSave,
+                saveEnabled = saveEnabled,
+                use2PanesAndSpotScreen = use2PanesAndSpotScreen,
+                modifier = buttonsModifier
+            )
         }
     }
 }

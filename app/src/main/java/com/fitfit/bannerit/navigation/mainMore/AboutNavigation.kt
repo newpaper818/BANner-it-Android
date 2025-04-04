@@ -1,19 +1,16 @@
 package com.fitfit.bannerit.navigation.mainMore
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.fitfit.bannerit.BuildConfig
 import com.fitfit.bannerit.navigation.TopLevelDestination
 import com.fitfit.core.model.enums.ScreenDestination
-import com.fitfit.core.ui.designsystem.components.NAVIGATION_DRAWER_BAR_WIDTH
-import com.fitfit.core.ui.designsystem.components.NAVIGATION_RAIL_BAR_WIDTH
-import com.fitfit.core.ui.designsystem.components.utils.MySpacerRow
 import com.fitfit.feature.more.about.AboutRoute
 import com.fitfit.bannerit.navigation.enterTransition
 import com.fitfit.bannerit.navigation.exitTransition
@@ -21,8 +18,6 @@ import com.fitfit.bannerit.navigation.popEnterTransition
 import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.ExternalState
-import com.fitfit.bannerit.utils.WindowHeightSizeClass
-import com.fitfit.bannerit.utils.WindowWidthSizeClass
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
 private val screenDestination = ScreenDestination.ABOUT
@@ -35,7 +30,9 @@ fun NavGraphBuilder.aboutScreen(
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
-    navigateToSomeScreen: () -> Unit,
+    navigateToOpenSourceLicense: () -> Unit,
+
+    modifier: Modifier = Modifier
 ) {
     composable(
         route = screenDestination.route,
@@ -53,21 +50,15 @@ fun NavGraphBuilder.aboutScreen(
         val widthSizeClass = externalState.windowSizeClass.widthSizeClass
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
-        Row {
-            if (widthSizeClass == WindowWidthSizeClass.Compact) {
-                MySpacerRow(width = 0.dp)
-            } else if (
-                heightSizeClass == WindowHeightSizeClass.Compact
-                || widthSizeClass == WindowWidthSizeClass.Medium
-            ) {
-                MySpacerRow(width = NAVIGATION_RAIL_BAR_WIDTH)
-            } else if (widthSizeClass == WindowWidthSizeClass.Expanded) {
-                MySpacerRow(width = NAVIGATION_DRAWER_BAR_WIDTH)
-            }
-
-            AboutRoute(
-                navigateUp = navigateUp
-            )
-        }
+        AboutRoute(
+            use2Panes = externalState.windowSizeClass.use2Panes,
+            spacerValue = externalState.windowSizeClass.spacerValue,
+            currentAppVersionCode = BuildConfig.VERSION_CODE,
+            currentAppVersionName = BuildConfig.VERSION_NAME,
+            isDebugMode = BuildConfig.DEBUG,
+            navigateToOpenSourceLicense = navigateToOpenSourceLicense,
+            navigateUp = navigateUp,
+            modifier = modifier
+        )
     }
 }

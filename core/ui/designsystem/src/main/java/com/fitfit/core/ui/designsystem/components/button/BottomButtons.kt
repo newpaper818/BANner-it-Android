@@ -203,7 +203,7 @@ private fun BigNegativeButton(
             disabledContainerColor = MaterialTheme.colorScheme.surfaceDim,
             disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant
         ),
-        shape = MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.large,
         enabled = enabled,
         onClick = onClick
     ) {
@@ -224,7 +224,7 @@ private fun BigPositiveButton(
 ){
     Button(
         modifier = modifier.height(48.dp), //max width: 150.dp
-        shape = MaterialTheme.shapes.medium,
+        shape = MaterialTheme.shapes.large,
         colors = ButtonDefaults.buttonColors(
             disabledContainerColor = MaterialTheme.colorScheme.surfaceDim,
             disabledContentColor = MaterialTheme.colorScheme.onSurfaceVariant

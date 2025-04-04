@@ -5,6 +5,8 @@ plugins {
 
     alias(libs.plugins.googleDevToolsKsp)
     alias(libs.plugins.hilt)
+
+    alias(libs.plugins.aboutlibraries)
 }
 
 android {
@@ -64,6 +66,9 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    //open source license
+    implementation(libs.aboutlibraries)
 
     //test
     testImplementation(libs.junit)

@@ -1,11 +1,14 @@
 package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 
 interface DbRemoteDataSource {
 
+
+    //sign in --------------------------------------------------------------------------------------
 
     /**
      * request idToken /
@@ -39,7 +42,7 @@ interface DbRemoteDataSource {
     ): Pair<String, UserData>?
 
 
-
+    //report banner --------------------------------------------------------------------------------
     suspend fun postBannerReport(
         jwt: String,
         userId: Int,
@@ -54,6 +57,10 @@ interface DbRemoteDataSource {
     ): Boolean
 
 
+
+
+
+    //get report records ---------------------------------------------------------------------------
     suspend fun getAppUserReportRecords(
         jwt: String,
     ): List<ReportRecord>?
@@ -62,10 +69,31 @@ interface DbRemoteDataSource {
 
     ): List<ReportRecord>?
 
+
+
+
+    //edit report records --------------------------------------------------------------------------
     suspend fun editBannerInfo(
         jwt: String,
         reportId: Int,
         bannerInfo: List<BannerInfo>
     ): Boolean
+
+
+
+    //account --------------------------------------------------------------------------------------
+    suspend fun updateUserData(
+        jwt: String,
+        userName: String,
+        userRole: UserRole
+    ): Boolean
+
+    /**
+     * ⚠️ DELETE ACCOUNT ⚠️
+     */
+    suspend fun deleteAccount(
+        jwt: String
+    ): Boolean
+
 }
 
