@@ -68,6 +68,7 @@ data class AddressDTO(
 data class BannerInfoDTO(
     @Json(name = "banner_id")val bannerId: Int,
     @Json(name = "status") val status: String,
+    @Json(name = "category") val category: String,
     @Json(name = "company_name")val companyName: String,
     @Json(name = "phone_number")val phoneNumber: String,
 ){
@@ -75,6 +76,7 @@ data class BannerInfoDTO(
         return BannerInfo(
             bannerId = bannerId,
             status = ReportStatus.valueOf(status),
+            category = category,
             companyName = companyName,
             phoneNumber = phoneNumber
         )
