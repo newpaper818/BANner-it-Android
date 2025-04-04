@@ -200,6 +200,7 @@ private fun AboutScreen(
                     //open source license
                     ItemWithText(
                         text = stringResource(id = R.string.open_source_license),
+                        showClickableIcon = true,
                         onItemClick = {
                             navigateToOpenSourceLicense()
                         }
