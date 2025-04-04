@@ -1,4 +1,4 @@
-package com.newpaper.somewhere.feature.dialog.deletingAccount
+package com.fitfit.core.ui.ui.dialog
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

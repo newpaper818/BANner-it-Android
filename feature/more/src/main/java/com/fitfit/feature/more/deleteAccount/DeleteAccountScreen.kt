@@ -59,7 +59,7 @@ import com.fitfit.core.ui.ui.dialog.component.DialogButtonLayout
 import com.fitfit.core.utils.itemMaxWidth
 import com.fitfit.feature.more.R
 import com.fitfit.feature.more.deleteAccount.component.AuthButtonsWithText
-import com.newpaper.somewhere.feature.dialog.deletingAccount.DeletingAccountDialog
+import com.fitfit.core.ui.ui.dialog.DeletingAccountDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
