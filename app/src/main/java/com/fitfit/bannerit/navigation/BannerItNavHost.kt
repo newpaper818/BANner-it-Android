@@ -32,6 +32,8 @@ import com.fitfit.bannerit.navigation.mainMore.mainMoreScreen
 import com.fitfit.bannerit.navigation.mainMore.navigateToDeleteAccount
 import com.fitfit.bannerit.navigation.mainMore.navigateToEditProfile
 import com.fitfit.bannerit.navigation.mainMore.navigateToMainMore
+import com.fitfit.bannerit.navigation.mainMore.navigateToOpenSourceLicense
+import com.fitfit.bannerit.navigation.mainMore.openSourceLicenseScreen
 import com.fitfit.bannerit.navigation.mainMore.setDateTimeFormatScreen
 import com.fitfit.bannerit.navigation.mainMore.setThemeScreen
 import com.fitfit.bannerit.navigation.mainReport.cameraScreen
@@ -346,7 +348,11 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToOpenSourceLicense = { }
+                navigateToOpenSourceLicense = {
+                    mainNavController.navigateToOpenSourceLicense(
+                        navOptions = navOptions { launchSingleTop = true }
+                    )
+                }
             )
 
             editProfileScreen(
@@ -371,6 +377,12 @@ fun BannerItNavHost(
                         }
                     )
                 }
+            )
+
+            openSourceLicenseScreen(
+                externalState = externalState,
+                appViewModel = appViewModel,
+                navigateUp = navigateUp
             )
         }
     }

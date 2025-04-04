@@ -28,5 +28,6 @@ enum class ScreenDestination(
     ACCOUNT("account"),
     ABOUT("about"),
     DELETE_ACCOUNT("deleteAccount"),
-    EDIT_PROFILE("editProfile")
+    EDIT_PROFILE("editProfile"),
+    OPEN_SOURCE_LICENSE("openSourceLicense")
 }
