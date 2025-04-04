@@ -8,9 +8,9 @@ fun onClickPrivacyPolicy(
 ){
     val language = Locale.getDefault().language
 
-    when (language){
-        "ko" -> uriHandler.openUri(PRIVACY_POLICY_KOR_URL)
-        "en" -> uriHandler.openUri(PRIVACY_POLICY_ENG_URL)
-        else -> uriHandler.openUri(PRIVACY_POLICY_ENG_URL)
-    }
+//    when (language){
+//        "ko" -> uriHandler.openUri(PRIVACY_POLICY_KOR_URL)
+//        "en" -> uriHandler.openUri(PRIVACY_POLICY_ENG_URL)
+//        else -> uriHandler.openUri(PRIVACY_POLICY_ENG_URL)
+//    }
 }
