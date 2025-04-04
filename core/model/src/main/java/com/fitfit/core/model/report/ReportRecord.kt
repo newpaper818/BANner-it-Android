@@ -20,6 +20,7 @@ data class ReportRecord(
 data class BannerInfo(
     val bannerId: Int = 0,
     val status: ReportStatus = ReportStatus.RECEIVED,
+    val category: String = "",
     val companyName: String = "",
     val phoneNumber: String = "",
 )
@@ -55,36 +56,42 @@ val sampleReportRecord = ReportRecord(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.RECEIVED,
+            category = "정치",
             companyName = "aaaa",
             phoneNumber = "010-2222-3366"
         ),
         BannerInfo(
             bannerId = 1059,
             status = ReportStatus.ILLEGAL,
+            category = "의료",
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         ),
         BannerInfo(
             bannerId = 2373732,
             status = ReportStatus.ILLEGAL_DEMOLITION,
+            category = "광고",
             companyName = "long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text",
             phoneNumber = "010-2222-7890"
         ),
         BannerInfo(
             bannerId = 43458,
             status = ReportStatus.LEGAL,
+            category = "부동산",
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         ),
         BannerInfo(
             bannerId = 54,
             status = ReportStatus.LEGAL_DEMOLITION,
+            category = "기타",
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         ),
         BannerInfo(
             bannerId = 134377,
             status = ReportStatus.UNKNOWN,
+            category = "?",
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         )
@@ -106,12 +113,14 @@ val sampleReportRecord2 = ReportRecord(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,
+            category = "?",
             companyName = "aaaa",
             phoneNumber = "010-2222-3366"
         ),
         BannerInfo(
             bannerId = 1059,
             status = ReportStatus.ILLEGAL,
+            category = "?",
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         )
@@ -133,12 +142,14 @@ val sampleReportRecord3 = ReportRecord(
         BannerInfo(
             bannerId = 4978,
             status = ReportStatus.LEGAL,
+            category = "?",
             companyName = "aaaa",
             phoneNumber = "010-2222-3366"
         ),
         BannerInfo(
             bannerId = 1059,
             status = ReportStatus.ILLEGAL,
+            category = "?",
             companyName = "ff",
             phoneNumber = "010-2222-7890"
         )

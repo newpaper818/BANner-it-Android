@@ -100,6 +100,14 @@ fun ReportRecordBannerInfoCard(
             MySpacerColumn(10.dp)
 
             TextRow(
+                text1 = stringResource(R.string.category),
+                text2 = bannerInfo.category,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            )
+
+            MySpacerColumn(16.dp)
+
+            TextRow(
                 text1 = stringResource(R.string.company_name),
                 text2 = bannerInfo.companyName,
                 modifier = Modifier.padding(horizontal = 16.dp)

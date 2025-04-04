@@ -14,6 +14,7 @@
     <string name="status">Status</string>
     <string name="report_time">Report time</string>
     <string name="banner_id">Banner ID</string>
+    <string name="category">Category</string>
     <string name="company_name">Company name</string>
     <string name="phone_number">Phone number</string>
 
