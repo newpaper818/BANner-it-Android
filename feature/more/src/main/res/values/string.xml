@@ -2,7 +2,8 @@
 <resources>
     <!--about ===================================================================================-->
     <string name="about">About</string>
-
+    <string name="privacy_policy">Privacy policy</string>
+    <string name="open_source_license">Open source license</string>
 
     <!--account =================================================================================-->
     <string name="account">Account</string>

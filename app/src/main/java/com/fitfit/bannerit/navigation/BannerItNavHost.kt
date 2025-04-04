@@ -346,7 +346,7 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
-                navigateToSomeScreen = { }
+                navigateToOpenSourceLicense = { }
             )
 
             editProfileScreen(

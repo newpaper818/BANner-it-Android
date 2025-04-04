@@ -13,19 +13,35 @@
     <string name="report_id">신고 ID</string>
     <string name="status">상태</string>
     <string name="report_time">신고 시간</string>
+    <string name="banner_id">현수막 ID</string>
     <string name="company_name">회사명</string>
     <string name="phone_number">전화번호</string>
 
 
     <!--card/ ===================================================================================-->
+    <!-- AppIconCard.kt -->
+    <string name="bannerit_app_icon">Banner it 앱 아이콘</string>
+
+    <!-- ContactCard.kt -->
+    <string name="contact">문의</string>
+
+
+    <!-- DeveloperCard.kt -->
+    <string name="developer">개발자</string>
+
+
     <!-- UserProfileCard.kt -->
     <string name="user_info">사용자 정보</string>
     <string name="no_name">이름 없음</string>
     <string name="no_email">이메일 없음</string>
     <string name="connected_with">연결된 계정</string>
-    <string name="banner_id">현수막 ID</string>
     <string name="my_profile_image">프로필 사진</string>
     <string name="default_profile_image">기본 프로필 사진</string>
+
+    <!-- VersionCard.kt -->
+    <string name="version">버전</string>
+    <string name="latest">(최신)</string>
+    <string name="old_version">(구 버전)</string>
 
 
     <!--dialog/component/ =======================================================================-->

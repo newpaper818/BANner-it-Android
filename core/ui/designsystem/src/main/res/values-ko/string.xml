@@ -86,7 +86,9 @@
     <string name="collapse">접기</string>
 
     <string name="flip_camera">카메라 전환</string>
+
     <string name="open_in_new">새 창에서 열기</string>
+    <string name="send_email">이메일 보내기</string>
 
 
 </resources>
