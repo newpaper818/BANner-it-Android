@@ -52,10 +52,9 @@ fun NavGraphBuilder.reportRecordDetailScreen(
 
         if (
             commonReportRecordsUiState.currentReportRecord != null
-            && appUiState.appUserData != null
         ) {
             ReportRecordDetailRoute(
-                appUserData = appUiState.appUserData!!,
+                appUserData = appUiState.appUserData,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,

@@ -51,7 +51,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ReportRecordDetailRoute(
-    appUserData: UserData,
+    appUserData: UserData?,
     use2Panes: Boolean,
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
@@ -100,17 +100,19 @@ fun ReportRecordDetailRoute(
             showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
             setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
             editBannerStatus = { bannerId, bannerStatus ->
-                coroutineScope.launch {
-                    val result = reportRecordDetailViewModel.editBannerStatus(
-                        jwt = appUserData.jwt,
-                        reportId = reportRecord.reportId,
-                        bannerId = bannerId,
-                        bannerStatus = bannerStatus
-                    )
-                    reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
+                if (appUserData != null) {
+                    coroutineScope.launch {
+                        val result = reportRecordDetailViewModel.editBannerStatus(
+                            jwt = appUserData.jwt,
+                            reportId = reportRecord.reportId,
+                            bannerId = bannerId,
+                            bannerStatus = bannerStatus
+                        )
+                        reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
 
-                    if (!result) {
-                        editBannerStatusErrorSnackbar()
+                        if (!result) {
+                            editBannerStatusErrorSnackbar()
+                        }
                     }
                 }
             },
@@ -123,7 +125,7 @@ fun ReportRecordDetailRoute(
 
 @Composable
 private fun ReportRecordDetailScreen(
-    appUserData: UserData,
+    appUserData: UserData?,
     spacerValue: Dp,
     dateTimeFormat: DateTimeFormat,
     internetEnabled: Boolean,
@@ -212,7 +214,7 @@ private fun ReportRecordDetailScreen(
 
                 ImageCard(
                     modifier = itemModifier,
-                    imageUserId = appUserData.userId,
+                    imageUserId = reportRecord.createdUserId,
                     internetEnabled = internetEnabled,
                     isEditMode = false,
                     imagePathList = reportRecord.images,
@@ -240,7 +242,10 @@ private fun ReportRecordDetailScreen(
 
                     reportRecord.bannersInfo.forEach { bannerInfo ->
                         ReportRecordBannerInfoCard(
-                            showEditBannerStatusButton = internetEnabled && appUserData.role == UserRole.ADMIN,
+                            showEditBannerStatusButton =
+                                internetEnabled
+                                && appUserData != null
+                                && appUserData.role == UserRole.ADMIN,
                             bannerInfo = bannerInfo,
                             onClickEditBannerStatus = {
                                 setCurrentBannerInfo(bannerInfo)
