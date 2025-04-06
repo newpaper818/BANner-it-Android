@@ -6,6 +6,10 @@ import com.fitfit.core.model.dto.basic.LocationDTO
 import com.fitfit.core.model.report.ReportRecord
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
+import com.squareup.moshi.Moshi
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 
 fun ReportRecord.toReportRecordDTO(
 
@@ -25,6 +29,26 @@ fun ReportRecord.toReportRecordDTO(
         )
     )
 }
+
+//TODO test
+@JsonClass(generateAdapter = true)
+data class TestRequestDTO(
+    @Json(name = "test") val test: Int,
+)
+
+fun createJsonPartFromDto(
+    dto: TestRequestDTO
+): RequestBody {
+    val moshi = Moshi.Builder().build()
+    val adapter = moshi.adapter(TestRequestDTO::class.java)
+    val json = adapter.toJson(dto)
+    return json.toRequestBody("application/json; charset=utf-8".toMediaType())
+}
+
+
+
+
+
 
 //request
 @JsonClass(generateAdapter = true)

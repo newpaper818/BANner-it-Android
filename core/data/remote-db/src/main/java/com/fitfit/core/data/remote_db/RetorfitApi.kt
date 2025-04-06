@@ -5,17 +5,19 @@ import android.util.Log
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
+import com.fitfit.core.model.dto.TestRequestDTO
 import com.fitfit.core.model.dto.UpdateUserDataDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
+import com.fitfit.core.model.dto.createJsonPartFromDto
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
 import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -115,27 +117,30 @@ class RetrofitApi @Inject constructor(
         userId: Int,
         reportRecord: ReportRecord
     ): Boolean {
-        val imageFile = File(context.filesDir, reportRecord.images[0])
-        val request = RequestBody.create(
-            MediaType.parse("image/jpg"),
-            imageFile
-        )
+        val requestDTO = TestRequestDTO(test = userId)
+        val jsonPart = createJsonPartFromDto(requestDTO)
 
-        val userIdReq = RequestBody.create(
-            MediaType.parse("application/json"),
-            "{"
-                    + "\"user_id\" : \"$userId\""
-            + "}"
-        )
+//        val userIdReq = RequestBody.create(
+//            MediaType.parse("application/json"),
+//            "{"
+//                    + "\"test\" : \"$userId\""
+//            + "}"
+//        )
 
-        val photo = MultipartBody.Part.createFormData(
-            "photo", imageFile.name, request
-        )
+        val photos = reportRecord.images.map {
+            val imageFile = File(context.filesDir, it)
+            val requestFile = imageFile
+                .asRequestBody("image/jpg".toMediaTypeOrNull())
+
+            MultipartBody.Part.createFormData(
+                "image", imageFile.name, requestFile
+            )
+        }
 
         try {
             val result = retrofitApiService.postTestPhoto(
-                photo = photo,
-                userId = userIdReq
+                photos = photos,
+                userId = jsonPart
             )
             val error = result.body()?.error
 

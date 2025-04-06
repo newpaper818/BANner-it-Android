@@ -41,6 +41,9 @@ dependencies {
     //moshi
     implementation(libs.squareup.converter.moshi)
 
+    //okhttp
+    implementation(libs.squareup.okhttp)
+
     //google maps
     implementation(libs.google.play.services.maps)
 
