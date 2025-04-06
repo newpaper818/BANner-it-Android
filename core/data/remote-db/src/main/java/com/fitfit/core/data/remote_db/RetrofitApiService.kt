@@ -46,11 +46,11 @@ interface RetrofitApiService {
         @Body reportBannerRequestBodyDTO: ReportBannerRequestBodyDTO
     ): Response<ReportBannerResponseDTO>
 
-    //TODO test FIXME several photos
+    //TODO test
     @Multipart
     @POST("")
     fun postTestPhoto(
-        @Part photo: MultipartBody.Part,
+        @Part photos: List<MultipartBody.Part>,
         @Part("test") userId: RequestBody
     ): Response<TestReportBannerResponseDTO>
 
