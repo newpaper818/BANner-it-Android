@@ -10,11 +10,18 @@ data class ReportRecord(
 
     val createdUserId: Int = 0,
 
-    val images: List<String> = listOf(), //string(url)
+    val images: List<ReportImage> = listOf(), //string(url)
     val location: LatLng = LatLng(0.0, 0.0),
     val address: Address = Address(),
     val content: String = "",
     val bannersInfo: List<BannerInfo> = listOf()
+)
+
+data class ReportImage(
+    val fileName: String? = null,
+    val previewUrl: String? = null,
+    val preSignedUrl: String? = null, //upload url
+    val s3Key: String? = null
 )
 
 data class BannerInfo(
@@ -46,8 +53,8 @@ val sampleReportRecord = ReportRecord(
     createdUserId = 145,
 
     images = listOf(
-        "https://www.greenkorea.org/wp-content/uploads/2024/03/IMG_8832-615x820.jpg",
-        "https://lh6.googleusercontent.com/proxy/1ZoW7lMeLruPcXpuTv-OrWj_Ksq7roabBQoZ90yyZdCxl7dNUTEmdyuLjmQlL785mb16F3W3_DUxERbt6JKKG8-1YOfDhE08oefCjcrvsxqtwzvLkA"
+        ReportImage(previewUrl = "https://www.greenkorea.org/wp-content/uploads/2024/03/IMG_8832-615x820.jpg"),
+        ReportImage(previewUrl = "https://lh6.googleusercontent.com/proxy/1ZoW7lMeLruPcXpuTv-OrWj_Ksq7roabBQoZ90yyZdCxl7dNUTEmdyuLjmQlL785mb16F3W3_DUxERbt6JKKG8-1YOfDhE08oefCjcrvsxqtwzvLkA")
     ),
     location = LatLng(0.0, 0.0),
     address = Address(),
@@ -134,7 +141,7 @@ val sampleReportRecord3 = ReportRecord(
 
     createdUserId = 1234,
 
-    images = listOf(""),
+    images = listOf(ReportImage()),
     location = LatLng(0.0, 0.0),
     address = Address(),
     content = "report content",
