@@ -212,16 +212,16 @@ private fun ReportScreen(
             addUriList = addUriList.subList(0, 10)
         }
 
-        val fileList: MutableList<String> = mutableListOf()
+        val fileNames: MutableList<String> = mutableListOf()
 
         coroutineScope.launch {
             //save to internal storage
             addUriList.forEachIndexed { index, uri ->
-                val file = saveImageToInternalStorage(index, uri)
-                if (file != null)
-                    fileList.add(file)
+                val fileName = saveImageToInternalStorage(index, uri)
+                if (fileName != null)
+                    fileNames.add(fileName)
             }
-            addPhotos(fileList)
+            addPhotos(fileNames)
         }
     }
 
@@ -285,16 +285,16 @@ private fun ReportScreen(
                         imageUserId = appUserData.userId,
                         internetEnabled = internetEnabled,
                         isEditMode = true,
-                        images = reportRecord.images,
+                        images = reportRecord.images.mapNotNull { it.fileName },
                         isImageCountOver = isPhotoCountOver,
                         onClickImage = { initialImageIndex ->
-                            navigateToImage(reportRecord.images, initialImageIndex)
+                            navigateToImage(reportRecord.images.mapNotNull { it.fileName }, initialImageIndex)
                         },
 //                        onAddImages = { addedImageFiles ->
 //                            addPhotos(addedImageFiles)
 //                        },
-                        deleteImage = { deletedImageFiles ->
-                            deletePhotos(listOf(deletedImageFiles))
+                        deleteImage = { deletedImageFileName ->
+                            deletePhotos(listOf(deletedImageFileName))
                         },
                         isOverImage = { isOverImage ->
                             setPhotoCountOver(isOverImage)

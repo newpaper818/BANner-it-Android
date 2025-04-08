@@ -217,10 +217,10 @@ private fun ReportRecordDetailScreen(
                     imageUserId = reportRecord.createdUserId,
                     internetEnabled = internetEnabled,
                     isEditMode = false,
-                    images = reportRecord.images,
+                    images = reportRecord.images.mapNotNull { it.previewUrl },
                     isImageCountOver = false,
                     onClickImage = { initialImageIndex ->
-                        navigateToImage(reportRecord.images, initialImageIndex)
+                        navigateToImage(reportRecord.images.mapNotNull { it.previewUrl }, initialImageIndex)
                     },
                     deleteImage = { _ -> },
                     isOverImage = { _ -> },
