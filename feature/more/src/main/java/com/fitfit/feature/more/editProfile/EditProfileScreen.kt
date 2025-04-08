@@ -236,7 +236,7 @@ private fun EditProfileScreen(
                 EditableProfileImage(
                     internetEnabled = internetEnabled,
                     userId = userData.userId,
-                    profileImage = editProfileUiState.userProfileImagePath,
+                    profileImagePreviewUrl = editProfileUiState.userProfileImagePath,
                     downloadImage = downloadImage,
                     onClickEditImage = onClickEditImage,
                     onClickDeleteImage = onClickDeleteImage,

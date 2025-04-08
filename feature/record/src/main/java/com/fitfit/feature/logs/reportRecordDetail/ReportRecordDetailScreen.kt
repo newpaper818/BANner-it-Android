@@ -217,7 +217,7 @@ private fun ReportRecordDetailScreen(
                     imageUserId = reportRecord.createdUserId,
                     internetEnabled = internetEnabled,
                     isEditMode = false,
-                    imagePathList = reportRecord.images,
+                    images = reportRecord.images,
                     isImageCountOver = false,
                     onClickImage = { initialImageIndex ->
                         navigateToImage(reportRecord.images, initialImageIndex)

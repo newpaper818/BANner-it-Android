@@ -24,7 +24,7 @@ import com.fitfit.feature.more.R
 internal fun EditableProfileImage(
     internetEnabled: Boolean,
     userId: Int,
-    profileImage: String?,
+    profileImagePreviewUrl: String?,
     downloadImage: (imagePath: String, profileUserId: String, (Boolean) -> Unit) -> Unit,
     onClickEditImage: () -> Unit,
     onClickDeleteImage: () -> Unit,
@@ -54,7 +54,7 @@ internal fun EditableProfileImage(
                     ProfileImage(
                         profileUserId = userId,
                         internetEnabled = internetEnabled,
-                        profileImagePath = profileImage,
+                        profileImagePreviewUrl = profileImagePreviewUrl,
                     )
                 },
                 content2 = {

@@ -13,13 +13,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
+/**
+ *
+ * @property images image preview url or image file name
+ */
 data class ReportUiState(
     val appUserReportRecords: List<ReportRecord> = listOf(),
     val allReportRecords: List<ReportRecord> = listOf(),
 
     val currentReportRecord: ReportRecord? = null,
 
-    val imageList: List<String> = listOf(),
+    val images: List<String> = listOf(),
     val initialImageIndex: Int = 0
 )
 
@@ -57,12 +61,12 @@ class CommonReportRecordsViewModel @Inject constructor(
     }
 
     fun setImageListAndInitialImageIndex(
-        imageList: List<String>,
+        images: List<String>,
         initialImageIndex: Int
     ) {
         _reportUiState.update {
             it.copy(
-                imageList = imageList,
+                images = images,
                 initialImageIndex = initialImageIndex
             )
         }
