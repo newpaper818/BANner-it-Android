@@ -17,25 +17,22 @@ class ReportRepository @Inject constructor(
         reportRecord: ReportRecord,
         onResult: (Boolean) -> Unit
     ){
-
-//        val result = dbRemoteDataSource.sendTestImage(
-//            jwt = jwt,
-//            userId = userId,
-//            reportRecord = reportRecord
-//        )
-//        onResult(result)
-
-
         //get preSigned url
         val newReportImages = dbRemoteDataSource.getPreSignedUrl(
             reportImages = reportRecord.images
         )
 
-        //upload to S3
         if (newReportImages != null){
-            //TODO
-            onResult(false)
-            return
+
+            //upload to S3
+            val uploadImagesResult = dbRemoteDataSource.uploadImagesToS3(
+                reportImages = newReportImages
+            )
+
+            if (!uploadImagesResult) {
+                onResult(false)
+                return
+            }
         }
         else {
             onResult(false)
@@ -43,16 +40,12 @@ class ReportRepository @Inject constructor(
         }
 
         //report banner
-//        val result = dbRemoteDataSource.postBannerReport(
-//            jwt = jwt,
-//            userId = userId,
-//            reportRecord = reportRecord.copy(images = newReportImages)
-//        )
-//        onResult(result)
+        val reportBannerResult = dbRemoteDataSource.postBannerReport(
+            jwt = jwt,
+            userId = userId,
+            reportRecord = reportRecord.copy(images = newReportImages)
+        )
 
+        onResult(reportBannerResult)
     }
-
-
-    //get all report logs
-
 }

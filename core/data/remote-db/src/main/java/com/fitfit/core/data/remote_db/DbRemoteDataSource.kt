@@ -44,15 +44,20 @@ interface DbRemoteDataSource {
 
 
     //report banner --------------------------------------------------------------------------------
+    suspend fun getPreSignedUrl(
+        reportImages: List<ReportImage>
+    ): List<ReportImage>?
+
     suspend fun postBannerReport(
         jwt: String,
         userId: Int,
         reportRecord: ReportRecord
     ): Boolean
 
-    suspend fun getPreSignedUrl(
+    suspend fun uploadImagesToS3(
         reportImages: List<ReportImage>
-    ): List<ReportImage>?
+    ): Boolean
+
 
     //TODO delete after test
 //    suspend fun sendTestImage(

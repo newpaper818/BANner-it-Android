@@ -12,6 +12,7 @@ import com.fitfit.core.model.dto.SignInResponseDTO
 import com.fitfit.core.model.dto.GetPreSignedUrlResponseDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.UpdateUserDataResponseDTO
+import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -19,6 +20,8 @@ import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Url
 
 interface RetrofitApiService {
 
@@ -46,8 +49,9 @@ interface RetrofitApiService {
 
     @PUT
     fun uploadImageToS3(
-
-    )
+        @Url preSignedUrl: String,
+        @Part imageFile: MultipartBody.Part
+    ): Response<Unit>
 
     @POST("reports/save")
     fun postBannerReport(

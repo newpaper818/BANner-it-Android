@@ -15,6 +15,10 @@ import com.fitfit.core.model.report.BannerInfo
 import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import javax.inject.Inject
 
 private const val RETROFIT_TAG = "Retrofit"
@@ -75,36 +79,6 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    override suspend fun postBannerReport(
-        jwt: String,
-        userId: Int,
-        reportRecord: ReportRecord
-    ): Boolean {
-        try {
-            val result = retrofitApiService.postBannerReport(
-                jwt = jwt,
-                reportBannerRequestBodyDTO = reportRecord.toReportRecordDTO()
-            )
-
-            if (
-                result.code() == 200
-                && result.body()?.error == null
-            ) {
-                return true
-            }
-            else {
-                Log.e(RETROFIT_TAG, "postBannerReport result: $result")
-                Log.e(RETROFIT_TAG, "postBannerReport headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "postBannerReport body: ${result.body()}")
-                return false
-            }
-
-        } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "postBannerReport - $e")
-            return false
-        }
-    }
-
     override suspend fun getPreSignedUrl(
         reportImages: List<ReportImage>
     ): List<ReportImage>? {
@@ -136,6 +110,83 @@ class RetrofitApi @Inject constructor(
             return null
         }
     }
+
+    override suspend fun uploadImagesToS3(
+        reportImages: List<ReportImage>
+    ): Boolean {
+        try{
+            reportImages.forEach { reportImage ->
+                val preSignedUrl = reportImage.preSignedUrl
+
+                val imageFile = reportImage.fileName?.let { File(context.filesDir, it) }
+                val requestFile = imageFile?.asRequestBody("image/*".toMediaTypeOrNull())
+
+                val multipartBody = requestFile?.let {
+                    MultipartBody.Part.createFormData("image", imageFile.name, it)
+                }
+
+                if (preSignedUrl != null && multipartBody != null){
+                    val result = retrofitApiService.uploadImageToS3(
+                        preSignedUrl = preSignedUrl,
+                        imageFile = multipartBody
+                    )
+
+                    if (
+                        result.code() == 200
+                    ) {
+
+                    }
+                    else {
+                        Log.e(RETROFIT_TAG, "uploadImagesToS3 result: $result")
+                        Log.e(RETROFIT_TAG, "uploadImagesToS3 headers: ${result.headers()}")
+                        Log.e(RETROFIT_TAG, "uploadImagesToS3 body: ${result.body()}")
+                        return false
+                    }
+                }
+                else {
+                    Log.e(RETROFIT_TAG, "uploadImagesToS3 - preSignedUrl == null or multipartBody == null")
+                    return false
+                }
+            }
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "uploadImagesToS3 - $e")
+            return false
+        }
+
+        return true
+    }
+
+    override suspend fun postBannerReport(
+        jwt: String,
+        userId: Int,
+        reportRecord: ReportRecord
+    ): Boolean {
+        try {
+            val result = retrofitApiService.postBannerReport(
+                jwt = jwt,
+                reportBannerRequestBodyDTO = reportRecord.toReportRecordDTO()
+            )
+
+            if (
+                result.code() == 200
+                && result.body()?.error == null
+            ) {
+                return true
+            }
+            else {
+                Log.e(RETROFIT_TAG, "postBannerReport result: $result")
+                Log.e(RETROFIT_TAG, "postBannerReport headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "postBannerReport body: ${result.body()}")
+                return false
+            }
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "postBannerReport - $e")
+            return false
+        }
+    }
+
+
 
     //
 //    override suspend fun sendTestImage(
