@@ -3,24 +3,22 @@ package com.fitfit.core.data.remote_db
 import com.fitfit.core.model.dto.DeleteAccountResponseDTO
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.EditBannerInfoResponseDTO
+import com.fitfit.core.model.dto.GetPreSignedUrlRequestDTO
 import com.fitfit.core.model.dto.GetReportRecordResponseDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
 import com.fitfit.core.model.dto.ReportBannerResponseDTO
 import com.fitfit.core.model.dto.SignInResponseDTO
-import com.fitfit.core.model.dto.TestReportBannerResponseDTO
+import com.fitfit.core.model.dto.GetPreSignedUrlResponseDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.UpdateUserDataResponseDTO
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
-import retrofit2.http.Part
+import retrofit2.http.PUT
 
 interface RetrofitApiService {
 
@@ -40,19 +38,23 @@ interface RetrofitApiService {
 
 
     //report banner --------------------------------------------------------------------------------
+    // get preSigned url
+    @POST("presigned-url")
+    fun getPreSignedUrl(
+        @Body getPreSignedUrlRequestDTO: GetPreSignedUrlRequestDTO
+    ): Response<GetPreSignedUrlResponseDTO>
+
+    @PUT
+    fun uploadImageToS3(
+
+    )
+
     @POST("reports/save")
     fun postBannerReport(
         @Header("Authorization") jwt: String,
         @Body reportBannerRequestBodyDTO: ReportBannerRequestBodyDTO
     ): Response<ReportBannerResponseDTO>
 
-    //TODO test
-    @Multipart
-    @POST("")
-    fun postTestPhoto(
-        @Part photos: List<MultipartBody.Part>,
-        @Part("test") userId: RequestBody
-    ): Response<TestReportBannerResponseDTO>
 
 
 

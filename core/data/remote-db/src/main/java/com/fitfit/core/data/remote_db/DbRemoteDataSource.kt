@@ -3,6 +3,7 @@ package com.fitfit.core.data.remote_db
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
+import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 
 interface DbRemoteDataSource {
@@ -49,12 +50,16 @@ interface DbRemoteDataSource {
         reportRecord: ReportRecord
     ): Boolean
 
+    suspend fun getPreSignedUrl(
+        reportImages: List<ReportImage>
+    ): List<ReportImage>?
+
     //TODO delete after test
-    suspend fun sendTestImage(
-        jwt: String,
-        userId: Int,
-        reportRecord: ReportRecord
-    ): Boolean
+//    suspend fun sendTestImage(
+//        jwt: String,
+//        userId: Int,
+//        reportRecord: ReportRecord
+//    ): Boolean
 
 
 

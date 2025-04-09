@@ -61,7 +61,7 @@ fun ReportRecordCard(
             ) {
                 if (reportRecord.images.isNotEmpty()){
                     ImageFromUrl(
-                        imageUrl = reportRecord.images[0],
+                        imageUrl = reportRecord.images[0].previewUrl ?: "",
                         contentDescription = stringResource(R.string.photo),
                         modifier = Modifier.fillMaxSize()
                     )

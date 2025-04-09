@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.dagger.hilt.android)
     ksp(libs.dagger.hilt.android.compiler)
 
+    //google maps
+    implementation(libs.google.play.services.maps)
 
     //test
     testImplementation(libs.junit)

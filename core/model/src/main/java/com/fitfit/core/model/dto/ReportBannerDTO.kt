@@ -3,6 +3,7 @@ package com.fitfit.core.model.dto
 import com.fitfit.core.model.dto.basic.AddressDTO
 import com.fitfit.core.model.dto.basic.ErrorDto
 import com.fitfit.core.model.dto.basic.LocationDTO
+import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -25,6 +26,7 @@ fun ReportRecord.toReportRecordDTO(
                 address2 = "",
                 address3 = "",
             ),
+            s3ImageKeys = images.mapNotNull { it.s3Key },
             content = content
         )
     )
@@ -46,10 +48,43 @@ fun createJsonPartFromDto(
 }
 
 
+//getPreSignedUrl
+//request
+@JsonClass(generateAdapter = true)
+data class GetPreSignedUrlRequestDTO(
+    @Json(name = "files")val imageFileNames: List<String>
+)
+
+//response
+@JsonClass(generateAdapter = true)
+data class GetPreSignedUrlResponseDTO(
+    @Json(name = "key_urls")val keyAndUrls: List<KeyAndUrlDTO>,
+    @Json(name = "error")val error: ErrorDto?
+)
+
+@JsonClass(generateAdapter = true)
+data class KeyAndUrlDTO(
+    @Json(name = "key")val s3Key: String,
+    @Json(name = "url")val preSignedUrl: String
+){
+    fun toReportImage(
+        prevReportImage: ReportImage
+    ): ReportImage{
+        return ReportImage(
+            fileName = prevReportImage.fileName,
+            previewUrl = prevReportImage.previewUrl,
+            preSignedUrl = preSignedUrl,
+            s3Key = s3Key
+        )
+    }
+}
 
 
 
 
+
+
+//reportBanner
 //request
 @JsonClass(generateAdapter = true)
 data class ReportBannerRequestBodyDTO(
@@ -60,6 +95,7 @@ data class ReportBannerRequestBodyDTO(
 data class ReportBannerRequestDTO(
     @Json(name = "location")val locationDTO: LocationDTO,
     @Json(name = "address")val addressDTO: AddressDTO,
+    @Json(name = "image_keys")val s3ImageKeys: List<String>,
     @Json(name = "content")val content: String,
 )
 
@@ -67,11 +103,7 @@ data class ReportBannerRequestDTO(
 
 //response
 @JsonClass(generateAdapter = true)
-data class TestReportBannerResponseDTO(
-    @Json(name = "error")val error: ErrorDto?
-)
-
-@JsonClass(generateAdapter = true)
 data class ReportBannerResponseDTO(
     @Json(name = "error")val error: ErrorDto?
 )
+
