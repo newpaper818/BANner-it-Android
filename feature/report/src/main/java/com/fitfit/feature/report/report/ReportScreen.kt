@@ -110,7 +110,7 @@ fun ReportRoute(
         modifier = Modifier.zIndex(1f)
     ) {
         SendReportResultDialog(
-            success = reportUiState.sendReportResultIsSuccess == true,
+            success = reportUiState.sendReportResultIsSuccess,
             onClickGoBackHome = {
                 navigateUp()
             },

@@ -193,13 +193,14 @@ class ReportViewModel @Inject constructor(
     suspend fun sendBannerReport(
         appUserData: UserData
     ){
+        setShowSendReportResultDialog(true)
+
         reportRepository.sendBannerReport(
             jwt = appUserData.jwt,
             userId = appUserData.userId,
             reportRecord = _reportUiState.value.reportRecord,
             onResult = { result ->
                 setSendReportResultIsSuccess(result)
-                setShowSendReportResultDialog(true)
             }
         )
     }
