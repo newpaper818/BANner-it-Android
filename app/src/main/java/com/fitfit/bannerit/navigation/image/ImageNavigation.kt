@@ -8,20 +8,15 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.fitfit.bannerit.navigation.TopLevelDestination
-import com.fitfit.bannerit.navigation.enterTransition
-import com.fitfit.bannerit.navigation.exitTransition
 import com.fitfit.bannerit.navigation.imageEnterTransition
 import com.fitfit.bannerit.navigation.imageExitTransition
 import com.fitfit.bannerit.navigation.imagePopEnterTransition
 import com.fitfit.bannerit.navigation.imagePopExitTransition
-import com.fitfit.bannerit.navigation.popEnterTransition
-import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
 import com.fitfit.feature.image.image.ImageRoute
-import com.fitfit.feature.signin.signin.SignInRoute
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
 private val screenDestination = ScreenDestination.IMAGE
@@ -52,7 +47,7 @@ fun NavGraphBuilder.imageScreen(
         ImageRoute(
             imageUerId = 1,
             internetEnabled = externalState.internetEnabled,
-            imagePathList = commonReportUiState.imageList,
+            images = commonReportUiState.images,
             initialImageIndex = commonReportUiState.initialImageIndex,
             navigateUp = navigateUp,
             downloadImage = {_,_,_ ->},

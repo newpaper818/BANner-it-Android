@@ -2,6 +2,7 @@ package com.fitfit.core.model.dto.basic
 
 import com.fitfit.core.model.report.Address
 import com.fitfit.core.model.report.BannerInfo
+import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.model.report.ReportStatus
 import com.google.android.gms.maps.model.LatLng
@@ -28,7 +29,7 @@ data class ReportRecordDTO(
             reportTime = ZonedDateTime.parse(reportTime),
             status = ReportStatus.valueOf(status),
             createdUserId = createdUserId,
-            images = images,
+            images = images.map { ReportImage(previewUrl = it) },
             location = locationDTO.toLatLng(),
             address = addressDTO.toAddress(),
             content = content,

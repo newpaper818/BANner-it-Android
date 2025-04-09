@@ -105,7 +105,7 @@ fun ImageFromUrl(
 fun ImageFromFile(
     internetEnabled: Boolean,
     imageUserId: Int,
-    imagePath: String,
+    imageFileName: String,
     contentDescription: String,
     downloadImage: (imagePath: String, imageUserId: Int, result: (Boolean) -> Unit) -> Unit,
 
@@ -115,7 +115,7 @@ fun ImageFromFile(
     onClick: () -> Unit = { }
 ){
     val context = LocalContext.current
-    val imageFile = File(context.filesDir, imagePath)
+    val imageFile = File(context.filesDir, imageFileName)
 
     var imageFileExit by rememberSaveable { mutableStateOf(imageFile.exists()) }
     var isLoading by rememberSaveable { mutableStateOf(false) }
@@ -164,7 +164,7 @@ fun ImageFromFile(
                 isLoading = true
                 isError = false
 
-                downloadImage(imagePath, imageUserId
+                downloadImage(imageFileName, imageUserId
                 ) {result ->
                     if (result) {
                         imageFileExit = true

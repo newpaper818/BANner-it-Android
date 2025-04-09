@@ -71,7 +71,7 @@ fun UserProfileCard(
             ProfileImage(
                 profileUserId = userData.userId,
                 internetEnabled = internetEnabled,
-                profileImagePath = userData.profileImageUrl,
+                profileImagePreviewUrl = userData.profileImageUrl,
                 size = profileImageSize,
                 modifier = Modifier.clearAndSetSemantics { }
             )
@@ -157,7 +157,7 @@ fun UserProfileCard(
  *
  * @param profileUserId
  * @param internetEnabled
- * @param profileImagePath it can be url or image file name
+ * @param profileImagePreviewUrl it can be url or image file name
  * @param downloadImage
  * @param modifier
  * @param size
@@ -166,7 +166,7 @@ fun UserProfileCard(
 fun ProfileImage(
     profileUserId: Int,
     internetEnabled: Boolean,
-    profileImagePath: String?,
+    profileImagePreviewUrl: String?,
 
     modifier: Modifier = Modifier,
     size: Dp = 80.dp
@@ -176,9 +176,9 @@ fun ProfileImage(
             .size(size)
             .clip(CircleShape)
     ) {
-        if (profileImagePath != null) {
+        if (profileImagePreviewUrl != null) {
             ImageFromUrl(
-                imageUrl = profileImagePath,
+                imageUrl = profileImagePreviewUrl,
                 contentDescription = stringResource(id = R.string.my_profile_image),
                 modifier = Modifier.fillMaxSize()
             )

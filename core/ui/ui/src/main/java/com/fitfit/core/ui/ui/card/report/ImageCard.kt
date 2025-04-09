@@ -62,12 +62,16 @@ import com.fitfit.core.ui.ui.R
 
 const val MAX_IMAGE_COUNT = 3
 
+/**
+ *
+ * @param images image preview url or image file name
+ */
 @Composable
 fun ImageCard(
     imageUserId: Int,
     internetEnabled: Boolean,
     isEditMode: Boolean,
-    imagePathList: List<String>,
+    images: List<String>,
     isImageCountOver: Boolean,
 
     onClickImage: (imageIndex: Int) -> Unit,
@@ -92,7 +96,7 @@ fun ImageCard(
 
 
     AnimatedVisibility(
-        visible = isEditMode || imagePathList.isNotEmpty(),
+        visible = isEditMode || images.isNotEmpty(),
         enter = scaleIn(animationSpec = tween(300))
                 + expandVertically(animationSpec = tween(300))
                 + fadeIn(animationSpec = tween(300)),
@@ -105,7 +109,7 @@ fun ImageCard(
             modifier = modifier
         ) {
             MyCard(
-                shape = if (isEditMode && imagePathList.isNotEmpty()) MaterialTheme.shapes.extraLarge
+                shape = if (isEditMode && images.isNotEmpty()) MaterialTheme.shapes.extraLarge
                         else MaterialTheme.shapes.medium,
                 modifier = modifier1
                     .fillMaxWidth()
@@ -113,7 +117,7 @@ fun ImageCard(
             ) {
                 Box {
                     Column {
-                        //edit mode
+                        //edit mode (image file name)
                         AnimatedVisibility(
                             visible = isEditMode,
                             enter = fadeIn(animationSpec = tween(0, 0)),
@@ -131,7 +135,7 @@ fun ImageCard(
 //                                }
 
                                 //if no image
-                                if (imagePathList.isEmpty()) {
+                                if (images.isEmpty()) {
                                     Text(
                                         text = stringResource(id = R.string.no_photos),
                                         style = MaterialTheme.typography.bodyLarge.copy(color = MaterialTheme.colorScheme.onSurfaceVariant),
@@ -146,22 +150,22 @@ fun ImageCard(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                 ) {
-                                    itemsIndexed(imagePathList) { index, imagePath ->
+                                    itemsIndexed(images) { index, imageFileName ->
 
-                                        key(imagePathList) {
+                                        key(images) {
 //                                            val slideState =
 //                                                slideStates[imagePath] ?: SlideState.NONE
 
                                             ImageWithDeleteIcon(
                                                 userId = imageUserId,
                                                 internetEnabled = internetEnabled,
-                                                imagePath = imagePath,
-                                                imagePathList = imagePathList,
+                                                imageFileName = imageFileName,
+                                                imagePathList = images,
                                                 onClickImage = {
                                                     onClickImage(index)
                                                 },
                                                 onDeleteClick = {
-                                                    deleteImage(imagePath)
+                                                    deleteImage(imageFileName)
                                                 },
                                                 downloadImage = downloadImage,
 //                                                slideState = slideState,
@@ -190,14 +194,14 @@ fun ImageCard(
                         }
                     }
 
-                    //not edit mode showing images
+                    //not edit mode showing images (image preview url)
                     Column {
                         AnimatedVisibility(
                             visible = !isEditMode,
                             enter = expandVertically(tween(500)),
                             exit = shrinkVertically(tween(500))
                         ) {
-                            val pageState = rememberPagerState { imagePathList.size }
+                            val pageState = rememberPagerState { images.size }
 
                             ClickableBox(
                                 modifier = Modifier
@@ -211,7 +215,7 @@ fun ImageCard(
                                     beyondViewportPageCount = 3,
                                     pageContent = {
                                         ImageFromUrl(
-                                            imageUrl = imagePathList[it],
+                                            imageUrl = images[it],
                                             contentDescription = stringResource(id = R.string.photo),
                                             modifier = Modifier.fillMaxSize()
                                         )
@@ -226,9 +230,9 @@ fun ImageCard(
                                     }
                                 )
 
-                                if (imagePathList.size != 1)
+                                if (images.size != 1)
                                     ImageIndicateDots(
-                                        pageCount = imagePathList.size,
+                                        pageCount = images.size,
                                         currentPage = pageState.currentPage
                                     )
                             }
@@ -247,7 +251,7 @@ fun ImageCard(
 private fun ImageWithDeleteIcon(
     userId: Int,
     internetEnabled: Boolean,
-    imagePath: String,
+    imageFileName: String,
     imagePathList: List<String>,
     onClickImage: () -> Unit,
     onDeleteClick: () -> Unit,
@@ -324,7 +328,7 @@ private fun ImageWithDeleteIcon(
             ImageFromFile(
                 internetEnabled = internetEnabled,
                 imageUserId = userId,
-                imagePath = imagePath,
+                imageFileName = imageFileName,
                 contentDescription = stringResource(id = R.string.photo),
                 downloadImage = downloadImage,
                 modifier = Modifier.fillMaxSize()

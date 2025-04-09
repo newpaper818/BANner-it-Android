@@ -17,23 +17,35 @@ class ReportRepository @Inject constructor(
         reportRecord: ReportRecord,
         onResult: (Boolean) -> Unit
     ){
-//        val result = dbRemoteDataSource.postBannerReport(
-//            jwt = jwt,
-//            userId = userId,
-//            reportRecord = reportRecord
-//        )
-//        onResult(result)
+        //get preSigned url
+        val newReportImages = dbRemoteDataSource.getPreSignedUrl(
+            reportImages = reportRecord.images
+        )
 
-        //TODO delete after test - use above
-        val result = dbRemoteDataSource.sendTestImage(
+        if (newReportImages != null){
+
+            //upload to S3
+            val uploadImagesResult = dbRemoteDataSource.uploadImagesToS3(
+                reportImages = newReportImages
+            )
+
+            if (!uploadImagesResult) {
+                onResult(false)
+                return
+            }
+        }
+        else {
+            onResult(false)
+            return
+        }
+
+        //report banner
+        val reportBannerResult = dbRemoteDataSource.postBannerReport(
             jwt = jwt,
             userId = userId,
-            reportRecord = reportRecord
+            reportRecord = reportRecord.copy(images = newReportImages)
         )
-        onResult(result)
+
+        onResult(reportBannerResult)
     }
-
-
-    //get all report logs
-
 }

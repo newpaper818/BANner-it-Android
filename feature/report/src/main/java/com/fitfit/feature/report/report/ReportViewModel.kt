@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ImageRepository
 import com.fitfit.core.data.data.repository.ReportRepository
 import com.fitfit.core.model.data.UserData
+import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 import com.fitfit.core.ui.ui.card.report.MAX_IMAGE_COUNT
 import com.google.android.gms.maps.model.LatLng
@@ -102,9 +103,11 @@ class ReportViewModel @Inject constructor(
         }
     }
 
-    fun addPhotos(addedPhotos: List<String>) {
+    fun addPhotos(
+        addedPhotoFileNames: List<String>
+    ) {
         val photos = _reportUiState.value.reportRecord.images.toMutableList()
-        photos.addAll(addedPhotos)
+        photos.addAll(addedPhotoFileNames.map { ReportImage(fileName = it) })
         val newPhotos = photos.distinct().toMutableList()
 
         _reportUiState.update {
@@ -118,9 +121,11 @@ class ReportViewModel @Inject constructor(
         setPhotoCountOver(newPhotos.size > MAX_IMAGE_COUNT)
     }
 
-    fun deletePhotos(deletedPhotos: List<String>) {
-        val newPhotos = _reportUiState.value.reportRecord.images.toMutableList()
-        newPhotos.removeAll(deletedPhotos)
+    fun deletePhotos(
+        deletedPhotos: List<String>
+    ) {
+        val photos = _reportUiState.value.reportRecord.images.toMutableList()
+        val newPhotos = photos.filterNot { it.fileName in deletedPhotos}
 
         _reportUiState.update {
             it.copy(
@@ -188,13 +193,14 @@ class ReportViewModel @Inject constructor(
     suspend fun sendBannerReport(
         appUserData: UserData
     ){
+        setShowSendReportResultDialog(true)
+
         reportRepository.sendBannerReport(
             jwt = appUserData.jwt,
             userId = appUserData.userId,
             reportRecord = _reportUiState.value.reportRecord,
             onResult = { result ->
                 setSendReportResultIsSuccess(result)
-                setShowSendReportResultDialog(true)
             }
         )
     }

@@ -1,5 +1,9 @@
 package com.fitfit.feature.report.report.component
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.displayCutoutPadding
@@ -15,12 +19,13 @@ import androidx.compose.ui.res.stringResource
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.button.BottomGoBackButton
 import com.fitfit.core.ui.designsystem.components.button.BottomGoBackHomeButton
+import com.fitfit.core.ui.designsystem.components.utils.CircularLoadingIndicator
 import com.fitfit.core.ui.designsystem.icon.MyIcons
 import com.fitfit.feature.report.R
 
 @Composable
 fun SendReportResultDialog(
-    success: Boolean,
+    success: Boolean?,
     onClickGoBackHome: () -> Unit,
     onClickGoBack: () -> Unit
 ){
@@ -31,43 +36,67 @@ fun SendReportResultDialog(
             .imePadding()
     ) { paddingValues ->
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+        //loading indicator
+        AnimatedVisibility(
+            visible = success == null,
+            enter = fadeIn(tween(500)),
+            exit = fadeOut(tween(500))
         ) {
             Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
+                modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                //icon with text
-                if (success) {
-                    IconWithText(
-                        icon = MyIcons.check,
-                        text = stringResource(R.string.report_was_received_successfully)
-                    )
-                } else {
-                    IconWithText(
-                        icon = MyIcons.error,
-                        text = stringResource(R.string.error_occurred)
-                    )
-                }
+                CircularLoadingIndicator()
             }
-            //buttons
-            Box(
-                modifier = Modifier.fillMaxWidth(),
-                contentAlignment = Alignment.Center
+        }
+
+        AnimatedVisibility(
+            visible = success != null,
+            enter = fadeIn(tween(500)),
+            exit = fadeOut(tween(500))
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
             ) {
-                if (success) {
-                    BottomGoBackHomeButton(
-                        onClick = onClickGoBackHome
-                    )
-                } else {
-                    BottomGoBackButton(
-                        onClick = onClickGoBack
-                    )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    contentAlignment = Alignment.Center
+                ) {
+                    //icon with text
+                    if (success == true) {
+                        IconWithText(
+                            icon = MyIcons.check,
+                            text = stringResource(R.string.report_was_received_successfully)
+                        )
+                    }
+                    else {
+                        IconWithText(
+                            icon = MyIcons.error,
+                            text = stringResource(R.string.error_occurred)
+                        )
+                    }
+                }
+
+
+                //buttons
+                Box(
+                    modifier = Modifier.fillMaxWidth(),
+                    contentAlignment = Alignment.Center
+                ) {
+                    if (success == true) {
+                        BottomGoBackHomeButton(
+                            onClick = onClickGoBackHome
+                        )
+                    }
+                    else {
+                        BottomGoBackButton(
+                            onClick = onClickGoBack
+                        )
+                    }
                 }
             }
         }

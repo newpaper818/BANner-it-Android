@@ -4,15 +4,15 @@ import android.content.Context
 import android.util.Log
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
+import com.fitfit.core.model.dto.GetPreSignedUrlRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
-import com.fitfit.core.model.dto.TestRequestDTO
 import com.fitfit.core.model.dto.UpdateUserDataDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
-import com.fitfit.core.model.dto.createJsonPartFromDto
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
 import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.BannerInfo
+import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -64,7 +64,7 @@ class RetrofitApi @Inject constructor(
         jwt: String
     ): Pair<String, UserData>? {
         try {
-            val result = retrofitApiService.requestUserDataWithJwt(jwt = jwt)
+            val result = retrofitApiService.requestUserDataWithJwt(jwt = getJwtFormat(jwt))
 
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
@@ -79,6 +79,83 @@ class RetrofitApi @Inject constructor(
         }
     }
 
+    override suspend fun getPreSignedUrl(
+        reportImages: List<ReportImage>
+    ): List<ReportImage>? {
+        try {
+            val result = retrofitApiService.getPreSignedUrl(
+                getPreSignedUrlRequestDTO = GetPreSignedUrlRequestDTO(
+                    imageFileNames = reportImages.mapNotNull { it.fileName }
+                )
+            )
+
+            if (
+                result.code() == 200
+                && result.body()?.error == null
+            ) {
+                val newReportImages = result.body()?.keyAndUrls?.mapIndexed { index, keyAndUrlDTO ->
+                    keyAndUrlDTO.toReportImage(reportImages[index])
+                }
+                return newReportImages
+            }
+            else {
+                Log.e(RETROFIT_TAG, "getPreSignedUrl result: $result")
+                Log.e(RETROFIT_TAG, "getPreSignedUrl headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "getPreSignedUrl body: ${result.body()}")
+                return null
+            }
+
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "getPreSignedUrl - $e")
+            return null
+        }
+    }
+
+    override suspend fun uploadImagesToS3(
+        reportImages: List<ReportImage>
+    ): Boolean {
+        try{
+            reportImages.forEach { reportImage ->
+                val preSignedUrl = reportImage.preSignedUrl
+
+                val imageFile = reportImage.fileName?.let { File(context.filesDir, it) }
+                val requestFile = imageFile?.asRequestBody("image/*".toMediaTypeOrNull())
+
+                val multipartBody = requestFile?.let {
+                    MultipartBody.Part.createFormData("image", imageFile.name, it)
+                }
+
+                if (preSignedUrl != null && multipartBody != null){
+                    val result = retrofitApiService.uploadImageToS3(
+                        preSignedUrl = preSignedUrl,
+                        imageFile = multipartBody
+                    )
+
+                    if (
+                        result.code() == 200
+                    ) {
+
+                    }
+                    else {
+                        Log.e(RETROFIT_TAG, "uploadImagesToS3 result: $result")
+                        Log.e(RETROFIT_TAG, "uploadImagesToS3 headers: ${result.headers()}")
+                        Log.e(RETROFIT_TAG, "uploadImagesToS3 body: ${result.body()}")
+                        return false
+                    }
+                }
+                else {
+                    Log.e(RETROFIT_TAG, "uploadImagesToS3 - preSignedUrl == null or multipartBody == null")
+                    return false
+                }
+            }
+        } catch (e: Exception){
+            Log.e(RETROFIT_TAG, "uploadImagesToS3 - $e")
+            return false
+        }
+
+        return true
+    }
+
     override suspend fun postBannerReport(
         jwt: String,
         userId: Int,
@@ -86,10 +163,8 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.postBannerReport(
-                jwt = jwt,
-                reportBannerRequestBodyDTO = reportRecord.toReportRecordDTO(
-//                    userId = userId
-                )
+                jwt = getJwtFormat(jwt),
+                reportBannerRequestBodyDTO = reportRecord.toReportRecordDTO()
             )
 
             if (
@@ -111,14 +186,16 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    //TODO delete after test - use above
-    override suspend fun sendTestImage(
-        jwt: String,
-        userId: Int,
-        reportRecord: ReportRecord
-    ): Boolean {
-        val requestDTO = TestRequestDTO(test = userId)
-        val jsonPart = createJsonPartFromDto(requestDTO)
+
+
+    //
+//    override suspend fun sendTestImage(
+//        jwt: String,
+//        userId: Int,
+//        reportRecord: ReportRecord
+//    ): Boolean {
+//        val requestDTO = TestRequestDTO(test = userId)
+//        val jsonPart = createJsonPartFromDto(requestDTO)
 
 //        val userIdReq = RequestBody.create(
 //            MediaType.parse("application/json"),
@@ -127,43 +204,43 @@ class RetrofitApi @Inject constructor(
 //            + "}"
 //        )
 
-        val photos = reportRecord.images.map {
-            val imageFile = File(context.filesDir, it)
-            val requestFile = imageFile
-                .asRequestBody("image/jpg".toMediaTypeOrNull())
-
-            MultipartBody.Part.createFormData(
-                "image", imageFile.name, requestFile
-            )
-        }
-
-        try {
-            val result = retrofitApiService.postTestPhoto(
-                photos = photos,
-                userId = jsonPart
-            )
-            val error = result.body()?.error
-
-            Log.d(RETROFIT_TAG, "result = $result")
-
-            if (error == null)
-                return true
-            else
-                return false
-
-        } catch (e: Exception){
-            Log.e(RETROFIT_TAG, e.toString())
-            return false
-        }
-
-    }
+//        val photos = reportRecord.images.map {
+//            val imageFile = File(context.filesDir, it)
+//            val requestFile = imageFile
+//                .asRequestBody("image/jpg".toMediaTypeOrNull())
+//
+//            MultipartBody.Part.createFormData(
+//                "image", imageFile.name, requestFile
+//            )
+//        }
+//
+//        try {
+//            val result = retrofitApiService.postTestPhoto(
+//                photos = photos,
+//                userId = jsonPart
+//            )
+//            val error = result.body()?.error
+//
+//            Log.d(RETROFIT_TAG, "result = $result")
+//
+//            if (error == null)
+//                return true
+//            else
+//                return false
+//
+//        } catch (e: Exception){
+//            Log.e(RETROFIT_TAG, e.toString())
+//            return false
+//        }
+//
+//    }
 
     override suspend fun getAppUserReportRecords(
         jwt: String
     ): List<ReportRecord>? {
         try {
             val result = retrofitApiService.getAppUserReportRecords(
-                jwt = jwt
+                jwt = getJwtFormat(jwt)
             )
 
             if (
@@ -215,7 +292,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.editBannerStatus(
-                jwt = jwt,
+                jwt = getJwtFormat(jwt),
                 editBannerInfoRequestDTO = EditBannerInfoRequestDTO(
                     reportId = reportId,
                     bannerInfoIdWithStatusDTO = bannerInfo.map { it.toBannerInfoIdWithStatusDTO() }
@@ -248,7 +325,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.updateUserData(
-                jwt = jwt,
+                jwt = getJwtFormat(jwt),
                 updateUserDataRequestDTO = UpdateUserDataRequestDTO(
                     updateUserDataDTO = UpdateUserDataDTO(
                         userName = userName,
@@ -281,7 +358,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.deleteAccount(
-                jwt = jwt
+                jwt = getJwtFormat(jwt)
             )
 
             if (
@@ -302,4 +379,10 @@ class RetrofitApi @Inject constructor(
             return false
         }
     }
+}
+
+private fun getJwtFormat(
+    jwt: String
+): String{
+    return "Bearer $jwt"
 }

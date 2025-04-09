@@ -42,7 +42,7 @@ import net.engawapg.lib.zoomable.zoomable
 fun ImageRoute(
     imageUerId: Int,
     internetEnabled: Boolean,
-    imagePathList: List<String>,
+    images: List<String>,
     initialImageIndex: Int,
 
     navigateUp: () -> Unit,
@@ -71,14 +71,14 @@ fun ImageRoute(
 
     val pageState = rememberPagerState(
         initialPage = initialImageIndex,
-        pageCount = { imagePathList.size }
+        pageCount = { images.size }
     )
 
     ImageScreen(
         imageUerId = imageUerId,
         internetEnabled = internetEnabled,
         pageState = pageState,
-        imagePathList = imagePathList,
+        images = images,
         showImageOnly = showImageOnly,
         onClickBack = onClickBack,
         onClickImage = {
@@ -86,7 +86,7 @@ fun ImageRoute(
             systemUiController.isSystemBarsVisible = !showImageOnly
         },
         onClickDownloadImage = {
-            val saveResult = saveImageToExternalStorage(imagePathList[pageState.currentPage])
+            val saveResult = saveImageToExternalStorage(images[pageState.currentPage])
 
             if (saveResult) Toast.makeText(context, downloadCompleteText, Toast.LENGTH_SHORT).show()
             else            Toast.makeText(context, downloadErrorText, Toast.LENGTH_SHORT).show()
@@ -103,7 +103,7 @@ private fun ImageScreen(
     internetEnabled: Boolean,
 
     pageState: PagerState,
-    imagePathList: List<String>,
+    images: List<String>,
     showImageOnly: Boolean,
 
     onClickBack: () -> Unit,
@@ -117,9 +117,9 @@ private fun ImageScreen(
         topBar = {
             ImageTopAppBar(
                 visible = !showImageOnly,
-                title = "${pageState.currentPage + 1} / ${imagePathList.size}",
+                title = "${pageState.currentPage + 1} / ${images.size}",
                 navigationIconOnClick = { onClickBack() },
-                actionIcon1Onclick = { onClickDownloadImage(imagePathList[pageState.currentPage]) }
+                actionIcon1Onclick = { onClickDownloadImage(images[pageState.currentPage]) }
             )
         },
         bottomBar = {
@@ -161,9 +161,9 @@ private fun ImageScreen(
 
                         val a = this
 
-                        if ("https" in imagePathList[it]) {
+                        if ("https" in images[it]) {
                             ImageFromUrl(
-                                imageUrl = imagePathList[it],
+                                imageUrl = images[it],
                                 contentDescription = stringResource(id = R.string.image),
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -178,7 +178,7 @@ private fun ImageScreen(
                             ImageFromFile(
                                 internetEnabled = internetEnabled,
                                 imageUserId = imageUerId,
-                                imagePath = imagePathList[it],
+                                imageFileName = images[it],
                                 contentDescription = stringResource(id = R.string.image),
                                 downloadImage = { _, _, _ -> },
                                 modifier = Modifier
@@ -211,7 +211,7 @@ private fun ImageScreenPreview(){
                 imageUerId = 1,
                 internetEnabled = true,
                 pageState = rememberPagerState { 1 },
-                imagePathList = listOf("", ""),
+                images = listOf("", ""),
                 showImageOnly = false,
                 onClickBack = { },
                 onClickImage = { },
