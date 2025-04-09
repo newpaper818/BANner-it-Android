@@ -64,7 +64,7 @@ class RetrofitApi @Inject constructor(
         jwt: String
     ): Pair<String, UserData>? {
         try {
-            val result = retrofitApiService.requestUserDataWithJwt(jwt = jwt)
+            val result = retrofitApiService.requestUserDataWithJwt(jwt = getJwtFormat(jwt))
 
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
             Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
@@ -163,7 +163,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.postBannerReport(
-                jwt = jwt,
+                jwt = getJwtFormat(jwt),
                 reportBannerRequestBodyDTO = reportRecord.toReportRecordDTO()
             )
 
@@ -240,7 +240,7 @@ class RetrofitApi @Inject constructor(
     ): List<ReportRecord>? {
         try {
             val result = retrofitApiService.getAppUserReportRecords(
-                jwt = jwt
+                jwt = getJwtFormat(jwt)
             )
 
             if (
@@ -292,7 +292,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.editBannerStatus(
-                jwt = jwt,
+                jwt = getJwtFormat(jwt),
                 editBannerInfoRequestDTO = EditBannerInfoRequestDTO(
                     reportId = reportId,
                     bannerInfoIdWithStatusDTO = bannerInfo.map { it.toBannerInfoIdWithStatusDTO() }
@@ -325,7 +325,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.updateUserData(
-                jwt = jwt,
+                jwt = getJwtFormat(jwt),
                 updateUserDataRequestDTO = UpdateUserDataRequestDTO(
                     updateUserDataDTO = UpdateUserDataDTO(
                         userName = userName,
@@ -358,7 +358,7 @@ class RetrofitApi @Inject constructor(
     ): Boolean {
         try {
             val result = retrofitApiService.deleteAccount(
-                jwt = jwt
+                jwt = getJwtFormat(jwt)
             )
 
             if (
@@ -379,4 +379,10 @@ class RetrofitApi @Inject constructor(
             return false
         }
     }
+}
+
+private fun getJwtFormat(
+    jwt: String
+): String{
+    return "Bearer $jwt"
 }
