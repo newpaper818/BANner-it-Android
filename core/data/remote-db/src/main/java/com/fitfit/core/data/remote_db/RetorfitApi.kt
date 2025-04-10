@@ -46,9 +46,13 @@ class RetrofitApi @Inject constructor(
                 && jwt != null
                 && userData != null
             ) {
+                Log.d(RETROFIT_TAG, "requestUserDataWithIdToken success")
                 return userData
             }
             else {
+                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken jwt: $jwt")
+                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken userData: $userData")
+
                 Log.e(RETROFIT_TAG, "requestUserDataWithIdToken result: $result")
                 Log.e(RETROFIT_TAG, "requestUserDataWithIdToken headers: ${result.headers()}")
                 Log.e(RETROFIT_TAG, "requestUserDataWithIdToken body: ${result.body()}")
@@ -66,12 +70,27 @@ class RetrofitApi @Inject constructor(
         try {
             val result = retrofitApiService.requestUserDataWithJwt(jwt = getJwtFormat(jwt))
 
-            Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
-            Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
-            Log.d(RETROFIT_TAG, "requestUserDataWithJwt body = ${result.body()}")
+            val jwt = result.headers()["Authorization"]?.replace("Bearer ", "")
+            val userData = result.body()?.userDataDTO?.toUserData(jwt ?: "")
 
-            //TODO: get jwt, userData
-            return null
+            if (
+                result.code() == 200
+                && result.body()?.error == null
+                && jwt != null
+                && userData != null
+            ) {
+                Log.d(RETROFIT_TAG, "requestUserDataWithJwt success")
+                return Pair(jwt, userData)
+            }
+            else{
+                Log.e(RETROFIT_TAG, "requestUserDataWithJwt jwt: $jwt")
+                Log.e(RETROFIT_TAG, "requestUserDataWithJwt userData: $userData")
+
+                Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
+                Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
+                Log.d(RETROFIT_TAG, "requestUserDataWithJwt body = ${result.body()}")
+                return null
+            }
 
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, "requestUserDataWithJwt - $e")
@@ -96,6 +115,7 @@ class RetrofitApi @Inject constructor(
                 val newReportImages = result.body()?.keyAndUrls?.mapIndexed { index, keyAndUrlDTO ->
                     keyAndUrlDTO.toReportImage(reportImages[index])
                 }
+                Log.d(RETROFIT_TAG, "getPreSignedUrl success")
                 return newReportImages
             }
             else {
@@ -134,6 +154,7 @@ class RetrofitApi @Inject constructor(
                     if (
                         result.code() == 200
                     ) {
+                        Log.d(RETROFIT_TAG, "uploadImagesToS3 success")
 
                     }
                     else {
@@ -171,6 +192,7 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "postBannerReport success")
                 return true
             }
             else {
@@ -247,6 +269,7 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "getAppUserReportRecords success")
                 return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
@@ -271,6 +294,7 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "getAllReportRecords success")
                 return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
@@ -303,6 +327,7 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "editBannerInfo success")
                 return true
             }
             else {
@@ -338,6 +363,7 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "updateUserData success")
                 return true
             }
             else {
@@ -365,6 +391,7 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "deleteAccount success")
                 return true
             }
             else {
