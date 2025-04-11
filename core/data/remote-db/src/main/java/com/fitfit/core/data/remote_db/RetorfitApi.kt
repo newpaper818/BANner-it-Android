@@ -70,20 +70,20 @@ class RetrofitApi @Inject constructor(
         try {
             val result = retrofitApiService.requestUserDataWithJwt(jwt = getJwtFormat(jwt))
 
-            val jwt = result.headers()["Authorization"]?.replace("Bearer ", "")
-            val userData = result.body()?.userDataDTO?.toUserData(jwt ?: "")
+            val newJwt = result.headers()["Authorization"]?.replace("Bearer ", "")
+            val userData = result.body()?.userDataDTO?.toUserData(newJwt ?: "")
 
             if (
                 result.code() == 200
                 && result.body()?.error == null
-                && jwt != null
+                && newJwt != null
                 && userData != null
             ) {
                 Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt success")
-                return Pair(jwt, userData)
+                return Pair(newJwt, userData)
             }
             else{
-                Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt jwt: $jwt")
+                Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt jwt: $newJwt")
                 Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt userData: $userData")
 
                 Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt result = $result")

@@ -36,7 +36,7 @@ interface RetrofitApiService {
 
     /**API-11*/
     @POST("oauth/refresh")
-    fun requestUserDataWithJwt(
+    suspend fun requestUserDataWithJwt(
         @Header("Authorization") jwt: String,
     ): Response<SignInResponseDTO>
 
