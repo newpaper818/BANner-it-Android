@@ -157,7 +157,7 @@ class RetrofitApi @Inject constructor(
                     if (
                         result.code() == 200
                     ) {
-                        Log.d(RETROFIT_TAG, "uploadImagesToS3 success")
+                        Log.d(RETROFIT_TAG, "uploadImagesToS3 success - ${reportImage.s3Key}")
 
                     }
                     else {
