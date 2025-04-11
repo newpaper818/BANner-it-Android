@@ -48,19 +48,19 @@ interface RetrofitApiService {
     // get preSigned url
     /**API-13*/
     @POST("presigned-url")
-    fun getPreSignedUrl(
+    suspend fun getPreSignedUrl(
         @Body getPreSignedUrlRequestDTO: GetPreSignedUrlRequestDTO
     ): Response<GetPreSignedUrlResponseDTO>
 
     @PUT
-    fun uploadImageToS3(
+    suspend fun uploadImageToS3(
         @Url preSignedUrl: String,
         @Part imageFile: MultipartBody.Part
     ): Response<Unit>
 
     /**API-14*/
     @POST("reports/save")
-    fun postBannerReport(
+    suspend fun postBannerReport(
         @Header("Authorization") jwt: String,
         @Body reportBannerRequestBodyDTO: ReportBannerRequestBodyDTO
     ): Response<ReportBannerResponseDTO>
@@ -73,13 +73,13 @@ interface RetrofitApiService {
     //get report records ---------------------------------------------------------------------------
     /**API-15*/
     @GET("reports/logs/me")
-    fun getAppUserReportRecords(
+    suspend fun getAppUserReportRecords(
         @Header("Authorization") jwt: String,
     ): Response<GetReportRecordResponseDTO>
 
     /**API-16*/
     @GET("reports/logs")
-    fun getAllReportRecords(
+    suspend fun getAllReportRecords(
 
     ): Response<GetReportRecordResponseDTO>
 
@@ -90,7 +90,7 @@ interface RetrofitApiService {
     //edit report records --------------------------------------------------------------------------
     /**API-4*/
     @PATCH("banners/update")
-    fun editBannerStatus(
+    suspend fun editBannerStatus(
         @Header("Authorization") jwt: String,
         @Body editBannerInfoRequestDTO: EditBannerInfoRequestDTO
     ): Response<EditBannerInfoResponseDTO>
@@ -102,7 +102,7 @@ interface RetrofitApiService {
     //account --------------------------------------------------------------------------------------
     /**API-8*/
     @PATCH("users/update")
-    fun updateUserData(
+    suspend fun updateUserData(
         @Header("Authorization") jwt: String,
         @Body updateUserDataRequestDTO: UpdateUserDataRequestDTO
     ): Response<UpdateUserDataResponseDTO>
@@ -112,7 +112,7 @@ interface RetrofitApiService {
      */
     /**API-3*/
     @DELETE("users/delete")
-    fun deleteAccount(
+    suspend fun deleteAccount(
         @Header("Authorization") jwt: String,
     ): Response<DeleteAccountResponseDTO>
 }
