@@ -98,12 +98,12 @@ class RetrofitApi @Inject constructor(
         }
     }
 
-    override suspend fun getPreSignedUrl(
+    override suspend fun getPreSignedUrls(
         jwt: String,
         reportImages: List<ReportImage>
     ): List<ReportImage>? {
         try {
-            val result = retrofitApiService.getPreSignedUrl(
+            val result = retrofitApiService.getPreSignedUrls(
                 jwt = getJwtFormat(jwt),
                 getPreSignedUrlRequestDTO = GetPreSignedUrlRequestDTO(
                     imageFileNames = reportImages.mapNotNull { it.fileName }
@@ -117,18 +117,19 @@ class RetrofitApi @Inject constructor(
                 val newReportImages = result.body()?.keyAndUrls?.mapIndexed { index, keyAndUrlDTO ->
                     keyAndUrlDTO.toReportImage(reportImages[index])
                 }
-                Log.d(RETROFIT_TAG, "API-13 getPreSignedUrl success")
+                Log.d(RETROFIT_TAG, "API-13 getPreSignedUrls success")
+                Log.d(RETROFIT_TAG, "API-13 getPreSignedUrls body: ${result.body()}")
                 return newReportImages
             }
             else {
-                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl result: $result")
-                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls result: $result")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls body: ${result.body()}")
                 return null
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl - $e")
+            Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls - $e")
             return null
         }
     }

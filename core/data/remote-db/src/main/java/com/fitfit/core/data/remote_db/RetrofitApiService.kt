@@ -47,8 +47,8 @@ interface RetrofitApiService {
     //report banner --------------------------------------------------------------------------------
     // get preSigned url
     /**API-13*/
-    @POST("presigned-url")
-    suspend fun getPreSignedUrl(
+    @POST("presigned-urls")
+    suspend fun getPreSignedUrls(
         @Header("Authorization") jwt: String,
         @Body getPreSignedUrlRequestDTO: GetPreSignedUrlRequestDTO
     ): Response<GetPreSignedUrlResponseDTO>

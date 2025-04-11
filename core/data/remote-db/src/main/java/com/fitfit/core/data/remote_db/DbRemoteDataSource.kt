@@ -44,7 +44,7 @@ interface DbRemoteDataSource {
 
 
     //report banner --------------------------------------------------------------------------------
-    suspend fun getPreSignedUrl(
+    suspend fun getPreSignedUrls(
         jwt: String,
         reportImages: List<ReportImage>
     ): List<ReportImage>?
