@@ -46,20 +46,20 @@ class RetrofitApi @Inject constructor(
                 && jwt != null
                 && userData != null
             ) {
-                Log.d(RETROFIT_TAG, "requestUserDataWithIdToken success")
+                Log.d(RETROFIT_TAG, "API-2 requestUserDataWithIdToken success")
                 return userData
             }
             else {
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken jwt: $jwt")
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken userData: $userData")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken jwt: $jwt")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken userData: $userData")
 
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken result: $result")
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken result: $result")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "requestUserDataWithIdToken - $e")
+            Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken - $e")
             return null
         }
     }
@@ -79,21 +79,21 @@ class RetrofitApi @Inject constructor(
                 && jwt != null
                 && userData != null
             ) {
-                Log.d(RETROFIT_TAG, "requestUserDataWithJwt success")
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt success")
                 return Pair(jwt, userData)
             }
             else{
-                Log.e(RETROFIT_TAG, "requestUserDataWithJwt jwt: $jwt")
-                Log.e(RETROFIT_TAG, "requestUserDataWithJwt userData: $userData")
+                Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt jwt: $jwt")
+                Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt userData: $userData")
 
-                Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
-                Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
-                Log.d(RETROFIT_TAG, "requestUserDataWithJwt body = ${result.body()}")
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt result = $result")
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt headers = ${result.headers()}")
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt body = ${result.body()}")
                 return null
             }
 
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "requestUserDataWithJwt - $e")
+            Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt - $e")
             return null
         }
     }
@@ -115,18 +115,18 @@ class RetrofitApi @Inject constructor(
                 val newReportImages = result.body()?.keyAndUrls?.mapIndexed { index, keyAndUrlDTO ->
                     keyAndUrlDTO.toReportImage(reportImages[index])
                 }
-                Log.d(RETROFIT_TAG, "getPreSignedUrl success")
+                Log.d(RETROFIT_TAG, "API-13 getPreSignedUrl success")
                 return newReportImages
             }
             else {
-                Log.e(RETROFIT_TAG, "getPreSignedUrl result: $result")
-                Log.e(RETROFIT_TAG, "getPreSignedUrl headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "getPreSignedUrl body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl result: $result")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl body: ${result.body()}")
                 return null
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "getPreSignedUrl - $e")
+            Log.e(RETROFIT_TAG, "API-13 getPreSignedUrl - $e")
             return null
         }
     }
@@ -192,18 +192,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                Log.d(RETROFIT_TAG, "postBannerReport success")
+                Log.d(RETROFIT_TAG, "API-14 postBannerReport success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "postBannerReport result: $result")
-                Log.e(RETROFIT_TAG, "postBannerReport headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "postBannerReport body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-14 postBannerReport result: $result")
+                Log.e(RETROFIT_TAG, "API-14 postBannerReport headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-14 postBannerReport body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "postBannerReport - $e")
+            Log.e(RETROFIT_TAG, "API-14 postBannerReport - $e")
             return false
         }
     }
@@ -269,17 +269,17 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                Log.d(RETROFIT_TAG, "getAppUserReportRecords success")
+                Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords success")
                 return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
-                Log.e(RETROFIT_TAG, "getAppUserReportRecords result: $result")
-                Log.e(RETROFIT_TAG, "getAppUserReportRecords headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "getAppUserReportRecords body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords result: $result")
+                Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "getAppUserReportRecords - $e")
+            Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords - $e")
             return null
         }
     }
@@ -294,17 +294,17 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                Log.d(RETROFIT_TAG, "getAllReportRecords success")
+                Log.d(RETROFIT_TAG, "API-16 getAllReportRecords success")
                 return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
-                Log.e(RETROFIT_TAG, "getAllReportRecords result: $result")
-                Log.e(RETROFIT_TAG, "getAllReportRecords headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "getAllReportRecords body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-16 getAllReportRecords result: $result")
+                Log.e(RETROFIT_TAG, "API-16 getAllReportRecords headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-16 getAllReportRecords body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "getAllReportRecords - $e")
+            Log.e(RETROFIT_TAG, "API-16 getAllReportRecords - $e")
             return null
         }
     }
@@ -327,18 +327,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                Log.d(RETROFIT_TAG, "editBannerInfo success")
+                Log.d(RETROFIT_TAG, "API-4 editBannerInfo success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "editBannerInfo result: $result")
-                Log.e(RETROFIT_TAG, "editBannerInfo headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "editBannerInfo body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-4 editBannerInfo result: $result")
+                Log.e(RETROFIT_TAG, "API-4 editBannerInfo headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-4 editBannerInfo body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "editBannerInfo - $e")
+            Log.e(RETROFIT_TAG, "API-4 editBannerInfo - $e")
             return false
         }
     }
@@ -363,18 +363,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                Log.d(RETROFIT_TAG, "updateUserData success")
+                Log.d(RETROFIT_TAG, "API-8 updateUserData success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "updateUserData result: $result")
-                Log.e(RETROFIT_TAG, "updateUserData headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "updateUserData body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-8 updateUserData result: $result")
+                Log.e(RETROFIT_TAG, "API-8 updateUserData headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-8 updateUserData body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "updateUserData - $e")
+            Log.e(RETROFIT_TAG, "API-8 updateUserData - $e")
             return false
         }
     }
@@ -391,18 +391,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                Log.d(RETROFIT_TAG, "deleteAccount success")
+                Log.d(RETROFIT_TAG, "API-3 deleteAccount success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "deleteAccount result: $result")
-                Log.e(RETROFIT_TAG, "deleteAccount headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "deleteAccount body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-3 deleteAccount result: $result")
+                Log.e(RETROFIT_TAG, "API-3 deleteAccount headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-3 deleteAccount body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "deleteAccount - $e")
+            Log.e(RETROFIT_TAG, "API-3 deleteAccount - $e")
             return false
         }
     }
