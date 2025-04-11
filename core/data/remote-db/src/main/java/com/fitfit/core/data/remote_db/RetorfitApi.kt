@@ -99,10 +99,12 @@ class RetrofitApi @Inject constructor(
     }
 
     override suspend fun getPreSignedUrl(
+        jwt: String,
         reportImages: List<ReportImage>
     ): List<ReportImage>? {
         try {
             val result = retrofitApiService.getPreSignedUrl(
+                jwt = getJwtFormat(jwt),
                 getPreSignedUrlRequestDTO = GetPreSignedUrlRequestDTO(
                     imageFileNames = reportImages.mapNotNull { it.fileName }
                 )

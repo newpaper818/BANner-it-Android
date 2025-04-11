@@ -19,6 +19,7 @@ class ReportRepository @Inject constructor(
     ){
         //get preSigned url
         val newReportImages = dbRemoteDataSource.getPreSignedUrl(
+            jwt = jwt,
             reportImages = reportRecord.images
         )
 
