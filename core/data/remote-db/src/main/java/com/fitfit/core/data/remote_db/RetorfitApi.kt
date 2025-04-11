@@ -356,7 +356,7 @@ class RetrofitApi @Inject constructor(
                 updateUserDataRequestDTO = UpdateUserDataRequestDTO(
                     updateUserDataDTO = UpdateUserDataDTO(
                         userName = userName,
-                        role = userRole.name
+//                        role = userRole.name
                     )
                 )
             )
@@ -366,6 +366,7 @@ class RetrofitApi @Inject constructor(
                 && result.body()?.error == null
             ) {
                 Log.d(RETROFIT_TAG, "API-8 updateUserData success")
+                Log.d(RETROFIT_TAG, "API-8 updateUserData body: ${result.body()}")
                 return true
             }
             else {

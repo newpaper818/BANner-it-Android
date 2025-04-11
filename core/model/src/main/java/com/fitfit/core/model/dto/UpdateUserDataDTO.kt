@@ -12,12 +12,13 @@ data class UpdateUserDataRequestDTO(
 
 @JsonClass(generateAdapter = true)
 data class UpdateUserDataDTO(
-    @Json(name = "user_name")val userName: String,
-    @Json(name = "role")val role: String,
+    @Json(name = "name")val userName: String,
+//    @Json(name = "role")val role: String,
 )
 
 //response
 @JsonClass(generateAdapter = true)
 data class UpdateUserDataResponseDTO(
+    @Json(name = "data")val data: String?,
     @Json(name = "error")val error: ErrorDto?
 )
