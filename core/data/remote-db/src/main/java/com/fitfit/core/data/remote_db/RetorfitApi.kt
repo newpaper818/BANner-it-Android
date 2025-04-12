@@ -6,7 +6,6 @@ import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.GetPreSignedUrlRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
-import com.fitfit.core.model.dto.UpdateUserDataDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
@@ -353,10 +352,7 @@ class RetrofitApi @Inject constructor(
             val result = retrofitApiService.updateUserData(
                 jwt = getJwtFormat(jwt),
                 updateUserDataRequestDTO = UpdateUserDataRequestDTO(
-                    updateUserDataDTO = UpdateUserDataDTO(
-                        userName = userName,
-//                        role = userRole.name
-                    )
+                    userName = userName
                 )
             )
 

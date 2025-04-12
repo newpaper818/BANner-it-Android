@@ -7,7 +7,8 @@ import com.squareup.moshi.JsonClass
 //request
 @JsonClass(generateAdapter = true)
 data class UpdateUserDataRequestDTO(
-    @Json(name = "user_data")val updateUserDataDTO: UpdateUserDataDTO,
+//    @Json(name = "user_data")val updateUserDataDTO: UpdateUserDataDTO,
+    @Json(name = "name")val userName: String,
 )
 
 @JsonClass(generateAdapter = true)
