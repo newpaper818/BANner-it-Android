@@ -39,8 +39,8 @@ fun SendReportResultDialog(
         //loading indicator
         AnimatedVisibility(
             visible = success == null,
-            enter = fadeIn(tween(500)),
-            exit = fadeOut(tween(500))
+            enter = fadeIn(tween(300)),
+            exit = fadeOut(tween(300))
         ) {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -52,8 +52,8 @@ fun SendReportResultDialog(
 
         AnimatedVisibility(
             visible = success != null,
-            enter = fadeIn(tween(500)),
-            exit = fadeOut(tween(500))
+            enter = fadeIn(tween(300)),
+            exit = fadeOut(tween(300))
         ) {
             Column(
                 modifier = Modifier
