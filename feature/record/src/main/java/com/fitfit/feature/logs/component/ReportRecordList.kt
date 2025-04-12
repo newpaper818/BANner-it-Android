@@ -35,8 +35,8 @@ internal fun ReportRecordList(
 
     AnimatedVisibility(
         visible = !isReportRecordsEmpty,
-        enter = fadeIn(tween(400)),
-        exit = fadeOut(tween(400))
+        enter = fadeIn(tween(500)),
+        exit = fadeOut(tween(500))
     ) {
         LazyColumn(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -62,8 +62,8 @@ internal fun ReportRecordList(
 
     AnimatedVisibility(
         visible = isReportRecordsEmpty,
-        enter = fadeIn(tween(400)),
-        exit = fadeOut(tween(400))
+        enter = fadeIn(tween(500)),
+        exit = fadeOut(tween(500))
     ) {
         Box(
             modifier = Modifier
