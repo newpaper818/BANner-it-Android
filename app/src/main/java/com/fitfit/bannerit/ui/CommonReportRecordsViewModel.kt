@@ -72,6 +72,18 @@ class CommonReportRecordsViewModel @Inject constructor(
         }
     }
 
+    fun clearReportRecords(
+
+    ){
+        _reportUiState.update {
+            it.copy(
+                appUserReportRecords = listOf(),
+                allReportRecords = listOf(),
+                currentReportRecord = null
+            )
+        }
+    }
+
 
 
 
@@ -81,13 +93,6 @@ class CommonReportRecordsViewModel @Inject constructor(
         val newAppUserReportRecords = reportRecordsRepository.getAppUserReportRecords(jwt = jwt)
         if (newAppUserReportRecords != null)
             setAppUserReportRecords(newAppUserReportRecords)
-
-        //TODO delete after test
-        else {
-            val sampleList = listOf(sampleReportRecord, sampleReportRecord2, sampleReportRecord3)
-            delay(2000)
-            setAppUserReportRecords(sampleList)
-        }
     }
 
     suspend fun getAllReportRecords(
@@ -96,13 +101,6 @@ class CommonReportRecordsViewModel @Inject constructor(
         val newAdminReportRecords = reportRecordsRepository.getAllReportRecords(jwt = jwt)
         if (newAdminReportRecords != null)
             setAllReportRecords(newAdminReportRecords)
-
-        //TODO delete after test
-        else {
-            val sampleList = listOf(sampleReportRecord3, sampleReportRecord, sampleReportRecord2)
-            delay(2000)
-            setAllReportRecords(sampleList)
-        }
     }
 
 }

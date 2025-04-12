@@ -310,6 +310,7 @@ fun BannerItNavHost(
             //from main more  ======================================================================
             accountScreen(
                 appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
                 navigateToEditProfile = {
