@@ -4,25 +4,23 @@ import com.fitfit.core.model.dto.DeleteAccountResponseDTO
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.EditBannerInfoResponseDTO
 import com.fitfit.core.model.dto.GetPreSignedUrlRequestDTO
+import com.fitfit.core.model.dto.GetPreSignedUrlResponseDTO
 import com.fitfit.core.model.dto.GetReportRecordResponseDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
 import com.fitfit.core.model.dto.ReportBannerResponseDTO
 import com.fitfit.core.model.dto.SignInResponseDTO
-import com.fitfit.core.model.dto.GetPreSignedUrlResponseDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.UpdateUserDataResponseDTO
-import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.Header
-import retrofit2.http.Multipart
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Part
 import retrofit2.http.Url
 
 interface RetrofitApiService {
@@ -54,11 +52,10 @@ interface RetrofitApiService {
         @Body getPreSignedUrlRequestDTO: GetPreSignedUrlRequestDTO
     ): Response<GetPreSignedUrlResponseDTO>
 
-    @Multipart
     @PUT
     suspend fun uploadImageToS3(
         @Url preSignedUrl: String,
-        @Part imageFile: MultipartBody.Part
+        @Body image: RequestBody
     ): Response<Unit>
 
     /**API-14*/

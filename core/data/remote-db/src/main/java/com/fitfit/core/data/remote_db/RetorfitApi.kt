@@ -16,7 +16,6 @@ import com.fitfit.core.model.report.ReportImage
 import com.fitfit.core.model.report.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
@@ -142,16 +141,12 @@ class RetrofitApi @Inject constructor(
                 val preSignedUrl = reportImage.preSignedUrl
 
                 val imageFile = reportImage.fileName?.let { File(context.filesDir, it) }
-                val requestFile = imageFile?.asRequestBody("image/*".toMediaTypeOrNull())
+                val requestBody = imageFile?.asRequestBody("image/jpeg".toMediaTypeOrNull())
 
-                val multipartBody = requestFile?.let {
-                    MultipartBody.Part.createFormData("image", imageFile.name, it)
-                }
-
-                if (preSignedUrl != null && multipartBody != null){
+                if (preSignedUrl != null && requestBody != null){
                     val result = retrofitApiService.uploadImageToS3(
                         preSignedUrl = preSignedUrl,
-                        imageFile = multipartBody
+                        image = requestBody
                     )
 
                     if (
