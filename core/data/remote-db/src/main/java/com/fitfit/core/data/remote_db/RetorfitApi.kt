@@ -268,6 +268,7 @@ class RetrofitApi @Inject constructor(
                 && result.body()?.error == null
             ) {
                 Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords success")
+                Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords body: ${result.body()}")
                 return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
             }
             else {
