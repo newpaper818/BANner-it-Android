@@ -87,16 +87,20 @@ class CommonReportRecordsViewModel @Inject constructor(
         jwt: String
     ) {
         val newAppUserReportRecords = reportRecordsRepository.getAppUserReportRecords(jwt = jwt)
-        if (newAppUserReportRecords != null)
+        if (newAppUserReportRecords != null
+            && newAppUserReportRecords.map { it.reportId } != _reportUiState.value.appUserReportRecords.map { it.reportId }) {
             setAppUserReportRecords(newAppUserReportRecords)
+        }
     }
 
     suspend fun getAllReportRecords(
 
     ) {
         val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
-        if (newAdminReportRecords != null)
+        if (newAdminReportRecords != null
+            && newAdminReportRecords.map { it.reportId } != _reportUiState.value.allReportRecords.map { it.reportId }) {
             setAllReportRecords(newAdminReportRecords)
+        }
     }
 
 }

@@ -81,7 +81,6 @@ fun ImageFromUrl(
     AsyncImage(
         model = ImageRequest.Builder(context)
             .data(imageUrl)
-            .crossfade(true)
             .crossfade(300)
             .build(),
         contentDescription = contentDescription,
