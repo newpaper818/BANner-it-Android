@@ -269,7 +269,7 @@ class RetrofitApi @Inject constructor(
             ) {
                 Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords success")
                 Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords body: ${result.body()}")
-                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
+                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }?.sortedByDescending { it.reportTime }
             }
             else {
                 Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords result: $result")
@@ -294,7 +294,7 @@ class RetrofitApi @Inject constructor(
                 && result.body()?.error == null
             ) {
                 Log.d(RETROFIT_TAG, "API-16 getAllReportRecords success")
-                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
+                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }?.sortedByDescending { it.reportTime }
             }
             else {
                 Log.e(RETROFIT_TAG, "API-16 getAllReportRecords result: $result")
