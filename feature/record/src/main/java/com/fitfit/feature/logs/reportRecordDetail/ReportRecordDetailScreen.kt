@@ -85,42 +85,39 @@ fun ReportRecordDetailRoute(
         }
     }
 
+    ReportRecordDetailScreen(
+        appUserData = appUserData,
+        spacerValue = spacerValue,
+        dateTimeFormat = dateTimeFormat,
+        internetEnabled = internetEnabled,
+        snackBarHostState = snackBarHostState,
+        reportRecord = reportRecordDetailUiState.currentReportRecord,
 
-    if (reportRecordDetailUiState.currentReportRecord != null) {
-        ReportRecordDetailScreen(
-            appUserData = appUserData,
-            spacerValue = spacerValue,
-            dateTimeFormat = dateTimeFormat,
-            internetEnabled = internetEnabled,
-            snackBarHostState = snackBarHostState,
-            reportRecord = reportRecordDetailUiState.currentReportRecord!!,
+        currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
+        setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
+        showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
+        setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
+        editBannerStatus = { bannerId, bannerStatus ->
+            if (appUserData != null) {
+                coroutineScope.launch {
+                    val result = reportRecordDetailViewModel.editBannerStatus(
+                        jwt = appUserData.jwt,
+                        reportId = reportRecord.reportId,
+                        bannerId = bannerId,
+                        bannerStatus = bannerStatus
+                    )
+                    reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
 
-            currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
-            setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
-            showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
-            setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
-            editBannerStatus = { bannerId, bannerStatus ->
-                if (appUserData != null) {
-                    coroutineScope.launch {
-                        val result = reportRecordDetailViewModel.editBannerStatus(
-                            jwt = appUserData.jwt,
-                            reportId = reportRecord.reportId,
-                            bannerId = bannerId,
-                            bannerStatus = bannerStatus
-                        )
-                        reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
-
-                        if (!result) {
-                            editBannerStatusErrorSnackbar()
-                        }
+                    if (!result) {
+                        editBannerStatusErrorSnackbar()
                     }
                 }
-            },
+            }
+        },
 
-            navigateUp = navigateUp,
-            navigateToImage = navigateToImage
-        )
-    }
+        navigateUp = navigateUp,
+        navigateToImage = navigateToImage
+    )
 }
 
 @Composable

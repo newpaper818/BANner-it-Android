@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class ReportRecordDetailUiState(
-    val currentReportRecord: ReportRecord? = null,
+    val currentReportRecord: ReportRecord = ReportRecord(),
 
     val currentBannerInfo: BannerInfo? = null,
     val showSelectBannerStatusDialog: Boolean = false,
@@ -25,7 +25,7 @@ class ReportRecordDetailViewModel @Inject constructor(
     private val _reportRecordDetailUiState = MutableStateFlow(ReportRecordDetailUiState())
     val reportRecordDetailUiState = _reportRecordDetailUiState.asStateFlow()
 
-    fun setCurrentReportRecord(reportRecord: ReportRecord?){
+    fun setCurrentReportRecord(reportRecord: ReportRecord){
         _reportRecordDetailUiState.update {
             it.copy(currentReportRecord = reportRecord)
         }
