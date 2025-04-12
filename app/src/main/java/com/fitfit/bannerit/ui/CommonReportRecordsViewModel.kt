@@ -91,9 +91,9 @@ class CommonReportRecordsViewModel @Inject constructor(
     }
 
     suspend fun getAllReportRecords(
-
+        jwt: String
     ) {
-        val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
+        val newAdminReportRecords = reportRecordsRepository.getAllReportRecords(jwt = jwt)
         if (newAdminReportRecords != null)
             setAllReportRecords(newAdminReportRecords)
 

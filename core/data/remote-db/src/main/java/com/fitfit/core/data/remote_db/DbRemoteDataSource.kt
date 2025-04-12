@@ -77,7 +77,7 @@ interface DbRemoteDataSource {
     ): List<ReportRecord>?
 
     suspend fun getAllReportRecords(
-
+        jwt: String
     ): List<ReportRecord>?
 
 

@@ -19,7 +19,7 @@ data class ReportRecordDTO(
 
     @Json(name = "images") val images: List<String>,
     @Json(name = "location")val locationDTO: LocationDTO,
-    @Json(name = "address")val addressDTO: AddressDTO,
+//    @Json(name = "address")val addressDTO: AddressDTO,
     @Json(name = "content")val content: String,
     @Json(name = "banner_info")val bannerInfoDTO: List<BannerInfoDTO>,
 ){
@@ -31,7 +31,7 @@ data class ReportRecordDTO(
             createdUserId = createdUserId,
             images = images.map { ReportImage(previewUrl = it) },
             location = locationDTO.toLatLng(),
-            address = addressDTO.toAddress(),
+//            address = addressDTO.toAddress(),
             content = content,
             bannersInfo = bannerInfoDTO.map { it.toBannerInfo() }
         )

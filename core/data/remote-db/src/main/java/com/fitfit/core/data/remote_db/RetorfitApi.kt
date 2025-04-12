@@ -284,10 +284,12 @@ class RetrofitApi @Inject constructor(
     }
 
     override suspend fun getAllReportRecords(
-
+        jwt: String
     ): List<ReportRecord>? {
         try {
-            val result = retrofitApiService.getAllReportRecords()
+            val result = retrofitApiService.getAllReportRecords(
+                jwt = getJwtFormat(jwt)
+            )
 
             if (
                 result.code() == 200

@@ -80,7 +80,7 @@ interface RetrofitApiService {
     /**API-16*/
     @GET("reports/logs")
     suspend fun getAllReportRecords(
-
+        @Header("Authorization") jwt: String,
     ): Response<GetReportRecordResponseDTO>
 
 
