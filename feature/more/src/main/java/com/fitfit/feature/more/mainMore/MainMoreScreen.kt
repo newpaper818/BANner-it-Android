@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -34,6 +35,8 @@ fun MainMoreRoute(
 
     use2Panes: Boolean,
     spacerValue: Dp,
+    lazyListState: LazyListState,
+
     navigateTo: (ScreenDestination) -> Unit,
 
     modifier: Modifier = Modifier,
@@ -47,6 +50,7 @@ fun MainMoreRoute(
 
         startSpacerValue = spacerValue,
         endSpacerValue = if (use2Panes) spacerValue / 2 else spacerValue,
+        lazyListState = lazyListState,
         navigateTo = navigateTo
     )
 }
@@ -59,6 +63,8 @@ private fun MainMoreScreen(
 
     startSpacerValue: Dp,
     endSpacerValue: Dp,
+    lazyListState: LazyListState,
+
     navigateTo: (ScreenDestination) -> Unit,
 
     modifier: Modifier = Modifier,
@@ -79,6 +85,7 @@ private fun MainMoreScreen(
     ){ paddingValues ->
 
         LazyColumn(
+            state = lazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(startSpacerValue, 16.dp, endSpacerValue, 200.dp),

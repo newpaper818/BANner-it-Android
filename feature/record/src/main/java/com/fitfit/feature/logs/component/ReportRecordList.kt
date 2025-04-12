@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,6 +26,7 @@ internal fun ReportRecordList(
     spacerValue: Dp,
     paddingValues: PaddingValues,
     dateTimeFormat: DateTimeFormat,
+    lazyListState: LazyListState,
 
     reportRecords: List<ReportRecord>,
     onClickReportRecord: (reportRecord: ReportRecord) -> Unit,
@@ -39,6 +41,7 @@ internal fun ReportRecordList(
         exit = fadeOut(tween(500))
     ) {
         LazyColumn(
+            state = lazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(spacerValue, 16.dp, spacerValue, 200.dp),
