@@ -214,7 +214,7 @@ private fun ReportRecordDetailScreen(
 
                 ImageCard(
                     modifier = itemModifier,
-                    imageUserId = reportRecord.createdUserId,
+                    imageUserId = reportRecord.createdUserId ?: 0,
                     internetEnabled = internetEnabled,
                     isEditMode = false,
                     images = reportRecord.images.mapNotNull { it.previewUrl },

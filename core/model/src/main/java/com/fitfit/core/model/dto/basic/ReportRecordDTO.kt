@@ -15,7 +15,7 @@ data class ReportRecordDTO(
     @Json(name = "report_id") val reportId: Int,
     @Json(name = "report_time") val reportTime: String,
     @Json(name = "status") val status: String,
-    @Json(name = "created_user_id") val createdUserId: Int,
+    @Json(name = "created_user_id") val createdUserId: Int?,
 
     @Json(name = "images") val images: List<String>,
     @Json(name = "location")val locationDTO: LocationDTO,

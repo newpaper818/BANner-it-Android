@@ -8,7 +8,7 @@ data class ReportRecord(
     val reportTime: ZonedDateTime = ZonedDateTime.now(),
     val status: ReportStatus = ReportStatus.RECEIVED,
 
-    val createdUserId: Int = 0,
+    val createdUserId: Int? = null,
 
     val images: List<ReportImage> = listOf(), //string(url)
     val location: LatLng = LatLng(0.0, 0.0),
