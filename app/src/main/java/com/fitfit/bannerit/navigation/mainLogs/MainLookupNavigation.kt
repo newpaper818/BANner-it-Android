@@ -53,12 +53,9 @@ fun NavGraphBuilder.mainLookupScreen(
         val widthSizeClass = externalState.windowSizeClass.widthSizeClass
         val heightSizeClass = externalState.windowSizeClass.heightSizeClass
 
-        val jwt = appUiState.appUserData?.jwt
 
         LaunchedEffect(Unit) {
-            if (jwt != null) {
-                commonReportRecordsViewModel.getAllReportRecords(jwt = jwt)
-            }
+            commonReportRecordsViewModel.getAllReportRecords()
         }
 
         LaunchedEffect(Unit) {

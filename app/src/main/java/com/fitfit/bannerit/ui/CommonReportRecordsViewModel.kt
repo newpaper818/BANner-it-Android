@@ -3,11 +3,7 @@ package com.fitfit.bannerit.ui
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordsRepository
 import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.sampleReportRecord
-import com.fitfit.core.model.report.sampleReportRecord2
-import com.fitfit.core.model.report.sampleReportRecord3
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -96,9 +92,9 @@ class CommonReportRecordsViewModel @Inject constructor(
     }
 
     suspend fun getAllReportRecords(
-        jwt: String
+
     ) {
-        val newAdminReportRecords = reportRecordsRepository.getAllReportRecords(jwt = jwt)
+        val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
         if (newAdminReportRecords != null)
             setAllReportRecords(newAdminReportRecords)
     }
