@@ -1,5 +1,8 @@
 package com.fitfit.bannerit
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -45,6 +48,11 @@ class MainActivity : ComponentActivity() {
             appViewModel.appUiState.value.screenDestination.startScreenDestination == null
         }
 
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val network = connectivityManager.activeNetwork
+        val capabilities = connectivityManager.getNetworkCapabilities(network)
+        val internetEnabled = capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true
+
         //get signed user and update start destination ---------------------------------------------------------
         appViewModel.viewModelScope.launch {
 
@@ -52,7 +60,9 @@ class MainActivity : ComponentActivity() {
             Log.d(MAIN_ACTIVITY_TAG, "- init user and update start destination start")
 
             //this function will get user and set {appViewModel.appUiState.value.screenDestination.startScreenDestination}
-            appViewModel.intiUserAndUpdateStartDestination()
+            appViewModel.intiUserAndUpdateStartDestination(
+                internetEnabled = internetEnabled
+            )
         }
 
         enableEdgeToEdge()
