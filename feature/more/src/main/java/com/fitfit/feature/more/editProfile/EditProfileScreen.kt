@@ -257,13 +257,13 @@ private fun EditProfileScreen(
             }
 
             //user role
-            item {
-                EditableUserRole(
-                    userRole = userData.role,
-                    onUserRoleChanged = onUserRoleChanged,
-                    modifier  = Modifier.widthIn(max = itemMaxWidthSmall)
-                )
-            }
+//            item {
+//                EditableUserRole(
+//                    userRole = userData.role,
+//                    onUserRoleChanged = onUserRoleChanged,
+//                    modifier  = Modifier.widthIn(max = itemMaxWidthSmall)
+//                )
+//            }
 
             //internet unavailable
             item {
