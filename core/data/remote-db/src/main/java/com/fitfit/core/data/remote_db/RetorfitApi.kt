@@ -58,6 +58,7 @@ class RetrofitApi @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken - $e")
+            e.printStackTrace()
             return null
         }
     }
@@ -92,6 +93,7 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt - $e")
+            e.printStackTrace()
             return null
         }
     }
@@ -128,6 +130,7 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls - $e")
+            e.printStackTrace()
             return null
         }
     }
@@ -168,6 +171,7 @@ class RetrofitApi @Inject constructor(
             }
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "uploadImagesToS3 - $e")
+            e.printStackTrace()
             return false
         }
 
@@ -201,6 +205,7 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "API-14 postBannerReport - $e")
+            e.printStackTrace()
             return false
         }
     }
@@ -278,6 +283,7 @@ class RetrofitApi @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords - $e")
+            e.printStackTrace()
             return null
         }
     }
@@ -303,6 +309,7 @@ class RetrofitApi @Inject constructor(
             }
         } catch (e: Exception) {
             Log.e(RETROFIT_TAG, "API-16 getAllReportRecords - $e")
+            e.printStackTrace()
             return null
         }
     }
@@ -337,6 +344,7 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "API-4 editBannerInfo - $e")
+            e.printStackTrace()
             return false
         }
     }
@@ -371,6 +379,7 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "API-8 updateUserData - $e")
+            e.printStackTrace()
             return false
         }
     }
@@ -399,6 +408,7 @@ class RetrofitApi @Inject constructor(
 
         } catch (e: Exception){
             Log.e(RETROFIT_TAG, "API-3 deleteAccount - $e")
+            e.printStackTrace()
             return false
         }
     }
