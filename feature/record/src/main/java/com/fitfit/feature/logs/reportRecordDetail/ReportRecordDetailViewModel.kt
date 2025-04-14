@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordDetailRepository
 import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.model.report.data.ReportRecord
-import com.fitfit.core.model.report.enums.ReportStatus
+import com.fitfit.core.model.report.enums.BannerStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -47,7 +47,7 @@ class ReportRecordDetailViewModel @Inject constructor(
         jwt: String,
         reportId: Int,
         bannerId: Int,
-        bannerStatus: ReportStatus
+        bannerStatus: BannerStatus
     ): Boolean {
         //retrofit
         val result = reportRecordDetailRepository.editBannerInfo(

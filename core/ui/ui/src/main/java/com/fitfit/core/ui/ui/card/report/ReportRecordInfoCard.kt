@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.model.report.data.ReportRecord
-import com.fitfit.core.model.report.enums.ReportStatus
+import com.fitfit.core.model.report.enums.BannerStatus
 import com.fitfit.core.ui.designsystem.components.BannerStatusLabel
 import com.fitfit.core.ui.designsystem.components.button.EditBannerStatusButton
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
@@ -127,7 +127,7 @@ fun ReportRecordBannerInfoCard(
 @Composable
 private fun BannerStatusRow(
     showEditBannerStatusButton: Boolean,
-    bannerStatus: ReportStatus,
+    bannerStatus: BannerStatus,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ){

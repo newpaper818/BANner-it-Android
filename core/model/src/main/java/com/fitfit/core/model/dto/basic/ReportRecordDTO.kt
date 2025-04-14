@@ -4,6 +4,7 @@ import com.fitfit.core.model.report.data.Address
 import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.model.report.data.ReportImage
 import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.BannerStatus
 import com.fitfit.core.model.report.enums.ReportStatus
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.moshi.Json
@@ -76,7 +77,7 @@ data class BannerInfoDTO(
     fun toBannerInfo(): BannerInfo {
         return BannerInfo(
             bannerId = bannerId,
-            status = ReportStatus.valueOf(status),
+            status = BannerStatus.valueOf(status),
             category = category,
             companyName = companyName,
             phoneNumber = phoneNumber

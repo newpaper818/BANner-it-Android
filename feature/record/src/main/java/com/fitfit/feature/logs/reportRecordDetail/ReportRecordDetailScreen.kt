@@ -33,7 +33,7 @@ import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.UserRole
 import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.model.report.data.ReportRecord
-import com.fitfit.core.model.report.enums.ReportStatus
+import com.fitfit.core.model.report.enums.BannerStatus
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
@@ -134,7 +134,7 @@ private fun ReportRecordDetailScreen(
     setCurrentBannerInfo: (BannerInfo) -> Unit,
     showSelectBannerStatusDialog: Boolean,
     setShowSelectBannerStatusDialog: (Boolean) -> Unit,
-    editBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
+    editBannerStatus: (bannerId: Int, bannerStatus: BannerStatus) -> Unit,
 
     navigateUp: () -> Unit,
     navigateToImage: (imageList: List<String>, initialImageIndex: Int) -> Unit

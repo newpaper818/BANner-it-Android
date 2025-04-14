@@ -22,7 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.fitfit.core.model.report.enums.ReportStatus
+import com.fitfit.core.model.report.enums.BannerStatus
 import com.fitfit.core.ui.designsystem.components.BannerStatusLabel
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.ui.R
@@ -34,12 +34,12 @@ import com.fitfit.core.ui.ui.dialog.component.SaveDialogButton
 
 @Composable
 fun SelectBannerStatusDialog(
-    initialBannerStatus: ReportStatus,
+    initialBannerStatus: BannerStatus,
 
-    onSaveClick: (bannerStatus: ReportStatus) -> Unit,
+    onSaveClick: (bannerStatus: BannerStatus) -> Unit,
     onDismissRequest: () -> Unit
 ){
-    val bannerStatusList = enumValues<ReportStatus>()
+    val bannerStatusList = enumValues<BannerStatus>()
 
     var currentBannerStatus by rememberSaveable { mutableStateOf(initialBannerStatus) }
 
@@ -91,9 +91,9 @@ fun SelectBannerStatusDialog(
 
 @Composable
 private fun BannerStatusCard(
-    bannerStatus: ReportStatus,
+    bannerStatus: BannerStatus,
     isSelected: Boolean,
-    onClick: (exercise: ReportStatus) -> Unit
+    onClick: (exercise: BannerStatus) -> Unit
 ){
     val cardColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer
                     else Color.Transparent
