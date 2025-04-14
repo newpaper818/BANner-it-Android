@@ -1,4 +1,4 @@
-package com.fitfit.core.model.report
+package com.fitfit.core.model.report.enums
 
 
 import androidx.annotation.StringRes

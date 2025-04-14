@@ -89,7 +89,7 @@ interface RetrofitApiService {
 
     //edit report records --------------------------------------------------------------------------
     /**API-4*/
-    @PATCH("banners/update")
+    @PUT("banners/update")
     suspend fun editBannerStatus(
         @Header("Authorization") jwt: String,
         @Body editBannerInfoRequestDTO: EditBannerInfoRequestDTO

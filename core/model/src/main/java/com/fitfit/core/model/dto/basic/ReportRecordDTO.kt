@@ -1,10 +1,10 @@
 package com.fitfit.core.model.dto.basic
 
-import com.fitfit.core.model.report.Address
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.data.Address
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.ReportStatus
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

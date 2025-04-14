@@ -22,7 +22,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.enums.ReportStatus
 import com.fitfit.core.ui.designsystem.components.BannerStatusLabel
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.ui.R

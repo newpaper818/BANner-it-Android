@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ImageRepository
 import com.fitfit.core.data.data.repository.ReportRepository
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
 import com.fitfit.core.ui.ui.card.report.MAX_IMAGE_COUNT
 import com.google.android.gms.maps.model.LatLng
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -2,7 +2,7 @@ package com.fitfit.bannerit.ui
 
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordsRepository
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.ReportRecord
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

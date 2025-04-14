@@ -31,9 +31,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.UserRole
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.ReportStatus
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MyCard

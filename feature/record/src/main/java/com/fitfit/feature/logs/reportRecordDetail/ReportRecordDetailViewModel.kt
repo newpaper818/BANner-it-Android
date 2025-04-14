@@ -2,9 +2,9 @@ package com.fitfit.feature.logs.reportRecordDetail
 
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordDetailRepository
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.ReportStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

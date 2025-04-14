@@ -10,9 +10,9 @@ import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
 import com.fitfit.core.model.enums.UserRole
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody

@@ -7,7 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import com.fitfit.core.model.data.DateTimeFormat
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.ReportRecord
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.utils.itemMaxWidthSmall

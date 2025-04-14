@@ -1,5 +1,6 @@
-package com.fitfit.core.model.report
+package com.fitfit.core.model.report.data
 
+import com.fitfit.core.model.report.enums.ReportStatus
 import com.google.android.gms.maps.model.LatLng
 import java.time.ZonedDateTime
 

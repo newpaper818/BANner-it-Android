@@ -2,9 +2,9 @@ package com.fitfit.core.data.remote_db
 
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.UserRole
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
 
 interface DbRemoteDataSource {
 

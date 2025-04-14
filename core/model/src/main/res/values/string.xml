@@ -20,7 +20,12 @@
     <string name="guest">Guest</string>
 
 
-    <!--report/ ================================================================================-->
+    <!--report/enums/ ===========================================================================-->
+    <!--BannerStatus.kt-->
+    <string name="banner_received">Received</string>
+    <string name="completed">AI processing completed</string>
+    <string name="admin_confirmed">Admin checked</string>
+
     <!--ReportStatus.kt-->
     <string name="received">Received</string>
     <string name="legal">Legal</string>

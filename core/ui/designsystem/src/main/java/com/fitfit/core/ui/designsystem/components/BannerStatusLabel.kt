@@ -14,7 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.enums.ReportStatus
 
 @Composable
 fun BannerStatusLabel(
