@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +31,7 @@ fun MainReportRoute(
 
     use2Panes: Boolean,
     spacerValue: Dp,
+    lazyListState: LazyListState,
 
     navigateToSignIn: () -> Unit,
     navigateToReport: () -> Unit,
@@ -37,18 +39,20 @@ fun MainReportRoute(
     modifier: Modifier = Modifier,
 ) {
 
-    MainWorkoutScreen(
+    MainReportScreen(
         appUserData = appUserData,
         spacerValue = spacerValue,
+        lazyListState = lazyListState,
         navigateToSignIn = navigateToSignIn,
         navigateToReport = navigateToReport
     )
 }
 
 @Composable
-private fun MainWorkoutScreen(
+private fun MainReportScreen(
     appUserData: UserData?,
     spacerValue: Dp,
+    lazyListState: LazyListState,
 
     navigateToSignIn: () -> Unit,
     navigateToReport: () -> Unit,
@@ -69,6 +73,7 @@ private fun MainWorkoutScreen(
     ){ paddingValues ->
 
         LazyColumn(
+            state = lazyListState,
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp),
             contentPadding = PaddingValues(spacerValue, 16.dp, spacerValue, 200.dp),

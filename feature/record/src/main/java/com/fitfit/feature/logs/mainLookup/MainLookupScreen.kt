@@ -1,12 +1,13 @@
 package com.fitfit.feature.logs.mainLookup
 
 import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import com.fitfit.core.model.data.DateTimeFormat
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.ReportRecord
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.utils.itemMaxWidthSmall
@@ -19,6 +20,7 @@ fun MainLookupRoute(
     spacerValue: Dp,
     internetEnabled: Boolean,
     dateTimeFormat: DateTimeFormat,
+    lazyListState: LazyListState,
 
     allReportRecords: List<ReportRecord>,
     onClickReportRecord: (reportRecord: ReportRecord) -> Unit,
@@ -29,6 +31,7 @@ fun MainLookupRoute(
         spacerValue = spacerValue,
         internetEnabled = internetEnabled,
         dateTimeFormat = dateTimeFormat,
+        lazyListState = lazyListState,
         allReportRecords = allReportRecords,
         onClickReportRecord = onClickReportRecord
     )
@@ -39,6 +42,8 @@ private fun MainLookupScreen(
     spacerValue: Dp,
     internetEnabled: Boolean,
     dateTimeFormat: DateTimeFormat,
+    lazyListState: LazyListState,
+
     allReportRecords: List<ReportRecord>,
     onClickReportRecord: (reportRecord: ReportRecord) -> Unit,
 ){
@@ -59,6 +64,7 @@ private fun MainLookupScreen(
             spacerValue = spacerValue,
             paddingValues = paddingValues,
             dateTimeFormat = dateTimeFormat,
+            lazyListState = lazyListState,
             reportRecords = allReportRecords,
             onClickReportRecord = onClickReportRecord,
             itemModifier = itemModifier

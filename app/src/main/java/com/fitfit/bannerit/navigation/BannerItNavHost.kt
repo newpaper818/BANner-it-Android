@@ -49,6 +49,7 @@ import com.fitfit.bannerit.ui.AppViewModel
 import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 import com.fitfit.core.model.enums.ScreenDestination
+import kotlinx.coroutines.launch
 import java.util.UUID
 
 @Composable
@@ -113,9 +114,10 @@ fun BannerItNavHost(
     }
 
 
-    val tripsLazyListState = rememberLazyListState()
-    val profileLazyListState = rememberLazyListState()
-    val moreLazyListState = rememberLazyListState()
+    val mainReportLazyListState = rememberLazyListState()
+    val mainLookupLazyListState = rememberLazyListState()
+    val mainMyRecordsLazyListState = rememberLazyListState()
+    val mainMoreLazyListState = rememberLazyListState()
 
     val coroutineScope = rememberCoroutineScope()
 
@@ -173,13 +175,14 @@ fun BannerItNavHost(
             }
         },
         onClickNavBarItemAgain = {
-//            coroutineScope.launch {
-//                when (it) {
-//                    TopLevelDestination.TRIPS -> tripsLazyListState.animateScrollToItem(0)
-//                    TopLevelDestination.PROFILE -> profileLazyListState.animateScrollToItem(0)
-//                    TopLevelDestination.MORE -> moreLazyListState.animateScrollToItem(0)
-//                }
-//            }
+            coroutineScope.launch {
+                when (it) {
+                    TopLevelDestination.REPORT -> mainReportLazyListState.animateScrollToItem(0)
+                    TopLevelDestination.LOOKUP -> mainLookupLazyListState.animateScrollToItem(0)
+                    TopLevelDestination.MY_RECORDS -> mainMyRecordsLazyListState.animateScrollToItem(0)
+                    TopLevelDestination.MORE -> mainMoreLazyListState.animateScrollToItem(0)
+                }
+            }
         }
     ) {
 
@@ -220,6 +223,7 @@ fun BannerItNavHost(
             mainReportScreen(
                 appViewModel = appViewModel,
                 externalState = externalState,
+                lazyListState = mainReportLazyListState,
                 navigateToSignIn = {
                     mainNavController.navigateToSignIn(
                         navOptions = navOptions { launchSingleTop = true }
@@ -236,6 +240,7 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
+                lazyListState = mainLookupLazyListState,
                 navigateToReportRecordDetail = {
                     mainNavController.navigateToReportRecordDetail(
                         navOptions = navOptions { launchSingleTop = true }
@@ -247,6 +252,7 @@ fun BannerItNavHost(
                 appViewModel = appViewModel,
                 commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
+                lazyListState = mainMyRecordsLazyListState,
                 navigateToReportRecordDetail = {
                     mainNavController.navigateToReportRecordDetail(
                         navOptions = navOptions { launchSingleTop = true }
@@ -257,6 +263,7 @@ fun BannerItNavHost(
             mainMoreScreen(
                 appViewModel = appViewModel,
                 externalState = externalState,
+                lazyListState = mainMoreLazyListState,
                 navigateTo = {
                     mainNavController.navigate(
                         route = it.route,
@@ -310,6 +317,7 @@ fun BannerItNavHost(
             //from main more  ======================================================================
             accountScreen(
                 appViewModel = appViewModel,
+                commonReportRecordsViewModel = commonReportRecordsViewModel,
                 externalState = externalState,
                 navigateUp = navigateUp,
                 navigateToEditProfile = {

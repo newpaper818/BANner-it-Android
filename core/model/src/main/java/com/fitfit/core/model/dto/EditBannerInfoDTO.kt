@@ -2,7 +2,7 @@ package com.fitfit.core.model.dto
 
 import com.fitfit.core.model.dto.basic.BannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.basic.ErrorDto
-import com.fitfit.core.model.report.BannerInfo
+import com.fitfit.core.model.report.data.BannerInfo
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

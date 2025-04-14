@@ -1,6 +1,7 @@
 package com.fitfit.bannerit.navigation.mainReport
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -34,6 +35,7 @@ fun NavController.navigateToMainReport(navOptions: NavOptions? = null) =
 fun NavGraphBuilder.mainReportScreen(
     appViewModel: AppViewModel,
     externalState: ExternalState,
+    lazyListState: LazyListState,
 
     navigateToSignIn: () -> Unit,
     navigateToReport: () -> Unit,
@@ -72,6 +74,7 @@ fun NavGraphBuilder.mainReportScreen(
                 appUserData = appUiState.appUserData,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
+                lazyListState = lazyListState,
                 navigateToSignIn = navigateToSignIn,
                 navigateToReport = navigateToReport
             )

@@ -4,15 +4,15 @@ import com.fitfit.core.model.dto.DeleteAccountResponseDTO
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.EditBannerInfoResponseDTO
 import com.fitfit.core.model.dto.GetPreSignedUrlRequestDTO
+import com.fitfit.core.model.dto.GetPreSignedUrlResponseDTO
 import com.fitfit.core.model.dto.GetReportRecordResponseDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
 import com.fitfit.core.model.dto.ReportBannerRequestBodyDTO
 import com.fitfit.core.model.dto.ReportBannerResponseDTO
 import com.fitfit.core.model.dto.SignInResponseDTO
-import com.fitfit.core.model.dto.GetPreSignedUrlResponseDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.UpdateUserDataResponseDTO
-import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
@@ -21,7 +21,6 @@ import retrofit2.http.Header
 import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.PUT
-import retrofit2.http.Part
 import retrofit2.http.Url
 
 interface RetrofitApiService {
@@ -36,7 +35,7 @@ interface RetrofitApiService {
 
     /**API-11*/
     @POST("oauth/refresh")
-    fun requestUserDataWithJwt(
+    suspend fun requestUserDataWithJwt(
         @Header("Authorization") jwt: String,
     ): Response<SignInResponseDTO>
 
@@ -47,20 +46,21 @@ interface RetrofitApiService {
     //report banner --------------------------------------------------------------------------------
     // get preSigned url
     /**API-13*/
-    @POST("presigned-url")
-    fun getPreSignedUrl(
+    @POST("presigned-urls")
+    suspend fun getPreSignedUrls(
+        @Header("Authorization") jwt: String,
         @Body getPreSignedUrlRequestDTO: GetPreSignedUrlRequestDTO
     ): Response<GetPreSignedUrlResponseDTO>
 
     @PUT
-    fun uploadImageToS3(
+    suspend fun uploadImageToS3(
         @Url preSignedUrl: String,
-        @Part imageFile: MultipartBody.Part
+        @Body image: RequestBody
     ): Response<Unit>
 
     /**API-14*/
     @POST("reports/save")
-    fun postBannerReport(
+    suspend fun postBannerReport(
         @Header("Authorization") jwt: String,
         @Body reportBannerRequestBodyDTO: ReportBannerRequestBodyDTO
     ): Response<ReportBannerResponseDTO>
@@ -73,13 +73,13 @@ interface RetrofitApiService {
     //get report records ---------------------------------------------------------------------------
     /**API-15*/
     @GET("reports/logs/me")
-    fun getAppUserReportRecords(
+    suspend fun getAppUserReportRecords(
         @Header("Authorization") jwt: String,
     ): Response<GetReportRecordResponseDTO>
 
     /**API-16*/
     @GET("reports/logs")
-    fun getAllReportRecords(
+    suspend fun getAllReportRecords(
 
     ): Response<GetReportRecordResponseDTO>
 
@@ -90,7 +90,7 @@ interface RetrofitApiService {
     //edit report records --------------------------------------------------------------------------
     /**API-4*/
     @PATCH("banners/update")
-    fun editBannerStatus(
+    suspend fun editBannerStatus(
         @Header("Authorization") jwt: String,
         @Body editBannerInfoRequestDTO: EditBannerInfoRequestDTO
     ): Response<EditBannerInfoResponseDTO>
@@ -102,7 +102,7 @@ interface RetrofitApiService {
     //account --------------------------------------------------------------------------------------
     /**API-8*/
     @PATCH("users/update")
-    fun updateUserData(
+    suspend fun updateUserData(
         @Header("Authorization") jwt: String,
         @Body updateUserDataRequestDTO: UpdateUserDataRequestDTO
     ): Response<UpdateUserDataResponseDTO>
@@ -112,7 +112,7 @@ interface RetrofitApiService {
      */
     /**API-3*/
     @DELETE("users/delete")
-    fun deleteAccount(
+    suspend fun deleteAccount(
         @Header("Authorization") jwt: String,
     ): Response<DeleteAccountResponseDTO>
 }

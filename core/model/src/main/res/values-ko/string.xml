@@ -20,7 +20,12 @@
     <string name="guest">게스트</string>
 
 
-    <!--report/ ================================================================================-->
+    <!--report/enums/ ===========================================================================-->
+    <!--BannerStatus.kt-->
+    <string name="banner_received">접수됨</string>
+    <string name="completed">AI 처리 완료</string>
+    <string name="admin_confirmed">관리자 확인 완료</string>
+
     <!--ReportStatus.kt-->
     <string name="received">접수됨</string>
     <string name="legal">합법</string>

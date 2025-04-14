@@ -31,9 +31,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.DateTimeFormat
 import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.enums.UserRole
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.BannerStatus
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.MyTopAppBar
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
@@ -85,42 +85,39 @@ fun ReportRecordDetailRoute(
         }
     }
 
+    ReportRecordDetailScreen(
+        appUserData = appUserData,
+        spacerValue = spacerValue,
+        dateTimeFormat = dateTimeFormat,
+        internetEnabled = internetEnabled,
+        snackBarHostState = snackBarHostState,
+        reportRecord = reportRecordDetailUiState.currentReportRecord,
 
-    if (reportRecordDetailUiState.currentReportRecord != null) {
-        ReportRecordDetailScreen(
-            appUserData = appUserData,
-            spacerValue = spacerValue,
-            dateTimeFormat = dateTimeFormat,
-            internetEnabled = internetEnabled,
-            snackBarHostState = snackBarHostState,
-            reportRecord = reportRecordDetailUiState.currentReportRecord!!,
+        currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
+        setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
+        showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
+        setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
+        editBannerStatus = { bannerId, bannerStatus ->
+            if (appUserData != null) {
+                coroutineScope.launch {
+                    val result = reportRecordDetailViewModel.editBannerStatus(
+                        jwt = appUserData.jwt,
+                        reportId = reportRecord.reportId,
+                        bannerId = bannerId,
+                        bannerStatus = bannerStatus
+                    )
+                    reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
 
-            currentBannerInfo = reportRecordDetailUiState.currentBannerInfo,
-            setCurrentBannerInfo = reportRecordDetailViewModel::setCurrentBannerInfo,
-            showSelectBannerStatusDialog = reportRecordDetailUiState.showSelectBannerStatusDialog,
-            setShowSelectBannerStatusDialog = reportRecordDetailViewModel::setShowSelectBannerStatusDialog,
-            editBannerStatus = { bannerId, bannerStatus ->
-                if (appUserData != null) {
-                    coroutineScope.launch {
-                        val result = reportRecordDetailViewModel.editBannerStatus(
-                            jwt = appUserData.jwt,
-                            reportId = reportRecord.reportId,
-                            bannerId = bannerId,
-                            bannerStatus = bannerStatus
-                        )
-                        reportRecordDetailViewModel.setShowSelectBannerStatusDialog(false)
-
-                        if (!result) {
-                            editBannerStatusErrorSnackbar()
-                        }
+                    if (!result) {
+                        editBannerStatusErrorSnackbar()
                     }
                 }
-            },
+            }
+        },
 
-            navigateUp = navigateUp,
-            navigateToImage = navigateToImage
-        )
-    }
+        navigateUp = navigateUp,
+        navigateToImage = navigateToImage
+    )
 }
 
 @Composable
@@ -137,7 +134,7 @@ private fun ReportRecordDetailScreen(
     setCurrentBannerInfo: (BannerInfo) -> Unit,
     showSelectBannerStatusDialog: Boolean,
     setShowSelectBannerStatusDialog: (Boolean) -> Unit,
-    editBannerStatus: (bannerId: Int, bannerStatus: ReportStatus) -> Unit,
+    editBannerStatus: (bannerId: Int, bannerStatus: BannerStatus) -> Unit,
 
     navigateUp: () -> Unit,
     navigateToImage: (imageList: List<String>, initialImageIndex: Int) -> Unit
@@ -214,7 +211,7 @@ private fun ReportRecordDetailScreen(
 
                 ImageCard(
                     modifier = itemModifier,
-                    imageUserId = reportRecord.createdUserId,
+                    imageUserId = reportRecord.createdUserId ?: 0,
                     internetEnabled = internetEnabled,
                     isEditMode = false,
                     images = reportRecord.images.mapNotNull { it.previewUrl },

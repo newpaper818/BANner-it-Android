@@ -39,7 +39,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.fitfit.core.model.data.UserData
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.ReportRecord
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.button.BottomReportCancelButtons
 import com.fitfit.core.ui.designsystem.components.button.GetPhotosButtons

@@ -1,6 +1,7 @@
 package com.fitfit.bannerit.navigation.mainLogs
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -36,6 +37,7 @@ fun NavGraphBuilder.mainLookupScreen(
     appViewModel: AppViewModel,
     commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
+    lazyListState: LazyListState,
 
     navigateToReportRecordDetail: () -> Unit,
 ) {
@@ -82,6 +84,7 @@ fun NavGraphBuilder.mainLookupScreen(
                 spacerValue = externalState.windowSizeClass.spacerValue,
                 internetEnabled = externalState.internetEnabled,
                 dateTimeFormat = appUiState.appPreferences.dateTimeFormat,
+                lazyListState = lazyListState,
                 allReportRecords = commonReportRecordsUiState.allReportRecords,
                 onClickReportRecord = {
                     commonReportRecordsViewModel.setCurrentReportRecord(it)

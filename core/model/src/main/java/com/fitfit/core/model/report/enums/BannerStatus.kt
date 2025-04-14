@@ -1,11 +1,11 @@
-package com.fitfit.core.model.report
+package com.fitfit.core.model.report.enums
 
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import com.fitfit.core.model.R
 
-enum class ReportStatus(
+enum class BannerStatus(
     @StringRes val textId: Int,
     val color: Color,
     val textColor: Color

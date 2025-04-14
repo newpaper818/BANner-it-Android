@@ -1,10 +1,11 @@
 package com.fitfit.core.model.dto.basic
 
-import com.fitfit.core.model.report.Address
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.data.Address
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.BannerStatus
+import com.fitfit.core.model.report.enums.ReportStatus
 import com.google.android.gms.maps.model.LatLng
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -15,11 +16,11 @@ data class ReportRecordDTO(
     @Json(name = "report_id") val reportId: Int,
     @Json(name = "report_time") val reportTime: String,
     @Json(name = "status") val status: String,
-    @Json(name = "created_user_id") val createdUserId: Int,
+    @Json(name = "created_user_id") val createdUserId: Int?,
 
     @Json(name = "images") val images: List<String>,
     @Json(name = "location")val locationDTO: LocationDTO,
-    @Json(name = "address")val addressDTO: AddressDTO,
+//    @Json(name = "address")val addressDTO: AddressDTO,
     @Json(name = "content")val content: String,
     @Json(name = "banner_info")val bannerInfoDTO: List<BannerInfoDTO>,
 ){
@@ -31,7 +32,7 @@ data class ReportRecordDTO(
             createdUserId = createdUserId,
             images = images.map { ReportImage(previewUrl = it) },
             location = locationDTO.toLatLng(),
-            address = addressDTO.toAddress(),
+//            address = addressDTO.toAddress(),
             content = content,
             bannersInfo = bannerInfoDTO.map { it.toBannerInfo() }
         )
@@ -76,7 +77,7 @@ data class BannerInfoDTO(
     fun toBannerInfo(): BannerInfo {
         return BannerInfo(
             bannerId = bannerId,
-            status = ReportStatus.valueOf(status),
+            status = BannerStatus.valueOf(status),
             category = category,
             companyName = companyName,
             phoneNumber = phoneNumber

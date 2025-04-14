@@ -3,14 +3,10 @@ package com.fitfit.core.model.dto
 import com.fitfit.core.model.dto.basic.AddressDTO
 import com.fitfit.core.model.dto.basic.ErrorDto
 import com.fitfit.core.model.dto.basic.LocationDTO
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import com.squareup.moshi.Moshi
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 
 fun ReportRecord.toReportRecordDTO(
 
@@ -54,7 +50,7 @@ data class KeyAndUrlDTO(
 ){
     fun toReportImage(
         prevReportImage: ReportImage
-    ): ReportImage{
+    ): ReportImage {
         return ReportImage(
             fileName = prevReportImage.fileName,
             previewUrl = prevReportImage.previewUrl,

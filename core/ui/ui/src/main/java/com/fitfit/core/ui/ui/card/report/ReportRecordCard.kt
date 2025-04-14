@@ -20,9 +20,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.fitfit.core.model.data.DateTimeFormat
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.sampleReportRecord
-import com.fitfit.core.ui.designsystem.components.ImageFromUrl
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.data.sampleReportRecord
+import com.fitfit.core.ui.designsystem.components.ImageFromUrlForReportListItem
 import com.fitfit.core.ui.designsystem.components.NoImage
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
@@ -60,7 +60,7 @@ fun ReportRecordCard(
                     .clip(MaterialTheme.shapes.medium)
             ) {
                 if (reportRecord.images.isNotEmpty()){
-                    ImageFromUrl(
+                    ImageFromUrlForReportListItem(
                         imageUrl = reportRecord.images[0].previewUrl ?: "",
                         contentDescription = stringResource(R.string.photo),
                         modifier = Modifier.fillMaxSize()

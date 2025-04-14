@@ -14,11 +14,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.enums.BannerStatus
 
 @Composable
 fun BannerStatusLabel(
-    bannerStatus: ReportStatus
+    bannerStatus: BannerStatus
 ){
     Box(
         contentAlignment = Alignment.Center,

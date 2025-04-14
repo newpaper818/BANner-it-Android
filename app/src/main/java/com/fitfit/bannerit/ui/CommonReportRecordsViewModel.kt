@@ -2,10 +2,7 @@ package com.fitfit.bannerit.ui
 
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordsRepository
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.sampleReportRecord
-import com.fitfit.core.model.report.sampleReportRecord2
-import com.fitfit.core.model.report.sampleReportRecord3
+import com.fitfit.core.model.report.data.ReportRecord
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -72,6 +69,18 @@ class CommonReportRecordsViewModel @Inject constructor(
         }
     }
 
+    fun clearReportRecords(
+
+    ){
+        _reportUiState.update {
+            it.copy(
+                appUserReportRecords = listOf(),
+                allReportRecords = listOf(),
+                currentReportRecord = null
+            )
+        }
+    }
+
 
 
 
@@ -79,14 +88,9 @@ class CommonReportRecordsViewModel @Inject constructor(
         jwt: String
     ) {
         val newAppUserReportRecords = reportRecordsRepository.getAppUserReportRecords(jwt = jwt)
-        if (newAppUserReportRecords != null)
+        if (newAppUserReportRecords != null) {
+            delay(330)
             setAppUserReportRecords(newAppUserReportRecords)
-
-        //TODO delete after test
-        else {
-            val sampleList = listOf(sampleReportRecord, sampleReportRecord2, sampleReportRecord3)
-            delay(2000)
-            setAppUserReportRecords(sampleList)
         }
     }
 
@@ -94,15 +98,9 @@ class CommonReportRecordsViewModel @Inject constructor(
 
     ) {
         val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
-        if (newAdminReportRecords != null)
+        if (newAdminReportRecords != null) {
+            delay(330)
             setAllReportRecords(newAdminReportRecords)
-
-        //TODO delete after test
-        else {
-            val sampleList = listOf(sampleReportRecord3, sampleReportRecord, sampleReportRecord2)
-            delay(2000)
-            setAllReportRecords(sampleList)
         }
     }
-
 }

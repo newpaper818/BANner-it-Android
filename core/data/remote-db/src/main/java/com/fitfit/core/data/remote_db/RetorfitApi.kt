@@ -6,17 +6,15 @@ import com.fitfit.core.model.data.UserData
 import com.fitfit.core.model.dto.EditBannerInfoRequestDTO
 import com.fitfit.core.model.dto.GetPreSignedUrlRequestDTO
 import com.fitfit.core.model.dto.IdTokenRequestDTO
-import com.fitfit.core.model.dto.UpdateUserDataDTO
 import com.fitfit.core.model.dto.UpdateUserDataRequestDTO
 import com.fitfit.core.model.dto.toBannerInfoIdWithStatusDTO
 import com.fitfit.core.model.dto.toReportRecordDTO
 import com.fitfit.core.model.enums.UserRole
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportImage
-import com.fitfit.core.model.report.ReportRecord
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportImage
+import com.fitfit.core.model.report.data.ReportRecord
 import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
@@ -46,16 +44,20 @@ class RetrofitApi @Inject constructor(
                 && jwt != null
                 && userData != null
             ) {
+                Log.d(RETROFIT_TAG, "API-2 requestUserDataWithIdToken success")
                 return userData
             }
             else {
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken result: $result")
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "requestUserDataWithIdToken body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken jwt: $jwt")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken userData: $userData")
+
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken result: $result")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "requestUserDataWithIdToken - $e")
+            Log.e(RETROFIT_TAG, "API-2 requestUserDataWithIdToken - $e")
             return null
         }
     }
@@ -66,24 +68,41 @@ class RetrofitApi @Inject constructor(
         try {
             val result = retrofitApiService.requestUserDataWithJwt(jwt = getJwtFormat(jwt))
 
-            Log.d(RETROFIT_TAG, "requestUserDataWithJwt result = $result")
-            Log.d(RETROFIT_TAG, "requestUserDataWithJwt headers = ${result.headers()}")
-            Log.d(RETROFIT_TAG, "requestUserDataWithJwt body = ${result.body()}")
+            val newJwt = result.headers()["Authorization"]?.replace("Bearer ", "")
+            val userData = result.body()?.userDataDTO?.toUserData(newJwt ?: "")
 
-            //TODO: get jwt, userData
-            return null
+            if (
+                result.code() == 200
+                && result.body()?.error == null
+                && newJwt != null
+                && userData != null
+            ) {
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt success")
+                return Pair(newJwt, userData)
+            }
+            else{
+                Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt jwt: $newJwt")
+                Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt userData: $userData")
+
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt result = $result")
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt headers = ${result.headers()}")
+                Log.d(RETROFIT_TAG, "API-11 requestUserDataWithJwt body = ${result.body()}")
+                return null
+            }
 
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "requestUserDataWithJwt - $e")
+            Log.e(RETROFIT_TAG, "API-11 requestUserDataWithJwt - $e")
             return null
         }
     }
 
-    override suspend fun getPreSignedUrl(
+    override suspend fun getPreSignedUrls(
+        jwt: String,
         reportImages: List<ReportImage>
     ): List<ReportImage>? {
         try {
-            val result = retrofitApiService.getPreSignedUrl(
+            val result = retrofitApiService.getPreSignedUrls(
+                jwt = getJwtFormat(jwt),
                 getPreSignedUrlRequestDTO = GetPreSignedUrlRequestDTO(
                     imageFileNames = reportImages.mapNotNull { it.fileName }
                 )
@@ -96,17 +115,19 @@ class RetrofitApi @Inject constructor(
                 val newReportImages = result.body()?.keyAndUrls?.mapIndexed { index, keyAndUrlDTO ->
                     keyAndUrlDTO.toReportImage(reportImages[index])
                 }
+                Log.d(RETROFIT_TAG, "API-13 getPreSignedUrls success")
+                Log.d(RETROFIT_TAG, "API-13 getPreSignedUrls body: ${result.body()}")
                 return newReportImages
             }
             else {
-                Log.e(RETROFIT_TAG, "getPreSignedUrl result: $result")
-                Log.e(RETROFIT_TAG, "getPreSignedUrl headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "getPreSignedUrl body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls result: $result")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls body: ${result.body()}")
                 return null
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "getPreSignedUrl - $e")
+            Log.e(RETROFIT_TAG, "API-13 getPreSignedUrls - $e")
             return null
         }
     }
@@ -119,21 +140,18 @@ class RetrofitApi @Inject constructor(
                 val preSignedUrl = reportImage.preSignedUrl
 
                 val imageFile = reportImage.fileName?.let { File(context.filesDir, it) }
-                val requestFile = imageFile?.asRequestBody("image/*".toMediaTypeOrNull())
+                val requestBody = imageFile?.asRequestBody("image/jpeg".toMediaTypeOrNull())
 
-                val multipartBody = requestFile?.let {
-                    MultipartBody.Part.createFormData("image", imageFile.name, it)
-                }
-
-                if (preSignedUrl != null && multipartBody != null){
+                if (preSignedUrl != null && requestBody != null){
                     val result = retrofitApiService.uploadImageToS3(
                         preSignedUrl = preSignedUrl,
-                        imageFile = multipartBody
+                        image = requestBody
                     )
 
                     if (
                         result.code() == 200
                     ) {
+                        Log.d(RETROFIT_TAG, "uploadImagesToS3 success - ${reportImage.s3Key}")
 
                     }
                     else {
@@ -171,17 +189,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "API-14 postBannerReport success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "postBannerReport result: $result")
-                Log.e(RETROFIT_TAG, "postBannerReport headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "postBannerReport body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-14 postBannerReport result: $result")
+                Log.e(RETROFIT_TAG, "API-14 postBannerReport headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-14 postBannerReport body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "postBannerReport - $e")
+            Log.e(RETROFIT_TAG, "API-14 postBannerReport - $e")
             return false
         }
     }
@@ -247,16 +266,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
+                Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords success")
+                Log.d(RETROFIT_TAG, "API-15 getAppUserReportRecords body: ${result.body()}")
+                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }?.sortedByDescending { it.reportTime }
             }
             else {
-                Log.e(RETROFIT_TAG, "getAppUserReportRecords result: $result")
-                Log.e(RETROFIT_TAG, "getAppUserReportRecords headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "getAppUserReportRecords body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords result: $result")
+                Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "getAppUserReportRecords - $e")
+            Log.e(RETROFIT_TAG, "API-15 getAppUserReportRecords - $e")
             return null
         }
     }
@@ -271,16 +292,17 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
-                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }
+                Log.d(RETROFIT_TAG, "API-16 getAllReportRecords success")
+                return result.body()?.reportRecordsDTO?.map { it.toReportRecord() }?.sortedByDescending { it.reportTime }
             }
             else {
-                Log.e(RETROFIT_TAG, "getAllReportRecords result: $result")
-                Log.e(RETROFIT_TAG, "getAllReportRecords headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "getAllReportRecords body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-16 getAllReportRecords result: $result")
+                Log.e(RETROFIT_TAG, "API-16 getAllReportRecords headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-16 getAllReportRecords body: ${result.body()}")
                 return null
             }
         } catch (e: Exception) {
-            Log.e(RETROFIT_TAG, "getAllReportRecords - $e")
+            Log.e(RETROFIT_TAG, "API-16 getAllReportRecords - $e")
             return null
         }
     }
@@ -303,17 +325,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "API-4 editBannerInfo success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "editBannerInfo result: $result")
-                Log.e(RETROFIT_TAG, "editBannerInfo headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "editBannerInfo body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-4 editBannerInfo result: $result")
+                Log.e(RETROFIT_TAG, "API-4 editBannerInfo headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-4 editBannerInfo body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "editBannerInfo - $e")
+            Log.e(RETROFIT_TAG, "API-4 editBannerInfo - $e")
             return false
         }
     }
@@ -327,10 +350,7 @@ class RetrofitApi @Inject constructor(
             val result = retrofitApiService.updateUserData(
                 jwt = getJwtFormat(jwt),
                 updateUserDataRequestDTO = UpdateUserDataRequestDTO(
-                    updateUserDataDTO = UpdateUserDataDTO(
-                        userName = userName,
-                        role = userRole.name
-                    )
+                    userName = userName
                 )
             )
 
@@ -338,17 +358,19 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "API-8 updateUserData success")
+                Log.d(RETROFIT_TAG, "API-8 updateUserData body: ${result.body()}")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "updateUserData result: $result")
-                Log.e(RETROFIT_TAG, "updateUserData headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "updateUserData body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-8 updateUserData result: $result")
+                Log.e(RETROFIT_TAG, "API-8 updateUserData headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-8 updateUserData body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "updateUserData - $e")
+            Log.e(RETROFIT_TAG, "API-8 updateUserData - $e")
             return false
         }
     }
@@ -365,17 +387,18 @@ class RetrofitApi @Inject constructor(
                 result.code() == 200
                 && result.body()?.error == null
             ) {
+                Log.d(RETROFIT_TAG, "API-3 deleteAccount success")
                 return true
             }
             else {
-                Log.e(RETROFIT_TAG, "deleteAccount result: $result")
-                Log.e(RETROFIT_TAG, "deleteAccount headers: ${result.headers()}")
-                Log.e(RETROFIT_TAG, "deleteAccount body: ${result.body()}")
+                Log.e(RETROFIT_TAG, "API-3 deleteAccount result: $result")
+                Log.e(RETROFIT_TAG, "API-3 deleteAccount headers: ${result.headers()}")
+                Log.e(RETROFIT_TAG, "API-3 deleteAccount body: ${result.body()}")
                 return false
             }
 
         } catch (e: Exception){
-            Log.e(RETROFIT_TAG, "deleteAccount - $e")
+            Log.e(RETROFIT_TAG, "API-3 deleteAccount - $e")
             return false
         }
     }

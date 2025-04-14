@@ -122,11 +122,12 @@ class AppViewModel @Inject constructor(
     //==============================================================================================
     //at app start splash screen ===================================================================
     fun intiUserAndUpdateStartDestination (
-
+        internetEnabled: Boolean,
     ){
         Log.d("MainActivity1", "[1] intiUserAndUpdateStartDestination start")
 
         initSignedInUser(
+            internetEnabled = internetEnabled,
             onDone = {
                 updateCurrentScreenDestination()
             }
@@ -135,6 +136,7 @@ class AppViewModel @Inject constructor(
     }
 
     private fun initSignedInUser(
+        internetEnabled: Boolean,
         onDone: () -> Unit
     ){
         Log.d("MainActivity1", "[2] initSignedInUser start")
@@ -156,10 +158,13 @@ class AppViewModel @Inject constructor(
             val jwt = jwt.value
             var newUserData: UserData? = null
 
+            //not signed in
             if (jwt == null || jwt == ""){
                 newUserData = null
             }
-            else {
+
+            //signed in -> get jwt, user data
+            else if (internetEnabled){
                 //gwt user data with jwt
                 val jwtAndUserData = splashRepository.getUserData(jwt = jwt)
 

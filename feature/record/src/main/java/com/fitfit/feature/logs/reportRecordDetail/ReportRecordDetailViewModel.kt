@@ -2,9 +2,9 @@ package com.fitfit.feature.logs.reportRecordDetail
 
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordDetailRepository
-import com.fitfit.core.model.report.BannerInfo
-import com.fitfit.core.model.report.ReportRecord
-import com.fitfit.core.model.report.ReportStatus
+import com.fitfit.core.model.report.data.BannerInfo
+import com.fitfit.core.model.report.data.ReportRecord
+import com.fitfit.core.model.report.enums.BannerStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 data class ReportRecordDetailUiState(
-    val currentReportRecord: ReportRecord? = null,
+    val currentReportRecord: ReportRecord = ReportRecord(),
 
     val currentBannerInfo: BannerInfo? = null,
     val showSelectBannerStatusDialog: Boolean = false,
@@ -25,7 +25,7 @@ class ReportRecordDetailViewModel @Inject constructor(
     private val _reportRecordDetailUiState = MutableStateFlow(ReportRecordDetailUiState())
     val reportRecordDetailUiState = _reportRecordDetailUiState.asStateFlow()
 
-    fun setCurrentReportRecord(reportRecord: ReportRecord?){
+    fun setCurrentReportRecord(reportRecord: ReportRecord){
         _reportRecordDetailUiState.update {
             it.copy(currentReportRecord = reportRecord)
         }
@@ -47,7 +47,7 @@ class ReportRecordDetailViewModel @Inject constructor(
         jwt: String,
         reportId: Int,
         bannerId: Int,
-        bannerStatus: ReportStatus
+        bannerStatus: BannerStatus
     ): Boolean {
         //retrofit
         val result = reportRecordDetailRepository.editBannerInfo(

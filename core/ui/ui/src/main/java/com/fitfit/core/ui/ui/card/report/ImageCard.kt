@@ -97,9 +97,9 @@ fun ImageCard(
 
     AnimatedVisibility(
         visible = isEditMode || images.isNotEmpty(),
-        enter = scaleIn(animationSpec = tween(300))
-                + expandVertically(animationSpec = tween(300))
-                + fadeIn(animationSpec = tween(300)),
+        enter = scaleIn(animationSpec = tween(0))
+                + expandVertically(animationSpec = tween(0))
+                + fadeIn(animationSpec = tween(0)),
         exit = scaleOut(animationSpec = tween(300))
                 + shrinkVertically(animationSpec = tween(300))
                 + fadeOut(animationSpec = tween(300))

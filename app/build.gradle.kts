@@ -124,6 +124,9 @@ dependencies {
     //system ui controller
     implementation(libs.google.accompanist.systemuicontroller)
 
+    //google maps
+    implementation(libs.google.play.services.maps)
+
     //test
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

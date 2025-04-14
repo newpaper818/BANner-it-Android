@@ -174,7 +174,7 @@ class CameraPreviewViewModel @Inject constructor(
 
     private fun compressAndRotateImage(
         photoFile: File,
-        quality: Int = 30
+        quality: Int = 80
     ) {
         val exif = ExifInterface(photoFile.absolutePath)
         val rotation = when (exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL)) {

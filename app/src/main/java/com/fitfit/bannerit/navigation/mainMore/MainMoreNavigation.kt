@@ -1,6 +1,7 @@
 package com.fitfit.bannerit.navigation.mainMore
 
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -35,6 +36,7 @@ fun NavController.navigateToMainMore(navOptions: NavOptions? = null) =
 fun NavGraphBuilder.mainMoreScreen(
     appViewModel: AppViewModel,
     externalState: ExternalState,
+    lazyListState: LazyListState,
 
     navigateTo: (ScreenDestination) -> Unit,
 ) {
@@ -74,6 +76,7 @@ fun NavGraphBuilder.mainMoreScreen(
                 internetEnabled = externalState.internetEnabled,
                 use2Panes = externalState.windowSizeClass.use2Panes,
                 spacerValue = externalState.windowSizeClass.spacerValue,
+                lazyListState = lazyListState,
                 navigateTo = navigateTo
             )
         }

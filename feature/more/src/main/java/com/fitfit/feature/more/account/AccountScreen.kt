@@ -48,6 +48,7 @@ fun AccountRoute(
     spacerValue: Dp,
 
     updateUserDataToNull: () -> Unit,
+    clearReportRecords: () -> Unit,
 
     navigateUp: () -> Unit,
     navigateToEditProfile: () -> Unit,
@@ -80,6 +81,7 @@ fun AccountRoute(
                         if (isSignOutSuccess) {
                             navigateToMainMore()
                             updateUserDataToNull()
+                            clearReportRecords()
                         } else {
                             signOutErrorSnackbar()
                         }

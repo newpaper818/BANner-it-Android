@@ -24,8 +24,8 @@ import kotlin.math.sqrt
 
 private const val LOCAL_IMAGE_TAG = "Local-Storage-Image"
 
-private const val IMAGE_MAX_SIZE_MB = 0.2    //Mebibyte
-private const val PROFILE_IMAGE_MAX_SIZE_MB = 0.05    //Mebibyte
+private const val IMAGE_MAX_SIZE_MB = 3.0    //Mebibyte
+private const val PROFILE_IMAGE_MAX_SIZE_MB = 0.2    //Mebibyte
 
 class ImageLocalApi @Inject constructor(
     @ApplicationContext private val context: Context
@@ -39,8 +39,8 @@ class ImageLocalApi @Inject constructor(
         //convert uri to bitmap
         val bitmap = getBitMapFromUri(uri)
 
-        //compress bitmap
-        val newBitmap = compressBitmap(isProfileImage, bitmap, uri)
+        //resize bitmap
+        val newBitmap = resizeBitmap(isProfileImage, bitmap, uri)
 
         //make file name : userId date time index
         val fileName = getImageFileName(userId, isProfileImage, index)
@@ -48,7 +48,7 @@ class ImageLocalApi @Inject constructor(
         //save
         return try{
             context.openFileOutput(fileName, Context.MODE_PRIVATE).use { stream ->
-                val quality = if (isProfileImage) 70 else 60
+                val quality = if (isProfileImage) 70 else 80
 
                 if (!newBitmap.compress(Bitmap.CompressFormat.JPEG, quality, stream)){
                     throw IOException("Couldn't save bitmap")
@@ -184,7 +184,7 @@ class ImageLocalApi @Inject constructor(
         }
     }
 
-    private fun compressBitmap(
+    private fun resizeBitmap(
         isProfileImage: Boolean,
         bitmap: Bitmap,
         uri: Uri

@@ -16,6 +16,7 @@ import com.fitfit.bannerit.navigation.exitTransition
 import com.fitfit.bannerit.navigation.popEnterTransition
 import com.fitfit.bannerit.navigation.popExitTransition
 import com.fitfit.bannerit.ui.AppViewModel
+import com.fitfit.bannerit.ui.CommonReportRecordsViewModel
 import com.fitfit.bannerit.ui.ExternalState
 
 private val topLevelScreenDestination = TopLevelDestination.MORE
@@ -26,6 +27,7 @@ fun NavController.navigateToAccount(navOptions: NavOptions? = null) =
 
 fun NavGraphBuilder.accountScreen(
     appViewModel: AppViewModel,
+    commonReportRecordsViewModel: CommonReportRecordsViewModel,
     externalState: ExternalState,
 
     navigateUp: () -> Unit,
@@ -59,6 +61,9 @@ fun NavGraphBuilder.accountScreen(
             spacerValue = externalState.windowSizeClass.spacerValue,
             updateUserDataToNull = {
                 appViewModel.updateUserData(null)
+            },
+            clearReportRecords = {
+                commonReportRecordsViewModel.clearReportRecords()
             },
             navigateUp = navigateUp,
             navigateToEditProfile = navigateToEditProfile,
