@@ -9,8 +9,6 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 
 
-
-
 //page animation
 internal val enterTransition = slideInHorizontally(animationSpec = tween(300), initialOffsetX = { it })
 internal val exitTransition = scaleOut(animationSpec = tween(300), targetScale = 0.93f)
@@ -19,7 +17,7 @@ internal val popExitTransition = slideOutHorizontally(animationSpec = tween(300)
 
 //
 internal val TopEnterTransition = fadeIn(animationSpec = tween(300))
-internal val TopExitTransition = fadeOut(animationSpec = tween(300))
+internal val TopExitTransition = fadeOut(animationSpec = tween(300, 200))
 internal val TopPopEnterTransition = fadeIn(animationSpec = tween(300))
 internal val TopPopExitTransition = fadeOut(animationSpec = tween(300))
 
