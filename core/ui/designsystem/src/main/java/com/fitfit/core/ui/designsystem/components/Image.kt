@@ -17,6 +17,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -25,6 +26,7 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
@@ -42,6 +44,8 @@ import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
 import com.fitfit.core.ui.designsystem.icon.DisplayIcon
 import com.fitfit.core.ui.designsystem.icon.MyIcons
 import com.fitfit.core.ui.designsystem.theme.CustomColor
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.io.File
 
 @Composable
@@ -92,6 +96,69 @@ fun ImageFromUrl(
         onSuccess = {
             isLoading = false
             isError = false
+        },
+        onError = {
+            isLoading = false
+            isError = true
+        }
+    )
+}
+
+@Composable
+fun ImageFromUrlForReportListItem(
+    imageUrl: String,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Crop
+){
+    val coroutineScope = rememberCoroutineScope()
+    val context = LocalContext.current
+    var isLoading by rememberSaveable { mutableStateOf(false) }
+    var isError by rememberSaveable { mutableStateOf(false) }
+
+    var currentImagePainter by remember { mutableStateOf<Painter?>(null) }
+
+    when {
+        isError -> {
+            OnErrorImage()
+        }
+
+        !isError && currentImagePainter != null -> {
+            Image(
+                painter = currentImagePainter!!,
+                contentDescription = contentDescription,
+                modifier = modifier,
+                contentScale = contentScale
+            )
+        }
+
+        isLoading -> {
+            OnLoadingImage()
+        }
+    }
+
+    AsyncImage(
+        model = ImageRequest.Builder(context)
+            .data(imageUrl)
+            .crossfade(300)
+            .build(),
+        contentDescription = contentDescription,
+        contentScale = contentScale,
+        modifier = modifier,
+        onLoading = {
+            isLoading = true
+        },
+        onSuccess = {
+            coroutineScope.launch {
+                isError = false
+                isLoading = false
+
+                if (currentImagePainter == null)
+                    delay(300)
+
+                currentImagePainter = it.painter
+
+            }
         },
         onError = {
             isLoading = false

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordsRepository
 import com.fitfit.core.model.report.data.ReportRecord
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -88,6 +89,7 @@ class CommonReportRecordsViewModel @Inject constructor(
     ) {
         val newAppUserReportRecords = reportRecordsRepository.getAppUserReportRecords(jwt = jwt)
         if (newAppUserReportRecords != null) {
+            delay(330)
             setAppUserReportRecords(newAppUserReportRecords)
         }
     }
@@ -97,6 +99,7 @@ class CommonReportRecordsViewModel @Inject constructor(
     ) {
         val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
         if (newAdminReportRecords != null) {
+            delay(330)
             setAllReportRecords(newAdminReportRecords)
         }
     }
