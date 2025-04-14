@@ -87,8 +87,7 @@ class CommonReportRecordsViewModel @Inject constructor(
         jwt: String
     ) {
         val newAppUserReportRecords = reportRecordsRepository.getAppUserReportRecords(jwt = jwt)
-        if (newAppUserReportRecords != null
-            && newAppUserReportRecords.map { it.reportId } != _reportUiState.value.appUserReportRecords.map { it.reportId }) {
+        if (newAppUserReportRecords != null) {
             setAppUserReportRecords(newAppUserReportRecords)
         }
     }
@@ -97,10 +96,8 @@ class CommonReportRecordsViewModel @Inject constructor(
 
     ) {
         val newAdminReportRecords = reportRecordsRepository.getAllReportRecords()
-        if (newAdminReportRecords != null
-            && newAdminReportRecords.map { it.reportId } != _reportUiState.value.allReportRecords.map { it.reportId }) {
+        if (newAdminReportRecords != null) {
             setAllReportRecords(newAdminReportRecords)
         }
     }
-
 }
