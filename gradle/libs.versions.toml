@@ -7,7 +7,8 @@ espressoCore = "3.6.1"
 #1 compose bom
 composeBom = "2025.01.00"
 
-#2 firebase bom
+#2 integrity
+integrity = "1.4.0"
 
 #3 core / activity / appcompat / material
 coreKtx = "1.15.0"
@@ -103,8 +104,8 @@ androidx-ui-test-junit4 =            { group = "androidx.compose.ui", name = "ui
 androidx-material-icons-extended =   { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-material3 =                 { group = "androidx.compose.material3", name = "material3" }
 
-#2 firebase bom
-
+#2 integrity
+google-integrity = { group = "com.google.android.play", name = "integrity", version.ref = "integrity" }
 
 #3 core / activity / appcompat / material
 androidx-core-ktx =         { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
