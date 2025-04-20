@@ -44,7 +44,12 @@ class CredentialsApi @Inject constructor(
             return userGoogleIdToken
 
         } catch (e: GetCredentialException) {
-            Log.e(CREDENTIALS_TAG, "error : $e")
+            Log.e(CREDENTIALS_TAG, "signinWithGoogle GetCredentialException error : $e")
+            e.printStackTrace()
+            return null
+        } catch (e: Exception){
+            Log.e(CREDENTIALS_TAG, "signinWithGoogle error : $e")
+            e.printStackTrace()
             return null
         }
     }
@@ -63,7 +68,7 @@ class CredentialsApi @Inject constructor(
                 }
             }
         }
-        //FIXME ???????????
+
         return null
     }
 

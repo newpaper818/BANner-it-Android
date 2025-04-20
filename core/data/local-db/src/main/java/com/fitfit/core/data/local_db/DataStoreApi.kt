@@ -186,7 +186,7 @@ class DataStoreApi @Inject constructor(
                 val jwtSecured = JwtSecure.encodeIvAndData(iv, secureByteArray)
                 preferences[JWT_SECURED] = jwtSecured
 
-                Log.d(DATA_STORE_TAG, "jwt original: $jwtOriginal / jwt secured: $jwtSecured")
+//                Log.d(DATA_STORE_TAG, "jwt original: $jwtOriginal / jwt secured: $jwtSecured")
             }
         }
     }
