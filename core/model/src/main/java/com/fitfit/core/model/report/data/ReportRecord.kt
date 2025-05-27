@@ -32,6 +32,9 @@ data class BannerInfo(
     val category: String = "",
     val companyName: String = "",
     val phoneNumber: String = "",
+    val center: List<Float>? = null,
+    val width: Float? = null,
+    val height: Float? = null
 )
 
 data class Address(
