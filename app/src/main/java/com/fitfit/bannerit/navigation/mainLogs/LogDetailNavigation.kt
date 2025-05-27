@@ -61,8 +61,9 @@ fun NavGraphBuilder.reportRecordDetailScreen(
                 internetEnabled = externalState.internetEnabled,
                 reportRecord = commonReportRecordsUiState.currentReportRecord!!,
                 navigateUp = navigateUp,
-                navigateToImage = { imageList, initialImageIndex ->
+                navigateToImage = { imageList, initialImageIndex, bannersInfo ->
                     commonReportRecordsViewModel.setImageListAndInitialImageIndex(imageList, initialImageIndex)
+                    commonReportRecordsViewModel.setBannersInfo(bannersInfo)
                     navigateToImage()
                 }
             )

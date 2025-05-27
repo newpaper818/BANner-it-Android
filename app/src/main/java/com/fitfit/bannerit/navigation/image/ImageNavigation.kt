@@ -51,7 +51,8 @@ fun NavGraphBuilder.imageScreen(
             initialImageIndex = commonReportUiState.initialImageIndex,
             navigateUp = navigateUp,
             downloadImage = {_,_,_ ->},
-            saveImageToExternalStorage = { _ -> true }
+            saveImageToExternalStorage = { _ -> true },
+            bannersInfo = commonReportUiState.bannersInfo
         )
     }
 }

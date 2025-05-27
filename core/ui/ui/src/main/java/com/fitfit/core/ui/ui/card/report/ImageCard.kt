@@ -47,8 +47,10 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.ui.designsystem.components.ImageFromFile
 import com.fitfit.core.ui.designsystem.components.ImageFromUrl
+import com.fitfit.core.ui.designsystem.components.ImageFromUrlAndBannerBoxOverlay
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.designsystem.components.utils.MyCard
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
@@ -83,6 +85,8 @@ fun ImageCard(
     downloadImage: (imagePath: String, imageUserId: Int, result: (Boolean) -> Unit) -> Unit,
     saveImageToInternalStorage: (index: Int, uri: Uri) -> String?,
 
+    bannersInfo: List<BannerInfo>? = null,
+
     modifier: Modifier = Modifier
 ){
 
@@ -91,7 +95,9 @@ fun ImageCard(
                         else Color.Transparent
 
     val modifier1 = if (isEditMode) modifier.sizeIn(maxHeight = 390.dp)
-                    else modifier.sizeIn(maxWidth = 650.dp, maxHeight = 390.dp)
+                    else modifier
+                            .sizeIn(maxWidth = 650.dp)
+//                        .sizeIn(maxWidth = 650.dp, maxHeight = 390.dp)
 
 
 
@@ -206,6 +212,7 @@ fun ImageCard(
                             ClickableBox(
                                 modifier = Modifier
                                     .fillMaxWidth(),
+                                contentAlignment = Alignment.BottomCenter,
                                 onClick = {
                                     onClickImage(pageState.currentPage)
                                 }
@@ -214,19 +221,22 @@ fun ImageCard(
                                     state = pageState,
                                     beyondViewportPageCount = 3,
                                     pageContent = {
-                                        ImageFromUrl(
-                                            imageUrl = images[it],
-                                            contentDescription = stringResource(id = R.string.photo),
-                                            modifier = Modifier.fillMaxSize()
-                                        )
-//                                        ImageFromFile(
-//                                            internetEnabled = internetEnabled,
-//                                            imageUserId = imageUserId,
-//                                            imagePath = imagePathList[it],
-//                                            contentDescription = stringResource(id = R.string.photo),
-//                                            downloadImage = downloadImage,
-//                                            modifier = Modifier.fillMaxSize()
-//                                        )
+                                        if (bannersInfo == null){
+                                            ImageFromUrl(
+                                                imageUrl = images[it],
+                                                contentDescription = stringResource(id = R.string.photo),
+                                                modifier = Modifier.fillMaxSize(),
+                                            )
+                                        }
+                                        else{
+                                            ImageFromUrlAndBannerBoxOverlay(
+                                                imageUrl = images[it],
+                                                contentDescription = stringResource(id = R.string.photo),
+                                                modifier = Modifier.fillMaxSize(),
+                                                bannersInfo = bannersInfo
+                                            )
+                                        }
+
                                     }
                                 )
 

@@ -7,14 +7,19 @@ import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -34,10 +39,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.ui.designsystem.R
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
 import com.fitfit.core.ui.designsystem.components.utils.MySpacerColumn
@@ -102,6 +109,133 @@ fun ImageFromUrl(
             isError = true
         }
     )
+}
+
+@Composable
+fun ImageFromUrlAndBannerBoxOverlay(
+    imageUrl: String,
+    contentDescription: String,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Crop,
+    bannersInfo: List<BannerInfo>? = null,
+){
+    val context = LocalContext.current
+    var isLoading by rememberSaveable { mutableStateOf(false) }
+    var isError by rememberSaveable { mutableStateOf(false) }
+
+    var imageSizePx by remember { mutableStateOf(IntSize.Zero) }
+    var displayWidthDp by remember { mutableFloatStateOf(0f) }
+    var displayHeightDp by remember { mutableFloatStateOf(0f) }
+
+    val density = LocalDensity.current
+
+    Box(
+        modifier = Modifier
+            .onSizeChanged {
+                displayWidthDp = with(density) { it.width.toDp().value }
+                displayHeightDp = with(density) { it.height.toDp().value }
+
+//                Log.d("aaa", "-- new display size(dp): $displayWidthDp x $displayHeightDp")
+            }
+    ) {
+        if (isLoading){
+            OnLoadingImage()
+        }
+
+        if (isError){
+            OnErrorImage()
+        }
+
+        AsyncImage(
+            model = ImageRequest.Builder(context)
+                .data(imageUrl)
+                .crossfade(300)
+                .listener(
+                    onSuccess = { _, result ->
+                        if (imageSizePx == IntSize.Zero)
+                            imageSizePx = IntSize(
+                                result.drawable.intrinsicWidth,
+                                result.drawable.intrinsicHeight
+                            )
+                    }
+                )
+                .build(),
+            contentDescription = contentDescription,
+            contentScale = contentScale,
+            modifier = modifier,
+            onLoading = {
+                isLoading = true
+            },
+            onSuccess = {
+                isLoading = false
+                isError = false
+            },
+            onError = {
+                isLoading = false
+                isError = true
+            }
+        )
+
+
+        // Banner overlay
+        if (
+            bannersInfo != null
+            && imageSizePx.width >= 1 && imageSizePx.height >= 1
+            && displayWidthDp >= 1 && displayHeightDp >= 1
+        ) {
+//            Log.d("aaa", "image size: $imageSizePx, display size: $displayWidthDp x $displayHeightDp")
+                            //  996 / 500 =~ 2
+            val scaleX = displayWidthDp / imageSizePx.width
+            val scaleY = displayHeightDp / imageSizePx.height
+
+            bannersInfo.forEach { bannerInfo ->
+                val center = bannerInfo.center
+                val width = bannerInfo.width
+                val height = bannerInfo.height
+
+//                Log.d("aaa", "    box center: ${center}, width: $width, height: $height")
+
+                if (center != null && width != null && height != null) {
+                    val scaledCenterX = center[0] * scaleX
+                    val scaledCenterY = center[1] * scaleY
+                    val scaledWidth = width * scaleX
+                    val scaledHeight = height * scaleY
+
+//                    Log.d("aaa", "    scaledCenterX: ${scaledCenterX}, scaledCenterY: ${scaledCenterY}")
+//                    Log.d("aaa", "    scaledWidth: ${scaledWidth}, scaledHeight: ${scaledHeight}")
+
+                    // top-left coordinates
+                    val startX = (scaledCenterX - (scaledWidth / 2)).coerceIn(0f, displayWidthDp)
+                    val startY = (scaledCenterY - (scaledHeight / 2)).coerceIn(0f, displayHeightDp)
+                    val startOffset = DpOffset(startX.dp, startY.dp)
+
+//                    Log.d("aaa", "    startX: ${startX}, startY: ${startY}")
+
+                    Box(
+                        modifier = Modifier
+                            .offset(startOffset.x, startOffset.y)
+                            .size(
+                                width = scaledWidth.dp.coerceAtMost((displayWidthDp - startX).dp),
+                                height = scaledHeight.dp.coerceAtMost((displayHeightDp - startY).dp)
+                            )
+                            .border(2.dp, bannerInfo.status.color)
+                    ){
+                        Box(
+                            modifier = Modifier.background(bannerInfo.status.color)
+                        ) {
+                            Text(
+                                text = bannerInfo.bannerId.toString(),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = bannerInfo.status.textColor,
+                                modifier = Modifier.padding(horizontal = 2.dp)
+                            )
+                        }
+
+                    }
+                }
+            }
+        }
+    }
 }
 
 @Composable

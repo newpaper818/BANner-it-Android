@@ -27,8 +27,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.ui.designsystem.components.ImageFromFile
 import com.fitfit.core.ui.designsystem.components.ImageFromUrl
+import com.fitfit.core.ui.designsystem.components.ImageFromUrlAndBannerBoxOverlay
 import com.fitfit.core.ui.designsystem.components.MyScaffold
 import com.fitfit.core.ui.designsystem.components.topAppBar.ImageTopAppBar
 import com.fitfit.core.ui.designsystem.theme.BannerItTheme
@@ -49,7 +51,8 @@ fun ImageRoute(
     downloadImage: (imagePath: String, imageUserId: String, result: (Boolean) -> Unit) -> Unit,
     saveImageToExternalStorage: (imageFileName: String) -> Boolean,
 
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    bannersInfo: List<BannerInfo>? = null
 ){
     val context = LocalContext.current
     val systemUiController = rememberSystemUiController()
@@ -92,7 +95,8 @@ fun ImageRoute(
             else            Toast.makeText(context, downloadErrorText, Toast.LENGTH_SHORT).show()
         },
         downloadImage = downloadImage,
-        modifier = modifier
+        modifier = modifier,
+        bannersInfo = bannersInfo
     )
 }
 
@@ -110,7 +114,8 @@ private fun ImageScreen(
     onClickImage: () -> Unit,
     onClickDownloadImage: (imageFileName: String) -> Unit,
     downloadImage: (imagePath: String, imageUserId: String, result: (Boolean) -> Unit) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    bannersInfo: List<BannerInfo>? = null
 ){
     Scaffold(
         modifier = modifier,
@@ -162,17 +167,34 @@ private fun ImageScreen(
                         val a = this
 
                         if ("https" in images[it]) {
-                            ImageFromUrl(
-                                imageUrl = images[it],
-                                contentDescription = stringResource(id = R.string.image),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .zoomable(
-                                        zoomState = zoomState,
+                            if (bannersInfo == null){
+                                ImageFromUrl(
+                                    imageUrl = images[it],
+                                    contentDescription = stringResource(id = R.string.image),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .zoomable(
+                                            zoomState = zoomState,
 //                                    onTap = { onClickImage() }
-                                    ),
-                                contentScale = ContentScale.Fit,
-                            )
+                                        ),
+                                    contentScale = ContentScale.Fit,
+                                )
+                            }
+                            else {
+                                ImageFromUrlAndBannerBoxOverlay(
+                                    imageUrl = images[it],
+                                    contentDescription = stringResource(id = R.string.image),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .zoomable(
+                                            zoomState = zoomState,
+//                                    onTap = { onClickImage() }
+                                        ),
+                                    contentScale = ContentScale.Fit,
+                                    bannersInfo = bannersInfo
+                                )
+                            }
+
                         }
                         else {
                             ImageFromFile(

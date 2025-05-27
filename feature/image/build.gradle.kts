@@ -36,6 +36,7 @@ android {
 dependencies {
 
     //module
+    implementation(project(":core:model"))
     implementation(project(":core:ui:designsystem"))
 
     //compose bom

@@ -2,6 +2,7 @@ package com.fitfit.bannerit.ui
 
 import androidx.lifecycle.ViewModel
 import com.fitfit.core.data.data.repository.ReportRecordsRepository
+import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.model.report.data.ReportRecord
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -21,7 +22,8 @@ data class ReportUiState(
     val currentReportRecord: ReportRecord? = null,
 
     val images: List<String> = listOf(),
-    val initialImageIndex: Int = 0
+    val initialImageIndex: Int = 0,
+    val bannersInfo: List<BannerInfo>? = null
 )
 
 @HiltViewModel
@@ -66,6 +68,14 @@ class CommonReportRecordsViewModel @Inject constructor(
                 images = images,
                 initialImageIndex = initialImageIndex
             )
+        }
+    }
+
+    fun setBannersInfo(
+        bannersInfo: List<BannerInfo>?
+    ) {
+        _reportUiState.update {
+            it.copy(bannersInfo = bannersInfo)
         }
     }
 
