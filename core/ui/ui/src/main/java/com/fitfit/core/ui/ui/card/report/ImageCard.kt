@@ -221,7 +221,7 @@ fun ImageCard(
                                     state = pageState,
                                     beyondViewportPageCount = 3,
                                     pageContent = {
-                                        if (bannersInfo == null){
+                                        if (bannersInfo.isNullOrEmpty()){
                                             ImageFromUrl(
                                                 imageUrl = images[it],
                                                 contentDescription = stringResource(id = R.string.photo),

@@ -1,10 +1,16 @@
 package com.fitfit.core.ui.designsystem.components
 
+import android.content.Context
 import androidx.annotation.DrawableRes
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.scaleIn
+import androidx.compose.animation.scaleOut
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -19,8 +25,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -44,8 +50,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import coil.size.Size
 import com.fitfit.core.model.report.data.BannerInfo
 import com.fitfit.core.ui.designsystem.R
 import com.fitfit.core.ui.designsystem.components.utils.ClickableBox
@@ -125,13 +133,15 @@ fun ImageFromUrlAndBannerBoxOverlay(
     var isLoading by rememberSaveable { mutableStateOf(false) }
     var isError by rememberSaveable { mutableStateOf(false) }
 
-    var imageWidthPx by rememberSaveable { mutableFloatStateOf(0f) }
-    var imageHeightPx by rememberSaveable { mutableFloatStateOf(0f) }
-
-    var displayWidthDp by rememberSaveable { mutableFloatStateOf(0f) }
-    var displayHeightDp by rememberSaveable { mutableFloatStateOf(0f) }
+    val imageSizePx = remember(imageUrl) { mutableStateOf(IntSize.Zero) }
+    val displaySizeDp = remember(imageUrl) { mutableStateOf(IntSize.Zero) }
 
     val density = LocalDensity.current
+
+    LaunchedEffect(imageUrl) {
+        imageSizePx.value = getImageResolution(context, imageUrl) ?: IntSize.Zero
+//        Log.d("aaa", "-- new image size(dp): $imageSizePx")
+    }
 
     Box(
         modifier = Modifier
@@ -139,10 +149,10 @@ fun ImageFromUrlAndBannerBoxOverlay(
                 val newWidth = with(density) { it.width.toDp().value }
                 val newHeight = with(density) { it.height.toDp().value }
 
-                if (displayWidthDp != newWidth || displayHeightDp != newHeight) {
-                    displayWidthDp = newWidth
-                    displayHeightDp = newHeight
-//                    Log.d("aaa", "-- new display size(dp): $displayWidthDp x $displayHeightDp")
+                val newSize = IntSize(newWidth.toInt(), newHeight.toInt())
+                if (displaySizeDp.value != newSize) {
+                    displaySizeDp.value = newSize
+//                    Log.d("aaa", "-- new display size(dp): $displaySizeDp")
                 }
             }
     ) {
@@ -158,21 +168,6 @@ fun ImageFromUrlAndBannerBoxOverlay(
             model = ImageRequest.Builder(context)
                 .data(imageUrl)
                 .crossfade(300)
-                .listener(
-                    onSuccess = { _, result ->
-                        val newWidth = result.drawable.intrinsicWidth.toFloat()
-                        val newHeight = result.drawable.intrinsicHeight.toFloat()
-
-                        if (imageWidthPx != newWidth || imageHeightPx != newHeight) {
-                            imageWidthPx = newWidth
-                            imageHeightPx = newHeight
-                        }
-//                            imageSizePx = IntSize(
-//                                result.drawable.intrinsicWidth,
-//                                result.drawable.intrinsicHeight
-//                            )
-                    }
-                )
                 .build(),
             contentDescription = contentDescription,
             contentScale = contentScale,
@@ -190,53 +185,82 @@ fun ImageFromUrlAndBannerBoxOverlay(
             }
         )
 
+        // Banner box overlay
+        if(
+            !bannersInfo.isNullOrEmpty()
+            && imageSizePx.value.width >= 1 && imageSizePx.value.height >= 1
+            && displaySizeDp.value.width >= 1 && displaySizeDp.value.height >= 1) {
 
-        // Banner overlay
-        if (
-            bannersInfo != null
-            && imageWidthPx >= 1 && imageHeightPx >= 1
-            && displayWidthDp >= 1 && displayHeightDp >= 1
-        ) {
-//            Log.d("aaa", "image size: $imageWidthPx x $imageHeightPx , display size: $displayWidthDp x $displayHeightDp")
+            BannerBoxOverlay(
+                displaySizeDp = displaySizeDp,
+                imageSizePx = imageSizePx,
+                bannersInfo = bannersInfo
+            )
+        }
+    }
+}
 
-            val scaleX = displayWidthDp / imageWidthPx
-            val scaleY = displayHeightDp / imageHeightPx
+@Composable
+private fun BannerBoxOverlay(
+    displaySizeDp: MutableState<IntSize>,
+    imageSizePx: MutableState<IntSize>,
+    bannersInfo: List<BannerInfo>
+){
+//    Log.d("aaa", "image size: $imageSizePx , display size: $displaySizeDp")
 
-            bannersInfo.forEach { bannerInfo ->
-                val center = bannerInfo.center
-                val width = bannerInfo.width
-                val height = bannerInfo.height
+    val scaleX = displaySizeDp.value.width.toFloat() / imageSizePx.value.width
+    val scaleY = displaySizeDp.value.height.toFloat() / imageSizePx.value.height
+
+    bannersInfo.forEach { bannerInfo ->
+        var show by remember { mutableStateOf(false) }
+        LaunchedEffect(Unit) {
+//            delay(1000)
+            show = true
+        }
+
+        val center = bannerInfo.center
+        val width = bannerInfo.width
+        val height = bannerInfo.height
 
 //                Log.d("aaa", "    box center: ${center}, width: $width, height: $height")
 
-                if (center != null && width != null && height != null) {
-                    val scaledCenterX = center[0] * scaleX
-                    val scaledCenterY = center[1] * scaleY
-                    val scaledWidth = width * scaleX
-                    val scaledHeight = height * scaleY
+        if (center != null && width != null && height != null) {
+            val scaledCenterX = center[0] * scaleX
+            val scaledCenterY = center[1] * scaleY
+            val scaledWidth = width * scaleX
+            val scaledHeight = height * scaleY
 
 //                    Log.d("aaa", "    scaledCenterX: ${scaledCenterX}, scaledCenterY: ${scaledCenterY}")
 //                    Log.d("aaa", "    scaledWidth: ${scaledWidth}, scaledHeight: ${scaledHeight}")
 
-                    // top-left coordinates
-                    val startX = (scaledCenterX - (scaledWidth / 2)).coerceIn(0f, displayWidthDp)
-                    val startY = (scaledCenterY - (scaledHeight / 2)).coerceIn(0f, displayHeightDp)
-                    val startOffset = DpOffset(startX.dp, startY.dp)
+            // top-left coordinates
+            val startX = (scaledCenterX - (scaledWidth / 2)).coerceIn(0f, displaySizeDp.value.width.toFloat())
+            val startY = (scaledCenterY - (scaledHeight / 2)).coerceIn(0f, displaySizeDp.value.height.toFloat())
+            val startOffset = DpOffset(startX.dp, startY.dp)
 
 //                    Log.d("aaa", "    startX: ${startX}, startY: ${startY}")
 
+            Box(
+                modifier = Modifier
+                    .offset(startOffset.x, startOffset.y)
+            ) {
+
+                AnimatedVisibility(
+                    visible = show,
+                    enter = fadeIn(tween(500)) + scaleIn(tween(1000, delayMillis = 200)),
+                    exit = fadeOut(tween(300)) + scaleOut(tween(300))
+                ) {
                     Box(
                         modifier = Modifier
-                            .offset(startOffset.x, startOffset.y)
                             .size(
-                                width = scaledWidth.dp.coerceAtMost((displayWidthDp - startX).dp),
-                                height = scaledHeight.dp.coerceAtMost((displayHeightDp - startY).dp)
+                                width = scaledWidth.dp.coerceAtMost((displaySizeDp.value.width - startX).dp),
+                                height = scaledHeight.dp.coerceAtMost((displaySizeDp.value.height - startY).dp)
                             )
                             .border(2.dp, bannerInfo.status.color, RoundedCornerShape(4.dp))
-                    ){
+                    ) {
                         Box(
                             modifier = Modifier
-                                .clip(RoundedCornerShape(topStart = 4.dp, bottomEnd =  4.dp))
+                                .clip(RoundedCornerShape(topStart = 4.dp, bottomEnd = 4.dp))
                                 .background(bannerInfo.status.color)
                         ) {
                             Text(
@@ -246,12 +270,29 @@ fun ImageFromUrlAndBannerBoxOverlay(
                                 modifier = Modifier.padding(horizontal = 3.dp, vertical = 0.5.dp)
                             )
                         }
-
                     }
                 }
             }
+
         }
     }
+}
+
+suspend fun getImageResolution(
+    context: Context,
+    imageUrl: String
+): IntSize? {
+    val imageLoader = ImageLoader(context)
+
+    val request = ImageRequest.Builder(context)
+        .data(imageUrl)
+        .size(Size.ORIGINAL)
+        .build()
+
+    val result = imageLoader.execute(request)
+
+    val drawable = (result.drawable ?: return null)
+    return IntSize(drawable.intrinsicWidth, drawable.intrinsicHeight)
 }
 
 @Composable
