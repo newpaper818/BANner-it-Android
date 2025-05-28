@@ -125,19 +125,25 @@ fun ImageFromUrlAndBannerBoxOverlay(
     var isLoading by rememberSaveable { mutableStateOf(false) }
     var isError by rememberSaveable { mutableStateOf(false) }
 
-    var imageSizePx by remember { mutableStateOf(IntSize.Zero) }
-    var displayWidthDp by remember { mutableFloatStateOf(0f) }
-    var displayHeightDp by remember { mutableFloatStateOf(0f) }
+    var imageWidthPx by rememberSaveable { mutableFloatStateOf(0f) }
+    var imageHeightPx by rememberSaveable { mutableFloatStateOf(0f) }
+
+    var displayWidthDp by rememberSaveable { mutableFloatStateOf(0f) }
+    var displayHeightDp by rememberSaveable { mutableFloatStateOf(0f) }
 
     val density = LocalDensity.current
 
     Box(
         modifier = Modifier
             .onSizeChanged {
-                displayWidthDp = with(density) { it.width.toDp().value }
-                displayHeightDp = with(density) { it.height.toDp().value }
+                val newWidth = with(density) { it.width.toDp().value }
+                val newHeight = with(density) { it.height.toDp().value }
 
-//                Log.d("aaa", "-- new display size(dp): $displayWidthDp x $displayHeightDp")
+                if (displayWidthDp != newWidth || displayHeightDp != newHeight) {
+                    displayWidthDp = newWidth
+                    displayHeightDp = newHeight
+//                    Log.d("aaa", "-- new display size(dp): $displayWidthDp x $displayHeightDp")
+                }
             }
     ) {
         if (isLoading){
@@ -154,11 +160,17 @@ fun ImageFromUrlAndBannerBoxOverlay(
                 .crossfade(300)
                 .listener(
                     onSuccess = { _, result ->
-                        if (imageSizePx == IntSize.Zero)
-                            imageSizePx = IntSize(
-                                result.drawable.intrinsicWidth,
-                                result.drawable.intrinsicHeight
-                            )
+                        val newWidth = result.drawable.intrinsicWidth.toFloat()
+                        val newHeight = result.drawable.intrinsicHeight.toFloat()
+
+                        if (imageWidthPx != newWidth || imageHeightPx != newHeight) {
+                            imageWidthPx = newWidth
+                            imageHeightPx = newHeight
+                        }
+//                            imageSizePx = IntSize(
+//                                result.drawable.intrinsicWidth,
+//                                result.drawable.intrinsicHeight
+//                            )
                     }
                 )
                 .build(),
@@ -182,13 +194,13 @@ fun ImageFromUrlAndBannerBoxOverlay(
         // Banner overlay
         if (
             bannersInfo != null
-            && imageSizePx.width >= 1 && imageSizePx.height >= 1
+            && imageWidthPx >= 1 && imageHeightPx >= 1
             && displayWidthDp >= 1 && displayHeightDp >= 1
         ) {
-//            Log.d("aaa", "image size: $imageSizePx, display size: $displayWidthDp x $displayHeightDp")
-                            //  996 / 500 =~ 2
-            val scaleX = displayWidthDp / imageSizePx.width
-            val scaleY = displayHeightDp / imageSizePx.height
+//            Log.d("aaa", "image size: $imageWidthPx x $imageHeightPx , display size: $displayWidthDp x $displayHeightDp")
+
+            val scaleX = displayWidthDp / imageWidthPx
+            val scaleY = displayHeightDp / imageHeightPx
 
             bannersInfo.forEach { bannerInfo ->
                 val center = bannerInfo.center
