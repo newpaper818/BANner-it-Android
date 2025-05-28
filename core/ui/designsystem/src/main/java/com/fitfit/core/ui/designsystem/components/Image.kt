@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +29,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -218,16 +220,18 @@ fun ImageFromUrlAndBannerBoxOverlay(
                                 width = scaledWidth.dp.coerceAtMost((displayWidthDp - startX).dp),
                                 height = scaledHeight.dp.coerceAtMost((displayHeightDp - startY).dp)
                             )
-                            .border(2.dp, bannerInfo.status.color)
+                            .border(2.dp, bannerInfo.status.color, RoundedCornerShape(4.dp))
                     ){
                         Box(
-                            modifier = Modifier.background(bannerInfo.status.color)
+                            modifier = Modifier
+                                .clip(RoundedCornerShape(topStart = 4.dp, bottomEnd =  4.dp))
+                                .background(bannerInfo.status.color)
                         ) {
                             Text(
                                 text = bannerInfo.bannerId.toString(),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = bannerInfo.status.textColor,
-                                modifier = Modifier.padding(horizontal = 2.dp)
+                                modifier = Modifier.padding(horizontal = 3.dp, vertical = 0.5.dp)
                             )
                         }
 
