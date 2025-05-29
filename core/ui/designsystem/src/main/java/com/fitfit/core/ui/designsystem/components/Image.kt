@@ -16,6 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -27,6 +28,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -136,15 +138,21 @@ fun ImageFromUrlAndBannerBoxOverlay(
     val imageSizePx = remember(imageUrl) { mutableStateOf(IntSize.Zero) }
     val displaySizeDp = remember(imageUrl) { mutableStateOf(IntSize.Zero) }
 
+    val aspectRatio = remember(imageUrl) { mutableFloatStateOf(3f / 4f) }
+
     val density = LocalDensity.current
 
     LaunchedEffect(imageUrl) {
         imageSizePx.value = getImageResolution(context, imageUrl) ?: IntSize.Zero
 //        Log.d("aaa", "-- new image size(dp): $imageSizePx")
+
+        aspectRatio.value = imageSizePx.value.width.toFloat() / imageSizePx.value.height
     }
+
 
     Box(
         modifier = Modifier
+            .aspectRatio(aspectRatio.value)
             .onSizeChanged {
                 val newWidth = with(density) { it.width.toDp().value }
                 val newHeight = with(density) { it.height.toDp().value }
@@ -222,7 +230,7 @@ private fun BannerBoxOverlay(
         val width = bannerInfo.width
         val height = bannerInfo.height
 
-//                Log.d("aaa", "    box center: ${center}, width: $width, height: $height")
+//        Log.d("aaa", "    box center: ${center}, width: $width, height: $height")
 
         if (center != null && width != null && height != null) {
             val scaledCenterX = center[0] * scaleX

@@ -94,9 +94,8 @@ fun ImageCard(
     val borderColor = if (isImageCountOver) CustomColor.outlineError
                         else Color.Transparent
 
-    val modifier1 = if (isEditMode) modifier.sizeIn(maxHeight = 390.dp)
-                    else modifier
-                            .sizeIn(maxWidth = 650.dp)
+    val modifier1 = if (isEditMode) Modifier.sizeIn(maxHeight = 390.dp)
+                    else Modifier
 //                        .sizeIn(maxWidth = 650.dp, maxHeight = 390.dp)
 
 
@@ -210,8 +209,7 @@ fun ImageCard(
                             val pageState = rememberPagerState { images.size }
 
                             ClickableBox(
-                                modifier = Modifier
-                                    .fillMaxWidth(),
+                                modifier = Modifier.fillMaxWidth(),
                                 contentAlignment = Alignment.BottomCenter,
                                 onClick = {
                                     onClickImage(pageState.currentPage)

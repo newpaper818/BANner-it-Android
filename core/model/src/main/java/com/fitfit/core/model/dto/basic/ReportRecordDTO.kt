@@ -84,7 +84,10 @@ data class BannerInfoDTO(
             status = BannerStatus.valueOf(status),
             category = category,
             companyName = companyName,
-            phoneNumber = phoneNumber
+            phoneNumber = phoneNumber,
+            center = center,
+            width = width,
+            height = height
         )
     }
 }
