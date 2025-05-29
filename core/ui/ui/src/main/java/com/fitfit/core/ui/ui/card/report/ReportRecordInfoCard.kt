@@ -73,6 +73,10 @@ fun ReportRecordBannerInfoCard(
     onClickEditBannerStatus: () -> Unit,
     modifier: Modifier = Modifier
 ){
+    val showMoreInfo = bannerInfo.status == BannerStatus.ILLEGAL
+            || bannerInfo.status == BannerStatus.ILLEGAL_DEMOLITION
+            || bannerInfo.status == BannerStatus.UNKNOWN
+
     MyCard(
         enabled = false,
         modifier = modifier.fillMaxWidth()
@@ -105,21 +109,23 @@ fun ReportRecordBannerInfoCard(
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
 
-            MySpacerColumn(16.dp)
+            if (showMoreInfo) {
+                MySpacerColumn(16.dp)
 
-            TextRow(
-                text1 = stringResource(R.string.company_name),
-                text2 = bannerInfo.companyName,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
+                TextRow(
+                    text1 = stringResource(R.string.company_name),
+                    text2 = bannerInfo.companyName,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
 
-            MySpacerColumn(16.dp)
+                MySpacerColumn(16.dp)
 
-            TextRow(
-                text1 = stringResource(R.string.phone_number),
-                text2 = bannerInfo.phoneNumber,
-                modifier = Modifier.padding(horizontal = 16.dp)
-            )
+                TextRow(
+                    text1 = stringResource(R.string.phone_number),
+                    text2 = bannerInfo.phoneNumber,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+            }
         }
     }
 }
