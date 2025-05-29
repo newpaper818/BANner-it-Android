@@ -19,8 +19,8 @@ android {
         applicationId = "com.fitfit.bannerit"
         minSdk = 26
         targetSdk = 35
-        versionCode = 4
-        versionName = "0.1.1-beta"
+        versionCode = 6
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
