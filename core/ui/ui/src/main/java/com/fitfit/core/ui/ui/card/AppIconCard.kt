@@ -35,7 +35,7 @@ fun AppIconCard(
             contentDescription = stringResource(id = R.string.bannerit_app_icon),
             modifier = Modifier
                 .size(120.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .clip(RoundedCornerShape(32.dp))
                 .clearAndSetSemantics {  }
         )
     }
